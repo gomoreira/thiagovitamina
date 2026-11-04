@@ -130,8 +130,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--link);outline-offse
 .reach li:first-child .val{grid-column:3 / span 8;user-select:all}
 .reach li:first-child .copybtn{grid-column:11 / -1;justify-self:end}
 .reach a.val:visited{color:var(--paper)}
-.reach a.val i{font-style:normal;font-family:var(--text);font-weight:300;transition:transform .25s ease}
-.reach a.val:hover i{transform:translate(4px,-4px)}
+.reach a.val .arw{width:.5em;height:.5em;transition:transform .25s ease}
+.reach a.val:hover .arw{transform:translate(4px,-4px)}
 .reach a.val:hover{color:var(--visited-dark)}
 .copybtn{font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--paper);border:1px solid var(--paper);padding:var(--sp-2) var(--sp-3);cursor:pointer}
 .copybtn:hover{background:var(--paper);color:var(--ink)}
@@ -178,7 +178,7 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .mnav nav a,.mnav nav a:visited{font-family:var(--display);font-weight:800;font-size:clamp(56px,17vw,96px);line-height:.95;letter-spacing:-.045em;color:var(--paper);text-decoration:none;opacity:0;transform:translateY(24px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
 .mnav.is-open nav a{opacity:1;transform:none}
 .mnav.is-open nav a:nth-child(2){transition-delay:.05s}.mnav.is-open nav a:nth-child(3){transition-delay:.1s}
-.mnav nav a::after{content:" ↗";font-weight:300;font-size:.4em;vertical-align:.9em}
+.mnav nav a::after{content:"";display:inline-block;width:.32em;height:.32em;margin-left:.08em;vertical-align:.52em;background:currentColor;-webkit-mask:var(--arw) center/contain no-repeat;mask:var(--arw) center/contain no-repeat}
 .mnav-foot{display:flex;flex-direction:column;gap:var(--sp-2);color:#DCCDF0}
 .mnav-foot .avail i{background:var(--paper)}
 .top{position:relative;z-index:21}
@@ -188,3 +188,10 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 }
 @media (prefers-reduced-motion:reduce){.mnav nav a,.plus i,.plus i::after{transition:none}}
 .menu-open .top,.menu-open .top a,.menu-open .top a:visited{color:var(--paper)!important}
+
+/* the arrow: one drawn glyph everywhere (never the font or emoji arrow) */
+:root{--arw:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 12.5 12 4M5.5 3.75h6.75v6.75' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E")}
+.arw{display:inline-block;width:.72em;height:.72em;margin-left:.22em;vertical-align:-.04em;background:currentColor;-webkit-mask:var(--arw) center/contain no-repeat;mask:var(--arw) center/contain no-repeat;flex:none}
+.open .arw{width:1em;height:1em;vertical-align:-.18em}
+.open,.proof li a{text-decoration-skip-ink:auto}
+.mnav-foot,.mnav-foot *{text-decoration:none!important;color:#DCCDF0}
