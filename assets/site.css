@@ -203,3 +203,7 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .open .arw{width:1em;height:1em;vertical-align:-.18em}
 .open,.proof li a{text-decoration-skip-ink:auto}
 .mnav-foot,.mnav-foot *{text-decoration:none!important;color:#DCCDF0}
+
+/* text selection: translucent plum, lilac on dark bands */
+::selection{background:rgba(85,26,139,.24);color:inherit}
+.dark ::selection,.contact ::selection,.mnav ::selection{background:rgba(201,166,242,.38);color:inherit}
