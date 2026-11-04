@@ -207,3 +207,6 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 /* text selection: translucent plum, lilac on dark bands */
 ::selection{background:rgba(85,26,139,.24);color:inherit}
 .dark ::selection,.contact ::selection,.mnav ::selection{background:rgba(201,166,242,.38);color:inherit}
+
+.cv-wrap{display:grid;gap:var(--sp-4);align-content:start;justify-items:start}
+.cv-wrap .cv{width:100%}
