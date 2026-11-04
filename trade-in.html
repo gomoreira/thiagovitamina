@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/ink.js" defer></script>
 <style>
 /* Case page: same tokens and 12-column grid as the home. Text sections put the statement in 7 columns and the explanation in 5. */
 .case-hero{padding-block:var(--sp-6) var(--sp-6)}
@@ -24,7 +25,7 @@
 .proof li{display:flex;justify-content:space-between;gap:var(--sp-3);font-size:var(--t-base)}
 .block{padding-top:var(--section)}
 .statement{font-family:var(--display);font-weight:700;font-size:var(--t-xl);line-height:1.02;letter-spacing:-.025em;max-width:16ch;text-wrap:balance}
-.body{display:grid;gap:var(--sp-3);font-size:var(--t-md);line-height:1.45;max-width:38ch}
+.body{display:grid;gap:var(--sp-3);align-content:start;font-size:var(--t-md);line-height:1.45;max-width:38ch}
 .steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);margin-top:var(--sp-6);border-top:1px solid var(--ink)}
 .steps li{padding-top:var(--sp-3);display:grid;gap:var(--sp-2);align-content:start}
 .steps b{font-family:var(--display);font-weight:700;font-size:var(--t-lg);letter-spacing:-.015em;line-height:1.1}
@@ -34,12 +35,12 @@ figcaption{margin-top:var(--sp-2)}
 .wide{margin-top:var(--sp-6)}
 .wide img{border:1px solid var(--rule)}
 .screens{background:var(--well);margin-top:var(--sp-6);padding-block:var(--sp-6)}
-.reel{display:flex;gap:var(--gap);overflow-x:auto;padding-bottom:var(--sp-3);scroll-snap-type:x mandatory}
+.reel{display:flex;gap:var(--gap);overflow-x:auto;padding-bottom:var(--sp-3);scroll-snap-type:x mandatory;align-items:flex-start}
 .reel figure{flex:0 0 clamp(200px,22vw,280px);scroll-snap-align:start}
-.reel img{border-radius:var(--sp-3);box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(20,10,40,.35);background:var(--paper)}
+
 .screens .note{margin-top:var(--sp-3)}
 .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
-.pair img{border-radius:var(--sp-3);border:1px solid var(--rule)}
+.pair{align-items:start}
 /* condition check demo */
 .demo{background:var(--well);padding:var(--sp-5);display:grid;gap:var(--sp-3);align-content:start}
 .demo .label{color:var(--mute)}
@@ -152,15 +153,15 @@ figcaption{margin-top:var(--sp-2)}
   <div class="wrap">
     <div class="head"><h2 class="label" id="scr">The flow</h2><span class="label">13 screens</span></div>
     <div class="reel" tabindex="0" aria-label="Screens from the final flow, scroll sideways">
-      <figure><img src="img/tradein/01-home.png" alt="Home: why trade in with us" width="375" height="995" loading="lazy"><figcaption class="label">Home</figcaption></figure>
-      <figure><img src="img/tradein/02-device.png" alt="Select your device" width="383" height="820" loading="lazy"><figcaption class="label">Device</figcaption></figure>
-      <figure><img src="img/tradein/06-condition.png" alt="Select the condition of your device" width="375" height="812" loading="lazy"><figcaption class="label">Condition</figcaption></figure>
-      <figure><img src="img/tradein/07-device-info.png" alt="Device information: IMEI" width="375" height="812" loading="lazy"><figcaption class="label">Device info</figcaption></figure>
-      <figure><img src="img/tradein/08-offer.png" alt="Trade-in offer: you qualify for a gift card" width="375" height="866" loading="lazy"><figcaption class="label">Offer</figcaption></figure>
-      <figure><img src="img/tradein/10-preauth.png" alt="Pre-authorization hold" width="375" height="1231" loading="lazy"><figcaption class="label">Hold</figcaption></figure>
-      <figure><img src="img/tradein/12-success.png" alt="Order placed and gift card sent" width="375" height="905" loading="lazy"><figcaption class="label">Done</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/01-home.png" alt="Home: why trade in with us" width="375" height="995" loading="lazy"></div></div><figcaption class="label">Home</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/02-device.png" alt="Select your device" width="383" height="820" loading="lazy"></div></div><figcaption class="label">Device</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/06-condition.png" alt="Select the condition of your device" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Condition</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/07-device-info.png" alt="Device information: IMEI" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Device info</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/08-offer.png" alt="Trade-in offer: you qualify for a gift card" width="375" height="866" loading="lazy"></div></div><figcaption class="label">Offer</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/10-preauth.png" alt="Pre-authorization hold" width="375" height="1231" loading="lazy"></div></div><figcaption class="label">Hold</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/tradein/12-success.png" alt="Order placed and gift card sent" width="375" height="905" loading="lazy"></div></div><figcaption class="label">Done</figcaption></figure>
     </div>
-    <p class="note label">A selection from the final flow, partner-branded version. From the original Figma file.</p>
+    <p class="note label">A selection from the final flow, partner-branded version, from the original Figma file. Longer screens scroll inside the phone.</p>
   </div>
 </section>
 
@@ -188,8 +189,8 @@ figcaption{margin-top:var(--sp-2)}
   <div class="head"><h2 class="label" id="edge">Edge states</h2><span class="label">Beyond the happy path</span></div>
   <div class="split">
     <div class="pair">
-      <img src="img/tradein/02b-not-tradable.png" alt="Device not tradable: financed devices are not accepted" width="375" height="812" loading="lazy">
-      <img src="img/tradein/07-device-info.png" alt="Device information with a link to find the IMEI number" width="375" height="812" loading="lazy">
+      <div class="phone-wrap"><div class="phone"><img src="img/tradein/02b-not-tradable.png" alt="Device not tradable: financed devices are not accepted" width="375" height="812" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/tradein/07-device-info.png" alt="Device information with a link to find the IMEI number" width="375" height="812" loading="lazy"></div></div>
     </div>
     <div class="body">
       <p class="statement" style="font-size:var(--t-lg)">When the answer is not the happy path.</p>
@@ -202,8 +203,8 @@ figcaption{margin-top:var(--sp-2)}
   <div class="head"><h2 class="label" id="pay">Get paid first</h2><span class="label">Trust</span></div>
   <div class="split">
     <div class="pair">
-      <img src="img/tradein/10-preauth.png" alt="Pre-authorization hold, explained as not a charge" width="375" height="1231" loading="lazy">
-      <img src="img/tradein/12-success.png" alt="Order received and gift card sent" width="375" height="905" loading="lazy">
+      <div class="phone-wrap"><div class="phone"><img src="img/tradein/10-preauth.png" alt="Pre-authorization hold, explained as not a charge" width="375" height="1231" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/tradein/12-success.png" alt="Order received and gift card sent" width="375" height="905" loading="lazy"></div></div>
     </div>
     <div class="body">
       <p class="statement" style="font-size:var(--t-lg)">The gift card before the device.</p>
@@ -233,12 +234,12 @@ figcaption{margin-top:var(--sp-2)}
   </div>
   <nav class="next" aria-label="Next">
     <span class="label">Back to all work</span>
-    <a href="index.html#work">Selected work →</a>
+    <a href="index.html#work">Selected work ↗</a>
   </nav>
 </section>
 </main>
 
-<section class="contact" id="contact" aria-labelledby="contact-h">
+<section class="contact" id="contact" aria-labelledby="contact-h" data-ink="dark">
   <div class="wrap">
     <div class="head"><h2 class="label" id="contact-h">Contact</h2><span class="label">São Paulo · GMT−3</span></div>
     <p class="cta">Let’s work together.</p>
@@ -269,6 +270,10 @@ function r(focus){
 }
 el.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(a){y+=+a.dataset.a;i++;r(true)}if(e.target.id==='again'){i=0;y=0;r(true)}});
 r(false);})();
+
+(()=>{document.querySelectorAll('.phone').forEach(p=>{const w=p.parentElement;const chk=()=>{const more=p.scrollHeight>p.clientHeight+4;w.classList.toggle('more',more);w.classList.toggle('end',p.scrollTop+p.clientHeight>=p.scrollHeight-4);
+  const cap=w.parentElement.querySelector('figcaption');if(cap&&more&&!cap.dataset.s){cap.dataset.s=1;cap.textContent+=' · scrolls'}};
+  p.addEventListener('scroll',chk,{passive:true});const im=p.querySelector('img');im.complete?chk():im.addEventListener('load',chk);addEventListener('resize',chk)})})();
 </script>
 </body>
 </html>
