@@ -345,10 +345,16 @@ function render(){
 /* pointer */
 let ptr=null,ghost=true,gt=0,lastT=0;
 function toUv(e){const r=hero.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]}
-hero.addEventListener('pointermove',e=>{if(!started)return;const [x,y]=toUv(e);
+function moveTo(e){if(!started)return;const [x,y]=toUv(e);
   if(ghost){ghost=false;hint.textContent='Paint to see the work'}
-  if(ptr){ptr.dx=(x-ptr.x);ptr.dy=(y-ptr.y)}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true});
-hero.addEventListener('pointerleave',()=>ptr=null);
+  if(ptr){ptr.dx=(x-ptr.x);ptr.dy=(y-ptr.y)}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true}
+hero.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')moveTo(e)});
+hero.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')ptr=null});
+/* touch: paint while the finger drags, even when the page scrolls under it */
+hero.addEventListener('touchstart',e=>{ptr=null;moveTo(e.touches[0])},{passive:true});
+hero.addEventListener('touchmove',e=>moveTo(e.touches[0]),{passive:true});
+hero.addEventListener('touchend',()=>{ptr=null},{passive:true});
+if(matchMedia('(hover: none)').matches)hint.textContent='Drag your finger to paint';
 hero.addEventListener('pointerdown',e=>{if(!started)return;ghost=false;const [x,y]=toUv(e);
   for(let i=0;i<6;i++){const a=Math.random()*6.28;splat(x,y,Math.cos(a)*900,Math.sin(a)*900,1.4,.0032)}});
 
