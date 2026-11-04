@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
+<script src="assets/site.js" defer></script>
 <style>
 /* Case page: same tokens and 12-column grid as the home. Text sections put the statement in 7 columns and the explanation in 5. */
 .case-hero{padding-block:var(--sp-6) var(--sp-6)}
@@ -69,7 +70,16 @@ figcaption{margin-top:var(--sp-2)}
   <a href="index.html" style="color:var(--ink);text-decoration:none">Thiago Vitamina</a>
   <nav aria-label="Main"><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav>
   <span class="avail"><i aria-hidden="true"></i>Available for projects</span>
+  <button class="plus" type="button" aria-expanded="false" aria-controls="mnav"><span class="sr">Menu</span><i aria-hidden="true"></i></button>
 </header>
+<div class="mnav" id="mnav" hidden>
+  <nav aria-label="Mobile">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="mnav-foot label"><span class="avail"><i aria-hidden="true"></i>Available for projects</span><span>designdasilva@gmail.com</span></div>
+</div>
 
 <main>
 <section class="wrap case-hero" style="border-top:1px solid var(--rule)">

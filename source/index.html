@@ -5,12 +5,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
+<script src="assets/site.js" defer></script>
 
 <header class="wrap top">
   <span>Thiago Vitamina</span>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
   <span class="avail"><i aria-hidden="true"></i>Available for projects</span>
+  <button class="plus" type="button" aria-expanded="false" aria-controls="mnav"><span class="sr">Menu</span><i aria-hidden="true"></i></button>
 </header>
+<div class="mnav" id="mnav" hidden>
+  <nav aria-label="Mobile">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="mnav-foot label"><span class="avail"><i aria-hidden="true"></i>Available for projects</span><span>designdasilva@gmail.com</span></div>
+</div>
 
 <section class="hero" id="hero" aria-label="Vitamina">
   <h1 class="sr">Vitamina. Thiago Vitamina, product designer.</h1>
