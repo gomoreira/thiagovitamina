@@ -82,6 +82,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--link);outline-offse
 .copy .open{align-self:flex-start}
 .copy h3 a:hover{text-decoration:underline;text-decoration-thickness:2px}
 .copy .what{font-size:var(--t-md);line-height:1.4;max-width:36ch}
+.copy .more{font-size:var(--t-base);line-height:1.55;max-width:44ch;color:#2A2730;margin-top:calc(var(--sp-2) * -1)}
 .facts{display:grid;grid-template-columns:12ch 1fr;gap:var(--sp-1) var(--sp-3);font-family:var(--mono);font-size:var(--t-xs);letter-spacing:.02em;line-height:1.5}
 .facts dt{color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
 .after{padding-top:var(--sp-3);border-top:1px solid var(--rule);max-width:40ch}
