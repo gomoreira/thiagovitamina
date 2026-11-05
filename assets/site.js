@@ -7,15 +7,24 @@ b.addEventListener('click',()=>set(b.getAttribute('aria-expanded')!=='true'));
 m.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}});
 matchMedia('(min-width:821px)').addEventListener('change',e=>{if(e.matches)set(false)});})();
-/* sticky header: dark glass over dark bands, tucks away while scrolling down */
+/* header + paint: fixed header, dark glass over dark bands, invert over the paint, tuck while scrolling down.
+   The paint sticks by its bottom edge and sinks a little as the sheet covers it. */
 (()=>{const h=document.querySelector('.top');if(!h)return;
-const darks=[...document.querySelectorAll('.dark,.contact')];
-const check=()=>{const y=h.getBoundingClientRect().bottom-4;h.classList.toggle('on-dark',darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y}))};
+const darks=[...document.querySelectorAll('.dark,.contact')],paint=document.getElementById('paint'),sheet=document.querySelector('.sheet');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){if(paint)paint.style.setProperty('--paint-top',Math.min(0,innerHeight-paint.offsetHeight)+'px')}
+function check(){const hb=h.offsetHeight,y=hb-4;
+  const overPaint=!!(paint&&sheet&&sheet.getBoundingClientRect().top>hb);
+  h.classList.toggle('over-paint',overPaint);
+  h.classList.toggle('on-dark',!overPaint&&darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y&&!(sheet&&d.classList.contains('contact')&&sheet.getBoundingClientRect().bottom>y)}));
+  if(paint&&sheet&&!reduce){const t=sheet.getBoundingClientRect().top,p=Math.min(1,Math.max(0,1-t/innerHeight));
+    paint.style.transform=p>0?'scale('+(1-.05*p)+')':'';paint.style.setProperty('--dim',(.22*p).toFixed(3))}}
 let last=scrollY,tick=false;
 addEventListener('scroll',()=>{if(tick)return;tick=true;requestAnimationFrame(()=>{const y=scrollY;
   if(!document.documentElement.classList.contains('menu-open'))h.classList.toggle('tucked',y>last&&y>160);
   last=y;check();tick=false})},{passive:true});
-check();})();
+addEventListener('resize',()=>{size();check()});
+size();check();})();
 /* Bauhaus reveal: modules turn and shrink away as the video scrolls into view */
 (()=>{const box=document.querySelector('.bh-reveal');if(!box)return;const g=box.querySelector('.bh-grid');
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){g.remove();return}

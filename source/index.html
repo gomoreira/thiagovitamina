@@ -3,15 +3,14 @@
 <meta name="format-detection" content="telephone=no,email=no,address=no">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
 <script src="assets/site.js" defer></script>
 
 <header class="wrap top">
-  <span>Thiago Vitamina</span>
+  <a class="name" href="#paint">Thiago Vitamina</a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-  <span class="avail"><i aria-hidden="true"></i><span>Available for projects</span></span>
   <button class="plus" type="button" aria-expanded="false" aria-controls="mnav"><span class="sr">Menu</span><i aria-hidden="true"></i></button>
 </header>
 <div class="mnav" id="mnav" hidden>
@@ -20,28 +19,33 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="mnav-foot label"><span class="avail"><i aria-hidden="true"></i><span>Available for projects</span></span><span class="nolink">designdasilva&#8203;@gmail.com</span></div>
+  <div class="mnav-foot"><span>Available for new projects</span><span class="nolink">designdasilva&#8203;@gmail.com</span></div>
 </div>
 
+<div class="layers">
+<div class="paint" id="paint">
+<canvas id="gl" aria-hidden="true"></canvas>
 <section class="hero" id="hero" aria-label="Vitamina">
   <h1 class="sr">Vitamina. Thiago Vitamina, product designer.</h1>
-  <canvas id="gl" aria-hidden="true"></canvas>
   <div class="fallback" aria-hidden="true">VITAMINA</div>
   <div class="seq" id="seq" aria-hidden="true" title="Skip"></div>
   <div class="hero-meta">
     <p>Product designer in São Paulo, working with teams in the US.</p>
-    <p class="label" id="hint">Move the cursor</p>
+    <p class="hint" id="hint">Move the cursor</p>
   </div>
 </section>
 
-<section class="intro" data-ink="light">
+<section class="intro">
   <div class="wrap">
   <p>I’m Thiago. I’ve been designing for the web since 1996, and these days I take products from the first sketch to the version people use.</p>
 </div>
 </section>
+</div>
+
+<div class="sheet">
 
 <section class="wrap" id="work" aria-labelledby="work-h">
-  <div class="head"><h2 class="label" id="work-h">Selected work</h2><span class="label">5 projects</span></div>
+  <div class="head"><h2 class="sec-title" id="work-h">Selected work</h2></div>
 
   <article class="case split">
     <div class="media"><video muted loop playsinline preload="none" poster="v/tradein.jpg" data-src="v/tradein.mp4"></video></div>
@@ -50,7 +54,7 @@
       <p class="what">Allstate Protection Plans had a desktop trade-in draft that had sat on a shelf for years. I rebuilt it as a mobile-first flow: six kinds of devices, several retail partners, thirteen screens.</p>
       <p class="more">Every step asks one thing. The gift card arrives before the device is sent, so trust is handled by the flow itself, not by small print.</p>
       <dl class="facts"><dt>Client</dt><dd>Allstate Protection Plans</dd><dt>Year</dt><dd>2023</dd><dt>Role</dt><dd>Product designer, via Avenue Code</dd></dl>
-      <p class="after"><span class="label">After launch</span>Became Allstate Protection Plans’ white-label trade-in platform, now live with Staples Canada.</p>
+      <p class="after"><strong>After launch.</strong> Became Allstate Protection Plans’ white-label trade-in platform, now live with Staples Canada.</p>
       <a class="open" href="trade-in.html">Read the case<span class="arw" aria-hidden="true"></span></a>
     </div>
   </article>
@@ -62,20 +66,20 @@
       <p class="what">SoundCloud made its yearly data report as a printed zine. I turned it into a website without losing the photocopy attitude.</p>
       <p class="more">A home that maps all eight chapters, a menu to jump anywhere, pages paced for scrolling. I also guided the Webflow build, so the motion and spacing shipped as designed.</p>
       <dl class="facts"><dt>Client</dt><dd>SoundCloud</dd><dt>Year</dt><dd>2026</dd><dt>Role</dt><dd>Web design, interaction, build direction</dd></dl>
-      <p class="after"><span class="label">After launch</span>The report’s findings were covered by Billboard.</p>
-      <span class="label">Case study soon</span>
+      <p class="after"><strong>After launch.</strong> The report’s findings were covered by Billboard.</p>
+      <span class="soon">Case study soon</span>
     </div>
   </article>
 
   <article class="case split">
-    <div class="media empty"><span class="label">Footage in progress</span><b>SoundCloud for Artists</b></div>
+    <div class="media empty"><span class="soon">Footage in progress</span><b>SoundCloud for Artists</b></div>
     <div class="copy">
       <h3>SoundCloud for Artists</h3>
       <p class="what">Creators were leaving SoundCloud for platforms with a clearer way to earn. I designed an academy around three tracks: get started, get heard, get paid.</p>
       <p class="more">From first idea to an approved, navigable prototype in two weeks. When the brand changed midway, I rebuilt it on the new guide, close to what is live today.</p>
       <dl class="facts"><dt>Client</dt><dd>SoundCloud</dd><dt>Year</dt><dd>2025–26</dd><dt>Role</dt><dd>Senior designer</dd></dl>
-      <p class="after"><span class="label">After launch</span>Live at artists.soundcloud.com.</p>
-      <span class="label">Case study soon</span>
+      <p class="after"><strong>After launch.</strong> Live at artists.soundcloud.com.</p>
+      <span class="soon">Case study soon</span>
     </div>
   </article>
 
@@ -86,21 +90,21 @@
       <p class="what">I kept being asked for portfolios that looked different on the surface and were the same underneath. So I turned the service into a product.</p>
       <p class="more">A white-room gallery for visual artists, with its own design system, editor and payments. Designed and built by me, now in beta with a university pilot for 500 students.</p>
       <dl class="facts"><dt>Year</dt><dd>2026</dd><dt>Role</dt><dd>Founder, designer, builder</dd></dl>
-      <p class="after"><span class="label">After launch</span>Live at criaaa.com.</p>
-      <span class="label">Case study soon</span>
+      <p class="after"><strong>After launch.</strong> Live at criaaa.com.</p>
+      <span class="soon">Case study soon</span>
     </div>
   </article>
 
 
   <article class="case split">
-    <div class="media empty"><span class="label">Footage in progress</span><b>SafraPay</b></div>
+    <div class="media empty"><span class="soon">Footage in progress</span><b>SafraPay</b></div>
     <div class="copy">
       <h3>SafraPay</h3>
       <p class="what">Banco Safra’s entry into card machines started with no product and no brand language. I led design at Ogilvy and designed hands-on.</p>
       <p class="more">The sign-up portal, the machine screens and the system behind them, kept premium on purpose. Its fee calculator turned a price list into a comparison shop owners could try themselves.</p>
       <dl class="facts"><dt>Client</dt><dd>Banco Safra, at Ogilvy</dd><dt>Year</dt><dd>2018–19</dd><dt>Role</dt><dd>Head of design</dd></dl>
-      <p class="after"><span class="label">After launch</span>Other players in the market later adopted the same calculator.</p>
-      <span class="label">Case study soon</span>
+      <p class="after"><strong>After launch.</strong> Other players in the market later adopted the same calculator.</p>
+      <span class="soon">Case study soon</span>
     </div>
   </article>
 </section>
@@ -108,7 +112,7 @@
 <div class="dark">
 <section class="feature" aria-labelledby="bh-h">
   <div class="wrap">
-    <div class="head"><h2 class="label">Personal project</h2><span class="label">2026</span></div>
+    <div class="head"><h2 class="sec-title">Personal project</h2></div>
     <div class="media bh-reveal"><video muted loop playsinline preload="none" poster="v/bauhaus.jpg" data-src="v/bauhaus.mp4"></video><div class="bh-grid" aria-hidden="true"></div></div>
     <div class="feature-copy split">
       <h3 id="bh-h">Quem fechou a Bauhaus?</h3>
@@ -122,7 +126,7 @@
 </section>
 
 <section class="wrap alsolive" aria-labelledby="live-h">
-  <div class="head"><h2 class="label" id="live-h">Also live</h2><span class="label">Websites</span></div>
+  <div class="head"><h2 class="sec-title" id="live-h">Also live</h2></div>
   <div class="live">
     <article>
       <div class="media"><video muted loop playsinline preload="none" poster="v/eccon.jpg" data-src="v/eccon.mp4"></video></div>
@@ -137,7 +141,7 @@
       <a class="open" href="https://cepaintegra.com.br" target="_blank" rel="noopener">cepaintegra.com.br<span class="arw" aria-hidden="true"></span></a>
     </article>
     <article>
-      <div class="media empty dk"><span class="label">Video in progress</span><b>Agência Amazonas</b></div>
+      <div class="media empty dk"><span class="soon">Video in progress</span><b>Agência Amazonas</b></div>
       <h3>Agência Amazonas</h3>
       <p>The official news agency of the Amazonas state government, publishing daily news about the state for journalists and readers across Brazil.</p>
       <a class="open" href="https://www.agenciaamazonas.am.gov.br" target="_blank" rel="noopener">agenciaamazonas.am.gov.br<span class="arw" aria-hidden="true"></span></a>
@@ -147,7 +151,7 @@
 </div>
 
 <section class="wrap sect" id="about" aria-labelledby="about-h">
-  <div class="head"><h2 class="label" id="about-h">About</h2><span class="label">São Paulo</span></div>
+  <div class="head"><h2 class="sec-title" id="about-h">About</h2></div>
   <div class="about split">
     <div>
       <p>I made my first website in 1996 and never really stopped. I’ve led design teams at agencies and startups, and today I work as an independent product designer, mostly with teams in the US.</p>
@@ -167,17 +171,22 @@
   </div>
 </section>
 
+</div>
+
+</div>
+
 <section class="contact" id="contact" aria-labelledby="contact-h" data-ink="dark">
   <div class="wrap">
-    <div class="head"><h2 class="label" id="contact-h">Contact</h2><span class="label">São Paulo · GMT−3</span></div>
+    <div class="head"><h2 class="sec-title" id="contact-h">Contact</h2></div>
     <p class="cta">Let’s work together.</p>
+    <p class="avail-line">Available for new projects, from São Paulo, working with teams anywhere.</p>
     <ul class="reach">
       <li><span class="label">Email</span><span class="val" id="mail">designdasilva@gmail.com</span><button class="copybtn" id="copy" type="button">Copy</button></li>
       <li><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/thiagovitamina" target="_blank" rel="noopener">thiagovitamina <span class="arw" aria-hidden="true"></span></a></li>
       <li><span class="label">Instagram</span><a class="val" href="https://www.instagram.com/thiagovitamina" target="_blank" rel="noopener">@thiagovitamina <span class="arw" aria-hidden="true"></span></a></li>
     </ul>
   </div>
-  <footer class="wrap label"><span>Thiago Vitamina</span><span>São Paulo, 2026</span></footer>
+  <footer class="wrap foot"><span>Thiago Vitamina</span><span>São Paulo, 2026</span></footer>
 </section>
 
 <script>
@@ -197,7 +206,7 @@ document.getElementById('copy').addEventListener('click',async e=>{
 
 /* ---------- hero ---------- */
 (()=>{
-const hero=document.getElementById('hero'),seq=document.getElementById('seq'),cv=document.getElementById('gl'),hint=document.getElementById('hint');
+const hero=document.getElementById('hero'),paint=document.getElementById('paint'),seq=document.getElementById('seq'),cv=document.getElementById('gl'),hint=document.getElementById('hint');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FONT='800 {s}px "Funnel Display", "Helvetica Neue", Arial, sans-serif';
 const C={paper:'#FFFFFF',ink:'#000000',plum:'#551A8B'};
@@ -248,7 +257,7 @@ async function frame(f,id){
 /* ---------- WebGL fluid ink ---------- */
 const gl=cv.getContext('webgl2',{alpha:false,antialias:false,premultipliedAlpha:false,preserveDrawingBuffer:false});
 const okGL=gl&&gl.getExtension('EXT_color_buffer_float');
-if(!okGL){hero.classList.add('nogl');}
+if(!okGL){paint.classList.add('nogl');}
 let ready=false,started=false,visible=true;
 const S={};
 const VS=`#version 300 es
@@ -269,7 +278,7 @@ const FS={
  clear:P+`uniform sampler2D uTex;uniform float uVal;void main(){o=uVal*texture(uTex,vUv);}`,
  press:P+`uniform sampler2D uPressure,uDiv;void main(){float L=texture(uPressure,vL).x,R=texture(uPressure,vR).x,T=texture(uPressure,vT).x,B=texture(uPressure,vB).x,d=texture(uDiv,vUv).x;o=vec4((L+R+B+T-d)*.25,0.,0.,1.);}`,
  grad:P+`uniform sampler2D uPressure,uVelocity;void main(){float L=texture(uPressure,vL).x,R=texture(uPressure,vR).x,T=texture(uPressure,vT).x,B=texture(uPressure,vB).x;vec2 v=texture(uVelocity,vUv).xy-vec2(R-L,T-B);o=vec4(v,0.,1.);}`,
- show:P+`uniform sampler2D uDye,uText,uVideo;uniform vec2 uVScale;uniform float uHasVideo;
+ show:P+`uniform sampler2D uDye,uText,uVideo;uniform vec2 uVScale;uniform float uHasVideo,uSplit;
   void main(){
    float d=texture(uDye,vUv).r;
    float w=max(fwidth(d)*.9,.0015);
@@ -278,15 +287,17 @@ const FS={
    vec3 base=mix(vec3(1.),vec3(0.),t);
    vec3 plum=vec3(.333,.102,.545);
    vec3 ink=plum;
-   if(uHasVideo>.5){vec2 tc=(vUv-.5)*uVScale+.5;vec3 v=texture(uVideo,tc).rgb;float l=dot(v,vec3(.299,.587,.114));
+   float band=smoothstep(uSplit-.05,uSplit+.05,vUv.y);
+   if(uHasVideo>.5){vec2 hv=vec2(vUv.x,(vUv.y-uSplit)/(1.-uSplit));vec2 tc=(hv-.5)*uVScale+.5;vec3 v=texture(uVideo,tc).rgb;float l=dot(v,vec3(.299,.587,.114));
      ink=mix(vec3(.16,.04,.30),vec3(.90,.84,1.),smoothstep(.05,.95,l));}
+   ink=mix(vec3(.894,.839,.969),ink,band);
    float core=smoothstep(.54-w,.54+w,d);
    vec3 inside=mix(plum,ink,core);
    inside=mix(inside,core>.5?plum:vec3(1.),t);
    o=vec4(mix(base,inside,m),1.);
   }`
 };
-let progs={},quad,vel,dye,prs,divT,curlT,textTex,vidTex,txtCv,txtCtx,simW,simH,dyeW,dyeH,W,H,DPR;
+let HH=1,progs={},quad,vel,dye,prs,divT,curlT,textTex,vidTex,txtCv,txtCtx,simW,simH,dyeW,dyeH,W,H,DPR;
 function sh(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s}
 function prog(fs){const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,VS));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.bindAttribLocation(p,0,'aPos');gl.linkProgram(p);
   const u={};const n=gl.getProgramParameter(p,gl.ACTIVE_UNIFORMS);for(let i=0;i<n;i++){const nm=gl.getActiveUniform(p,i).name;u[nm]=gl.getUniformLocation(p,nm)}return {p,u}}
@@ -304,7 +315,7 @@ function use(name,texel){const g=progs[name];gl.useProgram(g.p);gl.uniform2f(g.u
 
 function res(base){const a=W/H;return a>1?[Math.round(base*a),base]:[base,Math.round(base/a)]}
 function initGL(){
-  W=hero.clientWidth;H=hero.clientHeight;DPR=Math.min(2,devicePixelRatio||1);
+  W=paint.clientWidth;H=paint.clientHeight;HH=hero.clientHeight;DPR=Math.min(2,devicePixelRatio||1);
   cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
   if(!quad){
     for(const k in FS)progs[k]=prog(FS[k]);
@@ -323,9 +334,9 @@ let rise=1;
 const ease=t=>1-Math.pow(1-Math.min(1,Math.max(0,t)),3);
 function drawText(){
   const c=txtCtx,w=txtCv.width,h=txtCv.height;c.clearRect(0,0,w,h);
-  let s=sizeFor('VITAMINA',(W-Math.max(32,W*0.05))) ;s=Math.min(s,H*0.46);
+  let s=sizeFor('VITAMINA',(W-Math.max(32,W*0.05))) ;s=Math.min(s,HH*0.46);
   c.font=FONT.replace('{s}',s*DPR);const m=c.measureText('VITAMINA');
-  const asc=m.actualBoundingBoxAscent,desc=m.actualBoundingBoxDescent,x=(w-m.width)/2,y=h*0.47+(asc-desc)/2;
+  const asc=m.actualBoundingBoxAscent,desc=m.actualBoundingBoxDescent,x=(w-m.width)/2,y=HH*DPR*0.5+(asc-desc)/2;
   c.save();c.beginPath();c.rect(0,y-asc-6*DPR,w,asc+desc+12*DPR);c.clip();
   c.fillStyle='#000';c.fillText('VITAMINA',x,y+(1-ease(rise))*(asc+desc+12*DPR));c.restore();
   gl.bindTexture(gl.TEXTURE_2D,textTex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,txtCv);
@@ -359,25 +370,25 @@ function render(){
   if(hasVid&&hv.readyState>=2){gl.bindTexture(gl.TEXTURE_2D,vidTex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,hv)}catch(e){}}
   const u=use('show',[1/cv.width,1/cv.height]);
   gl.uniform1i(u.uDye,bindTex(0,dye.r.t));gl.uniform1i(u.uText,bindTex(1,textTex));gl.uniform1i(u.uVideo,bindTex(2,vidTex));
-  const va=hv.videoWidth&&hv.videoHeight?hv.videoWidth/hv.videoHeight:1.25,a=W/H;
+  const va=hv.videoWidth&&hv.videoHeight?hv.videoWidth/hv.videoHeight:1.25,a=W/HH;gl.uniform1f(u.uSplit,1-HH/H);
   gl.uniform2f(u.uVScale,a>va?1:a/va,a>va?va/a:1);gl.uniform1f(u.uHasVideo,hasVid&&hv.readyState>=2?1:0);
   blit(null);
 }
 
 /* pointer */
 let ptr=null,ghost=true,gt=0,lastT=0;
-function toUv(e){const r=hero.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]}
+function toUv(e){const r=paint.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]}
 function moveTo(e){if(!started)return;const [x,y]=toUv(e);
   if(ghost){ghost=false;hint.textContent='Paint to see the work'}
   if(ptr){ptr.dx=(x-ptr.x);ptr.dy=(y-ptr.y)}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true}
-hero.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')moveTo(e)});
-hero.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')ptr=null});
+paint.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')moveTo(e)});
+paint.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')ptr=null});
 /* touch: paint while the finger drags, even when the page scrolls under it */
-hero.addEventListener('touchstart',e=>{ptr=null;moveTo(e.touches[0])},{passive:true});
-hero.addEventListener('touchmove',e=>moveTo(e.touches[0]),{passive:true});
-hero.addEventListener('touchend',()=>{ptr=null},{passive:true});
+paint.addEventListener('touchstart',e=>{ptr=null;moveTo(e.touches[0])},{passive:true});
+paint.addEventListener('touchmove',e=>moveTo(e.touches[0]),{passive:true});
+paint.addEventListener('touchend',()=>{ptr=null},{passive:true});
 if(matchMedia('(hover: none)').matches)hint.textContent='Drag your finger to paint';
-hero.addEventListener('pointerdown',e=>{if(!started)return;ghost=false;const [x,y]=toUv(e);
+paint.addEventListener('pointerdown',e=>{if(!started)return;ghost=false;const [x,y]=toUv(e);
   for(let i=0;i<6;i++){const a=Math.random()*6.28;splat(x,y,Math.cos(a)*900,Math.sin(a)*900,1.4,.0032)}});
 
 function loop(now){
@@ -385,14 +396,14 @@ function loop(now){
   const dt=Math.min(.0166,(now-lastT)/1000||.016);lastT=now;
   if(visible&&ready){
     if(rise<1){rise=Math.min(1,rise+1/40);drawText()}
-    if(ghost&&!reduce&&rise>=1){gt+=dt;const x=.5+.34*Math.sin(gt*1.15),y=.52+.2*Math.sin(gt*1.9+1);
-      const nx=.5+.34*Math.sin((gt+dt)*1.15),ny=.52+.2*Math.sin((gt+dt)*1.9+1);splat(x,y,(nx-x)*4200,(ny-y)*4200,.7,.0034)}
+    if(ghost&&!reduce&&rise>=1){gt+=dt;const b=1-HH/H,x=.5+.34*Math.sin(gt*1.15),y=b+(1-b)*(.5+.2*Math.sin(gt*1.9+1));
+      const nx=.5+.34*Math.sin((gt+dt)*1.15),ny=b+(1-b)*(.5+.2*Math.sin((gt+dt)*1.9+1));splat(x,y,(nx-x)*4200,(ny-y)*4200,.7,.0034)}
     if(ptr&&ptr.moved){const sp=Math.hypot(ptr.dx,ptr.dy);splat(ptr.x,ptr.y,ptr.dx*5000,ptr.dy*5000,.6+Math.min(.9,sp*25),.0026+Math.min(.004,sp*.06));ptr.moved=false}
     step(dt);render();
   }
   requestAnimationFrame(loop);
 }
-new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&hasVid)hv.play().catch(()=>{});else hv.pause()}).observe(hero);
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&hasVid)hv.play().catch(()=>{});else hv.pause()}).observe(paint);
 
 async function play(){
   const id=++run;seq.hidden=false;
@@ -403,14 +414,14 @@ async function play(){
 function finish(){
   seq.hidden=true;seq.innerHTML='';
   if(!okGL)return;
-  try{initGL()}catch(e){console.error(e);hero.classList.add('nogl');return}
+  try{initGL()}catch(e){console.error(e);paint.classList.add('nogl');return}
   hv.src=clips[0];hv.play().catch(()=>{});
   rise=reduce?1:0;drawText();
   if(reduce){started=true;for(let i=0;i<8;i++)splat(.6+Math.random()*.15,.45+Math.random()*.1,0,0,1.2,.004);step(.016);render();started=false;return}
   if(!started){started=true;lastT=performance.now();requestAnimationFrame(loop)}
 }
 seq.addEventListener('click',()=>{run++;finish()});
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(ready&&Math.abs(hero.clientWidth-W)>2){initGL()}},150)});
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(ready&&(Math.abs(paint.clientWidth-W)>2||Math.abs(paint.clientHeight-H)>40)){initGL()}},150)});
 (async()=>{try{await document.fonts.load('800 100px "Funnel Display"','VITAMINA Understand')}catch(e){} play()})();
 })();
 </script>
