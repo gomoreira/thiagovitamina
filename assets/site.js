@@ -48,3 +48,11 @@ function draw(){const r=box.getBoundingClientRect(),vh=innerHeight;
 let t=false;addEventListener('scroll',()=>{if(t)return;t=true;requestAnimationFrame(()=>{draw();t=false})},{passive:true});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{build();draw()},150)});
 build();draw();})();
+
+/* ink hover on names and titles: the ink starts where the cursor enters and leaves where it exits */
+(()=>{if(!matchMedia('(hover: hover)').matches)return;
+const els=document.querySelectorAll('.top .name,.top nav a,.copy h3 a,.xp-co');
+els.forEach(el=>{el.classList.add('ink-text');const zone=el.closest('summary')||el;
+  const at=e=>{const r=el.getBoundingClientRect();el.style.setProperty('--x',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');el.style.setProperty('--y',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')};
+  zone.addEventListener('pointerenter',e=>{at(e);el.classList.add('is-in')});
+  zone.addEventListener('pointerleave',e=>{at(e);el.classList.remove('is-in')})});})();
