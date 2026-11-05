@@ -30,7 +30,7 @@
   <div class="fallback" aria-hidden="true">VITAMINA</div>
   <div class="seq" id="seq" aria-hidden="true" title="Skip"></div>
   <div class="hero-meta">
-    <p>Product designer in São Paulo, working with teams in the US.</p>
+    <p>Product designer in São Paulo.</p>
     <p class="hint" id="hint">Move the cursor</p>
   </div>
 </section>
@@ -153,22 +153,27 @@
 
 <div class="sheet light" id="sheet-about">
 <section class="wrap sect" id="about" aria-labelledby="about-h">
-  <div class="head"><h2 class="sec-title" id="about-h">About</h2><p class="sec-intro">I made my first website in 1996, when I was 12, and I never really stopped.</p></div>
+  <div class="head"><h2 class="sec-title" id="about-h">About</h2></div>
   <div class="about">
-    <figure class="portrait"><img src="img/thiago.jpg" alt="Thiago Vitamina, in sunglasses, at a café terrace in São Paulo" width="738" height="922" loading="lazy"></figure>
-    <div class="about-text">
-      <p>I’ve led design teams at agencies and startups, and today I work as an independent product designer, mostly with teams in the US.</p>
-      <p>I also run United Designers do Brasil, a community that helps Brazilian designers get ready to work abroad.</p>
-      <ol class="cv" aria-label="Experience">
-        <li><span>CRIAAA</span><span>Founder</span><span>2026–</span></li>
-        <li><span>Vitamina Interativa</span><span>Founder, creative director</span><span>2025–</span></li>
-        <li><span>SoundCloud</span><span>Senior designer, contract</span><span>2025–26</span></li>
-        <li><span>MundoVR</span><span>Design director, contract</span><span>2023–24</span></li>
-        <li><span>iFood</span><span>Design manager</span><span>2021–22</span></li>
-        <li><span>Ogilvy Brasil</span><span>Head of design</span><span>2018–19</span></li>
-      </ol>
-      <a class="open" href="https://www.linkedin.com/in/thiagovitamina" target="_blank" rel="noopener">Full experience on LinkedIn<span class="arw" aria-hidden="true"></span></a>
+    <div class="about-statement">
+      <p class="about-lead">I design products end to end: research, flows, interfaces, prototypes and the systems that hold them together. Over twenty years I’ve led design at agencies and startups, and worked inside product teams in Brazil and the US.</p>
+      <p>I made my first website in 1996, when I was 12. I also run United Designers do Brasil, a community that helps Brazilian designers get ready to work abroad.</p>
     </div>
+    <div class="xp" role="list">
+      <details role="listitem"><summary><span class="xp-when">Since 2026</span><span class="xp-co">CRIAAA</span><span class="xp-role">Founder</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>A portfolio platform for visual artists. I design it, build it and run it, from the editor to the payments.</p></div></details>
+      <details role="listitem"><summary><span class="xp-when">Since 2025</span><span class="xp-co">Vitamina Interativa</span><span class="xp-role">Founder, creative director</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>My studio. Product and web design for companies and agencies, plus visual production for brands.</p></div></details>
+      <details role="listitem"><summary><span class="xp-when">2025 to 2026</span><span class="xp-co">SoundCloud</span><span class="xp-role">Senior designer, contract</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>Remote for the New York team, in Scaled Creator Success. I designed SoundCloud for Artists and the Music Intelligence Report site.</p></div></details>
+      <details role="listitem"><summary><span class="xp-when">2023 to 2024</span><span class="xp-co">MundoVR</span><span class="xp-role">Design director, contract</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>Remote for Austin, Texas. I led the design of the prototype the company used to pitch investors.</p></div></details>
+      <details role="listitem"><summary><span class="xp-when">2022</span><span class="xp-co">TownSq</span><span class="xp-role">Head of design</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>Led design at a condominium management platform.</p></div></details>
+      <details role="listitem"><summary><span class="xp-when">2018 to 2019</span><span class="xp-co">Ogilvy Brasil</span><span class="xp-role">Head of design</span><i aria-hidden="true"></i></summary>
+        <div class="xp-body"><p>Led design for clients including Coca-Cola, BMW, Nestlé and Banco Safra, where we built SafraPay from zero.</p></div></details>
+    </div>
+    <a class="open xp-more" href="https://www.linkedin.com/in/thiagovitamina" target="_blank" rel="noopener">See my full work history on LinkedIn<span class="arw" aria-hidden="true"></span></a>
   </div>
 </section>
 </div>
@@ -195,12 +200,19 @@ document.getElementById('copy').addEventListener('click',async e=>{
   try{await navigator.clipboard.writeText(t);b.textContent='Copied'}catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
   setTimeout(()=>b.textContent='Copy',1800);
 });
-(()=>{ // videos play only while visible
+(()=>{ // thumbnails are still frames; on desktop they play while hovered, on touch screens while visible
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,hover=matchMedia('(hover: hover)').matches;
   const vids=[...document.querySelectorAll('video[data-src]')];
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const load=v=>{if(!v.src){v.src=v.dataset.src;v.load()}};
   const io=new IntersectionObserver(es=>es.forEach(en=>{const v=en.target;
-    if(en.isIntersecting){if(!v.src){v.src=v.dataset.src}if(!reduce)v.play().catch(()=>{})}else v.pause()}),{rootMargin:'200px 0px'});
-  vids.forEach(v=>io.observe(v));
+    if(en.isIntersecting){if(v.dataset.mode==='auto'||!hover){load(v);if(!reduce)v.play().catch(()=>{})}}else v.pause()}),{rootMargin:'200px 0px'});
+  vids.forEach(v=>{
+    if(v.closest('.bh-reveal'))v.dataset.mode='auto';
+    io.observe(v);
+    if(hover&&v.dataset.mode!=='auto'){const zone=v.closest('.case,article')||v.parentElement;
+      zone.addEventListener('pointerenter',()=>{load(v);if(!reduce)v.play().catch(()=>{});zone.classList.add('playing')});
+      zone.addEventListener('pointerleave',()=>{v.pause();zone.classList.remove('playing')})}
+  });
 })();
 
 /* ---------- hero ---------- */
@@ -333,7 +345,7 @@ let rise=1;
 const ease=t=>1-Math.pow(1-Math.min(1,Math.max(0,t)),3);
 function drawText(){
   const c=txtCtx,w=txtCv.width,h=txtCv.height;c.clearRect(0,0,w,h);
-  let s=sizeFor('VITAMINA',(W-Math.max(32,W*0.05))) ;s=Math.min(s,HH*0.46);
+  const side=Math.max(innerWidth<=820?16:40,(W-1440)/2);let s=sizeFor('VITAMINA',W-side*2);s=Math.min(s,HH*0.46);
   c.font=FONT.replace('{s}',s*DPR);const m=c.measureText('VITAMINA');
   const asc=m.actualBoundingBoxAscent,desc=m.actualBoundingBoxDescent,x=(w-m.width)/2,y=HH*DPR*0.5+(asc-desc)/2;
   c.save();c.beginPath();c.rect(0,y-asc-6*DPR,w,asc+desc+12*DPR);c.clip();
