@@ -464,3 +464,6 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .xp summary i::before,.xp summary i::after{content:none}
 .xp details[open] summary i{transform:rotate(45deg)}
 .xp summary:hover i{background:var(--plum)}
+/* contact links: arrow on the 16 icon grid, always at the right edge, aligned with Copy */
+.reach a.val .arw{width:16px;height:16px;flex:none}
+@media (max-width:820px){.reach a.val{grid-column:1 / -1}}
