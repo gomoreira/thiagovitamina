@@ -109,7 +109,7 @@
 <section class="feature" aria-labelledby="bh-h">
   <div class="wrap">
     <div class="head"><h2 class="label">Personal project</h2><span class="label">2026</span></div>
-    <div class="media"><video muted loop playsinline preload="none" poster="v/bauhaus.jpg" data-src="v/bauhaus.mp4"></video></div>
+    <div class="media bh-reveal"><video muted loop playsinline preload="none" poster="v/bauhaus.jpg" data-src="v/bauhaus.mp4"></video><div class="bh-grid" aria-hidden="true"></div></div>
     <div class="feature-copy split">
       <h3 id="bh-h">Quem fechou a Bauhaus?</h3>
       <div>
@@ -211,7 +211,7 @@ const FRAMES=[
   {t:'Understand.',bg:C.paper,fg:C.ink,k:'type',d:760},
   {t:'Think.',bg:C.ink,fg:C.paper,k:'giant',d:600},
   {t:'Sketch.',bg:C.paper,fg:C.plum,k:'stack',d:700},
-  {t:'Test.',bg:C.plum,fg:C.paper,k:'slide',d:680},
+  {t:'Test.',bg:C.plum,fg:C.paper,k:'drop',d:1050},
   {t:'Ship.',bg:C.ink,fg:C.paper,k:'giant',d:640}
 ];
 async function frame(f,id){
@@ -230,6 +230,14 @@ async function frame(f,id){
     const s=Math.min(sizeFor(f.t,W-64),H*0.28),box=document.createElement('div');box.className='stack';seq.append(box);
     for(let i=0;i<3;i++){const r=document.createElement('span');r.className='row';const sp=document.createElement('span');sp.textContent=f.t;sp.style.fontSize=s+'px';r.append(sp);box.append(r);
       sp.animate([{transform:'translateY(105%)'},{transform:'translateY(0)'}],{duration:320,delay:i*90,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'})}
+    await wait(f.d);
+  }else if(f.k==='drop'){
+    /* letters fall from above, land and settle into place, centered */
+    el.style.fontSize=Math.min(sizeFor(f.t,W*0.86),H*0.62)+'px';seq.append(el);
+    [...f.t].forEach((ch,i)=>{const l=document.createElement('span');l.textContent=ch;l.style.display='inline-block';el.append(l);
+      const rot=(i%2?1:-1)*(8+i*3);
+      l.animate([{transform:'translateY(-'+(H*1.1)+'px) rotate('+rot+'deg)'},{transform:'translateY(0) rotate(0deg)',offset:.62},{transform:'translateY(-7%) rotate('+(-rot*.15)+'deg)',offset:.78},{transform:'translateY(0) rotate(0deg)'}],
+        {duration:560,delay:i*85,easing:'cubic-bezier(.45,0,.55,1)',fill:'both'})});
     await wait(f.d);
   }else{
     el.textContent=f.t;el.style.fontSize=Math.min(sizeFor(f.t,W*1.5),H*0.6)+'px';seq.append(el);
