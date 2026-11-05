@@ -7,24 +7,30 @@ b.addEventListener('click',()=>set(b.getAttribute('aria-expanded')!=='true'));
 m.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}});
 matchMedia('(min-width:821px)').addEventListener('change',e=>{if(e.matches)set(false)});})();
-/* header + paint: fixed header, dark glass over dark bands, invert over the paint, tuck while scrolling down.
-   The paint sticks by its bottom edge and sinks a little as the sheet covers it. */
+/* header + pages. Each page sticks by its bottom edge; the next page slides over it and the one below dims.
+   The header inverts over the paint and turns to dark glass over dark pages. */
 (()=>{const h=document.querySelector('.top');if(!h)return;
-const darks=[...document.querySelectorAll('.dark,.contact')],paint=document.getElementById('paint'),sheet=document.querySelector('.sheet');
+const paint=document.getElementById('paint'),pages=[paint,...document.querySelectorAll('.sheet')].filter(Boolean);
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function size(){if(paint)paint.style.setProperty('--paint-top',Math.min(0,innerHeight-paint.offsetHeight)+'px')}
-function check(){const hb=h.offsetHeight,y=hb-4;
-  const overPaint=!!(paint&&sheet&&sheet.getBoundingClientRect().top>hb);
+function size(){pages.forEach(p=>p.style.setProperty('--st',Math.min(0,innerHeight-p.offsetHeight)+'px'))}
+function check(){const hb=h.offsetHeight,el=document.elementFromPoint(innerWidth/2,hb+2);
+  const overPaint=!!(el&&el.closest('.paint'));
   h.classList.toggle('over-paint',overPaint);
-  h.classList.toggle('on-dark',!overPaint&&darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y&&!(sheet&&d.classList.contains('contact')&&sheet.getBoundingClientRect().bottom>y)}));
-  if(paint&&sheet&&!reduce){const t=sheet.getBoundingClientRect().top,p=Math.min(1,Math.max(0,1-t/innerHeight));
-    paint.style.transform=p>0?'scale('+(1-.05*p)+')':'';paint.style.setProperty('--dim',(.22*p).toFixed(3))}}
+  h.classList.toggle('on-dark',!overPaint&&!!(el&&el.closest('.dark,.contact')));
+  if(reduce)return;
+  for(let i=0;i<pages.length-1;i++){const t=pages[i+1].getBoundingClientRect().top,p=Math.min(1,Math.max(0,1-t/innerHeight));
+    pages[i].style.setProperty('--dim',(.32*p).toFixed(3));
+    if(pages[i]===paint)paint.style.transform=p>0?'scale('+(1-.05*p)+')':''}}
 let last=scrollY,tick=false;
 addEventListener('scroll',()=>{if(tick)return;tick=true;requestAnimationFrame(()=>{const y=scrollY;
   if(!document.documentElement.classList.contains('menu-open'))h.classList.toggle('tucked',y>last&&y>160);
   last=y;check();tick=false})},{passive:true});
 addEventListener('resize',()=>{size();check()});
+addEventListener('load',()=>{size();check()});
 size();check();})();
+/* ink buttons: remember where the cursor came in */
+document.querySelectorAll('.btn-ink').forEach(b=>{const set=e=>{const r=b.getBoundingClientRect();b.style.setProperty('--x',(e.clientX-r.left)+'px');b.style.setProperty('--y',(e.clientY-r.top)+'px');b.style.setProperty('--k',Math.ceil(Math.hypot(r.width,r.height)/6)+1)};
+  b.addEventListener('pointerenter',set);b.addEventListener('pointerleave',set)});
 /* Bauhaus reveal: modules turn and shrink away as the video scrolls into view */
 (()=>{const box=document.querySelector('.bh-reveal');if(!box)return;const g=box.querySelector('.bh-grid');
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){g.remove();return}
