@@ -59,3 +59,19 @@ els.forEach(el=>{el.classList.add('ink-text');const zone=el.closest('summary')||
   const at=e=>{const r=el.getBoundingClientRect();el.style.setProperty('--x',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');el.style.setProperty('--y',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')};
   zone.addEventListener('pointerenter',e=>{at(e);el.classList.add('is-in')});
   zone.addEventListener('pointerleave',e=>{at(e);el.classList.remove('is-in')})});})();
+/* living favicon: the ink blot breathes in the tab. 32px canvas, ~8 frames a second, one small PNG per frame.
+   Static favicon.svg stays as the fallback (Safari, reduced motion). */
+(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');if(!x)return;
+let l=document.querySelector('link[rel="icon"][type="image/svg+xml"]');if(!l)return;
+const png=document.createElement('link');png.rel='icon';png.type='image/png';document.head.appendChild(png);
+document.querySelectorAll('link[rel="icon"]').forEach(n=>{if(n!==png)n.remove()});
+const N=48,R=26.5,p=[];
+const draw=t=>{for(let i=0;i<N;i++){const a=i/N*Math.PI*2;
+  const r=R*(1+.085*Math.sin(2*a+t*.55)+.06*Math.sin(3*a-t*.8+1.3)+.035*Math.sin(5*a+t*1.25+.4)+.02*Math.sin(7*a-t*1.7));
+  p[i]=[32+Math.cos(a)*r+.8*Math.sin(t*.4),32+Math.sin(a)*r*.94+.6*Math.cos(t*.33)]}
+  x.clearRect(0,0,64,64);x.fillStyle='#551A8B';x.beginPath();
+  for(let i=0;i<N;i++){const a=p[i],b=p[(i+1)%N],m=[(a[0]+b[0])/2,(a[1]+b[1])/2];
+    if(i===0){const z=p[N-1];x.moveTo((z[0]+a[0])/2,(z[1]+a[1])/2)}x.quadraticCurveTo(a[0],a[1],m[0],m[1])}
+  x.fill();png.href=c.toDataURL('image/png')};
+let t0=performance.now();draw(0);setInterval(()=>draw((performance.now()-t0)/1000),125);})();
