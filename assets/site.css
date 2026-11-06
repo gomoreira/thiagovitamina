@@ -467,3 +467,9 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 /* contact links: arrow on the 16 icon grid, always at the right edge, aligned with Copy */
 .reach a.val .arw{width:16px;height:16px;flex:none}
 @media (max-width:820px){.reach a.val{grid-column:1 / -1}}
+/* accessibility: skip link, focus that shows on every background */
+.skip{position:fixed;left:var(--gut);top:var(--sp-2);z-index:1000;background:var(--plum);color:var(--paper);padding:var(--sp-2) var(--sp-3);font-size:var(--t-sm);text-decoration:none;transform:translateY(-200%)}
+.skip:focus{transform:none;outline:2px solid var(--paper);outline-offset:2px}
+.skip:visited{color:var(--paper)}
+#main:focus{outline:none}
+.dark :focus-visible,.contact :focus-visible,.mnav :focus-visible,.on-dark :focus-visible{outline-color:var(--link-dark)}

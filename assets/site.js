@@ -5,7 +5,10 @@ const set=o=>{b.setAttribute('aria-expanded',o);document.documentElement.classLi
   else{m.classList.remove('is-open');m.hidden=true}};
 b.addEventListener('click',()=>set(b.getAttribute('aria-expanded')!=='true'));
 m.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
-addEventListener('keydown',e=>{if(e.key==='Escape'&&b.getAttribute('aria-expanded')==='true'){set(false);b.focus()}});
+addEventListener('keydown',e=>{if(b.getAttribute('aria-expanded')!=='true')return;
+  if(e.key==='Escape'){set(false);b.focus();return}
+  if(e.key==='Tab'){const f=[b,...m.querySelectorAll('a')],i=f.indexOf(document.activeElement);
+    if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}});
 matchMedia('(min-width:821px)').addEventListener('change',e=>{if(e.matches)set(false)});})();
 /* header + pages. Each page sticks by its bottom edge; the next page slides over it and the one below dims.
    The header inverts over the paint and turns to dark glass over dark pages. */
