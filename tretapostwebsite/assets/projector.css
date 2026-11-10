@@ -8,7 +8,7 @@
 :root {
   --black: #000;
   --film: #f1e4d3;          /* branco de película, puxado do logo */
-  --film-dim: rgba(241, 228, 211, .58);
+  --film-dim: rgba(241, 228, 211, .72);
   --film-faint: rgba(241, 228, 211, .22);
   --leak-orange: #ff5a1f;
   --leak-red: #d81e1e;

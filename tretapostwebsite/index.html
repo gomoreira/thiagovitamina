@@ -11,7 +11,8 @@
 <link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/archivo.woff2" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/tretapostwebsite/assets/projector.css">
 <style>
-body { font-family: "Archivo", system-ui, sans-serif; font-size: 17px; line-height: 1.55; font-stretch: 100%; }
+body { font-family: "Archivo", system-ui, sans-serif; font-size: 17px; line-height: 1.62; font-stretch: 108%; font-weight: 430; letter-spacing: .005em; }
+b, strong, dt { font-weight: 700; }
 .wrap { padding-inline: var(--gate-x); }
 .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
 
@@ -21,7 +22,7 @@ body { font-family: "Archivo", system-ui, sans-serif; font-size: 17px; line-heig
 .t-display { font-weight: 800; font-stretch: 125%; letter-spacing: -.04em; line-height: .86; }
 .t-h2 { font-weight: 800; font-stretch: 125%; letter-spacing: -.035em; line-height: .94; font-size: var(--fs-2xl); margin: 0; text-wrap: balance; }
 .t-h3 { font-weight: 600; font-stretch: 112%; letter-spacing: -.018em; line-height: 1.14; font-size: var(--fs-xl); margin: 0; text-wrap: balance; }
-.t-body { font-size: var(--fs-l); line-height: 1.5; }
+.t-body { font-size: var(--fs-l); line-height: 1.58; }
 .dim { color: var(--film-dim); }
 
 /* ---------- barra ---------- */
@@ -84,6 +85,42 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .hero__aside { grid-column: 9 / span 4; align-self: end; margin: 0; max-width: 34ch; font-size: var(--fs-l); line-height: 1.5; }
 .hero__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 48px; }
 
+
+[hidden] { display: none !important; }
+/* ---------- hero 1: manifesto ---------- */
+.hero--manifesto { justify-content: space-between; padding-bottom: 9svh; }
+.manifesto__sig { display: flex; align-items: baseline; gap: 16px; margin: 4vh 0 0; }
+.manifesto__sig .wordmark { font-size: clamp(28px, 2.6vw, 44px); }
+.manifesto__sig .dim { font-size: var(--fs-l); }
+.manifesto { margin: 0; display: grid; font-weight: 800; font-stretch: 125%; letter-spacing: -.045em; line-height: .9; font-size: clamp(44px, 7.1vw, 132px); }
+.manifesto span:first-child { color: var(--film-dim); }
+.manifesto__out { justify-self: end; font-weight: 900; }
+.manifesto__aside { grid-column: 1 / span 5; margin-top: 40px; }
+.manifesto__actions { grid-column: 7 / -1; justify-content: flex-end; align-self: end; margin-top: 40px; }
+
+/* ---------- hero 2: o logo é a tela ---------- */
+.hero-tela { --s: 1; --mo: 1; --co: 0; position: relative; height: 280svh; }
+.tela__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; }
+.tela__media { position: absolute; inset: 0; }
+.tela__media div { position: absolute; inset: -4%; background-size: cover; background-position: center; opacity: 0; animation: tela 20s linear infinite; }
+@keyframes tela { 0% { opacity: 0; transform: scale(1.12); } 4% { opacity: 1; } 20% { opacity: 1; } 25% { opacity: 0; transform: scale(1); } 100% { opacity: 0; } }
+.tela__mask { position: absolute; inset: 0; display: grid; place-items: center; background: #000; color: #fff; mix-blend-mode: multiply;
+              opacity: var(--mo); transform: scale(var(--s)); transform-origin: 56.5% 47%; will-change: transform; }
+.tela__mask span { font-weight: 900; font-stretch: 112%; letter-spacing: -.045em; line-height: .8; font-size: 15.8vw; white-space: nowrap; }
+.tela__grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .55; pointer-events: none; }
+.tela__copy { position: absolute; left: 0; right: 0; bottom: 0; padding-bottom: 10svh; padding-top: 30vh; opacity: var(--co); transform: translateY(calc((1 - var(--co)) * 30px));
+              background: linear-gradient(transparent, rgba(0,0,0,.75) 45%); pointer-events: none; }
+.hero-tela.is-open .tela__copy { pointer-events: auto; }
+.tela__copy .hero__aside { color: var(--film); opacity: .85; }
+.tela__hint { position: absolute; left: 50%; bottom: 5svh; transform: translateX(-50%); margin: 0; font-size: var(--fs-s); opacity: calc(1 - var(--co) * 3); }
+
+/* ---------- seletor de abertura (só no protótipo) ---------- */
+.picker { position: fixed; z-index: 25; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; padding: 4px;
+          background: rgba(0,0,0,.82); border: 1px solid var(--film-faint); backdrop-filter: blur(8px); font-size: 13px; }
+.picker span { padding: 0 10px 0 8px; color: var(--film-dim); }
+.picker button { appearance: none; border: 0; background: transparent; color: var(--film); font: inherit; font-weight: 600; font-stretch: 108%; padding: 8px 12px; cursor: pointer; }
+.picker button[aria-pressed="true"] { background: var(--film); color: #000; }
+
 /* ---------- serviços: rolo em tela cheia ---------- */
 .services { position: relative; height: 600svh; }
 .services__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
@@ -122,7 +159,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .panel__name { grid-column: 1 / -1; grid-row: 1; font-size: var(--fs-3xl); margin: 0 0 0 -.05em; white-space: nowrap;
                transform: translateX(calc(var(--off) * -16vw)); will-change: transform; }
 .panel__lead { grid-column: 1 / span 6; grid-row: 3; align-self: end; transform: translateX(calc(var(--off) * -5vw)); }
-.panel__lead p { margin: 16px 0 0; max-width: 48ch; font-size: var(--fs-m); line-height: 1.55; }
+.panel__lead p { margin: 16px 0 0; max-width: 46ch; font-size: var(--fs-m); line-height: 1.62; }
 .panel__lead p.t-h3 { margin: 0; }
 .panel__lead .muted { opacity: .78; }
 .panel__side { grid-column: 8 / span 5; grid-row: 3; align-self: end; display: grid; gap: 22px; transform: translateX(calc(var(--off) * 4vw)); }
@@ -235,6 +272,10 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   .panel__items { font-size: 15px; } .panel__items dt, .panel__items dd { padding: 7px 0; }
   .panel .btn { width: 100%; height: 50px; }
   .rim--top { top: 60px; } .rim--bottom { bottom: 22px; }
+  .manifesto { font-size: 12.6vw; } .manifesto__out { justify-self: start; }
+  .manifesto__aside, .manifesto__actions { grid-column: 1 / -1; } .manifesto__actions { margin-top: 28px; }
+  .hero-tela { height: 230svh; } .tela__mask span { font-size: 15.2vw; }
+  .picker { bottom: 10px; width: calc(100% - 20px); justify-content: space-between; } .picker span { display: none; } .picker button { flex: 1; padding: 9px 6px; }
   .panel--intro .t-h2 { grid-column: 1 / -1; }
   .panel--intro .intro__text { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 18px; }
   .index { grid-column: 1 / -1; grid-row: 3; margin-top: 24px; } .index a { font-size: 22px; padding: 10px 0; }
@@ -252,6 +293,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   .track { overflow-x: auto; scroll-snap-type: x mandatory; } .panel { scroll-snap-align: start; }
   .panel__name, .panel__lead, .panel__side { transform: none; }
   .leak { animation: none; } .menu, .menu nav a { transition: none; }
+  .hero-tela { height: auto; } .tela__pin { position: relative; } .tela__mask { display: none; } .tela__copy { opacity: 1; transform: none; pointer-events: auto; } .tela__media div { animation: none; opacity: 1; }
   .card { --y: 0px !important; }
 }
 </style>
@@ -278,15 +320,47 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 </div>
 
 <main class="reel" id="topo">
-  <section class="hero wrap" aria-labelledby="marca">
-    <h1 class="hero__mark wordmark" id="marca" data-flicker>TretaPost</h1>
+  <section class="hero wrap" data-hero="atual" aria-labelledby="marca-atual">
+    <h1 class="hero__mark wordmark" id="marca-atual" data-flicker>TretaPost</h1>
     <div class="grid">
-      <p class="hero__lede t-h3">Pós-produção do briefing ao filme pronto.</p>
-      <p class="hero__aside dim">Som, cor, pipeline, VFX e IA no mesmo fluxo. Você manda o briefing, a gente devolve o filme.</p>
+      <p class="hero__lede t-h3">Deixa a treta da pós com a gente.</p>
+      <p class="hero__aside dim">Som, cor, pipeline, VFX e IA no mesmo time. O material entra cru e sai pronto para cada tela, sem você juntar cinco fornecedores.</p>
       <div class="hero__actions">
         <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
-        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver o que a gente faz<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver os serviços<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
       </div>
+    </div>
+  </section>
+
+  <section class="hero hero--manifesto wrap" data-hero="manifesto" aria-labelledby="marca-manifesto" hidden>
+    <p class="manifesto__sig"><span class="wordmark" data-flicker>TretaPost</span><span class="dim">Pós-produção</span></p>
+    <h1 class="manifesto" id="marca-manifesto"><span>Entra o briefing.</span><span class="manifesto__out wordmark" data-flicker>Sai o filme.</span></h1>
+    <div class="grid">
+      <p class="hero__aside manifesto__aside dim">Som, cor, pipeline, VFX e IA no mesmo time. O material entra cru e sai pronto para cada tela, sem você juntar cinco fornecedores.</p>
+      <div class="hero__actions manifesto__actions">
+        <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver os serviços<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero-tela" data-hero="tela" aria-labelledby="marca-tela" hidden>
+    <div class="tela__pin">
+      <div class="tela__media" aria-hidden="true"><div style="background-image:url('/tretapostwebsite/assets/works/work1.jpg');animation-delay:0s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work2.jpg');animation-delay:4s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work3.jpg');animation-delay:8s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work4.jpg');animation-delay:12s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work5.jpg');animation-delay:16s"></div></div>
+      <div class="tela__mask" aria-hidden="true"><span>TretaPost</span></div>
+      <div class="tela__grain" aria-hidden="true"></div>
+      <div class="tela__copy wrap">
+        <h1 class="sr-only" id="marca-tela">TretaPost</h1>
+        <div class="grid">
+          <p class="hero__lede t-h3">Deixa a treta da pós com a gente.</p>
+          <p class="hero__aside">Som, cor, pipeline, VFX e IA no mesmo time. O material entra cru e sai pronto para cada tela, sem você juntar cinco fornecedores.</p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver os serviços<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <p class="tela__hint dim" aria-hidden="true">Role para abrir</p>
     </div>
   </section>
 
@@ -300,7 +374,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
           <rect x="10" y="5" width="14" height="20" rx="2.6"/>
         </pattern></defs><rect width="100%" height="30" fill="url(#kpi1)"/></svg></div>
         <h2 class="t-h2" id="servicos-t">O que a gente faz</h2>
-        <p class="intro__text dim">Cinco frentes de pós-produção que funcionam juntas ou separadas. O material chega do set, passa pelo nosso pipeline e sai pronto para cada tela: som mixado, cor finalizada, efeitos integrados e entregas no formato que o canal pede. Dá para contratar só uma etapa ou o filme inteiro.</p>
+        <p class="intro__text dim">Pós-produção costuma ser corrida de revezamento: cada etapa num fornecedor, o arquivo trocando de mão e a culpa também. Aqui é um time só. Você contrata uma etapa ou o filme inteiro, e nada se perde no caminho.</p>
         <ul class="index"><li><a href="#audio" style="--c:#ff5a1f"><i></i>TretaAudio</a></li><li><a href="#pipe" style="--c:#d81e1e"><i></i>TretaPipe</a></li><li><a href="#color" style="--c:#c44dff"><i></i>TretaColor</a></li><li><a href="#vfx" style="--c:#3b2bd9"><i></i>TretaVFX</a></li><li><a href="#ia" style="--c:#63c7d4"><i></i>TretaIA</a></li></ul>
       </section>
       <article class="panel ink" id="audio" style="--c:#ff5a1f" aria-labelledby="audio-t">
@@ -318,14 +392,14 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
         </pattern></defs><rect width="100%" height="30" fill="url(#kpb0)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
         <h3 class="panel__name t-display" id="audio-t">TretaAudio</h3>
         <div class="panel__lead">
-          <p class="t-h3">Som que segura o corte.</p>
-          <p>Do diálogo limpo à mixagem final. Cuidamos do som para o filme funcionar na sala de cinema, na TV e no fone de ouvido.</p>
-          <p class="muted">Recebemos o corte travado, limpamos e editamos os diálogos, criamos o desenho de som e mixamos para cada janela de exibição. Você aprova por etapas.</p>
+          <p class="t-h3">O som que ninguém nota quando está certo.</p>
+          <p>Diálogo limpo, desenho de som e mix pensados para onde o filme vai tocar: cinema, TV, celular ou fone de ouvido.</p>
+          <p class="muted">Você manda o corte travado. A gente limpa e edita os diálogos, cria o desenho de som e entrega uma mix para cada janela, com aprovação por etapas.</p>
         </div>
         <div class="panel__side">
           <dl class="panel__items"><dt>Edição</dt><dd>montagem de som e diálogo</dd><dt>ADR</dt><dd>regravação e sincronia de voz</dd><dt>Efeitos sonoros</dt><dd>desenho de som e foley</dd><dt>Mixagem</dt><dd>mix final para cada tela onde o filme vai passar</dd></dl>
           <p class="panel__meta"><span><b>Entregamos em</b> Stems separados, Mix 5.1 e estéreo, Versões para redes.</span><span><b>Bom para</b> campanhas, filmes de marca, clipes e séries.</span></p>
-          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaAudio</a>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
         </div>
       </article>
       <article class="panel film" id="pipe" style="--c:#d81e1e" aria-labelledby="pipe-t">
@@ -343,14 +417,14 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
         </pattern></defs><rect width="100%" height="30" fill="url(#kpb1)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
         <h3 class="panel__name t-display" id="pipe-t">TretaPipe</h3>
         <div class="panel__lead">
-          <p class="t-h3">O caminho do arquivo, do set à entrega.</p>
-          <p>É a parte que ninguém vê e todo mundo sente. Organizamos o material desde o set para que cor, som e VFX trabalhem em cima do mesmo arquivo, sem retrabalho.</p>
+          <p class="t-h3">Ninguém vê. Todo mundo sente.</p>
+          <p>A gente organiza o material desde o set para que cor, som e VFX trabalhem no mesmo arquivo. Menos retrabalho, menos versão perdida, menos treta.</p>
           <p class="muted">Entramos antes da primeira diária para definir formatos, nomes de arquivo e backups. Na pós, fazemos o conform, controlamos as versões e geramos todos os masters.</p>
         </div>
         <div class="panel__side">
           <dl class="panel__items"><dt>Ingest</dt><dd>mídia do set organizada e pronta para editar</dd><dt>Conform</dt><dd>do offline ao online sem perder nada no caminho</dd><dt>Masters</dt><dd>entregas em ProRes, EXR e o que o canal pedir</dd></dl>
           <p class="panel__meta"><span><b>Entregamos em</b> ProRes e DNx, EXR 16 bits, Masters por canal.</span><span><b>Bom para</b> produções com várias equipes e entregas para vários canais.</span></p>
-          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaPipe</a>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
         </div>
       </article>
       <article class="panel ink" id="color" style="--c:#c44dff" aria-labelledby="color-t">
@@ -368,14 +442,14 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
         </pattern></defs><rect width="100%" height="30" fill="url(#kpb2)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
         <h3 class="panel__name t-display" id="color-t">TretaColor</h3>
         <div class="panel__lead">
-          <p class="t-h3">Cor com intenção, da sala escura ao celular.</p>
-          <p>Grading pensado para onde o filme vai passar: uma versão HDR para telas de alto brilho e uma SDR fiel para todo o resto.</p>
-          <p class="muted">Montamos o look junto com você, aplicamos em todo o corte e geramos uma versão para cada saída, conferida antes de ir para o ar.</p>
+          <p class="t-h3">Cor que conta a história.</p>
+          <p>Do look ao master: HDR para as telas que brilham e SDR fiel para todo o resto.</p>
+          <p class="muted">Montamos o look junto com você, aplicamos no corte inteiro e geramos uma versão para cada saída, conferida antes de ir pro ar.</p>
         </div>
         <div class="panel__side">
           <dl class="panel__items"><dt>HDR</dt><dd>grading para telas de alto brilho</dd><dt>SDR</dt><dd>versão fiel para TV, web e redes</dd></dl>
           <p class="panel__meta"><span><b>Entregamos em</b> HDR10 e HLG, SDR Rec.709, LUTs para o set.</span><span><b>Bom para</b> publicidade, cinema e conteúdo para streaming.</span></p>
-          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaColor</a>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
         </div>
       </article>
       <article class="panel film" id="vfx" style="--c:#3b2bd9" aria-labelledby="vfx-t">
@@ -393,14 +467,14 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
         </pattern></defs><rect width="100%" height="30" fill="url(#kpb3)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
         <h3 class="panel__name t-display" id="vfx-t">TretaVFX</h3>
         <div class="panel__lead">
-          <p class="t-h3">O que não deu para filmar.</p>
-          <p>Quando a cena precisa de algo que não estava no set, a gente coloca. Quando tinha coisa demais, a gente tira.</p>
-          <p class="muted">Do planejamento no set à composição final. Avaliamos o plano antes de filmar para o efeito sair mais barato e mais verdadeiro.</p>
+          <p class="t-h3">O que não deu pra filmar, a gente coloca. O que sobrou, a gente tira.</p>
+          <p>Céu, fundo, objeto, multidão ou aquele fio que ninguém viu no set. Composição e limpeza que ninguém percebe.</p>
+          <p class="muted">Quanto antes a gente entra, mais barato e verdadeiro o efeito fica. Dá para planejar o plano com a gente antes de filmar.</p>
         </div>
         <div class="panel__side">
           <dl class="panel__items"><dt>Composição</dt><dd>integração de elementos, céus e cenários</dd><dt>Limpeza</dt><dd>fios, marcas e imperfeições removidos</dd></dl>
           <p class="panel__meta"><span><b>Entregamos em</b> Composição, Cleanup, Extensão de cenário.</span><span><b>Bom para</b> planos com céu, fundo ou objeto para trocar.</span></p>
-          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaVFX</a>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
         </div>
       </article>
       <article class="panel ink" id="ia" style="--c:#63c7d4" aria-labelledby="ia-t">
@@ -418,14 +492,14 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
         </pattern></defs><rect width="100%" height="30" fill="url(#kpb4)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
         <h3 class="panel__name t-display" id="ia-t">TretaIA</h3>
         <div class="panel__lead">
-          <p class="t-h3">IA dentro do pipeline, não no lugar dele.</p>
-          <p>IA como ferramenta de produção, com direção de arte e dentro do pipeline. Sai em formato profissional, pronto para cor e finalização.</p>
-          <p class="muted">Usamos IA onde ela economiza tempo ou abre possibilidades, sempre com direção de arte e saída em EXR ou ProRes para seguir no pipeline.</p>
+          <p class="t-h3">IA com direção, não no automático.</p>
+          <p>Usada onde economiza tempo ou abre possibilidades, sempre com olhar de pós e entregue pronta para finalizar.</p>
+          <p class="muted">Imagens, cenas, upscale e conversão para HDR saem em EXR ou ProRes, no mesmo pipeline do resto do filme.</p>
         </div>
         <div class="panel__side">
           <dl class="panel__items"><dt>Produção</dt><dd>imagens e cenas geradas com direção de arte</dd><dt>Pós-produção</dt><dd>upscale, HDR e finalização em formato profissional</dd></dl>
           <p class="panel__meta"><span><b>Entregamos em</b> Imagens e cenas, Upscale, Conversão de SDR para HDR.</span><span><b>Bom para</b> campanhas com prazo curto e cenas impossíveis de filmar.</span></p>
-          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaIA</a>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
         </div>
       </article>
       </div>
@@ -436,7 +510,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   <section class="section wrap" id="trabalhos" aria-labelledby="trabalhos-t">
     <div class="section__head grid">
       <h2 class="t-h2" id="trabalhos-t">O que a gente já fez</h2>
-      <p class="dim">Campanhas, sessões e filmes de marca que passaram pela nossa ilha. Cada projeto mostra o que foi pedido e o que a gente entregou.</p>
+      <p class="dim">Uma parte do que já passou pela nossa ilha: campanhas, sessões e filmes de marca.</p>
     </div>
     <ul class="collage">
       <li class="card">
@@ -485,28 +559,34 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   <section class="section wrap grid crew" aria-labelledby="equipe-t">
     <div class="crew__head">
       <h2 class="t-h2" id="equipe-t">Quem tá na treta</h2>
-      <p class="dim">Um coletivo de gente de pós. Cada projeto junta quem ele precisa.</p>
+      <p class="dim">Um coletivo de pós. A cada projeto, a gente junta quem ele pede.</p>
     </div>
-    <ul class="crew__list"><li><span class="crew__role dim">Cor</span><span class="crew__name">Adonias Dantas</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Pipeline</span><span class="crew__name">Luca Leocádio</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Áudio</span><span class="crew__name">Muzak</span><a class="crew__link" href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Bruna Keren</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Fadel Dabien</span><a class="crew__link" href="#">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">IA e VFX</span><span class="crew__name is-soon">Chegando</span></li></ul>
+    <ul class="crew__list"><li><span class="crew__role dim">Cor</span><span class="crew__name">Adonias Dantas</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Pipeline</span><span class="crew__name">Luca Leocádio</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Áudio</span><span class="crew__name">Muzak</span><a class="crew__link" href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Bruna Keren</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Fadel Dabien</span><a class="crew__link" href="#">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">IA e VFX</span><span class="crew__name is-soon">Em breve</span></li></ul>
   </section>
 
   <section class="section wrap" id="contato" aria-labelledby="contato-t">
     <div class="contact__top grid">
       <h2 class="t-h2" id="contato-t">Manda o briefing.</h2>
-      <p class="dim">Pode ser uma ideia solta ou um roteiro fechado. Manda por onde for mais fácil: a gente lê, responde e monta o caminho até o filme pronto.</p>
+      <p class="dim">Ideia solta, roteiro fechado ou corte travado: manda do jeito que estiver. A gente responde e monta o caminho.</p>
     </div>
     <div class="reach">
       <a href="https://wa.me/"><small>WhatsApp</small><strong>Mandar mensagem</strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a>
       <a href="mailto:treta@tretapost.com"><small>E-mail</small><strong>treta@tretapost.com</strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a>
     </div>
-    <div class="socials"><span>Acompanhe a TretaPost</span><a href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a><a href="#">TikTok <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></div>
+    <div class="socials"><span>Bastidores no</span><a href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a><a href="#">TikTok <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></div>
   </section>
 
   <footer class="foot">
     <span>© 2026 TretaPost</span>
-    <span class="foot__proto">Protótipo, rodada 4</span>
+    <span class="foot__proto">Protótipo, rodada 5</span>
   </footer>
 </main>
+<div class="picker" role="group" aria-label="Testar abertura">
+  <span>Abertura</span>
+  <button type="button" data-pick="atual" aria-pressed="true">Atual</button>
+  <button type="button" data-pick="manifesto" aria-pressed="false">Manifesto</button>
+  <button type="button" data-pick="tela" aria-pressed="false">Logo é a tela</button>
+</div>
 <script src="/tretapostwebsite/assets/projector.js"></script>
 <script>
 (() => {
@@ -551,6 +631,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     }
     panelsUpdate();
     if (!reduce) cardsUpdate();
+    if (typeof telaUpdate === 'function') telaUpdate();
   }
   addEventListener('scroll', onScroll, { passive: true });
   track.addEventListener('scroll', panelsUpdate, { passive: true });
@@ -565,6 +646,34 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     const total = sec.offsetHeight - innerHeight;
     scrollTo({ top: sec.offsetTop + total * (idx / (panels.length - 1)), behavior: 'smooth' });
   }));
+
+
+  // ---------- seletor de abertura ----------
+  const heroes = [...document.querySelectorAll('[data-hero]')], picks = [...document.querySelectorAll('[data-pick]')];
+  function showHero(name) {
+    if (!heroes.some(h => h.dataset.hero === name)) name = 'atual';
+    heroes.forEach(h => { h.hidden = h.dataset.hero !== name; });
+    picks.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pick === name)));
+    onScroll();
+  }
+  picks.forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#hero-' + b.dataset.pick); scrollTo(0, 0); showHero(b.dataset.pick); }));
+  showHero((location.hash.match(/^#hero-([a-z]+)/) || [])[1] || 'atual');
+
+  // ---------- hero "logo é a tela": as letras se abrem no scroll ----------
+  var tela = document.querySelector('.hero-tela');
+  function telaUpdate() {
+    if (!tela || tela.hidden || reduce) return;
+    const r = tela.getBoundingClientRect();
+    const p = clamp(-r.top / (r.height - innerHeight), 0, 1);
+    const grow = clamp(p / .7, 0, 1);
+    tela.style.setProperty('--s', (1 + Math.pow(grow, 2.4) * 46).toFixed(3));
+    tela.style.setProperty('--mo', (1 - clamp((p - .45) / .25, 0, 1)).toFixed(3));
+    const co = clamp((p - .62) / .25, 0, 1);
+    tela.style.setProperty('--co', co.toFixed(3));
+    tela.classList.toggle('is-open', co > .5);
+  }
+  addEventListener('scroll', telaUpdate, { passive: true });
+  addEventListener('resize', telaUpdate);
 
   // menu do celular
   const menu = document.querySelector('.menu'), burger = document.querySelector('.burger');
