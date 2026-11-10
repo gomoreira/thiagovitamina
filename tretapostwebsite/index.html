@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="TretaPost: pós-produção do briefing ao filme pronto. Som, cor, pipeline, VFX e IA.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23f1e4d3%22%3ET%3C/text%3E%3C/svg%3E">
+<title>TretaPost · Protótipo do site</title>
+<link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/archivo.woff2" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/tretapostwebsite/assets/projector.css">
+<style>
+body { font-family: "Archivo", system-ui, sans-serif; font-size: 17px; line-height: 1.55; font-stretch: 100%; }
+.wrap { padding-inline: var(--gate-x); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+
+/* escala tipográfica — só larguras normais e largas */
+.t-display { font-weight: 800; font-stretch: 125%; letter-spacing: -.035em; line-height: .88; }
+.t-h2 { font-weight: 800; font-stretch: 125%; letter-spacing: -.03em; line-height: .95; font-size: clamp(36px, 4.4vw, 72px); margin: 0; text-wrap: balance; }
+.t-h3 { font-weight: 600; font-stretch: 112%; letter-spacing: -.015em; line-height: 1.15; font-size: clamp(22px, 2.1vw, 32px); margin: 0; }
+.dim { color: var(--film-dim); }
+
+/* ---------- barra ---------- */
+.bar { position: fixed; z-index: 10; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 32px; padding: 16px var(--gate-x); }
+.bar::before { content: ""; position: absolute; inset: 0 0 -36px; z-index: -1; pointer-events: none; background: linear-gradient(#000 15%, rgba(0,0,0,.55) 60%, transparent); transition: opacity .4s; }
+body.on-panel .bar::before { opacity: 0; }
+.bar__mark { font-weight: 900; font-stretch: 112%; letter-spacing: -.035em; font-size: 21px; text-decoration: none; color: var(--film);
+             text-shadow: 0 0 .5em rgba(255, 90, 31, .45); transition: color .3s; }
+.bar__nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; font-stretch: 112%; }
+.bar__nav a { text-decoration: none; opacity: .72; transition: opacity .2s; } .bar__nav a:hover { opacity: 1; }
+.bar .sound { margin-right: -8px; border-radius: 0; }
+body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-shadow: none; }
+
+/* ---------- botões: retângulo com marcas de visor de câmera ---------- */
+.btn { --b: 14px; --gap: 7px; position: relative; display: inline-flex; align-items: center; gap: 12px; height: 54px; padding: 0 26px;
+       text-decoration: none; font: inherit; font-weight: 700; font-stretch: 112%; font-size: 16px; letter-spacing: -.005em; cursor: pointer;
+       border: 0; background: transparent; color: inherit; }
+.btn--solid { background: var(--film); color: #000; }
+.btn__frame { position: absolute; inset: calc(var(--gap) * -1); pointer-events: none; transition: inset .35s cubic-bezier(.2,.7,.2,1); }
+.btn__frame::before, .btn__frame::after { content: ""; position: absolute; width: var(--b); height: var(--b); border: 1.5px solid var(--frame-c, var(--film)); }
+.btn__frame::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.btn__frame::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.btn__frame i::before, .btn__frame i::after { content: ""; position: absolute; width: var(--b); height: var(--b); border: 1.5px solid var(--frame-c, var(--film)); }
+.btn__frame i::before { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.btn__frame i::after { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.btn:hover .btn__frame, .btn:focus-visible .btn__frame { inset: -2px; }
+.btn--solid:hover { box-shadow: 0 0 40px rgba(255, 90, 31, .45); }
+.btn svg { width: 18px; height: 18px; }
+.btn:focus-visible { outline: none; }
+
+/* ---------- abertura ---------- */
+.hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; padding-bottom: 11svh; }
+.hero__mark { font-size: clamp(40px, 14.2vw, 250px); margin: 0 0 clamp(28px, 4vw, 56px) -.04em; }
+.hero__lede { grid-column: 1 / span 7; font-size: clamp(26px, 2.9vw, 46px); line-height: 1.08; text-wrap: balance; }
+.hero__aside { grid-column: 9 / span 4; align-self: end; margin: 0; max-width: 34ch; }
+.hero__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; margin-top: 44px; }
+
+/* ---------- serviços: rolo em tela cheia ---------- */
+.services { position: relative; height: 600svh; }
+.services__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.track { display: flex; height: 100%; will-change: transform; }
+.panel { --off: 0; flex: 0 0 100vw; height: 100%; position: relative; overflow: hidden; background: var(--c, transparent);
+         display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr auto; column-gap: clamp(16px, 2vw, 32px);
+         padding: clamp(104px, 14svh, 136px) var(--gate-x) clamp(78px, 10svh, 100px); }
+.panel.ink { color: #000; } .panel.film { color: var(--film); }
+/* halation nas bordas do fotograma */
+.panel:not(.panel--intro) { box-shadow: inset 0 0 120px rgba(255, 240, 220, .22), inset 0 0 18px rgba(255, 250, 240, .25); }
+
+/* borda de película */
+.rim { position: absolute; z-index: 2; left: 0; right: 0; height: 44px; background: rgba(0, 0, 0, .82); }
+.rim--top { top: 52px; } .rim--bottom { bottom: 26px; }
+.rim__holes { position: absolute; top: 7px; left: 0; display: block; filter: drop-shadow(0 0 5px rgba(255, 236, 210, .75)) blur(.25px); }
+.rim__holes rect[rx] { fill: color-mix(in srgb, var(--c, #f1e4d3) 45%, #fff6ea); }
+.rim__codes { position: absolute; left: 0; right: 0; bottom: 1px; display: flex; justify-content: space-between; padding-inline: 40px;
+              font-size: 8px; line-height: 1; letter-spacing: .08em; color: rgba(255, 200, 120, .55); white-space: pre; font-variant-numeric: tabular-nums; }
+.rim--bottom .rim__codes { top: 1px; bottom: auto; }
+.rim--bottom .rim__holes { top: auto; bottom: 7px; }
+.panel--intro .rim { background: transparent; }
+.panel--intro .rim__holes rect[rx] { fill: rgba(241, 228, 211, .12); }
+.panel--intro .rim__holes { filter: none; }
+
+/* light leak vivo nos cantos */
+.leak { position: absolute; z-index: 1; width: 70vmax; height: 70vmax; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; filter: blur(30px);
+        opacity: calc(.35 + (1 - min(1, abs(var(--off)) * 3)) * .45); }
+.leak--a { left: -34vmax; top: -38vmax; background: radial-gradient(closest-side, rgba(255, 246, 225, .95), rgba(255, 170, 90, .5) 45%, transparent 72%); animation: leakA 7s ease-in-out infinite, flick 3.3s steps(1) infinite; }
+.leak--b { right: -38vmax; bottom: -40vmax; background: radial-gradient(closest-side, rgba(255, 210, 160, .8), rgba(255, 70, 30, .45) 48%, transparent 72%); animation: leakB 9s ease-in-out infinite, flick 4.7s steps(1) -.8s infinite; }
+@keyframes leakA { 50% { transform: translate(6vmax, 4vmax) scale(1.1); } }
+@keyframes leakB { 50% { transform: translate(-5vmax, -6vmax) scale(.92); } }
+@keyframes flick { 0%, 100% { filter: blur(30px) brightness(1); } 7% { filter: blur(30px) brightness(1.35); } 9% { filter: blur(30px) brightness(.8); }
+                   41% { filter: blur(30px) brightness(1.15); } 43% { filter: blur(30px) brightness(1); } 77% { filter: blur(30px) brightness(1.5); } 79% { filter: blur(30px) brightness(.95); } }
+.panel__grain { position: absolute; inset: 0; z-index: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .75; pointer-events: none; }
+
+.panel > h3, .panel > div:not(.rim):not(.leak):not(.panel__grain), .panel > p, .panel > ul, .panel > h2 { position: relative; z-index: 3; }
+.panel__name { grid-column: 1 / -1; grid-row: 1; font-size: clamp(60px, 9.8vw, 190px); margin: 0 0 0 -.05em; white-space: nowrap;
+               transform: translateX(calc(var(--off) * -16vw)); will-change: transform; }
+.panel__lead { grid-column: 1 / span 6; grid-row: 3; align-self: end; transform: translateX(calc(var(--off) * -5vw)); }
+.panel__lead p { margin: 16px 0 0; max-width: 48ch; font-size: 17px; }
+.panel__lead p.t-h3 { margin: 0; }
+.panel__lead .muted { opacity: .78; }
+.panel__side { grid-column: 8 / span 5; grid-row: 3; align-self: end; display: grid; gap: 22px; transform: translateX(calc(var(--off) * 4vw)); }
+.panel__items { margin: 0; display: grid; grid-template-columns: max-content 1fr; }
+.panel__items dt, .panel__items dd { padding: 9px 0; border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.panel__items dt { font-weight: 700; font-stretch: 112%; padding-right: 24px; }
+.panel__items dd { margin: 0; opacity: .82; }
+.panel__meta { margin: 0; font-size: 15px; opacity: .85; display: grid; gap: 4px; }
+.panel__meta b { font-weight: 700; }
+.panel .btn { justify-self: start; height: 48px; padding: 0 20px; font-size: 15px; }
+.panel.ink .btn { --frame-c: #000; } .panel.film .btn { --frame-c: var(--film); }
+
+.panel--intro { background: transparent; }
+.panel--intro .t-h2 { grid-column: 1 / span 7; grid-row: 1; font-size: clamp(48px, 7vw, 124px); }
+.panel--intro .intro__text { grid-column: 1 / span 6; grid-row: 3; align-self: end; margin: 0; font-size: 19px; max-width: 50ch; }
+.index { grid-column: 8 / span 5; grid-row: 2 / span 2; align-self: end; list-style: none; margin: 0; padding: 0; }
+.index a { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid var(--film-faint); text-decoration: none;
+           font-weight: 700; font-stretch: 125%; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.02em; transition: padding .3s cubic-bezier(.2,.7,.2,1); }
+.index li:last-child a { border-bottom: 1px solid var(--film-faint); }
+.index i { width: 12px; height: 12px; background: var(--c); flex: none; }
+.index a:hover { padding-left: 10px; }
+
+.ruler { position: absolute; z-index: 4; left: var(--gate-x); right: var(--gate-x); bottom: 10px; display: flex; gap: 6px; pointer-events: none; transition: color .3s; }
+.ruler span { flex: 1; height: 2px; background: currentColor; opacity: .25; transition: opacity .3s; }
+.ruler span.on { opacity: .95; }
+
+/* ---------- trabalhos: colagem que se sobrepõe no scroll ---------- */
+.section { padding-block: clamp(110px, 17vh, 190px); }
+.section__head { align-items: end; margin-bottom: clamp(48px, 8vh, 88px); }
+.section__head .t-h2 { grid-column: 1 / span 7; }
+.section__head p { grid-column: 9 / span 4; margin: 0; }
+.collage { list-style: none; margin: 0; padding: 0; position: relative; }
+.card { --y: 0px; position: relative; width: 50%; transform: translate3d(0, var(--y), 0); will-change: transform; }
+.card + .card { margin-top: -9vw; }
+.card:nth-child(1) { margin-left: 0; z-index: 1; }
+.card:nth-child(2) { margin-left: 46%; z-index: 2; }
+.card:nth-child(3) { margin-left: 12%; z-index: 3; }
+.card:nth-child(4) { margin-left: 50%; z-index: 4; }
+.card:nth-child(5) { margin-left: 4%; z-index: 5; }
+.card:nth-child(6) { margin-left: 44%; z-index: 6; }
+.card__img { display: block; position: relative; aspect-ratio: 16 / 9; overflow: hidden; text-decoration: none;
+             box-shadow: 0 30px 60px rgba(0, 0, 0, .65), 0 0 0 1px rgba(241, 228, 211, .08); }
+.card__img > div { position: absolute; inset: 0; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.card__img > div::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .5; }
+.card__img::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 30%, rgba(255, 120, 50, .4) 50%, transparent 70%);
+                     transform: translateX(-120%); transition: transform .9s cubic-bezier(.2,.7,.2,1); mix-blend-mode: screen; }
+.card__img:hover::before, .card__img:focus-visible::before { transform: translateX(120%); }
+.card__img:hover > div { transform: scale(1.04); }
+.card__text { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; padding: 18px 0 0; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.4)); }
+.card__text h3 { grid-column: 1 / -1; margin: 0; font-weight: 800; font-stretch: 125%; font-size: clamp(22px, 2vw, 32px); letter-spacing: -.025em; line-height: 1.05; }
+.card__text .what { grid-column: 1 / -1; margin: 0; font-weight: 600; font-stretch: 112%; }
+.card__text .desc { grid-column: 1 / span 2; margin: 4px 0 0; max-width: 52ch; color: var(--film-dim); font-size: 15px; }
+.card--next .card__img { background: var(--leak-orange); color: #000; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 2.4vw, 36px); }
+.card--next b { font-weight: 800; font-stretch: 125%; font-size: clamp(26px, 2.8vw, 46px); letter-spacing: -.03em; line-height: .98; max-width: 11ch; }
+.card--next span { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-stretch: 112%; }
+.card--next svg { width: 20px; height: 20px; }
+
+/* ---------- equipe ---------- */
+.crew { align-items: start; }
+.crew__head { grid-column: 1 / span 4; position: sticky; top: 110px; }
+.crew__head p { margin: 20px 0 0; max-width: 30ch; }
+.crew__list { grid-column: 6 / span 7; list-style: none; margin: 0; padding: 0; }
+.crew__list li { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 24px; padding: 22px 0 20px; border-top: 1px solid var(--film-faint); }
+.crew__list li:last-child { border-bottom: 1px solid var(--film-faint); }
+.crew__role { grid-column: 1; font-size: 14px; }
+.crew__name { grid-column: 1; font-weight: 800; font-stretch: 125%; font-size: clamp(28px, 3.1vw, 50px); letter-spacing: -.03em; line-height: 1; }
+.crew__name.is-soon { color: var(--film-dim); font-weight: 500; }
+.crew__link { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; text-decoration: none; color: var(--film-dim);
+              padding: 8px 12px; border: 1px solid var(--film-faint); transition: color .2s, border-color .2s; }
+.crew__link svg { width: 16px; height: 16px; }
+.crew__link:hover { color: var(--film); border-color: var(--film-dim); }
+
+/* ---------- contato: e-mail sob a luz do projetor + briefing rápido ---------- */
+.contact__top { align-items: end; margin-bottom: clamp(28px, 4vh, 44px); }
+.contact__top .t-h2 { grid-column: 1 / span 8; }
+.contact__top p { grid-column: 9 / span 4; margin: 0; }
+.beam { --mx: 50%; --my: 50%; display: block; width: 100%; text-align: left; border: 0; padding: 0; cursor: copy; background: none; font: inherit;
+        font-weight: 800; font-stretch: 125%; letter-spacing: -.04em; line-height: .95; font-size: clamp(34px, 6.3vw, 116px); white-space: nowrap;
+        color: transparent; -webkit-background-clip: text; background-clip: text;
+        background-image: radial-gradient(22vw 22vw at var(--mx) var(--my), #fff 0%, #ffd2a8 18%, var(--leak-orange) 38%, rgba(241, 228, 211, .32) 62%); }
+.beam:focus-visible { outline: 2px solid var(--leak-orange); outline-offset: 8px; }
+.beam__note { display: flex; justify-content: space-between; gap: 24px; margin-top: 16px; font-size: 15px; color: var(--film-dim); }
+.beam__note a { color: var(--film); }
+.brief { margin-top: clamp(64px, 11vh, 120px); border-top: 1px solid var(--film-faint); padding-top: 36px; }
+.brief__title { grid-column: 1 / span 4; }
+.brief__title p { margin: 14px 0 0; max-width: 30ch; }
+.brief__form { grid-column: 6 / span 7; display: grid; gap: 26px; }
+.brief fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; }
+.brief legend { font-weight: 700; font-stretch: 112%; margin-bottom: 12px; padding: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { appearance: none; font: inherit; font-size: 15px; font-weight: 600; font-stretch: 112%; color: var(--film); background: transparent; cursor: pointer;
+        border: 1px solid var(--film-faint); padding: 10px 14px; display: inline-flex; align-items: center; gap: 10px; transition: border-color .2s, background .2s, color .2s; }
+.chip:hover { border-color: var(--film-dim); }
+.chip i { width: 9px; height: 9px; background: var(--c, var(--film-dim)); }
+.chip[aria-pressed="true"] { background: var(--film); color: #000; border-color: var(--film); }
+.preview { margin: 8px 0 0; padding: 22px 24px; border-left: 2px solid var(--leak-orange); background: rgba(255, 90, 31, .06);
+           font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; font-stretch: 105%; min-height: 3.4em; }
+.brief__send { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 6px; }
+.channels { list-style: none; margin: clamp(64px, 10vh, 110px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+.channels a { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-top: 1px solid var(--film-faint); text-decoration: none;
+              font-weight: 800; font-stretch: 125%; font-size: clamp(22px, 2.2vw, 36px); letter-spacing: -.03em; transition: color .2s; }
+.channels svg { width: 26px; height: 26px; opacity: .5; transition: transform .3s, opacity .3s; }
+.channels a:hover { color: #fff; } .channels a:hover svg { transform: translate(3px, -3px); opacity: 1; }
+.toast { position: fixed; z-index: 20; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; background: var(--film); color: #000; padding: 12px 18px;
+         font-weight: 700; font-stretch: 112%; font-size: 15px; transition: opacity .25s, transform .3s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.foot { display: flex; gap: 24px; padding: 28px var(--gate-x) 36px; color: var(--film-faint); font-size: 13px; }
+.foot__proto { margin-left: auto; }
+
+/* ---------- celular ---------- */
+@media (max-width: 860px) {
+  :root { --gate-x: 9vw; }
+  .bar { gap: 14px; padding-block: 12px; } .bar__mark { font-size: 18px; } .bar__nav { gap: 14px; font-size: 13px; }
+  .hero__lede, .hero__aside { grid-column: 1 / -1; } .hero__aside { margin-top: 18px; }
+  .hero__actions { gap: 26px; }
+  .services { height: auto; }
+  .services__pin { position: static; height: auto; overflow: visible; }
+  .track { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; transform: none !important; height: auto; }
+  .track::-webkit-scrollbar { display: none; }
+  .panel { min-height: 100svh; height: auto; scroll-snap-align: start; padding-top: 118px; padding-bottom: 96px; grid-template-rows: auto 1fr auto auto; }
+  .panel__name { font-size: 14vw; white-space: normal; transform: none; }
+  .panel__lead, .panel__side { grid-column: 1 / -1; transform: none; }
+  .panel__lead { grid-row: 3; } .panel__side { grid-row: 4; margin-top: 28px; }
+  .panel--intro .t-h2 { grid-column: 1 / -1; font-size: 13vw; }
+  .panel--intro .intro__text { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 20px; }
+  .index { grid-column: 1 / -1; grid-row: 3; margin-top: 28px; }
+  .section__head .t-h2, .section__head p { grid-column: 1 / -1; } .section__head p { margin-top: 16px; }
+  .card { width: 88%; } .card + .card { margin-top: -6vw; }
+  .card:nth-child(odd) { margin-left: 0; } .card:nth-child(even) { margin-left: 12%; }
+  .crew__head { position: static; grid-column: 1 / -1; margin-bottom: 32px; } .crew__list { grid-column: 1 / -1; }
+  .contact__top .t-h2, .contact__top p { grid-column: 1 / -1; } .contact__top p { margin-top: 14px; }
+  .beam { white-space: normal; overflow-wrap: anywhere; font-size: 11vw; }
+  .beam__note { flex-direction: column; gap: 6px; }
+  .brief__title, .brief__form { grid-column: 1 / -1; } .brief__form { margin-top: 28px; }
+  .channels { grid-template-columns: 1fr; }
+  .foot { flex-wrap: wrap; } .foot__proto { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services { height: auto; } .services__pin { position: static; height: auto; }
+  .track { overflow-x: auto; scroll-snap-type: x mandatory; } .panel { scroll-snap-align: start; }
+  .panel__name, .panel__lead, .panel__side { transform: none; }
+  .leak { animation: none; }
+  .card { --y: 0px !important; }
+}
+</style>
+</head>
+<body>
+<div class="projector" data-projector data-assets="/tretapostwebsite/assets/" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="bar__mark" href="#topo" aria-label="TretaPost, voltar ao topo">TretaPost</a>
+  <nav class="bar__nav" aria-label="Principal">
+    <a href="#servicos">Serviços</a>
+    <a href="#trabalhos">Trabalhos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Ligar o som"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor" stroke="none"/>
+  <path class="w1" d="M15.5 9a4 4 0 0 1 0 6"/><path class="w2" d="M18 6.5a7.5 7.5 0 0 1 0 11"/>
+  <path class="x" d="M16 10l4 4M20 10l-4 4"/></svg></button>
+</header>
+
+<main class="reel" id="topo">
+  <section class="hero wrap" aria-labelledby="marca">
+    <h1 class="hero__mark wordmark" id="marca" data-flicker>TretaPost</h1>
+    <div class="grid">
+      <p class="hero__lede t-h3">Pós-produção do briefing ao filme pronto.</p>
+      <p class="hero__aside dim">Som, cor, pipeline, VFX e IA no mesmo fluxo. Você manda o briefing, a gente devolve o filme.</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver o que a gente faz<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="services" id="servicos">
+    <div class="services__pin">
+      <div class="track">
+      <section class="panel panel--intro" id="servicos-inicio" aria-labelledby="servicos-t">
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpi1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpi1)"/></svg></div>
+        <h2 class="t-h2" id="servicos-t">O que a gente faz</h2>
+        <p class="intro__text dim">Cinco frentes de pós-produção que funcionam juntas ou separadas. O material chega do set, passa pelo nosso pipeline e sai pronto para cada tela: som mixado, cor finalizada, efeitos integrados e entregas no formato que o canal pede. Dá para contratar só uma etapa ou o filme inteiro.</p>
+        <ul class="index"><li><a href="#audio" style="--c:#ff5a1f"><i></i>TretaAudio</a></li><li><a href="#pipe" style="--c:#d81e1e"><i></i>TretaPipe</a></li><li><a href="#color" style="--c:#c44dff"><i></i>TretaColor</a></li><li><a href="#vfx" style="--c:#3b2bd9"><i></i>TretaVFX</a></li><li><a href="#ia" style="--c:#63c7d4"><i></i>TretaIA</a></li></ul>
+      </section>
+      <article class="panel ink" id="audio" style="--c:#ff5a1f" aria-labelledby="audio-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt0" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt0)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb0" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb0)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="audio-t">TretaAudio</h3>
+        <div class="panel__lead">
+          <p class="t-h3">Som que segura o corte.</p>
+          <p>Do diálogo limpo à mixagem final. Cuidamos do som para o filme funcionar na sala de cinema, na TV e no fone de ouvido.</p>
+          <p class="muted">Recebemos o corte travado, limpamos e editamos os diálogos, criamos o desenho de som e mixamos para cada janela de exibição. Você aprova por etapas.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Edição</dt><dd>montagem de som e diálogo</dd><dt>ADR</dt><dd>regravação e sincronia de voz</dd><dt>Efeitos sonoros</dt><dd>desenho de som e foley</dd><dt>Mixagem</dt><dd>mix final para cada tela onde o filme vai passar</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Stems separados, Mix 5.1 e estéreo, Versões para redes.</span><span><b>Bom para</b> campanhas, filmes de marca, clipes e séries.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaAudio</a>
+        </div>
+      </article>
+      <article class="panel film" id="pipe" style="--c:#d81e1e" aria-labelledby="pipe-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt1)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb1)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="pipe-t">TretaPipe</h3>
+        <div class="panel__lead">
+          <p class="t-h3">O caminho do arquivo, do set à entrega.</p>
+          <p>É a parte que ninguém vê e todo mundo sente. Organizamos o material desde o set para que cor, som e VFX trabalhem em cima do mesmo arquivo, sem retrabalho.</p>
+          <p class="muted">Entramos antes da primeira diária para definir formatos, nomes de arquivo e backups. Na pós, fazemos o conform, controlamos as versões e geramos todos os masters.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Ingest</dt><dd>mídia do set organizada e pronta para editar</dd><dt>Conform</dt><dd>do offline ao online sem perder nada no caminho</dd><dt>Masters</dt><dd>entregas em ProRes, EXR e o que o canal pedir</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> ProRes e DNx, EXR 16 bits, Masters por canal.</span><span><b>Bom para</b> produções com várias equipes e entregas para vários canais.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaPipe</a>
+        </div>
+      </article>
+      <article class="panel ink" id="color" style="--c:#c44dff" aria-labelledby="color-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt2" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt2)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb2" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb2)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="color-t">TretaColor</h3>
+        <div class="panel__lead">
+          <p class="t-h3">Cor com intenção, da sala escura ao celular.</p>
+          <p>Grading pensado para onde o filme vai passar: uma versão HDR para telas de alto brilho e uma SDR fiel para todo o resto.</p>
+          <p class="muted">Montamos o look junto com você, aplicamos em todo o corte e geramos uma versão para cada saída, conferida antes de ir para o ar.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>HDR</dt><dd>grading para telas de alto brilho</dd><dt>SDR</dt><dd>versão fiel para TV, web e redes</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> HDR10 e HLG, SDR Rec.709, LUTs para o set.</span><span><b>Bom para</b> publicidade, cinema e conteúdo para streaming.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaColor</a>
+        </div>
+      </article>
+      <article class="panel film" id="vfx" style="--c:#3b2bd9" aria-labelledby="vfx-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt3" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt3)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb3" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb3)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="vfx-t">TretaVFX</h3>
+        <div class="panel__lead">
+          <p class="t-h3">O que não deu para filmar.</p>
+          <p>Quando a cena precisa de algo que não estava no set, a gente coloca. Quando tinha coisa demais, a gente tira.</p>
+          <p class="muted">Do planejamento no set à composição final. Avaliamos o plano antes de filmar para o efeito sair mais barato e mais verdadeiro.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Composição</dt><dd>integração de elementos, céus e cenários</dd><dt>Limpeza</dt><dd>fios, marcas e imperfeições removidos</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Composição, Cleanup, Extensão de cenário.</span><span><b>Bom para</b> planos com céu, fundo ou objeto para trocar.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaVFX</a>
+        </div>
+      </article>
+      <article class="panel ink" id="ia" style="--c:#63c7d4" aria-labelledby="ia-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt4" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt4)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb4" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb4)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="ia-t">TretaIA</h3>
+        <div class="panel__lead">
+          <p class="t-h3">IA dentro do pipeline, não no lugar dele.</p>
+          <p>IA como ferramenta de produção, com direção de arte e dentro do pipeline. Sai em formato profissional, pronto para cor e finalização.</p>
+          <p class="muted">Usamos IA onde ela economiza tempo ou abre possibilidades, sempre com direção de arte e saída em EXR ou ProRes para seguir no pipeline.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Produção</dt><dd>imagens e cenas geradas com direção de arte</dd><dt>Pós-produção</dt><dd>upscale, HDR e finalização em formato profissional</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Imagens e cenas, Upscale, Conversão de SDR para HDR.</span><span><b>Bom para</b> campanhas com prazo curto e cenas impossíveis de filmar.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Orçar TretaIA</a>
+        </div>
+      </article>
+      </div>
+      <div class="ruler" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <section class="section wrap" id="trabalhos" aria-labelledby="trabalhos-t">
+    <div class="section__head grid">
+      <h2 class="t-h2" id="trabalhos-t">O que a gente já fez</h2>
+      <p class="dim">Campanhas, sessões e filmes de marca que passaram pela nossa ilha. Cada projeto mostra o que foi pedido e o que a gente entregou.</p>
+    </div>
+    <ul class="collage">
+      <li class="card">
+        <a class="card__img" href="#"><div style="background: radial-gradient(120% 90% at 70% 30%, #d9a066 0%, transparent 55%), radial-gradient(90% 80% at 20% 90%, #3d5a73 0%, transparent 70%), #050505;" role="img" aria-label="Imagem do projeto Nusa Coffee Mate"></div></a>
+        <div class="card__text">
+          <h3>Nusa Coffee Mate</h3>
+          <p class="what">Paid socials 2026</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background: radial-gradient(120% 90% at 70% 30%, #c7743a 0%, transparent 55%), radial-gradient(90% 80% at 20% 90%, #2a1a12 0%, transparent 70%), #050505;" role="img" aria-label="Imagem do projeto Abbott Libre Duo"></div></a>
+        <div class="card__text">
+          <h3>Abbott Libre Duo</h3>
+          <p class="what">Campanha para redes</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background: radial-gradient(120% 90% at 70% 30%, #e0623a 0%, transparent 55%), radial-gradient(90% 80% at 20% 90%, #5a0f12 0%, transparent 70%), #050505;" role="img" aria-label="Imagem do projeto Primo Pobre Sessions"></div></a>
+        <div class="card__text">
+          <h3>Primo Pobre Sessions</h3>
+          <p class="what">Letícia Fialho</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background: radial-gradient(120% 90% at 70% 30%, #63c7d4 0%, transparent 55%), radial-gradient(90% 80% at 20% 90%, #0f2a2a 0%, transparent 70%), #050505;" role="img" aria-label="Imagem do projeto Muzak"></div></a>
+        <div class="card__text">
+          <h3>Muzak</h3>
+          <p class="what">Clube da Escuta</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background: radial-gradient(120% 90% at 70% 30%, #bdb6aa 0%, transparent 55%), radial-gradient(90% 80% at 20% 90%, #1c1c1c 0%, transparent 70%), #050505;" role="img" aria-label="Imagem do projeto TretaPost"></div></a>
+        <div class="card__text">
+          <h3>TretaPost</h3>
+          <p class="what">Filme de marca</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card card--next">
+        <a class="card__img" href="#contato"><b>O próximo filme pode ser o seu</b><span>Montar um briefing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section wrap grid crew" aria-labelledby="equipe-t">
+    <div class="crew__head">
+      <h2 class="t-h2" id="equipe-t">Quem tá na treta</h2>
+      <p class="dim">Um coletivo de gente de pós. Cada projeto junta quem ele precisa.</p>
+    </div>
+    <ul class="crew__list"><li><span class="crew__role dim">Cor</span><span class="crew__name">Adonias Dantas</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Pipeline</span><span class="crew__name">Luca Leocádio</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Áudio</span><span class="crew__name">Muzak</span><a class="crew__link" href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Bruna Keren</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Fadel Dabien</span><a class="crew__link" href="#">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">IA e VFX</span><span class="crew__name is-soon">Chegando</span></li></ul>
+  </section>
+
+  <section class="section wrap" id="contato" aria-labelledby="contato-t">
+    <div class="contact__top grid">
+      <h2 class="t-h2" id="contato-t">Manda o briefing.</h2>
+      <p class="dim">Pode ser uma ideia solta ou um roteiro fechado. A gente lê, responde e monta o caminho até o filme pronto.</p>
+    </div>
+    <button class="beam" type="button" data-email="treta@tretapost.com" aria-label="Copiar o e-mail treta@tretapost.com">treta@tretapost.com</button>
+    <div class="beam__note"><span>Clique no e-mail para copiar.</span><a href="mailto:treta@tretapost.com">Abrir no seu e-mail</a></div>
+
+    <div class="brief grid">
+      <div class="brief__title">
+        <h3 class="t-h3">Ou monte o briefing aqui</h3>
+        <p class="dim">Três toques e a mensagem sai pronta para mandar pelo WhatsApp ou por e-mail.</p>
+      </div>
+      <div class="brief__form">
+        <fieldset><legend>Do que você precisa?</legend><div class="chips" data-group="services"><button type="button" class="chip" data-value="audio" aria-pressed="false" style="--c:#ff5a1f"><i></i>TretaAudio</button><button type="button" class="chip" data-value="pipe" aria-pressed="false" style="--c:#d81e1e"><i></i>TretaPipe</button><button type="button" class="chip" data-value="color" aria-pressed="false" style="--c:#c44dff"><i></i>TretaColor</button><button type="button" class="chip" data-value="vfx" aria-pressed="false" style="--c:#3b2bd9"><i></i>TretaVFX</button><button type="button" class="chip" data-value="ia" aria-pressed="false" style="--c:#63c7d4"><i></i>TretaIA</button></div></fieldset>
+        <fieldset><legend>Para quê?</legend><div class="chips" data-group="kind"><button type="button" class="chip" data-value="uma campanha" aria-pressed="false">Campanha</button><button type="button" class="chip" data-value="um filme de marca" aria-pressed="false">Filme de marca</button><button type="button" class="chip" data-value="um clipe" aria-pressed="false">Clipe</button><button type="button" class="chip" data-value="uma série" aria-pressed="false">Série</button><button type="button" class="chip" data-value="conteúdo para redes" aria-pressed="false">Conteúdo para redes</button></div></fieldset>
+        <fieldset><legend>Para quando?</legend><div class="chips" data-group="when"><button type="button" class="chip" data-value="para esta semana" aria-pressed="false">Esta semana</button><button type="button" class="chip" data-value="para este mês" aria-pressed="false">Este mês</button><button type="button" class="chip" data-value="sem pressa" aria-pressed="false">Sem pressa</button></div></fieldset>
+        <p class="preview" aria-live="polite"></p>
+        <div class="brief__send">
+          <a class="btn btn--solid" data-send="wa" href="#"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar pelo WhatsApp</a>
+          <a class="btn" data-send="mail" href="#"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar por e-mail</a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="channels"><li><a href="#">WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><a href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><a href="#">TikTok <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li></ul>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 TretaPost</span>
+    <span class="foot__proto">Protótipo, rodada 3</span>
+  </footer>
+</main>
+<div class="toast" role="status"></div>
+<script src="/tretapostwebsite/assets/projector.js"></script>
+<script>
+(() => {
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = matchMedia('(max-width: 860px)');
+  const sec = document.querySelector('.services'), track = document.querySelector('.track');
+  const panels = [...document.querySelectorAll('.panel')];
+  const ticks = [...document.querySelectorAll('.ruler span')];
+  const ruler = document.querySelector('.ruler');
+  const cards = [...document.querySelectorAll('.card')];
+  // cada trabalho tem uma velocidade própria: uns sobem mais rápido e passam por cima dos outros
+  const speeds = [.10, .32, .05, .38, .16, .28];
+
+  function panelsUpdate() {
+    let current = 0, best = 1e9;
+    panels.forEach((p, i) => {
+      const r = p.getBoundingClientRect();
+      const off = clamp((r.left + r.width / 2 - innerWidth / 2) / innerWidth, -1, 1);
+      p.style.setProperty('--off', off.toFixed(4));
+      if (Math.abs(off) < best) { best = Math.abs(off); current = i; }
+    });
+    ticks.forEach((t, i) => t.classList.toggle('on', i === current));
+    const r = sec.getBoundingClientRect(), inSec = r.top <= 1 && r.bottom >= innerHeight - 1;
+    const ink = panels[current].classList.contains('ink');
+    document.body.classList.toggle('on-panel', inSec && current > 0);
+    document.body.classList.toggle('on-ink', inSec && ink);
+    ruler.style.color = ink ? '#000' : 'var(--film)';
+  }
+  function cardsUpdate() {
+    cards.forEach((c, i) => {
+      const base = c.offsetParent.getBoundingClientRect().top + c.offsetTop + c.offsetHeight / 2;
+      const d = base - innerHeight / 2;                     // distância do centro da tela
+      c.style.setProperty('--y', `${(d * speeds[i % speeds.length]).toFixed(1)}px`);
+    });
+  }
+  function onScroll() {
+    if (!mobile.matches && !reduce) {
+      const r = sec.getBoundingClientRect();
+      const p = clamp(-r.top / (r.height - innerHeight), 0, 1);
+      track.style.transform = `translate3d(${-p * (track.scrollWidth - innerWidth)}px,0,0)`;
+    }
+    panelsUpdate();
+    if (!reduce) cardsUpdate();
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  track.addEventListener('scroll', panelsUpdate, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  document.querySelectorAll('.index a').forEach(a => a.addEventListener('click', ev => {
+    const id = a.getAttribute('href').slice(1), idx = panels.findIndex(p => p.id === id);
+    if (idx < 0) return;
+    ev.preventDefault();
+    if (mobile.matches || reduce) { panels[idx].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'start', block: 'start' }); return; }
+    const total = sec.offsetHeight - innerHeight;
+    scrollTo({ top: sec.offsetTop + total * (idx / (panels.length - 1)), behavior: 'smooth' });
+  }));
+
+  // e-mail sob a luz do projetor; clique copia
+  const beam = document.querySelector('.beam'), toast = document.querySelector('.toast');
+  const say = (t) => { toast.textContent = t; toast.classList.add('on'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('on'), 1800); };
+  beam.addEventListener('pointermove', ev => {
+    const r = beam.getBoundingClientRect();
+    beam.style.setProperty('--mx', `${ev.clientX - r.left}px`); beam.style.setProperty('--my', `${ev.clientY - r.top}px`);
+  });
+  beam.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(beam.dataset.email); say('E-mail copiado'); }
+    catch (e) { say(beam.dataset.email); }
+  });
+
+  // briefing rápido: escolhas viram uma mensagem pronta
+  const state = { services: new Set(), kind: null, when: null };
+  const names = { audio: 'som', pipe: 'pipeline', color: 'cor', vfx: 'VFX', ia: 'IA' };
+  const preview = document.querySelector('.preview');
+  const mail = document.querySelector('[data-send="mail"]'), wa = document.querySelector('[data-send="wa"]');
+  const list = (arr) => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' e ' + arr.at(-1);
+  function compose() {
+    const s = [...state.services].map(k => names[k]);
+    let msg = 'Oi, TretaPost! ';
+    msg += s.length ? `Preciso de ${list(s)}` : 'Tenho um projeto';
+    if (state.kind) msg += ` para ${state.kind}`;
+    if (state.when) msg += `, ${state.when}`;
+    msg += '. Podemos conversar?';
+    preview.textContent = msg;
+    mail.href = `mailto:${beam.dataset.email}?subject=${encodeURIComponent('Briefing pelo site')}&body=${encodeURIComponent(msg)}`;
+    wa.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  }
+  document.querySelectorAll('[data-group]').forEach(group => {
+    const multi = group.dataset.group === 'services';
+    group.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => {
+      const v = chip.dataset.value, on = chip.getAttribute('aria-pressed') !== 'true';
+      if (multi) { on ? state.services.add(v) : state.services.delete(v); chip.setAttribute('aria-pressed', String(on)); }
+      else {
+        group.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', String(on));
+        state[group.dataset.group] = on ? v : null;
+      }
+      compose();
+    }));
+  });
+  compose();
+})();
+</script>
+</body>
+</html>
