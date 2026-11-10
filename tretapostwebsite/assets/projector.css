@@ -56,6 +56,12 @@ a { color: inherit; }
 /* vinheta leve: segura o olho no centro da janela */
 .projector__vignette { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0, 0, 0, .55)); }
 
+/* sala escura: some a borda de luz, fica só o grão vivo */
+.projector__bg, .projector__leak, .projector__strip, .projector__vignette { transition: opacity .9s ease; }
+body.dark-room .projector__bg, body.dark-room .projector__leak, body.dark-room .projector__strip { opacity: 0 !important; }
+body.dark-room .projector__grain { opacity: .1; mix-blend-mode: screen; }
+.projector__grain { transition: opacity .9s ease; }
+
 /* tudo que é conteúdo fica acima do projetor */
 .reel { position: relative; z-index: 1; }
 

@@ -206,7 +206,12 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .card__img::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 30%, rgba(255, 120, 50, .4) 50%, transparent 70%);
                      transform: translateX(-120%); transition: transform .9s cubic-bezier(.2,.7,.2,1); mix-blend-mode: screen; }
 .card__img:hover::before, .card__img:focus-visible::before { transform: translateX(120%); }
-.card__img:hover > div { transform: scale(1.04); }
+.card__img:hover > div, .card.is-touched .card__img > div { transform: scale(1.04); filter: contrast(1.08) brightness(1.04); }
+.card__img > div::after { transition: opacity .4s; }
+.card__img:hover > div::after, .card.is-touched .card__img > div::after { opacity: .95; animation: grainrun .5s steps(6) infinite; }
+.card__img:hover > div, .card.is-touched .card__img > div { animation: expo 2.6s steps(1) infinite; }
+@keyframes grainrun { 0% { background-position: 0 0; } 17% { background-position: -60px 40px; } 34% { background-position: 80px -30px; } 51% { background-position: -20px -90px; } 68% { background-position: 110px 70px; } 85% { background-position: -100px 10px; } }
+@keyframes expo { 0%, 100% { filter: contrast(1.08) brightness(1.04); } 12% { filter: contrast(1.1) brightness(1.18); } 14% { filter: contrast(1.08) brightness(.96); } 57% { filter: contrast(1.12) brightness(1.1); } 59% { filter: contrast(1.08) brightness(1.04); } }
 .card__text { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; padding: 18px 0 0; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.4)); }
 .card__text h3 { grid-column: 1 / -1; margin: 0; font-weight: 800; font-stretch: 125%; font-size: var(--fs-xl); letter-spacing: -.03em; line-height: 1.02; }
 .card__text .what { grid-column: 1 / -1; margin: 0; font-weight: 600; font-stretch: 112%; }
@@ -221,7 +226,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .crew__head { grid-column: 1 / span 4; position: sticky; top: 110px; }
 .crew__head p { margin: 20px 0 0; max-width: 30ch; }
 .crew__list { grid-column: 6 / span 7; list-style: none; margin: 0; padding: 0; }
-.crew__list li { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 24px; padding: 22px 0 20px; border-top: 1px solid var(--film-faint); }
+.crew__list li { --py: 0px; transform: translate3d(0, var(--py), 0); will-change: transform; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 24px; padding: 22px 0 20px; border-top: 1px solid var(--film-faint); }
 .crew__list li:last-child { border-bottom: 1px solid var(--film-faint); }
 .crew__role { grid-column: 1; font-size: 14px; }
 .crew__name { grid-column: 1; font-weight: 800; font-stretch: 125%; font-size: clamp(28px, 3.1vw, 50px); letter-spacing: -.03em; line-height: 1; }
@@ -566,7 +571,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 
   <footer class="foot">
     <span>© 2026 TretaPost</span>
-    <span class="foot__proto">Protótipo, rodada 5</span>
+    <span class="foot__proto">Protótipo, rodada 7</span>
   </footer>
 </main>
 <div class="picker" role="group" aria-label="Testar abertura">
@@ -647,13 +652,12 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   picks.forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#hero-' + b.dataset.pick); scrollTo(0, 0); showHero(b.dataset.pick); }));
   showHero((location.hash.match(/^#hero-([a-z]+)/) || [])[1] || 'atual');
 
-  // ---------- hero "logo vazado": halo de película queimada + queima no scroll ----------
+  // ---------- hero "logo vazado": borda de papel queimado + zoom na própria palavra ----------
   var tela = document.querySelector('.hero-tela');
   const cv = tela.querySelector('.tela__burn'), cx = cv.getContext('2d');
-  const low = document.createElement('canvas'), lx = low.getContext('2d');   // máscara da queima, baixa resolução
-  const glow = document.createElement('canvas'), gx = glow.getContext('2d'); // borda incandescente
-  const hc = document.createElement('canvas'), hx = hc.getContext('2d');       // halo das letras
-  var W = 0, H = 0, DPR = 1, LW = 0, LH = 0, field = null, prog = 0, ready = false, visible = false;
+  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas');
+  var W = 0, H = 0, DPR = 1, fs = 0, box = null, anchor = null, prog = 0, ready = false, visible = false, built = false;
+  const WORD = 'TretaPost';
   const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
   function hash(x, y) { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); }
   function vnoise(x, y) {
@@ -662,92 +666,75 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
     return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
   }
-  function sizeTela() {
+  const setFont = (ctx) => { ctx.font = `900 ${fs}px Archivo`; try { ctx.fontStretch = 'semi-expanded'; ctx.letterSpacing = `${-fs * .045}px`; } catch (e) {} ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; };
+  // monta uma vez, na escala 1: furo irregular e borda de brasa/chamuscado em volta das letras
+  function buildBurn() {
     DPR = Math.min(devicePixelRatio || 1, 1.5);
     W = cv.clientWidth; H = cv.clientHeight;
     cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-    LW = 420; LH = Math.max(1, Math.round(420 * H / W));
-    low.width = glow.width = LW; low.height = glow.height = LH;
-    // campo da queima: distância do centro + ruído fractal (a queima nasce no meio e se espalha com borda irregular)
-    field = new Float32Array(LW * LH);
-    const diag = Math.hypot(LW / 2, LH / 2);
-    for (let y = 0; y < LH; y++) for (let x = 0; x < LW; x++) {
-      const d = Math.hypot(x - LW / 2, (y - LH / 2) * 1.15) / diag;
-      const n = vnoise(x / 46, y / 46) * .6 + vnoise(x / 17, y / 17) * .28 + vnoise(x / 6, y / 6) * .12;
-      field[y * LW + x] = d * .82 + n * .34;
+    fs = W * (W < 860 ? .152 : .158) * DPR;
+    setFont(cx);
+    const tw = cx.measureText(WORD).width;
+    const bw = Math.ceil(tw + fs * .5), bh = Math.ceil(fs * 1.3);
+    box = { w: bw, h: bh };
+    // ponto de ancoragem do zoom: meio da haste do "P"
+    const pre = cx.measureText('Treta').width, mP = cx.measureText('P');
+    anchor = { x: -tw / 2 + pre + fs * .09, y: (mP.actualBoundingBoxDescent - mP.actualBoundingBoxAscent) / 2 };
+    // camadas de apoio: letra cheia (A) e letra espalhada (D) para medir a distância até a borda
+    const A = document.createElement('canvas'), D = document.createElement('canvas');
+    for (const c of [A, D, holeC, emberC]) { c.width = bw; c.height = bh; }
+    const ax = A.getContext('2d'), dx = D.getContext('2d');
+    setFont(ax); ax.fillStyle = '#fff'; ax.fillText(WORD, bw / 2, bh / 2);
+    setFont(dx); dx.filter = `blur(${fs * .028}px)`; dx.fillStyle = '#fff'; dx.fillText(WORD, bw / 2, bh / 2); dx.fillText(WORD, bw / 2, bh / 2);
+    const a = ax.getImageData(0, 0, bw, bh).data, d = dx.getImageData(0, 0, bw, bh).data;
+    const hx = holeC.getContext('2d'), ex = emberC.getContext('2d');
+    const hi = hx.createImageData(bw, bh), ei = ex.createImageData(bw, bh);
+    const sc = fs / 9;
+    for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) {
+      const i = (y * bw + x) * 4;
+      if (a[i + 3] > 128) continue;                                       // dentro da letra: o furo vetorial cuida
+      const dist = d[i + 3] / 255;                                        // perto da letra = 1, longe = 0
+      const n = vnoise(x / sc, y / sc) * .65 + vnoise(x / (sc * .35), y / (sc * .35)) * .35;
+      const v = dist + (n - .5) * .34;
+      if (v > .9) { hi.data[i + 3] = 255; }                              // papel já consumido: furo irregular
+      else if (v > .66) {                                                 // brasa viva na borda do furo
+        const e = (v - .66) / .24;
+        ei.data[i] = 255; ei.data[i + 1] = Math.round(90 + 150 * e * e); ei.data[i + 2] = Math.round(20 + 120 * Math.pow(e, 4)); ei.data[i + 3] = Math.round(255 * (.45 + .55 * e));
+      } else if (v > .36) {                                               // chamuscado: marrom que some no preto
+        const e = (v - .36) / .3;
+        ei.data[i] = 96; ei.data[i + 1] = 34; ei.data[i + 2] = 10; ei.data[i + 3] = Math.round(235 * e * e);
+      }
     }
+    hx.putImageData(hi, 0, 0); ex.putImageData(ei, 0, 0);
+    built = true;
     drawTela(performance.now());
   }
   function drawTela(now) {
-    if (!field) return;
+    if (!built) return;
     const p = prog, t = now / 1000;
-    const burnT = -0.06 + smooth(.2, .74, p) * 1.32;   // limiar da queima
-    const scale = 1 + smooth(.28, .8, p) * 1.1;        // zoom contido, sempre no centro
-    const mobileW = W < 860;
-    const fs = W * (mobileW ? .152 : .158) * DPR;
-    const cxp = cv.width / 2, cyp = cv.height * .48;
-    cx.setTransform(1, 0, 0, 1, 0, 0);
+    const k = smooth(.12, .74, p);                                         // progresso do zoom
+    const s = 1 + Math.pow(k, 2.6) * 70;                                   // a palavra mergulha até o "P" virar a tela
+    const C = { x: cv.width / 2, y: cv.height * .48 };
+    // a âncora (haste do P) desliza para o centro enquanto cresce: o zoom fica sempre centralizado
+    const tx = (C.x + anchor.x) + (C.x - (C.x + anchor.x)) * k - s * anchor.x;
+    const ty = (C.y + anchor.y) + (C.y - (C.y + anchor.y)) * k - s * anchor.y;
+    cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
     cx.globalCompositeOperation = 'source-over';
     cx.clearRect(0, 0, cv.width, cv.height);
     cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);
-    cx.translate(cxp, cyp); cx.scale(scale, scale);
-    cx.font = `900 ${fs}px Archivo`;
-    try { cx.fontStretch = 'semi-expanded'; cx.letterSpacing = `${-fs * .045}px`; } catch (e) {}
-    cx.textAlign = 'center'; cx.textBaseline = 'middle';
-    // halo queimado em volta das letras: laranja à esquerda, magenta à direita, respirando com flicker
-    const breathe = .72 + Math.sin(t * 1.3) * .12 + (Math.random() < .04 ? .22 : 0);
-    // halo em degradê contínuo (laranja → vermelho → magenta), sem emenda
-    if (hc.width !== cv.width || hc.height !== cv.height) { hc.width = cv.width; hc.height = cv.height; }
-    hx.setTransform(1, 0, 0, 1, 0, 0); hx.globalCompositeOperation = 'source-over'; hx.clearRect(0, 0, hc.width, hc.height);
-    hx.translate(cxp, cyp); hx.scale(scale, scale);
-    hx.font = cx.font; try { hx.fontStretch = 'semi-expanded'; hx.letterSpacing = cx.letterSpacing; } catch (e) {}
-    hx.textAlign = 'center'; hx.textBaseline = 'middle';
-    hx.shadowColor = '#fff'; hx.shadowBlur = fs * .32 * scale; hx.fillStyle = '#fff';
-    hx.fillText('TretaPost', 0, 0); hx.fillText('TretaPost', 0, 0);
-    hx.setTransform(1, 0, 0, 1, 0, 0); hx.shadowBlur = 0;
-    hx.globalCompositeOperation = 'source-in';
-    const gr = hx.createLinearGradient(cxp - fs * 3, 0, cxp + fs * 3, 0);
-    gr.addColorStop(0, '#ff7a1f'); gr.addColorStop(.45, '#ff3a2a'); gr.addColorStop(.6, '#e23c8c'); gr.addColorStop(1, '#a23cff');
-    hx.fillStyle = gr; hx.fillRect(0, 0, hc.width, hc.height);
-    cx.setTransform(1, 0, 0, 1, 0, 0);
-    cx.globalAlpha = breathe * (1 - smooth(.55, .8, p));
-    cx.drawImage(hc, 0, 0);
-    cx.globalAlpha = 1;
-    cx.translate(cxp, cyp); cx.scale(scale, scale);
-    // furos das letras: a imagem aparece por dentro
+    cx.setTransform(s, 0, 0, s, tx, ty);
+    setFont(cx);
     cx.globalCompositeOperation = 'destination-out';
-    cx.globalAlpha = 1; cx.shadowBlur = 0;
-    cx.fillText('TretaPost', 0, 0);
-    // franja de emulsão (vermelho/ciano deslocados) na borda interna das letras
+    cx.fillText(WORD, 0, 0);
+    cx.imageSmoothingEnabled = true;
+    cx.drawImage(holeC, -box.w / 2, -box.h / 2);
     cx.globalCompositeOperation = 'source-over';
-    cx.lineWidth = Math.max(1, fs * .006);
-    cx.globalAlpha = .55 * (1 - smooth(.5, .8, p));
-    cx.strokeStyle = 'rgba(255, 70, 40, 1)'; cx.strokeText('TretaPost', fs * .006, 0);
-    cx.strokeStyle = 'rgba(70, 210, 230, 1)'; cx.strokeText('TretaPost', -fs * .006, 0);
+    const breathe = .78 + Math.sin(t * 2.1) * .1 + Math.sin(t * 5.3) * .05 + (Math.random() < .05 ? .15 : 0);
+    cx.globalAlpha = clamp(breathe, 0, 1) * (1 - smooth(.25, .55, p));
+    cx.drawImage(emberC, -box.w / 2, -box.h / 2);
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
-    // queima: máscara e borda incandescente em baixa resolução, ampliadas suavemente
-    if (burnT > -0.05) {
-      const m = lx.createImageData(LW, LH), g = gx.createImageData(LW, LH), band = .07;
-      for (let i = 0; i < field.length; i++) {
-        const f = field[i], k = i * 4, d = f - burnT;
-        if (d < 0) { m.data[k + 3] = 255; continue; }                       // já queimou: transparente
-        if (d < band) {
-          const e = 1 - d / band;                                            // 1 = borda viva
-          m.data[k + 3] = Math.round(Math.pow(e, 3) * 200);
-          g.data[k] = 255; g.data[k + 1] = Math.round(70 + 150 * Math.pow(e, 3)); g.data[k + 2] = Math.round(20 + 170 * Math.pow(e, 6));
-          g.data[k + 3] = Math.round(220 * Math.pow(e, 1.6));
-        } else if (d < band * 2.2) {                                         // chamuscado: marrom avermelhado
-          const e = 1 - (d - band) / (band * 1.2);
-          g.data[k] = 110; g.data[k + 1] = 24; g.data[k + 2] = 6; g.data[k + 3] = Math.round(110 * e * e);
-        }
-      }
-      lx.putImageData(m, 0, 0); gx.putImageData(g, 0, 0);
-      cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = 'high';
-      cx.globalCompositeOperation = 'destination-out'; cx.drawImage(low, 0, 0, cv.width, cv.height);
-      cx.globalCompositeOperation = 'lighter'; cx.filter = `blur(${5 * DPR}px)`; cx.drawImage(glow, 0, 0, cv.width, cv.height);
-      cx.filter = 'none'; cx.globalCompositeOperation = 'source-over';
-    }
-    tela.style.setProperty('--fl', (smooth(.7, .76, p) * (1 - smooth(.76, .86, p)) * .55).toFixed(3));
+    cv.style.opacity = (1 - smooth(.66, .78, p)).toFixed(3);              // garantia: no fim, a imagem toma a tela
+    tela.style.setProperty('--fl', (smooth(.7, .76, p) * (1 - smooth(.76, .86, p)) * .35).toFixed(3));
   }
   function telaUpdate() {
     if (!tela || tela.hidden || reduce) return;
@@ -757,13 +744,39 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     tela.style.setProperty('--co', co.toFixed(3));
     tela.classList.toggle('is-open', co > .5);
     visible = r.bottom > 0 && r.top < innerHeight;
-    if (!ready) { ready = true; (document.fonts ? document.fonts.load('900 100px Archivo') : Promise.resolve()).then(sizeTela); }
+    if (!ready) { ready = true; (document.fonts ? document.fonts.load('900 100px Archivo') : Promise.resolve()).then(buildBurn); }
   }
+  var sizeTela = () => { if (ready) buildBurn(); };
+  var field = true;
   let lastT = 0;
   (function loop(now) { requestAnimationFrame(loop); if (!visible || tela.hidden || reduce || now - lastT < 1000 / 30) return; lastT = now; drawTela(now); })(0);
   addEventListener('scroll', telaUpdate, { passive: true });
-  addEventListener('resize', () => { telaUpdate(); if (ready) sizeTela(); });
+  addEventListener('resize', () => { telaUpdate(); sizeTela(); });
   telaUpdate();
+
+  // ---------- sala escura: trabalhos e equipe só com grão ----------
+  const darkZones = [document.querySelector('#trabalhos'), document.querySelector('.crew')];
+  function darkUpdate() {
+    const mid = innerHeight * .5;
+    const inDark = darkZones.some(z => { const r = z.getBoundingClientRect(); return r.top < mid && r.bottom > mid; });
+    document.body.classList.toggle('dark-room', inDark);
+  }
+  // parallax leve nos nomes da equipe
+  const crewRows = [...document.querySelectorAll('.crew__list li')];
+  function crewUpdate() {
+    if (reduce) return;
+    crewRows.forEach((li, i) => {
+      const r = li.getBoundingClientRect(), d = r.top + r.height / 2 - innerHeight / 2;
+      li.style.setProperty('--py', `${(d * (i % 2 ? .07 : .03) * -1).toFixed(1)}px`);
+    });
+  }
+  addEventListener('scroll', () => { darkUpdate(); crewUpdate(); }, { passive: true });
+  darkUpdate(); crewUpdate();
+  // no celular o toque acende o grão do trabalho
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('touchstart', () => {
+    document.querySelectorAll('.card.is-touched').forEach(o => o !== c && o.classList.remove('is-touched'));
+    c.classList.add('is-touched'); clearTimeout(c._t); c._t = setTimeout(() => c.classList.remove('is-touched'), 2200);
+  }, { passive: true }));
 
   // menu do celular
   const menu = document.querySelector('.menu'), burger = document.querySelector('.burger');
