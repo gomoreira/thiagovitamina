@@ -41,7 +41,7 @@
   let boost = 0, boostTarget = 0;   // intensidade do vazamento
   let lastY = scrollY, velocity = 0; // velocidade de scroll (px/frame suavizada)
   let hovering = false;
-  let analyser = null, wave = null;
+  let analyser = null, wave = null, analyserL = null, analyserR = null, waveL = null, waveR = null, freq = null;
 
   /* ---------- grão: tile de ruído reposicionado a 24 qps ---------- */
   const gctx = grain.getContext("2d");
@@ -62,7 +62,7 @@
     const s = Math.min(devicePixelRatio || 1, 1.5);
     grain.width = Math.ceil(innerWidth * s / 1.6);   // grão um pouco maior que o pixel, como película
     grain.height = Math.ceil(innerHeight * s / 1.6);
-    strip.width = 18 * Math.min(devicePixelRatio || 1, 2);
+    strip.width = 32 * Math.min(devicePixelRatio || 1, 2);
     strip.height = Math.ceil(innerHeight * Math.min(devicePixelRatio || 1, 2));
     drawGrain();
   }
@@ -85,29 +85,36 @@
     const burst = Math.max(0, Math.sin(y * .0041)) ** 3;
     return Math.min(1, Math.abs(a) * .55 + burst * .6 + .06);
   };
-  function drawStrip() {
-    const w = strip.width, h = strip.height, cx = w / 2;
-    sctx.clearRect(0, 0, w, h);
-    const step = 2 * (w / 18);
-    for (let y = 0; y < h; y += step) {
-      let amp;
-      if (wave && soundOn) {
-        const i = Math.floor(((y + stripOffset * .25) / step) % wave.length + wave.length) % wave.length;
-        amp = Math.min(1, Math.abs(wave[i] - 128) / 46 + .05);
-      } else {
-        amp = seedWave(y + stripOffset);
-      }
-      const half = amp * (w * .46);
-      const hue = (y + stripOffset) * .02;
-      // mistura ciano / laranja / magenta como na faixa original
-      const mix = (Math.sin(hue) + 1) / 2;
-      const r = Math.round(99 + mix * 156), g = Math.round(199 - mix * 110), b = Math.round(212 - mix * 120);
-      sctx.fillStyle = `rgba(${r},${g},${b},${.35 + amp * .5})`;
-      sctx.fillRect(cx - half, y, half * 2, step * .7);
+  // três pistas: canal esquerdo, canal direito (área variável, espelhadas) e uma pista fina central que pulsa com o grave
+  let bass = 0;
+  function trackAmp(arr, y, step, fallbackShift) {
+    if (arr && soundOn) {
+      const i = Math.floor(((y + stripOffset * .25) / step) % arr.length + arr.length) % arr.length;
+      return Math.min(1, Math.abs(arr[i] - 128) / 46 + .05);
     }
-    // linha central da pista
-    sctx.fillStyle = "rgba(99,199,212,.35)";
-    sctx.fillRect(cx - .5, 0, 1, h);
+    return seedWave(y + stripOffset + fallbackShift);
+  }
+  function drawStrip() {
+    const w = strip.width, h = strip.height, u = w / 32;
+    sctx.clearRect(0, 0, w, h);
+    const step = 2 * u;
+    const lanes = [{ cx: 8 * u, max: 6.5 * u, arr: waveL, shift: 0, warm: 0 }, { cx: 24 * u, max: 6.5 * u, arr: waveR, shift: 37, warm: 1 }];
+    for (let y = 0; y < h; y += step) {
+      const hue = (y + stripOffset) * .02, mix = (Math.sin(hue) + 1) / 2;
+      for (const L of lanes) {
+        const amp = trackAmp(L.arr, y, step, L.shift), half = amp * L.max;
+        const m = L.warm ? 1 - mix * .6 : mix * .6;
+        const r = Math.round(99 + m * 156), g = Math.round(199 - m * 110), bl = Math.round(212 - m * 120);
+        sctx.fillStyle = `rgba(${r},${g},${bl},${.32 + amp * .55})`;
+        sctx.fillRect(L.cx - half, y, half * 2, step * .7);
+      }
+    }
+    // pista central: brilho conforme o grave (ou uma pulsação leve sem som)
+    const pulse = soundOn ? bass : .25 + Math.sin(stripOffset * .01) * .1;
+    sctx.fillStyle = `rgba(255, 236, 214, ${.18 + pulse * .7})`;
+    sctx.fillRect(16 * u - .75 * u, 0, 1.5 * u, h);
+    sctx.fillStyle = "rgba(99,199,212,.28)";
+    sctx.fillRect(8 * u - .5, 0, 1, h); sctx.fillRect(24 * u - .5, 0, 1, h);
   }
 
   /* ---------- light leak: deriva orgânica ---------- */
@@ -150,7 +157,12 @@
     boost += (Math.max(boostTarget, scrollBoost) - boost) * .18;
     root.style.setProperty("--leak-boost", boost.toFixed(3));
     stripOffset += 14 + dy * 1.2;          // o filme corre sempre; o scroll acelera
-    if (analyser && soundOn) { analyser.getByteTimeDomainData(wave); }
+    if (analyser && soundOn) {
+      analyserL.getByteTimeDomainData(waveL); analyserR.getByteTimeDomainData(waveR);
+      analyser.getByteFrequencyData(freq);
+      let e = 0; for (let i = 1; i < 12; i++) e += freq[i]; e /= 11 * 255;
+      bass += (e - bass) * .35;
+    }
     drawGrain(); drawStrip(); driftLeak(t); flicker();
   }
 
@@ -165,7 +177,11 @@
     ctx = new (window.AudioContext || window.webkitAudioContext)();
     master = ctx.createGain(); master.gain.value = 0;
     analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = .6;
-    wave = new Uint8Array(analyser.fftSize);
+    wave = new Uint8Array(analyser.fftSize); freq = new Uint8Array(analyser.frequencyBinCount);
+    const split = ctx.createChannelSplitter(2);
+    analyserL = ctx.createAnalyser(); analyserR = ctx.createAnalyser(); analyserL.fftSize = analyserR.fftSize = 1024;
+    waveL = new Uint8Array(1024); waveR = new Uint8Array(1024);
+    master.connect(split); split.connect(analyserL, 0); split.connect(analyserR, 1);
     if (track) {
       // a faixa óptica desenha a onda da própria música
       music = new Audio(track); music.loop = true; music.crossOrigin = "anonymous"; music.preload = "auto";

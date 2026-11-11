@@ -53,8 +53,13 @@ a { color: inherit; }
 
 .projector__strip {
   position: absolute; top: 0; height: 100%;
-  left: calc(5.625vw - 9px); width: 18px;   /* mesma posição da faixa óptica do BG */
-  mix-blend-mode: screen; opacity: .9;
+  left: calc(5.625vw - 16px); width: 32px;   /* no lugar da faixa óptica gravada no vídeo */
+  mix-blend-mode: screen; opacity: .95;
+}
+/* a faixa gravada no vídeo some: no lugar dela entra a pista viva, que reage ao som */
+.projector__bg {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(5.625vw - 26px), rgba(0,0,0,.08) calc(5.625vw - 15px), rgba(0,0,0,.08) calc(5.625vw + 15px), #000 calc(5.625vw + 26px));
+          mask-image: linear-gradient(to right, #000 calc(5.625vw - 26px), rgba(0,0,0,.08) calc(5.625vw - 15px), rgba(0,0,0,.08) calc(5.625vw + 15px), #000 calc(5.625vw + 26px));
 }
 
 /* vinheta leve: segura o olho no centro da janela */
