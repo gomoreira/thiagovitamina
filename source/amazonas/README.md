@@ -40,3 +40,14 @@ ref/: o resto da home (rádio, fotos, áudios, notas, newsletter, rodapé) e as 
 - A barra da rádio mostra a música que estava tocando (Detonautas). É detalhe do momento da captura.
 - O selo do reCAPTCHA e o botão de voltar ao topo foram escondidos na captura. Nada mais foi mexido.
 - Não há captura de celular: a janela do Chrome não desce abaixo de 606 px. Se o novo thumbnail precisar de tela de celular, capturar no iPhone ou no modo responsivo do DevTools.
+
+## Layout original (original-2020/)
+
+Dois mockups em perspectiva, 1920×1280, da pasta "Agencia Amazonas" no Google Drive do Thiago (subidos em nov/2022). Mostram a home com conteúdo de junho de 2020 (Covid, Parintins) e texto de exemplo em lorem ipsum: topo e destaques, outros destaques, grade de notícias, fotos, vídeos, áudios, últimas notas, newsletter, "Checagem de fatos" e rodapé.
+
+- mockup-01-home-top.jpg
+- mockup-02-home-bottom.jpg
+
+Contexto do Drive: pasta "AGÊNCIA AMAZONAS - NOTÍCIAS PARA O LAYOUT", compartilhada pela equipe da Secom em 12/06/2020, com as notícias e fotos usadas para preencher o layout. Em 2022 houve uma segunda rodada de ajustes no portal (orçamentos de abril de 2022; os valores não entram no portfólio).
+
+O arquivo do Figma ainda não foi localizado.
