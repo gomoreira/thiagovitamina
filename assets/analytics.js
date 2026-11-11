@@ -134,6 +134,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
     }
     track('cookie_answered', { answer: answer });
     note.classList.add('is-out', answer === 'yes' ? 'is-yes' : 'is-no');
+    document.documentElement.style.scrollPaddingBottom = '';
     setTimeout(function () { cancelAnimationFrame(raf); removeEventListener('scroll', onTone); note.remove(); }, answer === 'yes' ? 1500 : 700);
   };
   note.querySelector('.cnote-yes').addEventListener('click', function () { close('yes'); });
@@ -156,6 +157,8 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   var show = function () {
     if (shown) return; shown = true;
     document.body.appendChild(note);
+    // Keyboard focus never lands under the note: the page keeps the note's height free when it scrolls to a focused element.
+    document.documentElement.style.scrollPaddingBottom = (note.offsetHeight + 24) + 'px';
     drawDrop(0);
     setTone();
     addEventListener('scroll', onTone, { passive: true });

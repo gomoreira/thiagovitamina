@@ -82,11 +82,11 @@ figcaption{margin-top:var(--sp-2)}
 .ti-steps b{position:relative;width:32px;height:32px;border-radius:50%;background:#B8BEC8;color:#111;display:grid;place-items:center;font:600 14px/1 "Helvetica Neue",Arial,sans-serif;border:2px solid #E6E8EC}
 .ti-steps b.on{background:#5F6673;color:#fff}.ti-steps b.cur{background:#000;color:#fff}
 .ti-body{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1}
-.ti-body h4{margin:0;font:400 26px/1.15 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.01em}
+.ti-body h3{margin:0;font:400 26px/1.15 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.01em}
 .ti-q{border-top:1px solid #E3E5E9;padding-top:12px;display:grid;gap:8px}
 .ti-q p{margin:0;font-size:14px;line-height:1.35;color:#333}
 .ti-yn{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ti-yn button{height:38px;border:1px solid #9AA1AC;background:#fff;color:#111;font:500 14px/1 "Helvetica Neue",Arial,sans-serif;border-radius:2px;cursor:pointer}
+.ti-yn button{height:38px;border:1px solid #737A86;background:#fff;color:#111;font:500 14px/1 "Helvetica Neue",Arial,sans-serif;border-radius:2px;cursor:pointer}
 .ti-yn button[aria-pressed="true"]{background:#000;border-color:#000;color:#fff}
 .ti-go{margin-top:auto;height:48px;border:0;background:#000;color:#fff;font:600 16px/1 "Helvetica Neue",Arial,sans-serif;cursor:pointer;border-radius:2px}
 .ti-go:disabled{background:#C9CDD3;color:#fff;cursor:default}
@@ -149,7 +149,7 @@ figcaption{margin-top:var(--sp-2)}
 
 <section class="wrap">
   <div class="split">
-    <div class="media"><video muted loop playsinline preload="none" poster="v/tradein.jpg" data-src="v/tradein.mp4"></video></div>
+    <div class="media"><video muted loop playsinline preload="none" poster="v/tradein.jpg" data-src="v/tradein.mp4" aria-label="Screen recording of the Allstate Trade-In flow, shown on a desktop browser and a phone side by side."></video></div>
     <aside class="proof" aria-label="After launch">
       <span class="sec-title" style="font-size:var(--t-md)">After launch</span>
       <p class="body">It became Allstate Protection Plans’ white-label trade-in platform. It has been live in Canada since June 2025, as Staples Trade-in by Allstate.</p>
@@ -223,9 +223,10 @@ figcaption{margin-top:var(--sp-2)}
 <section class="wrap block" aria-labelledby="key">
   <div class="head"><h2 class="sec-title" id="key">Key decision</h2></div>
   <div class="split">
-    <div class="demo">
-      <span class="label">Try it · condition check</span>
-      <div class="phone live"><div class="ti" id="ck" aria-live="polite"></div></div>
+    <div class="demo" role="group" aria-labelledby="ck-label">
+      <span class="label" id="ck-label">Try it · condition check</span>
+      <div class="phone live"><div class="ti" id="ck"></div></div>
+      <p class="sr" id="ck-status" aria-live="polite"></p>
     </div>
     <div class="body">
       <p class="statement" style="font-size:var(--t-lg)">Every step asks one thing.</p>
@@ -313,20 +314,25 @@ document.getElementById('copy').addEventListener('click',async e=>{const b=e.cur
   const io=new IntersectionObserver(es=>es.forEach(en=>{const v=en.target;if(en.isIntersecting){if(!v.src)v.src=v.dataset.src;if(!reduce)v.play().catch(()=>{})}else v.pause()}),{rootMargin:'200px 0px'});
   document.querySelectorAll('video[data-src]').forEach(v=>io.observe(v));})();
 (()=>{const Q=['Does your device power on and hold a charge?','Is the screen free of cracks, dead pixels or burn-in?','Do all buttons, ports and the camera work?','Have you signed out and turned off Find My or similar?'];
-const el=document.getElementById('ck');let a=Array(Q.length).fill(null),done=false;
-const chrome='<div class="ti-bar"><span>9:41</span><span>●●● ▮</span></div><div class="ti-head"><span class="ti-logo">TRADE-IN</span><small>Powered by<br>SquareTrade</small></div>';
-const steps=c=>'<div class="ti-steps">'+[1,2,3,4,5].map(n=>'<b class="'+(n<c?'on':n===c?'cur':'')+'">'+(n<c?'✓':n)+'</b>').join('')+'</div>';
-function r(focus){
-  if(!done){el.innerHTML=chrome+steps(3)+'<div class="ti-body"><h4>Assess your device’s condition</h4>'+Q.map((q,i)=>'<div class="ti-q"><p>'+q+'</p><div class="ti-yn" role="group" aria-label="'+q+'"><button type="button" data-q="'+i+'" data-v="1" aria-pressed="'+(a[i]===1)+'">Yes</button><button type="button" data-q="'+i+'" data-v="0" aria-pressed="'+(a[i]===0)+'">No</button></div></div>').join('')+'<button type="button" class="ti-go" '+(a.includes(null)?'disabled':'')+'>Continue</button></div>';}
+/* Keyboard and screen reader: real buttons with aria-pressed, one short status line per answer, focus never lost. */
+const el=document.getElementById('ck'),st=document.getElementById('ck-status');let a=Array(Q.length).fill(null),done=false;
+const say=t=>{st.textContent='';setTimeout(()=>st.textContent=t,60)};
+const chrome='<div class="ti-bar" aria-hidden="true"><span>9:41</span><span>●●● ▮</span></div><div class="ti-head" aria-hidden="true"><span class="ti-logo">TRADE-IN</span><small>Powered by<br>SquareTrade</small></div>';
+const steps=c=>'<div class="ti-steps" role="img" aria-label="Step '+c+' of 5">'+[1,2,3,4,5].map(n=>'<b aria-hidden="true" class="'+(n<c?'on':n===c?'cur':'')+'">'+(n<c?'✓':n)+'</b>').join('')+'</div>';
+function r(){
+  if(!done){el.innerHTML=chrome+steps(3)+'<div class="ti-body"><h3 tabindex="-1">Assess your device’s condition</h3>'+Q.map((q,i)=>'<div class="ti-q"><p id="ck-q'+i+'">'+q+'</p><div class="ti-yn" role="group" aria-labelledby="ck-q'+i+'"><button type="button" data-q="'+i+'" data-v="1" aria-pressed="'+(a[i]===1)+'">Yes</button><button type="button" data-q="'+i+'" data-v="0" aria-pressed="'+(a[i]===0)+'">No</button></div></div>').join('')+'<button type="button" class="ti-go" '+(a.includes(null)?'disabled':'')+'>Continue</button></div>';}
   else{const y=a.filter(v=>v===1).length,t=y===Q.length?['Very good','Eligible for the full trade-in value.']:y>=2?['Good','Eligible for a reduced trade-in value.']:['Poor','Not eligible for a quote. Recycling options instead.'];
-    el.innerHTML=chrome+steps(4)+'<div class="ti-body ti-res"><h4>Here’s your device condition</h4><div class="ti-card"><span>Device condition</span><b tabindex="-1">'+t[0]+'</b><span>'+t[1]+'</span></div><button type="button" class="ti-back">Start over</button></div>';}
-  if(focus){const f=el.querySelector('.ti-card b');f&&f.focus({preventScroll:true})}
+    el.innerHTML=chrome+steps(4)+'<div class="ti-body ti-res"><h3 tabindex="-1">Here’s your device condition</h3><div class="ti-card"><span>Device condition</span><b>'+t[0]+'</b><span>'+t[1]+'</span></div><button type="button" class="ti-back">Start over</button></div>';
+    return t}
 }
 el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.q){a[+b.dataset.q]=+b.dataset.v;r(false);el.querySelector('[data-q="'+b.dataset.q+'"][data-v="'+b.dataset.v+'"]').focus()}
-  else if(b.classList.contains('ti-go')){done=true;r(true)}
-  else if(b.classList.contains('ti-back')){a=Array(Q.length).fill(null);done=false;r(false)}});
-r(false);})();
+  if(b.dataset.q){const q=+b.dataset.q;a[q]=+b.dataset.v;
+    el.querySelectorAll('[data-q="'+q+'"]').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.v===a[q]));
+    const n=a.filter(v=>v!==null).length,go=el.querySelector('.ti-go');go.disabled=n<Q.length;
+    say(n<Q.length?n+' of '+Q.length+' answered.':'All answered. Continue is ready.')}
+  else if(b.classList.contains('ti-go')){done=true;const t=r();el.querySelector('h3').focus({preventScroll:true});say('Device condition: '+t[0]+'. '+t[1])}
+  else if(b.classList.contains('ti-back')){a=Array(Q.length).fill(null);done=false;r();el.querySelector('[data-q="0"]').focus({preventScroll:true});say('Answers cleared.')}});
+r();})();
 
 </script>
 </body>
