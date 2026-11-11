@@ -35,6 +35,9 @@ a { color: inherit; }
 
 /* o vídeo é só borda de luz sobre preto: esticar (fill) mantém as bordas em qualquer proporção */
 .projector__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+/* esconde qualquer controle nativo do vídeo de fundo (o play do iOS) */
+.projector__bg::-webkit-media-controls, .projector__bg::-webkit-media-controls-panel,
+.projector__bg::-webkit-media-controls-start-playback-button, .projector__bg::-webkit-media-controls-overlay-play-button { display: none !important; -webkit-appearance: none; opacity: 0; }
 
 .projector__leak {
   position: absolute; inset: -20%;

@@ -10,7 +10,7 @@
   /* ---------- montagem das camadas ---------- */
   const base = host.dataset.assets || "assets/";
   host.innerHTML = `
-    <video class="projector__bg" autoplay muted loop playsinline preload="auto" poster="${base}poster.jpg" aria-hidden="true">
+    <video class="projector__bg" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="auto" poster="${base}poster.jpg" aria-hidden="true">
       <source src="${base}bg-hevc.mp4" type='video/mp4; codecs="hvc1"'>
       <source src="${base}bg-avc.mp4" type="video/mp4">
     </video>
@@ -22,8 +22,20 @@
   const leak = host.querySelector(".projector__leak");
   const grain = host.querySelector(".projector__grain");
   const strip = host.querySelector(".projector__strip");
-  if (reduce) video.removeAttribute("autoplay");
-  video.play?.().catch(() => {});
+  // sem autoplay (modo Pouca Energia no iPhone, economia de dados ou movimento reduzido), o vídeo vira a imagem estática:
+  // nunca aparece o botão de play do sistema
+  const fallback = () => {
+    if (!video.isConnected) return;
+    const img = document.createElement("img");
+    img.className = "projector__bg"; img.alt = ""; img.src = `${base}poster.jpg`;
+    video.replaceWith(img);
+  };
+  if (reduce) fallback();
+  else {
+    const p = video.play?.();
+    if (p && p.catch) p.catch(fallback);
+    video.addEventListener("suspend", () => { if (video.paused && video.readyState < 3) setTimeout(() => video.paused && fallback(), 1200); });
+  }
 
   /* ---------- estado compartilhado ---------- */
   let boost = 0, boostTarget = 0;   // intensidade do vazamento
