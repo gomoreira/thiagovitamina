@@ -9,9 +9,12 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23f1e4d3%22%3ET%3C/text%3E%3C/svg%3E">
 <title>TretaPost · Protótipo do site</title>
 <link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/archivo.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/host-grotesk.woff2" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/tretapostwebsite/assets/projector.css">
 <style>
-body { font-family: "Archivo", system-ui, sans-serif; font-size: 17px; line-height: 1.62; font-stretch: 108%; font-weight: 430; letter-spacing: .005em; }
+body { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 17px; line-height: 1.6; font-weight: 420; letter-spacing: 0; }
+/* títulos, marca e chamadas seguem na Archivo larga; o resto é Host Grotesk */
+.t-display, .t-h2, .t-h3, .wordmark, .bar__mark, .index a, .card__text h3, .crew__name, .reach strong, .menu nav a, .btn, .panel__items dt, .chip, .picker button { font-family: "Archivo", system-ui, sans-serif; }
 b, strong, dt { font-weight: 700; }
 .wrap { padding-inline: var(--gate-x); }
 .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
@@ -159,7 +162,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
                transform: translateX(calc(var(--off) * -16vw)); will-change: transform; }
 .panel__lead { grid-column: 1 / span 6; grid-row: 3; align-self: end; transform: translateX(calc(var(--off) * -5vw)); }
 .panel__lead p { margin: 16px 0 0; max-width: 46ch; font-size: var(--fs-m); line-height: 1.62; }
-.panel__lead p.t-h3 { margin: 0; }
+.panel__lead p.t-h3 { margin: 0; font-size: var(--fs-xl); line-height: 1.14; max-width: 22ch; }
 .panel__lead .muted { opacity: .78; }
 .panel__side { grid-column: 8 / span 5; grid-row: 3; align-self: end; display: grid; gap: 22px; transform: translateX(calc(var(--off) * 4vw)); }
 .panel__items { margin: 0; display: grid; grid-template-columns: max-content 1fr; }
