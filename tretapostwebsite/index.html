@@ -110,7 +110,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 @keyframes tela { 0% { opacity: 0; transform: scale(1.12); } 4% { opacity: 1; } 20% { opacity: 1; } 25% { opacity: 0; transform: scale(1); } 100% { opacity: 0; } }
 .tela__burn { position: absolute; inset: 0; width: 100%; height: 100%; }
 .tela__flash { position: absolute; inset: 0; background: radial-gradient(70% 70% at 50% 50%, #fff6e8, #ffb070 60%, #ff5a1f); mix-blend-mode: screen; opacity: var(--fl, 0); pointer-events: none; }
-.tela__grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .55; pointer-events: none; }
+.tela__grain { position: absolute; inset: -60px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px; mix-blend-mode: screen; opacity: .09; pointer-events: none; animation: grainrun .42s steps(6) infinite; }
 .tela__copy { position: absolute; left: 0; right: 0; bottom: 0; padding-bottom: 10svh; padding-top: 30vh; opacity: var(--co); transform: translateY(calc((1 - var(--co)) * 30px));
               background: linear-gradient(transparent, rgba(0,0,0,.75) 45%); pointer-events: none; }
 .hero-tela.is-open .tela__copy { pointer-events: auto; }
@@ -720,7 +720,6 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
       }
     }
     hx.putImageData(hi, 0, 0); ex.putImageData(ei, 0, 0);
-    buildFilm();
     built = true;
     drawTela(performance.now());
   }
@@ -788,14 +787,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
     cx.globalCompositeOperation = 'source-over';
     cx.clearRect(0, 0, cv.width, cv.height);
-    // o rolo gira: o scroll empurra a película para cima (com inércia), mais uma deriva lenta
-    rollV += ((prog - lastP) * cv.height * 9 - rollV) * .35; lastP = prog;
-    roll = (roll + rollV + .6 * DPR) % filmC.height;
-    const weave = (Math.random() - .5) * 1.2 * DPR;
-    cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);           // fundo totalmente fechado
-    cx.drawImage(filmC, weave, -roll); cx.drawImage(filmC, weave, filmC.height - roll);
-    cx.fillStyle = `rgba(0, 0, 0, ${(Math.random() * .08).toFixed(3)})`;        // flicker de densidade, sem deixar vazar
-    cx.fillRect(0, 0, cv.width, cv.height);
+    cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);           // preto minimalista; o grão vem por cima
     cx.fillStyle = '#000';                                                     // o furo das letras precisa de tinta opaca
     cx.setTransform(s, 0, 0, s, tx, ty);
     setFont(cx);
