@@ -792,9 +792,11 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     rollV += ((prog - lastP) * cv.height * 9 - rollV) * .35; lastP = prog;
     roll = (roll + rollV + .6 * DPR) % filmC.height;
     const weave = (Math.random() - .5) * 1.2 * DPR;
-    cx.globalAlpha = .955 + Math.random() * .045;                              // flicker de densidade
+    cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);           // fundo totalmente fechado
     cx.drawImage(filmC, weave, -roll); cx.drawImage(filmC, weave, filmC.height - roll);
-    cx.globalAlpha = 1;
+    cx.fillStyle = `rgba(0, 0, 0, ${(Math.random() * .08).toFixed(3)})`;        // flicker de densidade, sem deixar vazar
+    cx.fillRect(0, 0, cv.width, cv.height);
+    cx.fillStyle = '#000';                                                     // o furo das letras precisa de tinta opaca
     cx.setTransform(s, 0, 0, s, tx, ty);
     setFont(cx);
     cx.globalCompositeOperation = 'destination-out';
