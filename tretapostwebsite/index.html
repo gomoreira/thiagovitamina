@@ -646,7 +646,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     ev.preventDefault();
     if (reduce) { panels[idx].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'start', block: 'start' }); return; }
     const total = sec.offsetHeight - innerHeight;
-    scrollTo({ top: sec.offsetTop + total * (idx / (panels.length - 1)), behavior: 'smooth' });
+    glide(sec.offsetTop + total * (idx / (panels.length - 1)));
   }));
 
 
@@ -862,6 +862,40 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     document.querySelectorAll('.card.is-touched').forEach(o => o !== c && o.classList.remove('is-touched'));
     c.classList.add('is-touched'); clearTimeout(c._t); c._t = setTimeout(() => c.classList.remove('is-touched'), 2200);
   }, { passive: true }));
+
+  // ---------- rolagem suave dos links internos ----------
+  // curva lenta no começo, aceleração no meio e um pouso longo no fim: o "freio" de um travelling
+  const ease = t => t < .5 ? 16 * t ** 5 : 1 - Math.pow(-2 * t + 2, 5) / 2;
+  let glideId = 0;
+  function glide(to) {
+    to = clamp(to, 0, document.documentElement.scrollHeight - innerHeight);
+    if (reduce) { scrollTo(0, to); return; }
+    const from = scrollY, dist = to - from;
+    if (Math.abs(dist) < 2) return;
+    const dur = clamp(700 + Math.abs(dist) * .18, 900, 2200);   // trajetos longos levam mais tempo, sem arrastar
+    const id = ++glideId, t0 = performance.now();
+    const stop = () => { glideId++; removeEventListener('wheel', stop); removeEventListener('touchstart', stop); removeEventListener('keydown', stop); };
+    addEventListener('wheel', stop, { passive: true }); addEventListener('touchstart', stop, { passive: true }); addEventListener('keydown', stop);
+    (function step(now) {
+      if (id !== glideId) return;
+      const t = clamp((now - t0) / dur, 0, 1);
+      scrollTo(0, from + dist * ease(t));
+      if (t < 1) requestAnimationFrame(step); else stop();
+    })(t0);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    if (a.closest('.index')) return;                                  // o índice tem destino próprio dentro do rolo
+    a.addEventListener('click', ev => {
+      const id = a.getAttribute('href').slice(1);
+      const el = id ? document.getElementById(id) : null;
+      if (!el && id !== 'topo') return;
+      ev.preventDefault();
+      const target = id === 'topo' ? 0 : el.getBoundingClientRect().top + scrollY;
+      // o menu do celular fecha primeiro e a rolagem começa logo em seguida
+      if (a.closest('.menu')) setTimeout(() => glide(target), 260); else glide(target);
+      if (id) history.replaceState(null, '', location.pathname + location.search + (location.hash.startsWith('#hero-') ? location.hash : ''));
+    });
+  });
 
   // menu do celular
   const menu = document.querySelector('.menu'), burger = document.querySelector('.burger');
