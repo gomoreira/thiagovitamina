@@ -68,6 +68,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
     var href = el.getAttribute('href') || '';
     if (el.id === 'copy') return track('contact_clicked', { channel: 'email_copy' });
     if (/linkedin\.com/.test(href)) return track('contact_clicked', { channel: 'linkedin' });
+    if (/cv\.pdf$/.test(href)) return track('cv_downloaded');
     if (/instagram\.com/.test(href)) return track('contact_clicked', { channel: 'instagram' });
     if (/^mailto:/.test(href)) return track('contact_clicked', { channel: 'email' });
     if (el.classList.contains('btn-ink') && /(trade-in|mir|sc4a|criaaa)/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
