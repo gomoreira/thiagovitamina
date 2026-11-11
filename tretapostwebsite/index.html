@@ -40,14 +40,15 @@ body.on-panel .bar::before { opacity: 0; }
 .bar__nav a { text-decoration: none; opacity: .72; transition: opacity .2s; } .bar__nav a:hover { opacity: 1; }
 .sound { width: 40px; height: 40px; border-radius: 0; border: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 30%, transparent); }
 .sound:hover { border-color: currentColor; background: transparent; }
-.eq { display: flex; align-items: flex-end; justify-content: center; gap: 3px; width: 18px; height: 14px; }
-.eq i { width: 2px; height: 6px; background: currentColor; transition: height .25s; }
-.eq i:nth-child(1) { height: 6px; } .eq i:nth-child(2) { height: 12px; } .eq i:nth-child(3) { height: 8px; } .eq i:nth-child(4) { height: 4px; }
-.sound[aria-pressed="false"] .eq { opacity: .75; }
+.spk { width: 24px; height: 24px; overflow: visible; }
+.spk__x { transition: opacity .2s; }
+.spk__w { opacity: 0; transition: opacity .25s; }
 .sound[aria-pressed="true"] { color: var(--leak-orange); }
-.sound[aria-pressed="true"] .eq i { animation: eq .9s ease-in-out infinite alternate; }
-.sound[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.45s; } .sound[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.2s; } .sound[aria-pressed="true"] .eq i:nth-child(4) { animation-delay: -.7s; }
-@keyframes eq { from { height: 3px; } to { height: 14px; } }
+.sound[aria-pressed="true"] .spk__x { opacity: 0; }
+.sound[aria-pressed="true"] .spk__w { animation: spkw 1.4s ease-in-out infinite; }
+.sound[aria-pressed="true"] .spk__w2 { animation-delay: -.4s; }
+@keyframes spkw { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sound[aria-pressed="true"] .spk__w { animation: none; opacity: 1; } }
 .burger { display: none; width: 40px; height: 40px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: transparent; color: inherit; cursor: pointer; place-items: center; }
 .burger span { display: block; width: 16px; height: 1.5px; background: currentColor; box-shadow: 0 5px 0 currentColor; transform: translateY(-2.5px); }
 .bar__tools { display: flex; gap: 8px; margin-left: 28px; }
@@ -331,7 +332,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     <a href="#contato">Contato</a>
   </nav>
   <div class="bar__tools">
-    <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Ligar o som"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+    <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Ligar o som"><svg class="spk" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter"><path d="M5 12h5l7-6v20l-7-6H5z"/><path class="spk__x" d="M22 12l7 8M29 12l-7 8"/><path class="spk__w spk__w1" d="M21 12.5a5 5 0 0 1 0 7"/><path class="spk__w spk__w2" d="M24.5 9a10 10 0 0 1 0 14"/></svg></button>
     <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
   </div>
 </header>
