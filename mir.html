@@ -108,6 +108,18 @@ figcaption{margin-top:var(--sp-2)}
 .mi-rail button:hover i{background:#f1f1ef}
 .mi{min-height:300px}@media (max-width:820px){.mi{aspect-ratio:auto;min-height:320px}.mi-rail{gap:0}.mi-rail button{height:34px}}
 .mi-rail button:focus-visible{outline:2px solid var(--o);outline-offset:2px;border-radius:50%}
+
+.bw{border:1px solid var(--rule);background:#fff}
+.bw-bar{display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-bottom:1px solid var(--rule);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden}
+.bw-bar i{width:7px;height:7px;border-radius:50%;border:1px solid var(--rule);flex:none}
+.bw-bar span{margin-left:8px;overflow:hidden;text-overflow:ellipsis}
+.web .reel figure{flex:0 0 min(84vw,880px)}
+.web .bw img{border:0}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-2)}
+.tri img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.duo.mir .col{grid-template-rows:none;align-content:start}
+@media (max-width:820px){.tri{grid-template-columns:1fr}}
+.mob3 .pair{flex-wrap:wrap}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="ink-edge" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter></svg>
@@ -214,16 +226,44 @@ figcaption{margin-top:var(--sp-2)}
   </div>
 </section>
 
-<section class="wrap block duo">
-  <div class="col" aria-labelledby="tpl">
-    <div class="head"><h2 class="sec-title" id="tpl">Templates</h2></div>
-    <div class="body">
-      <p class="statement" style="font-size:var(--t-lg)">Every page designed, some made into templates.</p>
-      <p>The launch date was close. I designed all the pages, and where chapters shared a structure I turned them into templates, so the developer could build faster without losing the look.</p>
+
+<section class="screens zines web" aria-labelledby="st">
+  <div class="wrap">
+    <div class="head"><h2 class="sec-title" id="st">The site</h2></div>
+    <div class="reel" tabindex="0" aria-label="Screens from the live website, scroll sideways">
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>soundcloud.com/company/…/scenes-to-watch</span></span><img src="img/mir/web-scenes-hero.jpg" alt="Scenes to Watch page: chapter title and summary over a photocopied image" width="1440" height="757" loading="lazy"></div><figcaption class="label">Scenes to Watch, opening</figcaption></figure>
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>…/scenes-to-watch</span></span><img src="img/mir/web-scenes-image.jpg" alt="Scenes to Watch page: a large xerox collage and the scene title An Eclectic New Indie" width="1440" height="757" loading="lazy"></div><figcaption class="label">A scene, with its collage</figcaption></figure>
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>…/genre-breaking</span></span><img src="img/mir/web-genre-chart.jpg" alt="Genre Breaking page: a chart drawn with four guitars filling with orange over time" width="1440" height="757" loading="lazy"></div><figcaption class="label">Genre Breaking, a chart made of guitars</figcaption></figure>
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>…/rising-electronic-tides</span></span><img src="img/mir/web-djset-chart.jpg" alt="Rising Electronic Tides page: uploads tagged DJ set shown as mixer faders by year" width="1440" height="757" loading="lazy"></div><figcaption class="label">Rising Electronic Tides, a chart made of faders</figcaption></figure>
     </div>
+    <p class="note label">Screens from the live site, desktop.</p>
   </div>
-  <div class="col" aria-labelledby="mob">
-    <div class="head"><h2 class="sec-title" id="mob">Mobile</h2></div>
+</section>
+
+<section class="wrap block" aria-labelledby="tpl">
+  <div class="head"><h2 class="sec-title" id="tpl">Templates</h2></div>
+  <div class="split">
+    <p class="statement">Every page designed, some made into templates.</p>
+    <div class="body"><p>The launch date was close. I designed all the pages, and where chapters shared a structure I turned them into templates, so the developer could build faster without losing the look.</p></div>
+  </div>
+  <figure class="wide">
+    <div class="tri">
+      <img src="img/mir/web-scenes-hero.jpg" alt="Scenes to Watch opening" width="1440" height="757" loading="lazy">
+      <img src="img/mir/web-electronic-hero.jpg" alt="Rising Electronic Tides opening, same template" width="1440" height="757" loading="lazy">
+      <img src="img/mir/web-ukrap-hero.jpg" alt="UK Underground Rap Family Tree opening, same template" width="1440" height="757" loading="lazy">
+    </div>
+    <figcaption class="label">One template, three chapters: the title block changes, the structure stays.</figcaption>
+  </figure>
+</section>
+
+<section class="wrap block" aria-labelledby="mob">
+  <div class="head"><h2 class="sec-title" id="mob">Mobile</h2></div>
+  <div class="split">
+    <div class="pair">
+      <div class="phone-wrap"><div class="phone"><img src="img/mir/m-home.jpg" alt="Mobile home: the report title and introduction" width="382" height="826" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/mir/m-scenes.jpg" alt="Mobile Scenes to Watch" width="382" height="826" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/mir/m-genre.jpg" alt="Mobile Genre Breaking" width="382" height="826" loading="lazy"></div></div>
+    </div>
     <div class="body">
       <p class="statement" style="font-size:var(--t-lg)">The same attitude on a small screen.</p>
       <p>I also designed the mobile version. Wide spreads became single columns, and the type kept its weight.</p>
