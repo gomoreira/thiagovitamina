@@ -70,7 +70,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
     if (/linkedin\.com/.test(href)) return track('contact_clicked', { channel: 'linkedin' });
     if (/instagram\.com/.test(href)) return track('contact_clicked', { channel: 'instagram' });
     if (/^mailto:/.test(href)) return track('contact_clicked', { channel: 'email' });
-    if (el.classList.contains('btn-ink') && /trade-in/.test(href)) return track('case_opened', { case: caseName(el) || 'Allstate Trade-In' });
+    if (el.classList.contains('btn-ink') && /(trade-in|mir|sc4a|criaaa)/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
     if (/^https?:/.test(href) && href.indexOf(location.host) < 0) return track('external_site_opened', { url: href, project: caseName(el) });
   }, true);
 

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>CRIAAA · Thiago Vitamina</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Case study: CRIAAA, a portfolio platform for visual artists. Sign up, publish and subscribe alone, at your own address. Designed, built and run by Thiago Vitamina.">
+<link rel="canonical" href="https://thiagovitamina.com/criaaa">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Thiago Vitamina">
+<meta property="og:title" content="CRIAAA · Thiago Vitamina">
+<meta property="og:description" content="Case study: CRIAAA, a portfolio platform for visual artists. Sign up, publish and subscribe alone, at your own address. Designed, built and run by Thiago Vitamina.">
+<meta property="og:url" content="https://thiagovitamina.com/criaaa">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://thiagovitamina.com/og/criaaa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CRIAAA case study, with the product’s landing page.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thiagovitamina.com/og/criaaa.jpg">
+<meta name="twitter:title" content="CRIAAA · Thiago Vitamina">
+<meta name="twitter:description" content="Case study: CRIAAA, a portfolio platform for visual artists. Sign up, publish and subscribe alone, at your own address. Designed, built and run by Thiago Vitamina.">
+<meta name="author" content="Thiago Vitamina">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://thiagovitamina.com/#thiago", "name": "Thiago Vitamina", "alternateName": ["Thiago Moreira"], "jobTitle": "Product Designer", "url": "https://thiagovitamina.com/", "image": "https://thiagovitamina.com/icon-512.png", "address": {"@type": "PostalAddress", "addressLocality": "São Paulo", "addressCountry": "BR"}, "knowsLanguage": ["en", "pt"], "sameAs": ["https://www.linkedin.com/in/thiagovitamina", "https://www.instagram.com/thiagovitamina"]}, {"@type": "CreativeWork", "@id": "https://thiagovitamina.com/criaaa#case", "url": "https://thiagovitamina.com/criaaa", "name": "CRIAAA", "headline": "CRIAAA: a portfolio platform for visual artists", "description": "Case study: CRIAAA, a portfolio platform for visual artists. Sign up, publish and subscribe alone, at your own address. Designed, built and run by Thiago Vitamina.", "creator": {"@id": "https://thiagovitamina.com/#thiago"}, "inLanguage": "en", "genre": "Product design case study"}]}</script>
+<script src="/assets/analytics.js"></script>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="format-detection" content="telephone=no,email=no,address=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/ink.js" defer></script>
+<script src="assets/site.js" defer></script>
+<style>
+/* Case page: same tokens and 12-column grid as the home. Text sections put the statement in 7 columns and the explanation in 5. */
+.case-hero{padding-block:calc(var(--hh) + var(--sp-6)) var(--sp-6)}
+.case-hero h1{font-family:var(--display);font-weight:600;font-size:var(--t-3xl);line-height:.92;letter-spacing:-.045em;margin-block:var(--sp-4) var(--sp-5);text-wrap:balance}
+.case-hero .lead{font-size:var(--t-lg);line-height:1.3;max-width:34ch;letter-spacing:-.005em}
+.meta{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--gap);border-top:1px solid var(--rule);padding-top:var(--sp-3);margin-top:var(--sp-6)}
+.meta dt{font-size:var(--t-sm);color:var(--mute);margin-bottom:var(--sp-1)}
+.meta dd{font-size:var(--t-base);line-height:1.4}
+.proof{display:flex;flex-direction:column;gap:var(--sp-3);align-self:start;position:sticky;top:calc(var(--sp-6) + var(--sp-3))}
+.proof ul{list-style:none;padding:0;display:grid;gap:var(--sp-2);border-top:1px solid var(--rule);padding-top:var(--sp-3)}
+.proof li{display:flex;justify-content:space-between;gap:var(--sp-3);font-size:var(--t-base)}
+.block{padding-top:var(--section)}
+.statement{font-family:var(--display);font-weight:600;font-size:var(--t-xl);line-height:1.02;letter-spacing:-.025em;max-width:16ch;text-wrap:balance}
+.body{display:grid;gap:var(--sp-3);align-content:start;font-size:var(--t-md);line-height:1.45;max-width:38ch}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);margin-top:var(--sp-6);border-top:1px solid var(--ink)}
+.steps li{padding-top:var(--sp-3);display:grid;gap:var(--sp-2);align-content:start}
+.steps b{font-family:var(--display);font-weight:600;font-size:var(--t-lg);letter-spacing:-.015em;line-height:1.1}
+.steps .label{color:var(--mute)}
+figure img{display:block;width:100%;height:auto}
+figcaption{margin-top:var(--sp-2)}
+.wide{margin-top:var(--sp-6)}
+.wide img{border:1px solid var(--rule)}
+.screens{background:var(--well);margin-top:var(--sp-6);padding-block:var(--sp-6)}
+.reel{display:flex;gap:var(--gap);overflow-x:auto;padding-bottom:var(--sp-3);scroll-snap-type:x mandatory;align-items:flex-start;scrollbar-width:thin}
+.reel figure{flex:0 0 var(--phone-w);scroll-snap-align:start}
+.screens .note{margin-top:var(--sp-3)}
+.pair{display:flex;flex-wrap:wrap;gap:var(--gap);align-items:flex-start}
+/* edge states + get paid first: two columns, text on top, screens below */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);row-gap:var(--section)}
+.duo .col{display:grid;gap:var(--sp-5);align-content:start;grid-template-rows:auto 1fr auto}
+.duo .head{margin:0}
+.duo .pair{flex-wrap:nowrap}
+@media (max-width:820px){.duo{grid-template-columns:1fr}.duo .col{grid-template-rows:none}}
+.numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin-top:var(--sp-6);border-top:1px solid var(--ink)}
+.numbers div{padding-top:var(--sp-3);display:grid;gap:var(--sp-2)}
+.numbers b{font-family:var(--display);font-weight:600;font-size:var(--t-3xl);line-height:.9;letter-spacing:-.05em}
+.awards{list-style:none;padding:0;display:grid;gap:var(--sp-2);margin-top:var(--sp-2)}
+.next{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--sp-3);padding-block:var(--sp-5);border-top:1px solid var(--ink);margin-top:var(--section)}
+.next a,.next a:visited{font-family:var(--display);font-weight:600;font-size:var(--t-xl);letter-spacing:-.025em;color:var(--ink);text-decoration:none}
+.next a:hover{text-decoration:underline;text-decoration-thickness:2px}
+@media (max-width:820px){
+  .demo{--demo-w:280px}
+  .meta{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-4)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-4)}
+  .proof{position:static}
+  .numbers{grid-template-columns:minmax(0,1fr)}
+  .demo{padding:var(--sp-4) var(--sp-3)}
+}
+.head{margin-bottom:var(--sp-4)}
+.sec-title{font-size:var(--t-md);letter-spacing:-.01em;line-height:1.2}
+.block{padding-top:var(--section)}
+/* long phone screens scroll inside the frame */
+.phone.long{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.phone.long::-webkit-scrollbar{display:none}
+.phone-wrap.long::after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:var(--sp-6);background:linear-gradient(transparent,var(--paper));border-radius:0 0 calc(var(--phone-w) * .11) calc(var(--phone-w) * .11);pointer-events:none}
+.phone.long:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+.bw{border:1px solid var(--rule);background:var(--paper)}
+.bw-bar{display:flex;align-items:center;gap:var(--sp-1);height:24px;padding:0 var(--sp-2);border-bottom:1px solid var(--rule);font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden}
+.bw-bar i{width:8px;height:8px;border-radius:50%;border:1px solid var(--rule);flex:none}
+.bw-bar span{margin-left:var(--sp-2);overflow:hidden;text-overflow:ellipsis}
+.bw img{border:0}
+.bw-scroll{height:min(72vh,640px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.bw-scroll img{display:block;width:100%;height:auto}
+.bw-scroll:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+.homeframe{padding:0;background:none}
+.stack{margin-top:var(--sp-3);font-size:var(--t-sm);color:var(--mute);line-height:1.5}
+.duo.flow .col{grid-template-rows:none}
+.fixes{list-style:none;padding:0;display:grid;gap:var(--sp-2);border-top:1px solid var(--rule);padding-top:var(--sp-3)}
+.fixes li{display:grid;gap:var(--sp-1)}
+.fixes b{font-weight:600}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="ink-edge" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="14"/></filter></svg>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap top">
+  <a class="name" href="index.html">Thiago Vitamina</a>
+  <nav aria-label="Main"><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav>
+  <button class="plus" type="button" aria-expanded="false" aria-controls="mnav"><span class="sr">Menu</span><i aria-hidden="true"></i></button>
+</header>
+<div class="mnav" id="mnav" hidden>
+  <nav aria-label="Mobile">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="mnav-foot"><span>Available for new projects</span><span class="nolink">designdasilva&#8203;@gmail.com</span></div>
+</div>
+
+<main id="main" tabindex="-1">
+<section class="wrap case-hero">
+  <h1>CRIAAA</h1>
+  <p class="lead">A portfolio platform for visual artists. People sign up, publish, subscribe and get their own address without talking to anyone.</p>
+  <dl class="meta">
+    <div><dt>Product</dt><dd>My own, under Vitamina</dd></div>
+    <div><dt>Role</dt><dd>Founder, designer, builder</dd></div>
+    <div><dt>Timeline</dt><dd>March 2026 to now</dd></div>
+    <div><dt>Built with</dt><dd>Lovable, Supabase, Stripe, Resend, Vercel</dd></div>
+    <div><dt>Status</dt><dd>Live, in pilot with FMU</dd></div>
+  </dl>
+</section>
+
+<section class="wrap">
+  <div class="split">
+    <div class="media"><video muted loop playsinline preload="none" poster="v/criaaa169.jpg" data-src="v/criaaa169.mp4" aria-label="Screen recording of the CRIAAA website."></video></div>
+    <aside class="proof" aria-label="Where it stands">
+      <span class="sec-title">Where it stands</span>
+      <p class="body">Live since October 2026. A pilot with FMU, a university in São Paulo, opens it to a base of about 500 students.</p>
+      <ul>
+        <li><a href="https://criaaa.com" target="_blank" rel="noopener">See the live site<span class="arw" aria-hidden="true"></span></a></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="ctx">
+  <div class="head"><h2 class="sec-title" id="ctx">Context</h2></div>
+  <div class="split">
+    <p class="statement">The same site, asked for again and again.</p>
+    <div class="body">
+      <p>It started as a portfolio for a photographer, Samuel, at mostra.se. Other artists asked for the same thing. Each site looked different, but underneath it was the same structure.</p>
+      <p>So I turned the service into a product. mostra.se was the first site to run on it, with its own domain, and it still does.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="chl">
+  <div class="head"><h2 class="sec-title" id="chl">Challenge</h2></div>
+  <div class="split">
+    <p class="statement">Everything a person needs, without me in the middle.</p>
+    <div class="body">
+      <p>When I built each site by hand, I chose the address, set up the DNS and sent the invoice. A product has to do all of that on its own.</p>
+      <p>An artist should be able to create an account, upload work, choose a layout, pay and connect a domain alone, and get an e-mail at every step that matters.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="prc">
+  <div class="head"><h2 class="sec-title" id="prc">Process</h2></div>
+  <div class="split">
+    <p class="statement">First make it work. Then make it right.</p>
+    <div class="body"><p>I worked in layers. The flows came first, with plain screens. Then the design system, and only then the details of the interface.</p></div>
+  </div>
+  <ol class="steps">
+    <li><span class="label">March</span><b>Function</b><p>Accounts, onboarding, payments, e-mails, plans and the first site at its own domain.</p></li>
+    <li><span class="label">April</span><b>System</b><p>A design system in code, rebuilt twice, with a single family of thin icons.</p></li>
+    <li><span class="label">April</span><b>Detail</b><p>The whole editor aligned to the system. Menu alignment, font rendering, spacing.</p></li>
+    <li><span class="label">October</span><b>Pilot</b><p>Public launch and the pilot with FMU students.</p></li>
+  </ol>
+</section>
+
+<section class="screens" aria-labelledby="scr">
+  <div class="wrap">
+    <div class="head"><h2 class="sec-title" id="scr">The way in</h2></div>
+    <div class="reel" tabindex="0" aria-label="Screens from the live site, scroll sideways">
+      <figure><div class="phone-wrap long"><div class="phone long" tabindex="0" aria-label="The full landing page, scroll inside the frame"><img src="img/criaaa/m-landing.jpg" alt="The landing page on a phone: the CRIAAA wordmark, how it works in three steps, the eight layouts, the invite program, the three plans and the questions people ask" width="375" height="8777" loading="lazy"></div></div><figcaption class="label">Landing, scrolls</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/criaaa/m-signup.jpg" alt="Create account: Google, Apple, or the address of your site first, which shows right away that thiagovitamina.criaaa.com is taken" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Create account</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/criaaa/m-login.jpg" alt="Log in: Google, Apple, or e-mail and password, with a link to reset the password" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Log in</figcaption></figure>
+    </div>
+    <p class="note label">From the live site, November 2026. The interface is in Portuguese, for artists in Brazil.</p>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="key">
+  <div class="head"><h2 class="sec-title" id="key">Key decision</h2></div>
+  <div class="split">
+    <figure class="demo homeframe" aria-labelledby="home-cap">
+      <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>criaaa.com</span></span>
+        <div class="bw-scroll" tabindex="0" aria-label="The full landing page on desktop, scroll inside the frame"><img src="img/criaaa/web-landing-full.jpg" alt="The landing page on desktop, top to bottom: the wordmark and an e-mail field, the reasons to have your own site, how it works, the layouts, the invite program, the plans and the questions" width="1000" height="3826" loading="lazy"></div>
+      </div>
+      <figcaption class="label" id="home-cap">The live landing page. Scroll inside the frame.</figcaption>
+    </figure>
+    <div class="body">
+      <p class="statement" style="font-size:var(--t-lg)">Your name is your address.</p>
+      <p>The first thing you choose is not a password. It is the address of your site. The field checks it as you type and says right away if it is taken.</p>
+      <p>On the free plan that name becomes name.criaaa.com from the first minute. On Pro, the artist connects their own domain from the settings, and the editor shows the two records to add and checks when they are working.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block duo flow">
+  <div class="col" aria-labelledby="dom">
+    <div class="head"><h2 class="sec-title" id="dom">Your own domain</h2></div>
+    <div class="body">
+      <p class="statement" style="font-size:var(--t-lg)">The hardest part was making an address belong to someone.</p>
+      <p>Every artist lives at a different address, and each address had to find the right site, keep people signed in and send links that land in the right place.</p>
+    </div>
+    <ul class="fixes">
+      <li><b>New addresses did not resolve.</b><span>One wildcard record now answers for every name.criaaa.com.</span></li>
+      <li><b>“www” was read as an artist.</b><span>A list of reserved names keeps system words out of usernames.</span></li>
+      <li><b>Sign-in stayed behind.</b><span>Each address keeps its own session, so a one-time link carries it from criaaa.com to the artist’s address.</span></li>
+      <li><b>E-mails pointed to the wrong place.</b><span>Confirmation, password reset and Google sign-in now return to the artist’s own editor.</span></li>
+    </ul>
+  </div>
+  <div class="col" aria-labelledby="pay">
+    <div class="head"><h2 class="sec-title" id="pay">Paying alone</h2></div>
+    <div class="body">
+      <p class="statement" style="font-size:var(--t-lg)">From the editor to Pro, with nobody in between.</p>
+      <p>The artist picks a plan in the editor, pays on Stripe’s own checkout and comes back to their site already on Pro. An e-mail confirms it, and another one if they cancel.</p>
+      <p>Beta testers went through sign-up and checkout without help.</p>
+    </div>
+    <figure>
+      <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>criaaa.com/#planos</span></span><img src="img/criaaa/web-plans.jpg" alt="Three plans: Free with five galleries at name.criaaa.com, Pro monthly with unlimited galleries, custom appearance and your own domain, and Premium with a fully made portfolio" width="1440" height="850" loading="lazy"></div>
+      <figcaption class="label">The plans, as they appear on the live site.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="lay">
+  <div class="head"><h2 class="sec-title" id="lay">Layouts</h2></div>
+  <div class="split">
+    <p class="statement">The structure is shared. The look is not.</p>
+    <div class="body">
+      <p>Each gallery picks one of four layouts: Cascata, one image at a time; Panorama, a sideways filmstrip; Dividida, two columns; and Mosaico, rows of varied heights. Four more are on the way.</p>
+      <p>On top of that, the artist chooses the fonts, the cursor and transitions, light or dark, where the logo sits on a three by three grid, where the menu goes and how it runs, the spacing and the text alignment.</p>
+    </div>
+  </div>
+  <figure class="wide">
+    <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>criaaa.com</span></span><img src="img/criaaa/web-layouts.jpg" alt="The eight layouts, each drawn as a small diagram: Cascata, Panorama, Dividida and Mosaico available, Magazine, Lista, Grid Livre and Timeline coming soon" width="1440" height="585" loading="lazy"></div>
+    <figcaption class="label">The layouts, from the landing page.</figcaption>
+  </figure>
+</section>
+
+<section class="wrap block" aria-labelledby="hw">
+  <div class="head"><h2 class="sec-title" id="hw">How it was built</h2></div>
+  <div class="split">
+    <p class="statement">Built with AI, checked by hand.</p>
+    <div class="body">
+      <p>I built the interface, the editor and the back-end functions in Lovable, one small prompt at a time. Big prompts broke things that already worked.</p>
+      <p>For the parts where a mistake is expensive (database rules, sign-in, domains, payments) I worked with Claude. Before changing anything, we checked the real queries, logs and Stripe data.</p>
+      <p>The quiet failures got screens too. An e-mail that does not go out lands on a list in the admin, with a button to send it again.</p>
+      <p class="stack">React, TypeScript and Tailwind · Supabase · Stripe Checkout and webhooks · Resend · Vercel · Cloudflare DNS · Google sign-in</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block" aria-labelledby="out">
+  <div class="head"><h2 class="sec-title" id="out">Outcome</h2></div>
+  <div class="split">
+    <p class="statement">From one photographer’s site to a product in pilot.</p>
+    <div class="body">
+      <p>CRIAAA has been live at criaaa.com since October 2026. mostra.se, the site where it all began, runs on it with its own domain.</p>
+      <p>The pilot with FMU opens it to a base of about 500 students, to learn from real use before anything else is added.</p>
+    </div>
+  </div>
+  <div class="numbers">
+    <div><b>4</b><span class="label">Layouts live, four more on the way</span></div>
+    <div><b>~500</b><span class="label">Students in the FMU pilot base</span></div>
+    <div><b>7</b><span class="label">Months from the first build to the pilot</span></div>
+  </div>
+  <nav class="next" aria-label="Next">
+    <span class="label">That’s the case.</span>
+    <a class="btn-ink" href="index.html#work"><span>All selected work</span><span class="arw" aria-hidden="true"></span></a>
+  </nav>
+</section>
+</main>
+
+<section class="contact flat" id="contact" aria-labelledby="contact-h" data-ink="dark">
+  <div class="wrap">
+    <div class="head"><h2 class="sec-title" id="contact-h">Contact</h2></div>
+    <p class="cta">Let’s work together.</p>
+    <p class="avail-line">Available for new projects, from São Paulo, working with teams anywhere.</p>
+    <ul class="reach">
+      <li><span class="label">Email</span><span class="val" id="mail">designdasilva@gmail.com</span><button class="copybtn" id="copy" type="button">Copy</button></li>
+      <li><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/thiagovitamina" target="_blank" rel="noopener">thiagovitamina <span class="arw" aria-hidden="true"></span></a></li>
+      <li><span class="label">Instagram</span><a class="val" href="https://www.instagram.com/thiagovitamina" target="_blank" rel="noopener">@thiagovitamina <span class="arw" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+  <footer class="wrap foot"><span>Thiago Vitamina</span><span>São Paulo, 2026</span></footer>
+</section>
+
+<script>
+document.getElementById('copy').addEventListener('click',async e=>{const b=e.currentTarget,t=document.getElementById('mail').textContent;
+  try{await navigator.clipboard.writeText(t);b.textContent='Copied'}catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+  setTimeout(()=>b.textContent='Copy',1800)});
+(()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io=new IntersectionObserver(es=>es.forEach(en=>{const v=en.target;if(en.isIntersecting){if(!v.src)v.src=v.dataset.src;if(!reduce)v.play().catch(()=>{})}else v.pause()}),{rootMargin:'200px 0px'});
+  document.querySelectorAll('video[data-src]').forEach(v=>io.observe(v));})();
+</script>
+</body>
+</html>
