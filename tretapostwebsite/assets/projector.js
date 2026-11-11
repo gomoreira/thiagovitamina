@@ -91,9 +91,9 @@
     const step = 2 * (w / 18);
     for (let y = 0; y < h; y += step) {
       let amp;
-      if (wave) {
-        const i = Math.floor(((y + stripOffset) / step) % wave.length + wave.length) % wave.length;
-        amp = Math.min(1, Math.abs(wave[i] - 128) / 60 + .05);
+      if (wave && soundOn) {
+        const i = Math.floor(((y + stripOffset * .25) / step) % wave.length + wave.length) % wave.length;
+        amp = Math.min(1, Math.abs(wave[i] - 128) / 46 + .05);
       } else {
         amp = seedWave(y + stripOffset);
       }
@@ -150,7 +150,7 @@
     boost += (Math.max(boostTarget, scrollBoost) - boost) * .18;
     root.style.setProperty("--leak-boost", boost.toFixed(3));
     stripOffset += 14 + dy * 1.2;          // o filme corre sempre; o scroll acelera
-    if (analyser) { analyser.getByteTimeDomainData(wave); }
+    if (analyser && soundOn) { analyser.getByteTimeDomainData(wave); }
     drawGrain(); drawStrip(); driftLeak(t); flicker();
   }
 
@@ -158,44 +158,55 @@
   addEventListener("resize", sizeGrain);
   if (reduce) { drawStrip(); } else { requestAnimationFrame(frame); }
 
-  /* ---------- som de projetor (opcional, sempre iniciado por clique) ---------- */
-  let ctx = null, master = null;
+  /* ---------- som: trilha (data-track) ou, sem trilha, ruído de projetor. Sempre iniciado por clique ---------- */
+  const track = host.dataset.track ? base + host.dataset.track : null;
+  let ctx = null, master = null, music = null;
   function buildSound() {
     ctx = new (window.AudioContext || window.webkitAudioContext)();
     master = ctx.createGain(); master.gain.value = 0;
-    // chiado do motor: ruído rosa filtrado
-    const len = ctx.sampleRate * 2, buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
-    let b0 = 0, b1 = 0, b2 = 0;
-    for (let i = 0; i < len; i++) { const w = Math.random() * 2 - 1; b0 = .997 * b0 + w * .029; b1 = .985 * b1 + w * .032; b2 = .95 * b2 + w * .048; d[i] = (b0 + b1 + b2) * .25; }
-    const noise = ctx.createBufferSource(); noise.buffer = buf; noise.loop = true;
-    const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1400; bp.Q.value = .6;
-    const hiss = ctx.createGain(); hiss.gain.value = .5;
-    // claque do obturador: 24 batidas por segundo moduladas
-    const clack = ctx.createOscillator(); clack.type = "square"; clack.frequency.value = 24;
-    const clackGain = ctx.createGain(); clackGain.gain.value = .05;
-    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 320;
-    noise.connect(bp).connect(hiss).connect(master);
-    clack.connect(lp).connect(clackGain).connect(master);
-    analyser = ctx.createAnalyser(); analyser.fftSize = 512; wave = new Uint8Array(analyser.fftSize);
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = .6;
+    wave = new Uint8Array(analyser.fftSize);
+    if (track) {
+      // a faixa óptica desenha a onda da própria música
+      music = new Audio(track); music.loop = true; music.crossOrigin = "anonymous"; music.preload = "auto";
+      const src = ctx.createMediaElementSource(music);
+      src.connect(master);
+    } else {
+      const len = ctx.sampleRate * 2, buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0;
+      for (let i = 0; i < len; i++) { const w = Math.random() * 2 - 1; b0 = .997 * b0 + w * .029; b1 = .985 * b1 + w * .032; b2 = .95 * b2 + w * .048; d[i] = (b0 + b1 + b2) * .25; }
+      const noise = ctx.createBufferSource(); noise.buffer = buf; noise.loop = true;
+      const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1400; bp.Q.value = .6;
+      const hiss = ctx.createGain(); hiss.gain.value = .5;
+      const clack = ctx.createOscillator(); clack.type = "square"; clack.frequency.value = 24;
+      const clackGain = ctx.createGain(); clackGain.gain.value = .05;
+      const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 320;
+      noise.connect(bp).connect(hiss).connect(master);
+      clack.connect(lp).connect(clackGain).connect(master);
+      noise.start(); clack.start();
+    }
     master.connect(analyser); master.connect(ctx.destination);
-    noise.start(); clack.start();
   }
+  var soundOn = false;
   document.querySelectorAll("[data-sound]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       try {
         if (!ctx) buildSound();
-        const on = btn.getAttribute("aria-pressed") !== "true";
+        soundOn = !soundOn;
         if (ctx.state === "suspended") await ctx.resume();
-        master.gain.setTargetAtTime(on ? .16 : 0, ctx.currentTime, .25);
+        if (music && soundOn) await music.play();
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setTargetAtTime(soundOn ? (music ? .9 : .16) : 0, ctx.currentTime, soundOn ? .35 : .25);
+        if (music && !soundOn) setTimeout(() => { if (!soundOn) music.pause(); }, 900);
         document.querySelectorAll("[data-sound]").forEach((b) => {
-          b.setAttribute("aria-pressed", String(on));
-          b.setAttribute("aria-label", on ? "Desligar o som" : "Ligar o som");
+          b.setAttribute("aria-pressed", String(soundOn));
+          b.setAttribute("aria-label", soundOn ? "Desligar o som" : "Ligar o som");
         });
-        if (!on) { setTimeout(() => { analyser = null; wave = null; }, 600); }
-        else if (!analyser) { analyser = ctx.createAnalyser(); analyser.fftSize = 512; wave = new Uint8Array(512); master.connect(analyser); }
-      } catch (e) { btn.disabled = true; }
+      } catch (e) { soundOn = false; }
     });
   });
+  // a faixa só reage enquanto o som está ligado
+  const realWave = () => soundOn && analyser;
 
   /* expõe utilidades para as páginas */
   window.Projector = { reduce };

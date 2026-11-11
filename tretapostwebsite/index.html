@@ -120,6 +120,8 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 /* ---------- seletor de abertura (só no protótipo) ---------- */
 .picker { position: fixed; z-index: 25; left: 50%; bottom: 16px; transform: translateX(-50%); display: grid; gap: 8px; padding: 10px 10px 10px;
           background: rgba(0,0,0,.88); border: 1px solid var(--leak-orange); backdrop-filter: blur(10px); box-shadow: 0 0 40px rgba(255, 90, 31, .25); }
+.picker { transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+.picker.is-away { opacity: 0; transform: translate(-50%, 24px); pointer-events: none; }
 .picker__q { margin: 0 4px; font-size: 13px; line-height: 1.2; color: var(--film); font-weight: 600; text-align: center; }
 .picker__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .picker button { appearance: none; border: 1px solid var(--film-faint); background: transparent; color: var(--film); font: inherit; cursor: pointer;
@@ -319,7 +321,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 </style>
 </head>
 <body>
-<div class="projector" data-projector data-assets="/tretapostwebsite/assets/" aria-hidden="true"></div>
+<div class="projector" data-projector data-assets="/tretapostwebsite/assets/" data-track="audio/trilha.mp3" aria-hidden="true"></div>
 
 <header class="bar">
   <a class="bar__mark" href="#topo" aria-label="TretaPost, voltar ao topo">TretaPost</a>
@@ -658,7 +660,10 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   }));
 
 
-  // ---------- seletor de abertura ----------
+  // ---------- seletor de abertura: aparece só no topo da página ----------
+  const pickerEl = document.querySelector('.picker');
+  const pickerUpdate = () => pickerEl.classList.toggle('is-away', scrollY > 140);
+  addEventListener('scroll', pickerUpdate, { passive: true }); pickerUpdate();
   const heroes = [...document.querySelectorAll('[data-hero]')], picks = [...document.querySelectorAll('[data-pick]')];
   function showHero(name) {
     if (!heroes.some(h => h.dataset.hero === name)) name = 'atual';
