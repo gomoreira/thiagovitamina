@@ -1,5 +1,7 @@
 # Agência Amazonas · material para o thumbnail do Also live
 
+Decisão (11/11/2026): fica no Also live, não vira case. Aguarda a nova dinâmica dos thumbnails para gerar v/amazonas.mp4.
+
 Capturado em 11/11/2026 no Chrome, desktop 1440 px de largura, 1x, a partir de https://www.agenciaamazonas.am.gov.br. Fica em `source/`, que não vai para o deploy (`.vercelignore`).
 
 ## Entrada no site (já está em source/index.html, sem vídeo)
@@ -50,4 +52,4 @@ Dois mockups em perspectiva, 1920×1280, da pasta "Agencia Amazonas" no Google D
 
 Contexto do Drive: pasta "AGÊNCIA AMAZONAS - NOTÍCIAS PARA O LAYOUT", compartilhada pela equipe da Secom em 12/06/2020, com as notícias e fotos usadas para preencher o layout. Em 2022 houve uma segunda rodada de ajustes no portal (orçamentos de abril de 2022; os valores não entram no portfólio).
 
-O arquivo do Figma ainda não foi localizado.
+O arquivo do Figma não foi localizado; como ficou no Also live, não é necessário.
