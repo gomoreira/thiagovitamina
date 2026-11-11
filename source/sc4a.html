@@ -100,8 +100,20 @@ figcaption{margin-top:var(--sp-2)}
 .steps.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .pair2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-2)}.pair2 figure{margin:0}
 .pair2.motion{margin-top:var(--sp-6)}.pair2 video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--night)}
+.rounds .col{display:grid;gap:var(--sp-4);align-content:start}
+.rounds{gap:var(--gap)}
+.rounds .body .label{margin:0}
+.homeframe.small .bw-scroll{height:400px}
+.evo{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp-2)}
+.evo figure{margin:0}.evo .bw-bar{height:18px;padding:0 6px}.evo .bw-bar span{display:none}.evo .bw-bar i{width:5px;height:5px}
+.evo figcaption{margin-top:var(--sp-1)}
+.phone-fig{width:100%}
+.phone-panel{background:var(--well);border:1px solid var(--rule);display:grid;place-items:center;padding:var(--sp-6) var(--sp-4);height:min(72vh,640px);box-sizing:border-box}
+.phone-panel{--phone-w:240px}
+@media (max-width:1100px){.evo{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){.evo{grid-template-columns:repeat(2,minmax(0,1fr))}.homeframe.small .bw-scroll{height:360px}.phone-panel{--phone-w:200px;height:auto}}
 /* phone that scrolls inside its frame */
-.phone-fig{display:grid;gap:var(--sp-2);justify-items:start;align-content:start}
+.phone-fig{display:grid;gap:var(--sp-2);align-content:start}
 .phone.scroll{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;background:var(--night)}
 .phone.scroll::-webkit-scrollbar{display:none}
 .phone.scroll:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
@@ -131,7 +143,7 @@ figcaption{margin-top:var(--sp-2)}
     <div><dt>Client</dt><dd>SoundCloud</dd></div>
     <div><dt>Team</dt><dd>Scaled Creator Success</dd></div>
     <div><dt>Role</dt><dd>Senior designer, contract</dd></div>
-    <div><dt>Duration</dt><dd>Two weeks to an approved prototype, 2025–2026</dd></div>
+    <div><dt>Scope</dt><dd>Concept, prototypes and final design</dd></div>
     <div><dt>Built in</dt><dd>Prototyped in Lovable and Framer, built in Webflow</dd></div>
   </dl>
 </section>
@@ -140,7 +152,8 @@ figcaption{margin-top:var(--sp-2)}
     <div class="media"><video muted loop playsinline preload="none" poster="v/sc4a169.jpg" data-src="v/sc4a169.mp4" aria-label="The final prototype in Framer, scrolling from the hero through Get started, Grow and Monetize to the closing call to action."></video></div>
     <aside class="proof" aria-label="After launch">
       <span class="sec-title">After launch</span>
-      <p class="body">The hub is live. It replaced SoundCloud’s old education hub, whose address now points to the new one.</p>
+      <p class="body">The hub is live at artists.soundcloud.com. It replaced SoundCloud’s old education hub, and the old address now points to the new one.</p>
+      <p class="body">The three steps and the hero line went into production as designed. Today the hub is where SoundCloud sends artists to learn the platform, compare the Artist plans and find the yearly Music Intelligence Report.</p>
       <ul>
         <li><a href="https://artists.soundcloud.com" target="_blank" rel="noopener">The live site<span class="arw" aria-hidden="true"></span></a></li>
       </ul>
@@ -168,49 +181,49 @@ figcaption{margin-top:var(--sp-2)}
     </div>
   </div>
 </section>
-<section class="wrap block" aria-labelledby="r1">
-  <div class="head"><h2 class="sec-title" id="r1">Round 1</h2></div>
-  <div class="split">
-    <figure class="demo homeframe" aria-labelledby="r1-cap">
-      <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span>
-        <div class="bw-scroll" tabindex="0" aria-label="The first prototype, scroll inside the frame"><img src="img/sc4a/r1-full.jpg" alt="The first prototype, an academy: a hero promising to master SoundCloud success, paid courses with levels and prices, student testimonials and a one-time offer for full access." width="1440" height="4418" loading="lazy"></div>
+<section class="wrap block" aria-labelledby="r12">
+  <div class="head"><h2 class="sec-title" id="r12">The first two rounds</h2></div>
+  <div class="pair2 rounds">
+    <div class="col">
+      <figure class="demo homeframe small" aria-labelledby="r1-cap">
+        <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 1, scroll inside the frame"><img src="img/sc4a/r1-full.jpg" alt="The first prototype, an academy: a hero promising to master SoundCloud success, paid courses with levels and prices, student testimonials and a one-time offer for full access." width="1440" height="4418" loading="lazy"></div>
+        </div>
+        <figcaption class="label" id="r1-cap">Round 1. Scroll inside the frame.</figcaption>
+      </figure>
+      <div class="body">
+        <p class="statement" style="font-size:var(--t-lg)">Round 1 asked the wrong question.</p>
+        <p>The brief pointed to a learning hub, so I built an academy: courses, levels, enrollment. Its job was to test the brief. In review it became clear that creators didn’t need a school. They needed a path inside the platform.</p>
       </div>
-      <figcaption class="label" id="r1-cap">The first prototype, top to bottom. Scroll inside the frame.</figcaption>
-    </figure>
-    <div class="body">
-      <p class="statement" style="font-size:var(--t-lg)">The first prototype asked the wrong question.</p>
-      <p>The brief pointed to a learning hub, the kind of academy software companies build around their tools. Without all the information yet, I built the first prototype exactly that way: courses, levels, enrollment.</p>
-      <p>Its job was to test the brief. In review it became clear that creators didn’t need a school. They needed a path inside the platform. That was the point of building it.</p>
     </div>
-  </div>
-</section>
-<section class="wrap block" aria-labelledby="r2">
-  <div class="head"><h2 class="sec-title" id="r2">Round 2</h2></div>
-  <div class="split">
-    <p class="statement">Three steps, in the order a creator lives them.</p>
-    <div class="body"><p>The second prototype organized everything around a creator’s journey. Each step holds its own guides, followed by plans and questions. This structure carried through every later version, and it is the one live today.</p></div>
+    <div class="col">
+      <figure class="demo homeframe small" aria-labelledby="r2-cap">
+        <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 2 · Lovable</span></span>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 2, scroll inside the frame"><img src="img/sc4a/r2-full.jpg" alt="The second prototype, Creator Hub: a dark hero with a sound wave, then one section each for Upload, Get Heard and Get Paid, each with a lead guide and smaller guides, then plans and questions." width="1440" height="6356" loading="lazy"></div>
+        </div>
+        <figcaption class="label" id="r2-cap">Round 2. Scroll inside the frame.</figcaption>
+      </figure>
+      <div class="body">
+        <p class="statement" style="font-size:var(--t-lg)">Round 2 found the structure.</p>
+        <p>Three steps, in the order a creator lives them: get started, get heard, get paid. Each step holds its own guides, then plans and questions. This structure carried through every later version, and it is the one live today.</p>
+      </div>
+    </div>
   </div>
   <ol class="steps three">
     <li><b>Get started</b><span class="label">Set up a profile, upload a first track, understand how fans find music.</span></li>
     <li><b>Get heard</b><span class="label">Distribution, discovery and knowing who is listening.</span></li>
     <li><b>Get paid</b><span class="label">Fan-powered royalties, merch and vinyl, direct fan support.</span></li>
   </ol>
-  <figure class="wide demo homeframe" aria-labelledby="r2-cap">
-    <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 2 · Lovable</span></span>
-      <div class="bw-scroll" tabindex="0" aria-label="The second prototype, scroll inside the frame"><img src="img/sc4a/r2-full.jpg" alt="The second prototype, Creator Hub: a dark hero with a sound wave, then one section each for Upload, Get Heard and Get Paid, each with a lead guide and a grid of smaller guides, then plans and questions." width="1440" height="6356" loading="lazy"></div>
-    </div>
-    <figcaption class="label" id="r2-cap">Round 2, where the structure was set. Scroll inside the frame.</figcaption>
-  </figure>
 </section>
 <section class="wrap block" aria-labelledby="r3">
   <div class="head"><h2 class="sec-title" id="r3">Round 3</h2></div>
   <div class="split">
     <figure class="demo homeframe" aria-labelledby="r3-cap">
-      <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span>
-        <div class="bw-scroll" tabindex="0" aria-label="The third prototype, scroll inside the frame"><img src="img/sc4a/r3-full.jpg" alt="The third prototype: the SoundCloud logo, a live show in the hero, real SoundCloud videos as guides in one card pattern across the three steps, and the real Artist and Artist Pro plans." width="1440" height="7531" loading="lazy"></div>
-      </div>
-      <figcaption class="label" id="r3-cap">Round 3, with real content. Scroll inside the frame.</figcaption>
-    </figure>
+        <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 3, scroll inside the frame"><img src="img/sc4a/r3-full.jpg" alt="The third prototype: the SoundCloud logo, a live show in the hero, real SoundCloud videos as guides in one card pattern across the three steps, and the real Artist and Artist Pro plans." width="1440" height="7531" loading="lazy"></div>
+        </div>
+        <figcaption class="label" id="r3-cap">Round 3, with real content. Scroll inside the frame.</figcaption>
+      </figure>
     <div class="body">
       <p class="statement" style="font-size:var(--t-lg)">From placeholders to the real product.</p>
       <p>The third round replaced the generic parts with SoundCloud itself: the brand, photography from live shows, SoundCloud’s own videos as guides, and the real Artist and Artist Pro plans with their actual limits.</p>
@@ -218,18 +231,16 @@ figcaption{margin-top:var(--sp-2)}
     </div>
   </div>
 </section>
-<section class="screens zines web" aria-labelledby="ev">
-  <div class="wrap">
-    <div class="head"><h2 class="sec-title" id="ev">Five versions</h2></div>
-    <div class="reel" tabindex="0" aria-label="The hero of each version, from the first prototype to the live site, scroll sideways">
+<section class="wrap block" aria-labelledby="ev">
+  <div class="head"><h2 class="sec-title" id="ev">Five versions</h2></div>
+  <div class="evo">
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span><img src="img/sc4a/r1-hero.jpg" alt="Round 1 hero: Master your SoundCloud success, with illustrations and course numbers" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 1. An academy.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 2 · Lovable</span></span><img src="img/sc4a/r2-hero.jpg" alt="Round 2 hero: Welcome to Creator Hub over a sound wave, with Upload, Get Heard and Get Paid in the navigation" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 2. The three steps.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span><img src="img/sc4a/r3-hero.jpg" alt="Round 3 hero: Welcome to Creator Hub over a photo of an artist on stage" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 3. Real content.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Final prototype · Framer</span></span><img src="img/sc4a/framer-hero.jpg" alt="Final prototype hero on the new brand: Your sound. Your scene. Your moment., next to artist videos" width="1440" height="810" loading="lazy"></div><figcaption class="label">Final prototype. The new brand.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>artists.soundcloud.com</span></span><img src="img/sc4a/live-hero.jpg" alt="Live site hero: Your sound. Your scene. Your moment., surrounded by artist videos" width="1440" height="810" loading="lazy"></div><figcaption class="label">Live. Built in Webflow.</figcaption></figure>
-    </div>
-    <p class="note label">The hero of each version, from the first prototype to the live site.</p>
   </div>
+  <p class="note label">The hero of each version, from the first prototype to the live site.</p>
 </section>
 <section class="wrap block" aria-labelledby="fp">
   <div class="head"><h2 class="sec-title" id="fp">Final prototype</h2></div>
@@ -251,7 +262,7 @@ figcaption{margin-top:var(--sp-2)}
   <div class="head"><h2 class="sec-title" id="mob">Mobile</h2></div>
   <div class="split">
     <figure class="phone-fig">
-      <div class="phone-wrap scroll"><div class="phone scroll" tabindex="0" aria-label="The live site on a phone, scroll inside the frame"><img src="img/sc4a/m-live.jpg" alt="The live site on a phone: the hero line stacked over artist videos, the earn more banner, the big numbers, creator spotlights and the first Get started guide." width="750" height="7600" loading="lazy"></div></div>
+      <div class="phone-panel"><div class="phone-wrap scroll"><div class="phone scroll" tabindex="0" aria-label="The live site on a phone, scroll inside the frame"><img src="img/sc4a/m-live.jpg" alt="The live site on a phone: the hero line stacked over artist videos, the earn more banner, the big numbers, creator spotlights and the first Get started guide." width="750" height="7600" loading="lazy"></div></div></div>
       <figcaption class="label">The live site on a phone. Scrolls.</figcaption>
     </figure>
     <div class="body">
@@ -278,7 +289,7 @@ figcaption{margin-top:var(--sp-2)}
   <div class="split">
     <p class="statement">One path, from first upload to first payout.</p>
     <div class="body">
-      <p>The hub is live at artists.soundcloud.com and replaced the old education hub. The three steps and the hero went into production as designed, and the card pattern now carries more than twenty guides.</p>
+      <p>Creators now find one path instead of a library: start, get heard, get paid. The card pattern designed in the third round now carries more than twenty guides across the three steps.</p>
       <p>The process stayed smooth. By the time anything was expensive to change, the team had already agreed on it.</p>
       <p>The hub also points to SoundCloud’s yearly data report, another project I designed: <a href="mir.html">Music Intelligence Report<span class="arw" aria-hidden="true"></span></a></p>
     </div>
