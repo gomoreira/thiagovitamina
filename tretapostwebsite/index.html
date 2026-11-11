@@ -665,7 +665,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   // ---------- hero "logo vazado": borda de papel queimado + zoom na própria palavra ----------
   var tela = document.querySelector('.hero-tela');
   const cv = tela.querySelector('.tela__burn'), cx = cv.getContext('2d');
-  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas');
+  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas'), filmC = document.createElement('canvas');
   var W = 0, H = 0, DPR = 1, fs = 0, box = null, anchor = null, prog = 0, ready = false, visible = false, built = false;
   const WORD = 'TretaPost';
   const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
@@ -676,13 +676,13 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
     return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
   }
-  const setFont = (ctx) => { ctx.font = `900 ${fs}px Archivo`; try { ctx.fontStretch = 'semi-expanded'; ctx.letterSpacing = `${-fs * .045}px`; } catch (e) {} ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; };
+  const setFont = (ctx) => { ctx.font = `900 semi-expanded ${fs}px Archivo`; try { ctx.fontStretch = 'semi-expanded'; ctx.letterSpacing = `${-fs * .018}px`; } catch (e) {} ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; };
   // monta uma vez, na escala 1: furo irregular e borda de brasa/chamuscado em volta das letras
   function buildBurn() {
     DPR = Math.min(devicePixelRatio || 1, 1.5);
     W = cv.clientWidth; H = cv.clientHeight;
     cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-    fs = W * (W < 860 ? .152 : .158) * DPR;
+    fs = W * (W < 860 ? .14 : .145) * DPR;
     setFont(cx);
     const tw = cx.measureText(WORD).width;
     const bw = Math.ceil(tw + fs * .5), bh = Math.ceil(fs * 1.3), SS = 2;   // textura em 2x para borda lisa
@@ -720,9 +720,62 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
       }
     }
     hx.putImageData(hi, 0, 0); ex.putImageData(ei, 0, 0);
+    buildFilm();
     built = true;
     drawTela(performance.now());
   }
+  // película: base com densidade irregular, riscos, poeira, linha entre fotogramas e perfuração. Altura = 2 fotogramas, repete.
+  function buildFilm() {
+    const fw = cv.width, fh = cv.height * 2, fx = filmC.getContext('2d');
+    filmC.width = fw; filmC.height = fh;
+    // base em baixa resolução (densidade da emulsão), ampliada suave
+    const lw = 160, lh = Math.round(160 * fh / fw), base = document.createElement('canvas'); base.width = lw; base.height = lh;
+    const bx = base.getContext('2d'), bi = bx.createImageData(lw, lh);
+    for (let y = 0; y < lh; y++) for (let x = 0; x < lw; x++) {
+      const yy = y % Math.round(lh / 2);                                         // repete por fotograma
+      const n = vnoise(x / 18, yy / 18) * .6 + vnoise(x / 6, yy / 6) * .4;
+      const v = 7 + n * 16, i = (y * lw + x) * 4;
+      bi.data[i] = v * 1.25; bi.data[i + 1] = v * .92; bi.data[i + 2] = v * .7; bi.data[i + 3] = 255;
+    }
+    bx.putImageData(bi, 0, 0);
+    fx.imageSmoothingEnabled = true; fx.imageSmoothingQuality = 'high';
+    fx.drawImage(base, 0, 0, fw, fh);
+    const fr = fh / 2;
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    // linha entre fotogramas
+    for (const y0 of [0, fr]) {
+      const g = fx.createLinearGradient(0, y0 - fr * .04, 0, y0 + fr * .04);
+      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.5, 'rgba(0,0,0,.85)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      fx.fillStyle = g; fx.fillRect(0, y0 - fr * .04, fw, fr * .08);
+    }
+    fx.fillStyle = 'rgba(0,0,0,.85)'; fx.fillRect(0, fh - fr * .04, fw, fr * .04);
+    // riscos verticais
+    for (let i = 0; i < 26; i++) {
+      const x = rnd() * fw, y = rnd() * fh, len = fh * (.1 + rnd() * .6), w = (rnd() < .8 ? .6 : 1.4) * DPR;
+      fx.fillStyle = rnd() < .75 ? `rgba(255, 236, 214, ${.05 + rnd() * .12})` : `rgba(0, 0, 0, ${.4 + rnd() * .4})`;
+      fx.fillRect(x, y, w, len); if (y + len > fh) fx.fillRect(x, 0, w, y + len - fh);
+    }
+    // poeira e fios de cabelo
+    for (let i = 0; i < 220; i++) {
+      const x = rnd() * fw, y = rnd() * fh, r = (rnd() * 1.6 + .3) * DPR;
+      fx.fillStyle = rnd() < .6 ? `rgba(255, 240, 220, ${.08 + rnd() * .22})` : `rgba(0, 0, 0, ${.5 + rnd() * .4})`;
+      fx.beginPath(); fx.arc(x, y, r, 0, Math.PI * 2); fx.fill();
+    }
+    fx.lineCap = 'round';
+    for (let i = 0; i < 5; i++) {
+      const x = rnd() * fw, y = rnd() * fh; fx.strokeStyle = `rgba(255, 240, 220, ${.08 + rnd() * .1})`; fx.lineWidth = .8 * DPR;
+      fx.beginPath(); fx.moveTo(x, y); fx.bezierCurveTo(x + 40 * DPR * rnd(), y + 30 * DPR, x - 30 * DPR * rnd(), y + 60 * DPR, x + 20 * DPR, y + 90 * DPR * rnd() + 20 * DPR); fx.stroke();
+    }
+    // perfuração nas laterais, com luz vazando pelos furos
+    const hw = Math.max(10, fw * .011), hh = hw * 1.42, pitch = hh * 2.35, mx = fw * .025;
+    fx.shadowColor = 'rgba(255, 214, 170, .55)'; fx.shadowBlur = 8 * DPR;
+    fx.fillStyle = 'rgba(255, 226, 190, .16)';
+    for (let y = pitch * .3; y < fh; y += pitch) for (const x of [mx, fw - mx - hw]) {
+      fx.beginPath(); fx.roundRect ? fx.roundRect(x, y, hw, hh, hw * .22) : fx.rect(x, y, hw, hh); fx.fill();
+    }
+    fx.shadowBlur = 0;
+  }
+  let lastP = 0, roll = 0, rollV = 0;
   function drawTela(now) {
     if (!built) return;
     const p = prog, t = now / 1000;
@@ -735,7 +788,13 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
     cx.globalCompositeOperation = 'source-over';
     cx.clearRect(0, 0, cv.width, cv.height);
-    cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);
+    // o rolo gira: o scroll empurra a película para cima (com inércia), mais uma deriva lenta
+    rollV += ((prog - lastP) * cv.height * 9 - rollV) * .35; lastP = prog;
+    roll = (roll + rollV + .6 * DPR) % filmC.height;
+    const weave = (Math.random() - .5) * 1.2 * DPR;
+    cx.globalAlpha = .955 + Math.random() * .045;                              // flicker de densidade
+    cx.drawImage(filmC, weave, -roll); cx.drawImage(filmC, weave, filmC.height - roll);
+    cx.globalAlpha = 1;
     cx.setTransform(s, 0, 0, s, tx, ty);
     setFont(cx);
     cx.globalCompositeOperation = 'destination-out';
