@@ -95,26 +95,28 @@
     return seedWave(y + stripOffset + fallbackShift);
   }
   function drawStrip() {
-    const w = strip.width, h = strip.height, u = w / 32;
+    // uma faixa só, com camadas sobrepostas no mesmo eixo (levemente desalinhadas, como cópia de filme)
+    const w = strip.width, h = strip.height, u = w / 32, cx = 16 * u;
     sctx.clearRect(0, 0, w, h);
+    sctx.globalCompositeOperation = "lighter";
     const step = 2 * u;
-    const lanes = [{ cx: 8 * u, max: 6.5 * u, arr: waveL, shift: 0, warm: 0 }, { cx: 24 * u, max: 6.5 * u, arr: waveR, shift: 37, warm: 1 }];
+    const layers = [
+      { dx: -1.2 * u, max: 7 * u, arr: waveL, shift: 0,  rgb: [70, 190, 215], a: .26, k: .5 },
+      { dx: 1.2 * u,  max: 6 * u, arr: waveR, shift: 37, rgb: [255, 92, 40],  a: .24, k: .55 },
+    ];
     for (let y = 0; y < h; y += step) {
-      const hue = (y + stripOffset) * .02, mix = (Math.sin(hue) + 1) / 2;
-      for (const L of lanes) {
+      for (const L of layers) {
         const amp = trackAmp(L.arr, y, step, L.shift), half = amp * L.max;
-        const m = L.warm ? 1 - mix * .6 : mix * .6;
-        const r = Math.round(99 + m * 156), g = Math.round(199 - m * 110), bl = Math.round(212 - m * 120);
-        sctx.fillStyle = `rgba(${r},${g},${bl},${.32 + amp * .55})`;
-        sctx.fillRect(L.cx - half, y, half * 2, step * .7);
+        sctx.fillStyle = `rgba(${L.rgb[0]},${L.rgb[1]},${L.rgb[2]},${L.a + amp * L.k})`;
+        sctx.fillRect(cx + L.dx - half, y, half * 2, step * .7);
       }
     }
-    // pista central: brilho conforme o grave (ou uma pulsação leve sem som)
+    // núcleo: linha clara no centro que acende com o grave
     const pulse = soundOn ? bass : .25 + Math.sin(stripOffset * .01) * .1;
-    sctx.fillStyle = `rgba(255, 236, 214, ${.18 + pulse * .7})`;
-    sctx.fillRect(16 * u - .75 * u, 0, 1.5 * u, h);
-    sctx.fillStyle = "rgba(99,199,212,.28)";
-    sctx.fillRect(8 * u - .5, 0, 1, h); sctx.fillRect(24 * u - .5, 0, 1, h);
+    const core = .9 * u + pulse * 1.6 * u;
+    sctx.fillStyle = `rgba(255, 236, 214, ${.16 + pulse * .6})`;
+    sctx.fillRect(cx - core / 2, 0, core, h);
+    sctx.globalCompositeOperation = "source-over";
   }
 
   /* ---------- light leak: deriva orgânica ---------- */
