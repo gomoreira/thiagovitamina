@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="TretaPost: pós-produção do briefing ao filme pronto. Som, cor, pipeline, VFX e IA.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23f1e4d3%22%3ET%3C/text%3E%3C/svg%3E">
+<title>TretaPost · Protótipo do site</title>
+<link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/archivo.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="/tretapostwebsite/assets/fonts/host-grotesk.woff2" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/tretapostwebsite/assets/projector.css">
+<style>
+body { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 17px; line-height: 1.6; font-weight: 420; letter-spacing: 0; }
+/* títulos, marca e chamadas seguem na Archivo larga; o resto é Host Grotesk */
+.t-display, .t-h2, .t-h3, .wordmark, .bar__mark, .index a, .card__text h3, .crew__name, .reach strong, .menu nav a, .btn, .panel__items dt, .chip, .picker button { font-family: "Archivo", system-ui, sans-serif; }
+b, strong, dt { font-weight: 700; }
+.wrap { padding-inline: var(--gate-x); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+
+/* escala tipográfica: 6 tamanhos, só larguras normais e largas */
+:root { --fs-s: 15px; --fs-m: 17px; --fs-l: clamp(18px, 1.35vw, 21px); --fs-xl: clamp(24px, 2.2vw, 34px);
+        --fs-2xl: clamp(44px, 5.4vw, 92px); --fs-3xl: clamp(56px, 9vw, 168px);
+        --sp-section: clamp(112px, 12vw, 200px); --sp-head: clamp(44px, 5vw, 80px); --sp-block: clamp(20px, 2vw, 32px); }
+.t-display { font-weight: 800; font-stretch: 125%; letter-spacing: -.04em; line-height: .86; }
+.t-h2 { font-weight: 800; font-stretch: 125%; letter-spacing: -.035em; line-height: .94; font-size: var(--fs-2xl); margin: 0; text-wrap: balance; }
+.t-h3 { font-weight: 600; font-stretch: 112%; letter-spacing: -.018em; line-height: 1.14; font-size: var(--fs-xl); margin: 0; text-wrap: balance; }
+.t-body { font-size: var(--fs-l); line-height: 1.58; }
+.dim { color: var(--film-dim); }
+
+/* ---------- barra ---------- */
+.bar { position: fixed; z-index: 10; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 32px; padding: 16px var(--gate-x); }
+.bar::before { content: ""; position: absolute; inset: 0 0 -36px; z-index: -1; pointer-events: none; background: linear-gradient(#000 15%, rgba(0,0,0,.55) 60%, transparent); transition: opacity .4s; }
+body.on-panel .bar::before { opacity: 0; }
+.bar__mark { font-weight: 900; font-stretch: 112%; letter-spacing: -.035em; font-size: 21px; text-decoration: none; color: var(--film);
+             text-shadow: 0 0 .5em rgba(255, 90, 31, .45); transition: color .3s; }
+.bar__nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; font-stretch: 112%; }
+.bar__mark { margin-right: auto; }
+.bar__nav a { text-decoration: none; opacity: .72; transition: opacity .2s; } .bar__nav a:hover { opacity: 1; }
+.sound { width: 40px; height: 40px; border-radius: 0; border: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 30%, transparent); }
+.sound:hover { border-color: currentColor; background: transparent; }
+.eq { display: flex; align-items: flex-end; justify-content: center; gap: 3px; width: 18px; height: 14px; }
+.eq i { width: 2px; height: 6px; background: currentColor; transition: height .25s; }
+.eq i:nth-child(1) { height: 6px; } .eq i:nth-child(2) { height: 12px; } .eq i:nth-child(3) { height: 8px; } .eq i:nth-child(4) { height: 4px; }
+.sound[aria-pressed="false"] .eq { opacity: .75; }
+.sound[aria-pressed="true"] { color: var(--leak-orange); }
+.sound[aria-pressed="true"] .eq i { animation: eq .9s ease-in-out infinite alternate; }
+.sound[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.45s; } .sound[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.2s; } .sound[aria-pressed="true"] .eq i:nth-child(4) { animation-delay: -.7s; }
+@keyframes eq { from { height: 3px; } to { height: 14px; } }
+.burger { display: none; width: 40px; height: 40px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: transparent; color: inherit; cursor: pointer; place-items: center; }
+.burger span { display: block; width: 16px; height: 1.5px; background: currentColor; box-shadow: 0 5px 0 currentColor; transform: translateY(-2.5px); }
+.bar__tools { display: flex; gap: 8px; margin-left: 28px; }
+.menu { position: fixed; z-index: 30; inset: 0; background: #000; display: flex; flex-direction: column; padding: 16px var(--gate-x) 40px;
+        clip-path: inset(0 0 100% 0); transition: clip-path .55s cubic-bezier(.7,0,.2,1); visibility: hidden; }
+.menu.open { clip-path: inset(0 0 0 0); visibility: visible; }
+.menu::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 40% at 0% 100%, rgba(255, 90, 31, .35), transparent 70%), radial-gradient(50% 40% at 100% 0%, rgba(162, 60, 255, .3), transparent 70%); }
+.menu__top { position: relative; display: flex; justify-content: space-between; align-items: center; height: 40px; }
+.menu__close { width: 40px; height: 40px; border: 1px solid var(--film-faint); background: transparent; color: var(--film); cursor: pointer; font-size: 22px; line-height: 1; }
+.menu nav { position: relative; margin-top: auto; display: grid; }
+.menu nav a { font-weight: 800; font-stretch: 125%; letter-spacing: -.04em; font-size: 12.5vw; line-height: 1.02; text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--film-faint);
+              transform: translateY(24px); opacity: 0; transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .4s; }
+.menu.open nav a { transform: none; opacity: 1; } .menu.open nav a:nth-child(2) { transition-delay: .06s; } .menu.open nav a:nth-child(3) { transition-delay: .12s; }
+.menu__foot { position: relative; display: flex; gap: 20px; margin-top: 32px; font-size: var(--fs-s); color: var(--film-dim); }
+.menu__foot a { text-decoration: none; }
+body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-shadow: none; }
+
+/* ---------- botões: retângulo com marcas de visor de câmera ---------- */
+.btn { --b: 14px; --gap: 7px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; width: 264px; height: 56px; padding: 0 20px;
+       text-decoration: none; font: inherit; font-weight: 700; font-stretch: 112%; font-size: 16px; letter-spacing: -.005em; cursor: pointer;
+       border: 0; background: transparent; color: inherit; }
+.btn--solid { background: var(--film); color: #000; }
+.btn__frame { position: absolute; inset: calc(var(--gap) * -1); pointer-events: none; transition: inset .35s cubic-bezier(.2,.7,.2,1); }
+.btn__frame::before, .btn__frame::after { content: ""; position: absolute; width: var(--b); height: var(--b); border: 1.5px solid var(--frame-c, var(--film)); }
+.btn__frame::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.btn__frame::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.btn__frame i::before, .btn__frame i::after { content: ""; position: absolute; width: var(--b); height: var(--b); border: 1.5px solid var(--frame-c, var(--film)); }
+.btn__frame i::before { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.btn__frame i::after { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.btn:hover .btn__frame, .btn:focus-visible .btn__frame { inset: -2px; }
+.btn--solid:hover { box-shadow: 0 0 40px rgba(255, 90, 31, .45); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn:focus-visible { outline: none; }
+
+/* ---------- abertura ---------- */
+.hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; padding-bottom: 11svh; }
+.hero__mark { font-size: clamp(40px, 14.2vw, 250px); margin: 0 0 clamp(28px, 4vw, 56px) -.04em; }
+.hero__lede { grid-column: 1 / span 7; font-size: clamp(28px, 3vw, 48px); line-height: 1.06; }
+.hero__aside { grid-column: 9 / span 4; align-self: end; margin: 0; max-width: 34ch; font-size: var(--fs-l); line-height: 1.5; }
+.hero__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 48px; }
+
+
+[hidden] { display: none !important; }
+/* ---------- hero 1: manifesto ---------- */
+.hero--manifesto { justify-content: space-between; padding-bottom: 9svh; }
+.manifesto__sig { display: flex; align-items: baseline; gap: 16px; margin: 4vh 0 0; }
+.manifesto__sig .wordmark { font-size: clamp(28px, 2.6vw, 44px); }
+.manifesto__sig .dim { font-size: var(--fs-l); }
+.manifesto { margin: 0; display: grid; font-weight: 800; font-stretch: 125%; letter-spacing: -.045em; line-height: .9; font-size: clamp(44px, 7.1vw, 132px); }
+.manifesto span:first-child { color: var(--film-dim); }
+.manifesto__out { justify-self: end; font-weight: 900; }
+.manifesto__aside { grid-column: 1 / span 5; margin-top: 40px; }
+.manifesto__actions { grid-column: 7 / -1; justify-content: flex-end; align-self: end; margin-top: 40px; }
+
+/* ---------- hero 2: o logo é a tela ---------- */
+.hero-tela { --co: 0; position: relative; height: 300svh; }
+.tela__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; }
+.tela__media { position: absolute; inset: 0; filter: brightness(1.22) contrast(1.06) saturate(1.05); }
+.tela__media div { position: absolute; inset: -4%; background-size: cover; background-position: center; opacity: 0; animation: tela 20s linear infinite; }
+@keyframes tela { 0% { opacity: 0; transform: scale(1.12); } 4% { opacity: 1; } 20% { opacity: 1; } 25% { opacity: 0; transform: scale(1); } 100% { opacity: 0; } }
+.tela__burn { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tela__flash { position: absolute; inset: 0; background: radial-gradient(70% 70% at 50% 50%, #fff6e8, #ffb070 60%, #ff5a1f); mix-blend-mode: screen; opacity: var(--fl, 0); pointer-events: none; }
+.tela__grain { position: absolute; inset: -60px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px; mix-blend-mode: screen; opacity: .09; pointer-events: none; animation: grainrun .42s steps(6) infinite; }
+.tela__copy { position: absolute; left: 0; right: 0; bottom: 0; padding-bottom: 10svh; padding-top: 30vh; opacity: var(--co); transform: translateY(calc((1 - var(--co)) * 30px));
+              background: linear-gradient(transparent, rgba(0,0,0,.75) 45%); pointer-events: none; }
+.hero-tela.is-open .tela__copy { pointer-events: auto; }
+.tela__copy .hero__aside { color: var(--film); opacity: .85; }
+.tela__hint { position: absolute; left: 50%; bottom: 12svh; transform: translateX(-50%); margin: 0; font-size: var(--fs-s); opacity: calc(1 - var(--co) * 3); }
+
+/* ---------- seletor de abertura (só no protótipo) ---------- */
+.picker { position: fixed; z-index: 25; left: 50%; bottom: 16px; transform: translateX(-50%); display: grid; gap: 8px; padding: 10px 10px 10px;
+          background: rgba(0,0,0,.88); border: 1px solid var(--leak-orange); backdrop-filter: blur(10px); box-shadow: 0 0 40px rgba(255, 90, 31, .25); }
+.picker__q { margin: 0 4px; font-size: 13px; line-height: 1.2; color: var(--film); font-weight: 600; text-align: center; }
+.picker__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.picker button { appearance: none; border: 1px solid var(--film-faint); background: transparent; color: var(--film); font: inherit; cursor: pointer;
+                 display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; text-align: left; transition: border-color .2s, background .2s; }
+.picker button:hover { border-color: var(--film-dim); }
+.picker button b { font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 18px; width: 30px; height: 30px; display: grid; place-items: center; background: rgba(241,228,211,.1); }
+.picker button span { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.picker button[aria-pressed="true"] { background: var(--film); color: #000; border-color: var(--film); }
+.picker button[aria-pressed="true"] b { background: var(--leak-orange); color: #000; }
+
+/* ---------- serviços: rolo em tela cheia ---------- */
+.services { position: relative; height: 600svh; }
+.services__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.track { display: flex; height: 100%; will-change: transform; }
+.panel { --off: 0; flex: 0 0 100vw; height: 100%; position: relative; overflow: hidden; background: var(--c, transparent);
+         display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr auto; column-gap: clamp(16px, 2vw, 32px);
+         padding: clamp(104px, 14svh, 136px) var(--gate-x) clamp(78px, 10svh, 100px); }
+.panel.ink { color: #000; } .panel.film { color: var(--film); }
+/* halation nas bordas do fotograma */
+.panel:not(.panel--intro) { box-shadow: inset 0 0 120px rgba(255, 240, 220, .22), inset 0 0 18px rgba(255, 250, 240, .25); }
+
+/* borda de película */
+.rim { position: absolute; z-index: 2; left: 0; right: 0; height: 44px; }
+.rim--top { top: 58px; } .rim--bottom { bottom: 24px; }
+.rim__holes { position: absolute; top: 7px; left: 0; display: block; }
+.rim__holes rect[rx] { fill: #000; }
+.rim__codes { position: absolute; left: 0; right: 0; bottom: 1px; display: flex; justify-content: space-between; padding-inline: 40px;
+              font-size: 8px; line-height: 1; letter-spacing: .08em; color: currentColor; opacity: .55; white-space: pre; font-variant-numeric: tabular-nums; }
+.rim--bottom .rim__codes { top: 1px; bottom: auto; }
+.rim--bottom .rim__holes { top: auto; bottom: 7px; }
+.panel--intro .rim__holes rect[rx] { fill: rgba(241, 228, 211, .16); }
+
+/* light leak vivo nos cantos */
+.leak { position: absolute; z-index: 1; width: 70vmax; height: 70vmax; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; filter: blur(30px);
+        opacity: calc(.35 + (1 - min(1, abs(var(--off)) * 3)) * .45); }
+.leak--a { left: -34vmax; top: -38vmax; background: radial-gradient(closest-side, rgba(255, 246, 225, .95), rgba(255, 170, 90, .5) 45%, transparent 72%); animation: leakA 7s ease-in-out infinite, flick 3.3s steps(1) infinite; }
+.leak--b { right: -38vmax; bottom: -40vmax; background: radial-gradient(closest-side, rgba(255, 210, 160, .8), rgba(255, 70, 30, .45) 48%, transparent 72%); animation: leakB 9s ease-in-out infinite, flick 4.7s steps(1) -.8s infinite; }
+@keyframes leakA { 50% { transform: translate(6vmax, 4vmax) scale(1.1); } }
+@keyframes leakB { 50% { transform: translate(-5vmax, -6vmax) scale(.92); } }
+@keyframes flick { 0%, 100% { filter: blur(30px) brightness(1); } 7% { filter: blur(30px) brightness(1.35); } 9% { filter: blur(30px) brightness(.8); }
+                   41% { filter: blur(30px) brightness(1.15); } 43% { filter: blur(30px) brightness(1); } 77% { filter: blur(30px) brightness(1.5); } 79% { filter: blur(30px) brightness(.95); } }
+.panel__grain { position: absolute; inset: 0; z-index: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .75; pointer-events: none; }
+
+.panel > h3, .panel > div:not(.rim):not(.leak):not(.panel__grain), .panel > p, .panel > ul, .panel > h2 { position: relative; z-index: 3; }
+.panel__name { grid-column: 1 / -1; grid-row: 1; font-size: var(--fs-3xl); margin: 0 0 0 -.05em; white-space: nowrap;
+               transform: translateX(calc(var(--off) * -16vw)); will-change: transform; }
+.panel__lead { grid-column: 1 / span 6; grid-row: 3; align-self: start; transform: translateX(calc(var(--off) * -5vw)); }
+.panel__lead p { margin: 14px 0 0; max-width: 46ch; font-size: var(--fs-m); line-height: 1.62; }
+.panel__lead p.t-h3 { margin: 0; font-size: var(--fs-xl); line-height: 1.14; max-width: 22ch; }
+.panel__lead .muted { opacity: .78; }
+.panel__side { grid-column: 8 / span 5; grid-row: 3; align-self: start; display: grid; gap: var(--sp-block); transform: translateX(calc(var(--off) * 4vw)); }
+.panel__items { margin: 0; display: grid; grid-template-columns: max-content 1fr; }
+.panel__items dt, .panel__items dd { padding: 10px 0; border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.panel__items { font-size: var(--fs-m); }
+.panel__items dt:first-of-type, .panel__items dd:first-of-type { border-top: 0; padding-top: 4px; }
+.panel__items dt { font-weight: 700; font-stretch: 112%; padding-right: 24px; }
+.panel__items dd { margin: 0; opacity: .82; }
+.panel__meta { margin: 0; font-size: var(--fs-s); line-height: 1.5; opacity: .85; display: grid; gap: 6px; }
+.panel__meta b { font-weight: 700; }
+.panel .btn { justify-self: start; }
+.panel.ink .btn { --frame-c: #000; } .panel.film .btn { --frame-c: var(--film); }
+
+.panel--intro { background: transparent; }
+.panel--intro .t-h2 { grid-column: 1 / span 9; grid-row: 1; }
+.panel--intro .intro__text { grid-column: 1 / span 6; grid-row: 3; align-self: end; margin: 0; font-size: var(--fs-l); line-height: 1.5; max-width: 46ch; }
+.index { grid-column: 8 / span 5; grid-row: 2 / span 2; align-self: end; list-style: none; margin: 0; padding: 0; }
+.index a { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid var(--film-faint); text-decoration: none;
+           font-weight: 700; font-stretch: 125%; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.02em; transition: padding .3s cubic-bezier(.2,.7,.2,1); }
+.index li:last-child a { border-bottom: 1px solid var(--film-faint); }
+.index i { width: 12px; height: 12px; background: var(--c); flex: none; }
+.index a:hover { padding-left: 10px; }
+
+.ruler { position: absolute; z-index: 4; left: var(--gate-x); right: var(--gate-x); bottom: 10px; display: flex; gap: 6px; pointer-events: none; transition: color .3s; }
+.ruler span { flex: 1; height: 2px; background: currentColor; opacity: .25; transition: opacity .3s; }
+.ruler span.on { opacity: .95; }
+
+/* ---------- trabalhos: colagem que se sobrepõe no scroll ---------- */
+.section { padding-block: var(--sp-section); }
+.section__head { align-items: end; margin-bottom: var(--sp-head); }
+.section__head .t-h2 { grid-column: 1 / span 7; }
+.section__head p { grid-column: 9 / span 4; margin: 0; font-size: var(--fs-l); line-height: 1.55; }
+.collage { list-style: none; margin: 0; padding: 0; position: relative; }
+.card { --y: 0px; position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px);
+        transform: translate3d(0, var(--y), 0); will-change: transform; }
+.card + .card { margin-top: -6vw; }
+.card .card__img { grid-column: 1 / span 8; grid-row: 1; }
+.card .card__text { grid-column: 9 / span 4; grid-row: 1; align-self: center; }
+.card:nth-child(even) .card__img { grid-column: 5 / span 8; }
+.card:nth-child(even) .card__text { grid-column: 1 / span 4; text-align: right; }
+.card:nth-child(n) { z-index: 1; } .card:nth-child(2) { z-index: 2; } .card:nth-child(3) { z-index: 3; } .card:nth-child(4) { z-index: 4; } .card:nth-child(5) { z-index: 5; }
+.card__img { display: block; position: relative; aspect-ratio: 16 / 9; overflow: hidden; text-decoration: none;
+             box-shadow: 0 30px 60px rgba(0, 0, 0, .65), 0 0 0 1px rgba(241, 228, 211, .08); }
+.card__img > div { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.card__img > div::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .5; }
+.card__img::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, transparent 30%, rgba(255, 120, 50, .4) 50%, transparent 70%);
+                     transform: translateX(-120%); transition: transform .9s cubic-bezier(.2,.7,.2,1); mix-blend-mode: screen; }
+.card__img:hover::before, .card__img:focus-visible::before { transform: translateX(120%); }
+.card__img:hover > div, .card.is-touched .card__img > div { transform: scale(1.04); filter: contrast(1.08) brightness(1.04); }
+.card__img > div::after { transition: opacity .4s; }
+.card__img:hover > div::after, .card.is-touched .card__img > div::after { opacity: .95; animation: grainrun .5s steps(6) infinite; }
+.card__img:hover > div, .card.is-touched .card__img > div { animation: expo 2.6s steps(1) infinite; }
+@keyframes grainrun { 0% { background-position: 0 0; } 17% { background-position: -60px 40px; } 34% { background-position: 80px -30px; } 51% { background-position: -20px -90px; } 68% { background-position: 110px 70px; } 85% { background-position: -100px 10px; } }
+@keyframes expo { 0%, 100% { filter: contrast(1.08) brightness(1.04); } 12% { filter: contrast(1.1) brightness(1.18); } 14% { filter: contrast(1.08) brightness(.96); } 57% { filter: contrast(1.12) brightness(1.1); } 59% { filter: contrast(1.08) brightness(1.04); } }
+.card__text { display: grid; gap: 8px; padding: 6px 0 0; }
+.card__text h3 { margin: 0; font-weight: 800; font-stretch: 125%; font-size: var(--fs-xl); letter-spacing: -.03em; line-height: 1.02; }
+.card__text .what { margin: 0; font-weight: 600; font-size: var(--fs-m); }
+.card__text .desc { margin: 6px 0 0; color: var(--film-dim); font-size: var(--fs-m); line-height: 1.55; }
+.card:nth-child(even) .card__text .desc { margin-left: auto; }
+.card--next .card__img { background: var(--leak-orange); color: #000; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 2.4vw, 36px); }
+.card--next b { font-weight: 800; font-stretch: 125%; font-size: clamp(26px, 2.8vw, 46px); letter-spacing: -.03em; line-height: .98; max-width: 11ch; }
+.card--next span { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-stretch: 112%; }
+.card--next svg { width: 20px; height: 20px; }
+
+/* ---------- equipe ---------- */
+.crew { align-items: start; }
+.crew__head { grid-column: 1 / span 5; position: sticky; top: 110px; }
+.crew__head p { margin: var(--sp-block) 0 0; max-width: 30ch; font-size: var(--fs-l); line-height: 1.55; }
+.crew__list { grid-column: 7 / span 6; list-style: none; margin: 0; padding: 0; }
+.crew__list li { --py: 0px; transform: translate3d(0, var(--py), 0); will-change: transform; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6px 24px; padding: 24px 0; border-top: 1px solid var(--film-faint); }
+.crew__list li:last-child { border-bottom: 1px solid var(--film-faint); }
+.crew__role { grid-column: 1; font-size: var(--fs-s); }
+.crew__name { grid-column: 1; font-weight: 800; font-stretch: 125%; font-size: clamp(28px, 3.1vw, 50px); letter-spacing: -.03em; line-height: 1; }
+.crew__name.is-soon { color: var(--film-dim); font-weight: 500; }
+.crew__link { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-s); text-decoration: none; color: var(--film-dim);
+              padding: 9px 14px; border: 1px solid var(--film-faint); transition: color .2s, border-color .2s; }
+.crew__link svg { width: 16px; height: 16px; }
+.crew__link:hover { color: var(--film); border-color: var(--film-dim); }
+
+/* ---------- contato: direto ---------- */
+.contact__top { align-items: end; margin-bottom: var(--sp-head); }
+.contact__top .t-h2 { grid-column: 1 / span 7; }
+.contact__top p { grid-column: 9 / span 4; margin: 0; font-size: var(--fs-l); line-height: 1.5; }
+.reach { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(16px, 2vw, 32px); }
+.reach a { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 10px 20px; padding: 28px 0 30px; border-top: 1px solid var(--film-dim); text-decoration: none; }
+.reach small { grid-column: 1 / -1; font-size: var(--fs-s); color: var(--film-dim); }
+.reach strong { font-weight: 800; font-stretch: 125%; letter-spacing: -.035em; line-height: 1; font-size: clamp(26px, 2.5vw, 42px); white-space: nowrap; }
+.reach svg { width: 34px; height: 34px; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.reach a:hover svg { transform: translate(4px, -4px); }
+.reach a:hover strong { text-shadow: 0 0 30px rgba(255, 110, 40, .55); }
+.socials { display: flex; gap: 28px; margin-top: 0; padding-top: 24px; border-top: 1px solid var(--film-faint); font-size: var(--fs-m); }
+.socials span { color: var(--film-dim); margin-right: auto; }
+.socials a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-stretch: 112%; }
+.socials svg { width: 16px; height: 16px; opacity: .6; }
+.toast { position: fixed; z-index: 20; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; background: var(--film); color: #000; padding: 12px 18px;
+         font-weight: 700; font-stretch: 112%; font-size: 15px; transition: opacity .25s, transform .3s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.foot { display: flex; justify-content: space-between; gap: 24px; padding: 32px var(--gate-x) 40px; color: var(--film-dim); font-size: var(--fs-s); border-top: 1px solid var(--film-faint); margin-inline: var(--gate-x); padding-inline: 0; }
+.foot__top { text-decoration: none; } .foot__top:hover { color: var(--film); }
+.foot__proto { margin-left: auto; }
+
+/* ---------- celular ---------- */
+@media (max-width: 860px) {
+  :root { --gate-x: 9vw; }
+  :root { --fs-s: 14px; --fs-m: 16px; --fs-l: 17px; --fs-xl: 23px; --fs-2xl: 11vw; --fs-3xl: 13.5vw; --sp-section: 96px; --sp-head: 36px; --sp-block: 18px; }
+  .bar { padding-block: 12px; } .bar__mark { font-size: 19px; } .bar__nav { display: none; } .burger { display: grid; } .bar__tools { margin-left: 0; }
+  .hero { padding-bottom: 8svh; }
+  .hero__mark { font-size: 15.4vw; margin-bottom: 22px; }
+  .hero__lede, .hero__aside { grid-column: 1 / -1; } .hero__lede { font-size: 27px; } .hero__aside { margin-top: 14px; }
+  .hero__actions { flex-direction: column; align-items: stretch; gap: 18px; margin-top: 34px; }
+  .btn { width: 100%; }
+  .panel { padding-top: 112px; padding-bottom: 84px; grid-template-rows: auto 1fr auto auto; }
+  .panel__name { font-size: 11.4vw; }
+  .panel__lead, .panel__side { grid-column: 1 / -1; }
+  .panel__lead { grid-row: 3; } .panel__side { grid-row: 4; margin-top: 20px; gap: 16px; }
+  .panel__lead .muted, .panel__meta { display: none; }
+  .panel__items { font-size: 15px; } .panel__items dt, .panel__items dd { padding: 7px 0; }
+  .panel .btn { width: 100%; height: 50px; }
+  .rim--top { top: 62px; } .rim--bottom { bottom: 18px; }
+  .rim__codes { display: none; }
+  .manifesto { font-size: 12.6vw; } .manifesto__out { justify-self: start; }
+  .manifesto__aside, .manifesto__actions { grid-column: 1 / -1; } .manifesto__actions { margin-top: 28px; }
+  .hero-tela { height: 260svh; }
+  .picker { bottom: 10px; width: calc(100% - 20px); } .picker__q { font-size: 12px; } .picker button { padding: 6px 10px 6px 6px; } .picker button b { width: 26px; height: 26px; font-size: 16px; }
+  .panel--intro .t-h2 { grid-column: 1 / -1; }
+  .panel--intro .intro__text { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 18px; }
+  .index { grid-column: 1 / -1; grid-row: 3; margin-top: 24px; } .index a { font-size: 22px; padding: 10px 0; }
+  .section__head .t-h2, .section__head p { grid-column: 1 / -1; } .section__head p { margin-top: 16px; }
+  .card { grid-template-columns: 1fr; } .card + .card { margin-top: 56px; }
+  .card .card__img, .card:nth-child(even) .card__img { grid-column: 1; grid-row: 1; width: 100vw; margin-left: calc(var(--gate-x) * -1); }
+  .card .card__text, .card:nth-child(even) .card__text { grid-column: 1; grid-row: 2; text-align: left; padding-top: 18px; }
+  .card:nth-child(even) .card__text .desc { margin-left: 0; }
+  .crew__head { position: static; grid-column: 1 / -1; margin-bottom: 32px; } .crew__list { grid-column: 1 / -1; }
+  .contact__top .t-h2, .contact__top p { grid-column: 1 / -1; } .contact__top p { margin-top: 18px; }
+  .reach { grid-template-columns: 1fr; } .reach strong { font-size: 6.2vw; } .reach svg { width: 26px; height: 26px; }
+  .socials { flex-wrap: wrap; gap: 20px; } .socials span { width: 100%; }
+  .foot { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services { height: auto; } .services__pin { position: static; height: auto; }
+  .track { overflow-x: auto; scroll-snap-type: x mandatory; } .panel { scroll-snap-align: start; }
+  .panel__name, .panel__lead, .panel__side { transform: none; }
+  .leak { animation: none; } .menu, .menu nav a { transition: none; }
+  .hero-tela { height: auto; } .tela__pin { position: relative; } .tela__burn { display: none; } .tela__copy { opacity: 1; transform: none; pointer-events: auto; } .tela__media div { animation: none; opacity: 1; }
+  .card { --y: 0px !important; }
+}
+</style>
+</head>
+<body>
+<div class="projector" data-projector data-assets="/tretapostwebsite/assets/" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="bar__mark" href="#topo" aria-label="TretaPost, voltar ao topo">TretaPost</a>
+  <nav class="bar__nav" aria-label="Principal">
+    <a href="#servicos">Serviços</a>
+    <a href="#trabalhos">Trabalhos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="bar__tools">
+    <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Ligar o som"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+    <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+  </div>
+</header>
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="menu__top"><span class="bar__mark">TretaPost</span><button class="menu__close" type="button" aria-label="Fechar menu">×</button></div>
+  <nav aria-label="Menu do celular"><a href="#servicos">Serviços</a><a href="#trabalhos">Trabalhos</a><a href="#contato">Contato</a></nav>
+  <div class="menu__foot"><a href="https://wa.me/">WhatsApp</a><a href="mailto:treta@tretapost.com">E-mail</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
+</div>
+
+<main class="reel" id="topo">
+  <section class="hero wrap" data-hero="atual" aria-labelledby="marca-atual">
+    <h1 class="hero__mark wordmark" id="marca-atual" data-flicker>TretaPost</h1>
+    <div class="grid">
+      <p class="hero__lede t-h3">Deixa a treta da pós com a gente.</p>
+      <p class="hero__aside dim">Som, cor, pipeline, VFX e IA no mesmo time. O material entra cru e sai pronto para cada tela, sem você juntar cinco fornecedores.</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver os serviços<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero-tela" data-hero="tela" aria-labelledby="marca-tela" hidden>
+    <div class="tela__pin">
+      <div class="tela__media" aria-hidden="true"><div style="background-image:url('/tretapostwebsite/assets/works/work1.jpg');animation-delay:0s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work2.jpg');animation-delay:4s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work3.jpg');animation-delay:8s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work4.jpg');animation-delay:12s"></div><div style="background-image:url('/tretapostwebsite/assets/works/work5.jpg');animation-delay:16s"></div></div>
+      <canvas class="tela__burn" aria-hidden="true"></canvas>
+      <div class="tela__flash" aria-hidden="true"></div>
+      <div class="tela__grain" aria-hidden="true"></div>
+      <div class="tela__copy wrap">
+        <h1 class="sr-only" id="marca-tela">TretaPost</h1>
+        <div class="grid">
+          <p class="hero__lede t-h3">Deixa a treta da pós com a gente.</p>
+          <p class="hero__aside">Som, cor, pipeline, VFX e IA no mesmo time. O material entra cru e sai pronto para cada tela, sem você juntar cinco fornecedores.</p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Mandar um briefing</a>
+        <a class="btn" href="#servicos"><span class="btn__frame" aria-hidden="true"><i></i></span>Ver os serviços<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <p class="tela__hint dim" aria-hidden="true">Role para abrir</p>
+    </div>
+  </section>
+
+  <div class="services" id="servicos">
+    <div class="services__pin">
+      <div class="track">
+      <section class="panel panel--intro" id="servicos-inicio" aria-labelledby="servicos-t">
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpi1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpi1)"/></svg></div>
+        <h2 class="t-h2" id="servicos-t">O que a gente faz</h2>
+        <p class="intro__text dim">Pós-produção costuma ser corrida de revezamento: cada etapa num fornecedor, o arquivo trocando de mão e a culpa também. Aqui é um time só. Você contrata uma etapa ou o filme inteiro, e nada se perde no caminho.</p>
+        <ul class="index"><li><a href="#audio" style="--c:#ff5a1f"><i></i>TretaAudio</a></li><li><a href="#pipe" style="--c:#d81e1e"><i></i>TretaPipe</a></li><li><a href="#color" style="--c:#c44dff"><i></i>TretaColor</a></li><li><a href="#vfx" style="--c:#3b2bd9"><i></i>TretaVFX</a></li><li><a href="#ia" style="--c:#63c7d4"><i></i>TretaIA</a></li></ul>
+      </section>
+      <article class="panel ink" id="audio" style="--c:#ff5a1f" aria-labelledby="audio-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt0" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt0)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb0" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb0)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="audio-t">TretaAudio</h3>
+        <div class="panel__lead">
+          <p class="t-h3">O som que ninguém nota quando está certo.</p>
+          <p>Diálogo limpo, desenho de som e mix pensados para onde o filme vai tocar: cinema, TV, celular ou fone de ouvido.</p>
+          <p class="muted">Você manda o corte travado. A gente limpa e edita os diálogos, cria o desenho de som e entrega uma mix para cada janela, com aprovação por etapas.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Edição</dt><dd>montagem de som e diálogo</dd><dt>ADR</dt><dd>regravação e sincronia de voz</dd><dt>Efeitos sonoros</dt><dd>desenho de som e foley</dd><dt>Mixagem</dt><dd>mix final para cada tela onde o filme vai passar</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Stems separados, Mix 5.1 e estéreo, Versões para redes.</span><span><b>Bom para</b> campanhas, filmes de marca, clipes e séries.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
+        </div>
+      </article>
+      <article class="panel film" id="pipe" style="--c:#d81e1e" aria-labelledby="pipe-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt1)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb1" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb1)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="pipe-t">TretaPipe</h3>
+        <div class="panel__lead">
+          <p class="t-h3">Ninguém vê. Todo mundo sente.</p>
+          <p>A gente organiza o material desde o set para que cor, som e VFX trabalhem no mesmo arquivo. Menos retrabalho, menos versão perdida, menos treta.</p>
+          <p class="muted">Entramos antes da primeira diária para definir formatos, nomes de arquivo e backups. Na pós, fazemos o conform, controlamos as versões e geramos todos os masters.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Ingest</dt><dd>mídia do set organizada e pronta para editar</dd><dt>Conform</dt><dd>do offline ao online sem perder nada no caminho</dd><dt>Masters</dt><dd>entregas em ProRes, EXR e o que o canal pedir</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> ProRes e DNx, EXR 16 bits, Masters por canal.</span><span><b>Bom para</b> produções com várias equipes e entregas para vários canais.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
+        </div>
+      </article>
+      <article class="panel ink" id="color" style="--c:#c44dff" aria-labelledby="color-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt2" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt2)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb2" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb2)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="color-t">TretaColor</h3>
+        <div class="panel__lead">
+          <p class="t-h3">Cor que conta a história.</p>
+          <p>Do look ao master: HDR para as telas que brilham e SDR fiel para todo o resto.</p>
+          <p class="muted">Montamos o look junto com você, aplicamos no corte inteiro e geramos uma versão para cada saída, conferida antes de ir pro ar.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>HDR</dt><dd>grading para telas de alto brilho</dd><dt>SDR</dt><dd>versão fiel para TV, web e redes</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> HDR10 e HLG, SDR Rec.709, LUTs para o set.</span><span><b>Bom para</b> publicidade, cinema e conteúdo para streaming.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
+        </div>
+      </article>
+      <article class="panel film" id="vfx" style="--c:#3b2bd9" aria-labelledby="vfx-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt3" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt3)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb3" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb3)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="vfx-t">TretaVFX</h3>
+        <div class="panel__lead">
+          <p class="t-h3">O que não deu pra filmar, a gente coloca. O que sobrou, a gente tira.</p>
+          <p>Céu, fundo, objeto, multidão ou aquele fio que ninguém viu no set. Composição e limpeza que ninguém percebe.</p>
+          <p class="muted">Quanto antes a gente entra, mais barato e verdadeiro o efeito fica. Dá para planejar o plano com a gente antes de filmar.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Composição</dt><dd>integração de elementos, céus e cenários</dd><dt>Limpeza</dt><dd>fios, marcas e imperfeições removidos</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Composição, Cleanup, Extensão de cenário.</span><span><b>Bom para</b> planos com céu, fundo ou objeto para trocar.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
+        </div>
+      </article>
+      <article class="panel ink" id="ia" style="--c:#63c7d4" aria-labelledby="ia-t">
+        <div class="leak leak--a" aria-hidden="true"></div><div class="leak leak--b" aria-hidden="true"></div>
+        <div class="panel__grain" aria-hidden="true"></div>
+        <div class="rim rim--top" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpt4" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpt4)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <div class="rim rim--bottom" aria-hidden="true">
+      <svg class="rim__holes" width="100%" height="30"><defs>
+        <pattern id="kpb4" width="34" height="30" patternUnits="userSpaceOnUse">
+          <rect x="10" y="5" width="14" height="20" rx="2.6"/>
+        </pattern></defs><rect width="100%" height="30" fill="url(#kpb4)"/></svg><div class="rim__codes" aria-hidden="true"><span>TP 5219    4</span><span>TP 5220   20</span><span>TP 5221   36</span><span>TP 5222   52</span><span>TP 5223   68</span><span>TP 5224   84</span><span>TP 5225  100</span><span>TP 5226  116</span><span>TP 5227  132</span><span>TP 5228  148</span><span>TP 5229  164</span><span>TP 5230  180</span><span>TP 5231  196</span><span>TP 5232  212</span></div></div>
+        <h3 class="panel__name t-display" id="ia-t">TretaIA</h3>
+        <div class="panel__lead">
+          <p class="t-h3">IA com direção, não no automático.</p>
+          <p>Usada onde economiza tempo ou abre possibilidades, sempre com olhar de pós e entregue pronta para finalizar.</p>
+          <p class="muted">Imagens, cenas, upscale e conversão para HDR saem em EXR ou ProRes, no mesmo pipeline do resto do filme.</p>
+        </div>
+        <div class="panel__side">
+          <dl class="panel__items"><dt>Produção</dt><dd>imagens e cenas geradas com direção de arte</dd><dt>Pós-produção</dt><dd>upscale, HDR e finalização em formato profissional</dd></dl>
+          <p class="panel__meta"><span><b>Entregamos em</b> Imagens e cenas, Upscale, Conversão de SDR para HDR.</span><span><b>Bom para</b> campanhas com prazo curto e cenas impossíveis de filmar.</span></p>
+          <a class="btn" href="#contato"><span class="btn__frame" aria-hidden="true"><i></i></span>Pedir orçamento</a>
+        </div>
+      </article>
+      </div>
+      <div class="ruler" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <section class="section wrap" id="trabalhos" aria-labelledby="trabalhos-t">
+    <div class="section__head grid">
+      <h2 class="t-h2" id="trabalhos-t">O que a gente já fez</h2>
+      <p class="dim">Uma parte do que já passou pela nossa ilha: campanhas, sessões e filmes de marca.</p>
+    </div>
+    <ul class="collage">
+      <li class="card">
+        <a class="card__img" href="#"><div style="background-image: url('/tretapostwebsite/assets/works/work1.jpg')" role="img" aria-label="Imagem do projeto Nusa Coffee Mate"></div></a>
+        <div class="card__text">
+          <h3>Nusa Coffee Mate</h3>
+          <p class="what">Paid socials 2026</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background-image: url('/tretapostwebsite/assets/works/work2.jpg')" role="img" aria-label="Imagem do projeto Abbott Libre Duo"></div></a>
+        <div class="card__text">
+          <h3>Abbott Libre Duo</h3>
+          <p class="what">Campanha para redes</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background-image: url('/tretapostwebsite/assets/works/work3.jpg')" role="img" aria-label="Imagem do projeto Primo Pobre Sessions"></div></a>
+        <div class="card__text">
+          <h3>Primo Pobre Sessions</h3>
+          <p class="what">Letícia Fialho</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background-image: url('/tretapostwebsite/assets/works/work4.jpg')" role="img" aria-label="Imagem do projeto Muzak"></div></a>
+        <div class="card__text">
+          <h3>Muzak</h3>
+          <p class="what">Clube da Escuta</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+      <li class="card">
+        <a class="card__img" href="#"><div style="background-image: url('/tretapostwebsite/assets/works/work5.jpg')" role="img" aria-label="Imagem do projeto TretaPost"></div></a>
+        <div class="card__text">
+          <h3>TretaPost</h3>
+          <p class="what">Filme de marca</p>
+          <p class="desc">Aqui entra o resumo do projeto: o que o cliente pediu, o que a TretaPost fez e onde o filme passou. Duas ou três linhas.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section wrap grid crew" aria-labelledby="equipe-t">
+    <div class="crew__head">
+      <h2 class="t-h2" id="equipe-t">Quem tá na treta</h2>
+      <p class="dim">Um coletivo de pós. A cada projeto, a gente junta quem ele pede.</p>
+    </div>
+    <ul class="crew__list"><li><span class="crew__role dim">Cor</span><span class="crew__name">Adonias Dantas</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Pipeline</span><span class="crew__name">Luca Leocádio</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Áudio</span><span class="crew__name">Muzak</span><a class="crew__link" href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Bruna Keren</span><a class="crew__link" href="#">IMDb <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">Produção</span><span class="crew__name">Fadel Dabien</span><a class="crew__link" href="#">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></li><li><span class="crew__role dim">IA e VFX</span><span class="crew__name is-soon">Em breve</span></li></ul>
+  </section>
+
+  <section class="section wrap" id="contato" aria-labelledby="contato-t">
+    <div class="contact__top grid">
+      <h2 class="t-h2" id="contato-t">Manda o briefing.</h2>
+      <p class="dim">Ideia solta, roteiro fechado ou corte travado: manda do jeito que estiver. A gente responde e monta o caminho.</p>
+    </div>
+    <div class="reach">
+      <a href="https://wa.me/"><small>WhatsApp</small><strong>Mandar mensagem</strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a>
+      <a href="mailto:treta@tretapost.com"><small>E-mail</small><strong>treta@tretapost.com</strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a>
+    </div>
+    <div class="socials"><span>Bastidores no</span><a href="#">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a><a href="#">TikTok <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg></a></div>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 TretaPost</span>
+    <a class="foot__top" href="#topo">Voltar ao topo</a>
+  </footer>
+</main>
+<div class="picker" role="group" aria-label="Escolha a abertura do site">
+  <p class="picker__q">Para aprovar: qual abertura vocês preferem?</p>
+  <div class="picker__opts">
+    <button type="button" data-pick="atual" aria-pressed="true"><b>A</b><span>Logo com brilho</span></button>
+    <button type="button" data-pick="tela" aria-pressed="false"><b>B</b><span>Logo vazado</span></button>
+  </div>
+</div>
+<script src="/tretapostwebsite/assets/projector.js"></script>
+<script>
+(() => {
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = matchMedia('(max-width: 860px)');
+  const sec = document.querySelector('.services'), track = document.querySelector('.track');
+  const panels = [...document.querySelectorAll('.panel')];
+  const ticks = [...document.querySelectorAll('.ruler span')];
+  const ruler = document.querySelector('.ruler');
+  const cards = [...document.querySelectorAll('.card')];
+  // cada trabalho tem uma velocidade própria: uns sobem mais rápido e passam por cima dos outros
+  const speeds = [.04, .12, .02, .14, .06, .1];
+
+  function panelsUpdate() {
+    let current = 0, best = 1e9;
+    panels.forEach((p, i) => {
+      const r = p.getBoundingClientRect();
+      const off = clamp((r.left + r.width / 2 - innerWidth / 2) / innerWidth, -1, 1);
+      p.style.setProperty('--off', off.toFixed(4));
+      if (Math.abs(off) < best) { best = Math.abs(off); current = i; }
+    });
+    ticks.forEach((t, i) => t.classList.toggle('on', i === current));
+    const r = sec.getBoundingClientRect(), inSec = r.top <= 1 && r.bottom >= innerHeight - 1;
+    const ink = panels[current].classList.contains('ink');
+    document.body.classList.toggle('on-panel', inSec && current > 0);
+    document.body.classList.toggle('on-ink', inSec && ink);
+    ruler.style.color = ink ? '#000' : 'var(--film)';
+  }
+  function cardsUpdate() {
+    cards.forEach((c, i) => {
+      const base = c.offsetParent.getBoundingClientRect().top + c.offsetTop + c.offsetHeight / 2;
+      const d = base - innerHeight / 2;                     // distância do centro da tela
+      c.style.setProperty('--y', `${(d * speeds[i % speeds.length] * (mobile.matches ? .25 : 1)).toFixed(1)}px`);
+    });
+  }
+  function onScroll() {
+    if (!reduce) {
+      const r = sec.getBoundingClientRect();
+      const p = clamp(-r.top / (r.height - innerHeight), 0, 1);
+      track.style.transform = `translate3d(${-p * (track.scrollWidth - innerWidth)}px,0,0)`;
+    }
+    panelsUpdate();
+    if (!reduce) cardsUpdate();
+    if (typeof telaUpdate === 'function') telaUpdate();
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  track.addEventListener('scroll', panelsUpdate, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  document.querySelectorAll('.index a').forEach(a => a.addEventListener('click', ev => {
+    const id = a.getAttribute('href').slice(1), idx = panels.findIndex(p => p.id === id);
+    if (idx < 0) return;
+    ev.preventDefault();
+    if (reduce) { panels[idx].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'start', block: 'start' }); return; }
+    const total = sec.offsetHeight - innerHeight;
+    glide(sec.offsetTop + total * (idx / (panels.length - 1)));
+  }));
+
+
+  // ---------- seletor de abertura ----------
+  const heroes = [...document.querySelectorAll('[data-hero]')], picks = [...document.querySelectorAll('[data-pick]')];
+  function showHero(name) {
+    if (!heroes.some(h => h.dataset.hero === name)) name = 'atual';
+    heroes.forEach(h => { h.hidden = h.dataset.hero !== name; });
+    picks.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pick === name)));
+    onScroll();
+    if (name === 'tela' && typeof sizeTela === 'function' && field) sizeTela();
+  }
+  picks.forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#hero-' + b.dataset.pick); scrollTo(0, 0); showHero(b.dataset.pick); }));
+  showHero((location.hash.match(/^#hero-([a-z]+)/) || [])[1] || 'atual');
+
+  // ---------- hero "logo vazado": borda de papel queimado + zoom na própria palavra ----------
+  var tela = document.querySelector('.hero-tela');
+  const cv = tela.querySelector('.tela__burn'), cx = cv.getContext('2d');
+  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas'), filmC = document.createElement('canvas'), innerC = document.createElement('canvas');
+  var W = 0, H = 0, DPR = 1, fs = 0, box = null, anchor = null, prog = 0, ready = false, visible = false, built = false;
+  const WORD = 'TretaPost';
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+  function hash(x, y) { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); }
+  function vnoise(x, y) {
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  }
+  const setFont = (ctx) => { ctx.font = `900 semi-expanded ${fs}px Archivo`; try { ctx.fontStretch = 'semi-expanded'; ctx.letterSpacing = `${-fs * .018}px`; } catch (e) {} ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; };
+  // monta uma vez, na escala 1: furo irregular e borda de brasa/chamuscado em volta das letras
+  function buildBurn() {
+    DPR = Math.min(devicePixelRatio || 1, 1.5);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    fs = W * (W < 860 ? .14 : .145) * DPR;
+    setFont(cx);
+    const tw = cx.measureText(WORD).width;
+    const bw = Math.ceil(tw + fs * .5), bh = Math.ceil(fs * 1.3), SS = 2;   // textura em 2x para borda lisa
+    box = { w: bw, h: bh };
+    // ponto de ancoragem do zoom: meio da haste do "P"
+    const pre = cx.measureText('Treta').width, mP = cx.measureText('P');
+    anchor = { x: -tw / 2 + pre + fs * .09, y: (mP.actualBoundingBoxDescent - mP.actualBoundingBoxAscent) / 2 };
+    // camadas de apoio: letra cheia (A) e letra espalhada (D) para medir a distância até a borda
+    const A = document.createElement('canvas'), D = document.createElement('canvas');
+    const BW = bw * SS, BH = bh * SS;
+    for (const c of [A, D, holeC, emberC]) { c.width = BW; c.height = BH; }
+    const ax = A.getContext('2d'), dx = D.getContext('2d');
+    const fs0 = fs; fs = fs0 * SS;
+    setFont(ax); ax.fillStyle = '#fff'; ax.fillText(WORD, BW / 2, BH / 2);
+    setFont(dx); dx.filter = `blur(${fs * .028}px)`; dx.fillStyle = '#fff'; dx.fillText(WORD, BW / 2, BH / 2); dx.fillText(WORD, BW / 2, BH / 2);
+    fs = fs0;
+    const a = ax.getImageData(0, 0, BW, BH).data, d = dx.getImageData(0, 0, BW, BH).data;
+    const hx = holeC.getContext('2d'), ex = emberC.getContext('2d');
+    const hi = hx.createImageData(BW, BH), ei = ex.createImageData(BW, BH);
+    const sc = fs * SS / 9;
+    for (let y = 0; y < BH; y++) for (let x = 0; x < BW; x++) {
+      const i = (y * BW + x) * 4;
+      if (a[i + 3] > 128) continue;                                       // dentro da letra: o furo vetorial cuida
+      const dist = d[i + 3] / 255;                                        // perto da letra = 1, longe = 0
+      const n = vnoise(x / sc, y / sc) * .65 + vnoise(x / (sc * .35), y / (sc * .35)) * .35;
+      const v = dist + (n - .5) * .34;
+      if (v > .84) { hi.data[i + 3] = Math.round(255 * smooth(.84, .94, v)); }   // papel consumido: furo irregular, borda suave
+      if (v > .9) { continue; }
+      else if (v > .66) {                                                 // brasa viva na borda do furo
+        const e = (v - .66) / .24;
+        ei.data[i] = 255; ei.data[i + 1] = Math.round(90 + 150 * e * e); ei.data[i + 2] = Math.round(20 + 120 * Math.pow(e, 4)); ei.data[i + 3] = Math.round(255 * (.45 + .55 * e));
+      } else if (v > .36) {                                               // chamuscado: marrom que some no preto
+        const e = (v - .36) / .3;
+        ei.data[i] = 96; ei.data[i + 1] = 34; ei.data[i + 2] = 10; ei.data[i + 3] = Math.round(235 * e * e);
+      }
+    }
+    hx.putImageData(hi, 0, 0); ex.putImageData(ei, 0, 0);
+    // brilho interno: a borda do papel acende para dentro da letra e some na imagem
+    const paper = document.createElement('canvas'); paper.width = BW; paper.height = BH;
+    const px = paper.getContext('2d');
+    px.fillStyle = '#000'; px.fillRect(0, 0, BW, BH);
+    fs = fs0 * SS; setFont(px); px.globalCompositeOperation = 'destination-out'; px.fillText(WORD, BW / 2, BH / 2);
+    px.drawImage(holeC, 0, 0);
+    innerC.width = BW; innerC.height = BH;
+    const ix = innerC.getContext('2d');
+    ix.shadowColor = 'rgba(255, 170, 90, 1)'; ix.shadowBlur = fs * .022; ix.drawImage(paper, 0, 0);    // núcleo quente, colado na borda
+    ix.shadowColor = 'rgba(255, 90, 20, .9)'; ix.shadowBlur = fs * .07; ix.drawImage(paper, 0, 0);     // halo que entra na imagem
+    ix.shadowBlur = 0; ix.globalCompositeOperation = 'destination-out'; ix.drawImage(paper, 0, 0);      // fica só o que caiu dentro da letra
+    fs = fs0;
+    built = true;
+    drawTela(performance.now());
+  }
+  // película: base com densidade irregular, riscos, poeira, linha entre fotogramas e perfuração. Altura = 2 fotogramas, repete.
+  function buildFilm() {
+    const fw = cv.width, fh = cv.height * 2, fx = filmC.getContext('2d');
+    filmC.width = fw; filmC.height = fh;
+    // base em baixa resolução (densidade da emulsão), ampliada suave
+    const lw = 160, lh = Math.round(160 * fh / fw), base = document.createElement('canvas'); base.width = lw; base.height = lh;
+    const bx = base.getContext('2d'), bi = bx.createImageData(lw, lh);
+    for (let y = 0; y < lh; y++) for (let x = 0; x < lw; x++) {
+      const yy = y % Math.round(lh / 2);                                         // repete por fotograma
+      const n = vnoise(x / 18, yy / 18) * .6 + vnoise(x / 6, yy / 6) * .4;
+      const v = 7 + n * 16, i = (y * lw + x) * 4;
+      bi.data[i] = v * 1.25; bi.data[i + 1] = v * .92; bi.data[i + 2] = v * .7; bi.data[i + 3] = 255;
+    }
+    bx.putImageData(bi, 0, 0);
+    fx.imageSmoothingEnabled = true; fx.imageSmoothingQuality = 'high';
+    fx.drawImage(base, 0, 0, fw, fh);
+    const fr = fh / 2;
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    // linha entre fotogramas
+    for (const y0 of [0, fr]) {
+      const g = fx.createLinearGradient(0, y0 - fr * .04, 0, y0 + fr * .04);
+      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.5, 'rgba(0,0,0,.85)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      fx.fillStyle = g; fx.fillRect(0, y0 - fr * .04, fw, fr * .08);
+    }
+    fx.fillStyle = 'rgba(0,0,0,.85)'; fx.fillRect(0, fh - fr * .04, fw, fr * .04);
+    // riscos verticais
+    for (let i = 0; i < 26; i++) {
+      const x = rnd() * fw, y = rnd() * fh, len = fh * (.1 + rnd() * .6), w = (rnd() < .8 ? .6 : 1.4) * DPR;
+      fx.fillStyle = rnd() < .75 ? `rgba(255, 236, 214, ${.05 + rnd() * .12})` : `rgba(0, 0, 0, ${.4 + rnd() * .4})`;
+      fx.fillRect(x, y, w, len); if (y + len > fh) fx.fillRect(x, 0, w, y + len - fh);
+    }
+    // poeira e fios de cabelo
+    for (let i = 0; i < 220; i++) {
+      const x = rnd() * fw, y = rnd() * fh, r = (rnd() * 1.6 + .3) * DPR;
+      fx.fillStyle = rnd() < .6 ? `rgba(255, 240, 220, ${.08 + rnd() * .22})` : `rgba(0, 0, 0, ${.5 + rnd() * .4})`;
+      fx.beginPath(); fx.arc(x, y, r, 0, Math.PI * 2); fx.fill();
+    }
+    fx.lineCap = 'round';
+    for (let i = 0; i < 5; i++) {
+      const x = rnd() * fw, y = rnd() * fh; fx.strokeStyle = `rgba(255, 240, 220, ${.08 + rnd() * .1})`; fx.lineWidth = .8 * DPR;
+      fx.beginPath(); fx.moveTo(x, y); fx.bezierCurveTo(x + 40 * DPR * rnd(), y + 30 * DPR, x - 30 * DPR * rnd(), y + 60 * DPR, x + 20 * DPR, y + 90 * DPR * rnd() + 20 * DPR); fx.stroke();
+    }
+    // perfuração nas laterais, com luz vazando pelos furos
+    const hw = Math.max(10, fw * .011), hh = hw * 1.42, pitch = hh * 2.35, mx = fw * .025;
+    fx.shadowColor = 'rgba(255, 214, 170, .55)'; fx.shadowBlur = 8 * DPR;
+    fx.fillStyle = 'rgba(255, 226, 190, .16)';
+    for (let y = pitch * .3; y < fh; y += pitch) for (const x of [mx, fw - mx - hw]) {
+      fx.beginPath(); fx.roundRect ? fx.roundRect(x, y, hw, hh, hw * .22) : fx.rect(x, y, hw, hh); fx.fill();
+    }
+    fx.shadowBlur = 0;
+  }
+  let lastP = 0, roll = 0, rollV = 0;
+  function drawTela(now) {
+    if (!built) return;
+    const p = prog, t = now / 1000;
+    const k = smooth(.12, .74, p);                                         // progresso do zoom
+    const s = 1 + Math.pow(k, 2.6) * 70;                                   // a palavra mergulha até o "P" virar a tela
+    const C = { x: cv.width / 2, y: cv.height * .48 };
+    // a âncora (haste do P) desliza para o centro enquanto cresce: o zoom fica sempre centralizado
+    const tx = (C.x + anchor.x) + (C.x - (C.x + anchor.x)) * k - s * anchor.x;
+    const ty = (C.y + anchor.y) + (C.y - (C.y + anchor.y)) * k - s * anchor.y;
+    cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
+    cx.globalCompositeOperation = 'source-over';
+    cx.clearRect(0, 0, cv.width, cv.height);
+    cx.fillStyle = '#000'; cx.fillRect(0, 0, cv.width, cv.height);           // preto minimalista; o grão vem por cima
+    cx.fillStyle = '#000';                                                     // o furo das letras precisa de tinta opaca
+    cx.setTransform(s, 0, 0, s, tx, ty);
+    setFont(cx);
+    cx.globalCompositeOperation = 'destination-out';
+    cx.fillText(WORD, 0, 0);
+    cx.imageSmoothingEnabled = true;
+    const rasterA = 1 - smooth(.02, .2, k);                                 // a textura só aparece parada; no zoom, só vetor
+    cx.globalAlpha = rasterA; cx.imageSmoothingQuality = 'high';
+    if (rasterA > 0) cx.drawImage(holeC, -box.w / 2, -box.h / 2, box.w, box.h);
+    cx.globalAlpha = 1;
+    cx.globalCompositeOperation = 'source-over';
+    const breathe = .78 + Math.sin(t * 2.1) * .1 + Math.sin(t * 5.3) * .05 + (Math.random() < .05 ? .15 : 0);
+    const glowA = clamp(breathe, 0, 1) * (1 - smooth(.04, .3, k));            // some aos poucos no começo do zoom
+    if (glowA > 0) {
+      cx.globalAlpha = glowA * .55; cx.drawImage(emberC, -box.w / 2, -box.h / 2, box.w, box.h);   // calor por fora, discreto
+      cx.globalAlpha = glowA * .85; cx.drawImage(innerC, -box.w / 2, -box.h / 2, box.w, box.h);   // brilho por dentro, integrado à imagem
+    }
+    cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
+    cv.style.opacity = (1 - smooth(.66, .78, p)).toFixed(3);              // garantia: no fim, a imagem toma a tela
+    tela.style.setProperty('--fl', (smooth(.7, .76, p) * (1 - smooth(.76, .86, p)) * .35).toFixed(3));
+  }
+  function telaUpdate() {
+    if (!tela || tela.hidden || reduce) return;
+    const r = tela.getBoundingClientRect();
+    prog = clamp(-r.top / (r.height - innerHeight), 0, 1);
+    const co = clamp((prog - .74) / .16, 0, 1);
+    tela.style.setProperty('--co', co.toFixed(3));
+    tela.classList.toggle('is-open', co > .5);
+    visible = r.bottom > 0 && r.top < innerHeight;
+    if (!ready) { ready = true; (document.fonts ? document.fonts.load('900 100px Archivo') : Promise.resolve()).then(buildBurn); }
+  }
+  var sizeTela = () => { if (ready) buildBurn(); };
+  var field = true;
+  let lastT = 0;
+  (function loop(now) { requestAnimationFrame(loop); if (!visible || tela.hidden || reduce || now - lastT < 1000 / 30) return; lastT = now; drawTela(now); })(0);
+  addEventListener('scroll', telaUpdate, { passive: true });
+  addEventListener('resize', () => { telaUpdate(); sizeTela(); });
+  telaUpdate();
+
+  // ---------- sala escura: trabalhos e equipe só com grão ----------
+  const darkZones = [document.querySelector('#trabalhos'), document.querySelector('.crew')];
+  function darkUpdate() {
+    const mid = innerHeight * .5;
+    const inDark = darkZones.some(z => { const r = z.getBoundingClientRect(); return r.top < mid && r.bottom > mid; });
+    document.body.classList.toggle('dark-room', inDark);
+  }
+  // parallax leve nos nomes da equipe
+  const crewRows = [...document.querySelectorAll('.crew__list li')];
+  function crewUpdate() {
+    if (reduce) return;
+    crewRows.forEach((li, i) => {
+      const r = li.getBoundingClientRect(), d = r.top + r.height / 2 - innerHeight / 2;
+      li.style.setProperty('--py', `${(d * (i % 2 ? .07 : .03) * -1).toFixed(1)}px`);
+    });
+  }
+  addEventListener('scroll', () => { darkUpdate(); crewUpdate(); }, { passive: true });
+  darkUpdate(); crewUpdate();
+  // no celular o toque acende o grão do trabalho
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('touchstart', () => {
+    document.querySelectorAll('.card.is-touched').forEach(o => o !== c && o.classList.remove('is-touched'));
+    c.classList.add('is-touched'); clearTimeout(c._t); c._t = setTimeout(() => c.classList.remove('is-touched'), 2200);
+  }, { passive: true }));
+
+  // ---------- rolagem suave dos links internos ----------
+  // curva lenta no começo, aceleração no meio e um pouso longo no fim: o "freio" de um travelling
+  const ease = t => t < .5 ? 16 * t ** 5 : 1 - Math.pow(-2 * t + 2, 5) / 2;
+  let glideId = 0;
+  function glide(to) {
+    to = clamp(to, 0, document.documentElement.scrollHeight - innerHeight);
+    if (reduce) { scrollTo(0, to); return; }
+    const from = scrollY, dist = to - from;
+    if (Math.abs(dist) < 2) return;
+    const dur = clamp(700 + Math.abs(dist) * .18, 900, 2200);   // trajetos longos levam mais tempo, sem arrastar
+    const id = ++glideId, t0 = performance.now();
+    const stop = () => { glideId++; removeEventListener('wheel', stop); removeEventListener('touchstart', stop); removeEventListener('keydown', stop); };
+    addEventListener('wheel', stop, { passive: true }); addEventListener('touchstart', stop, { passive: true }); addEventListener('keydown', stop);
+    (function step(now) {
+      if (id !== glideId) return;
+      const t = clamp((now - t0) / dur, 0, 1);
+      scrollTo(0, from + dist * ease(t));
+      if (t < 1) requestAnimationFrame(step); else stop();
+    })(t0);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    if (a.closest('.index')) return;                                  // o índice tem destino próprio dentro do rolo
+    a.addEventListener('click', ev => {
+      const id = a.getAttribute('href').slice(1);
+      const el = id ? document.getElementById(id) : null;
+      if (!el && id !== 'topo') return;
+      ev.preventDefault();
+      const target = id === 'topo' ? 0 : el.getBoundingClientRect().top + scrollY;
+      // o menu do celular fecha primeiro e a rolagem começa logo em seguida
+      if (a.closest('.menu')) setTimeout(() => glide(target), 260); else glide(target);
+      if (id) history.replaceState(null, '', location.pathname + location.search + (location.hash.startsWith('#hero-') ? location.hash : ''));
+    });
+  });
+
+  // menu do celular
+  const menu = document.querySelector('.menu'), burger = document.querySelector('.burger');
+  const setMenu = (open) => { menu.classList.toggle('open', open); burger.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : '';
+                              if (open) menu.querySelector('.menu__close').focus(); else burger.focus(); };
+  burger.addEventListener('click', () => setMenu(true));
+  menu.querySelector('.menu__close').addEventListener('click', () => setMenu(false));
+  menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', ev => { if (ev.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
+})();
+</script>
+</body>
+</html>
