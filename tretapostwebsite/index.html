@@ -105,7 +105,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 /* ---------- hero 2: o logo é a tela ---------- */
 .hero-tela { --co: 0; position: relative; height: 300svh; }
 .tela__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #000; }
-.tela__media { position: absolute; inset: 0; }
+.tela__media { position: absolute; inset: 0; filter: brightness(1.22) contrast(1.06) saturate(1.05); }
 .tela__media div { position: absolute; inset: -4%; background-size: cover; background-position: center; opacity: 0; animation: tela 20s linear infinite; }
 @keyframes tela { 0% { opacity: 0; transform: scale(1.12); } 4% { opacity: 1; } 20% { opacity: 1; } 25% { opacity: 0; transform: scale(1); } 100% { opacity: 0; } }
 .tela__burn { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -665,7 +665,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   // ---------- hero "logo vazado": borda de papel queimado + zoom na própria palavra ----------
   var tela = document.querySelector('.hero-tela');
   const cv = tela.querySelector('.tela__burn'), cx = cv.getContext('2d');
-  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas'), filmC = document.createElement('canvas');
+  const holeC = document.createElement('canvas'), emberC = document.createElement('canvas'), filmC = document.createElement('canvas'), innerC = document.createElement('canvas');
   var W = 0, H = 0, DPR = 1, fs = 0, box = null, anchor = null, prog = 0, ready = false, visible = false, built = false;
   const WORD = 'TretaPost';
   const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
@@ -720,6 +720,18 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
       }
     }
     hx.putImageData(hi, 0, 0); ex.putImageData(ei, 0, 0);
+    // brilho interno: a borda do papel acende para dentro da letra e some na imagem
+    const paper = document.createElement('canvas'); paper.width = BW; paper.height = BH;
+    const px = paper.getContext('2d');
+    px.fillStyle = '#000'; px.fillRect(0, 0, BW, BH);
+    fs = fs0 * SS; setFont(px); px.globalCompositeOperation = 'destination-out'; px.fillText(WORD, BW / 2, BH / 2);
+    px.drawImage(holeC, 0, 0);
+    innerC.width = BW; innerC.height = BH;
+    const ix = innerC.getContext('2d');
+    ix.shadowColor = 'rgba(255, 170, 90, 1)'; ix.shadowBlur = fs * .022; ix.drawImage(paper, 0, 0);    // núcleo quente, colado na borda
+    ix.shadowColor = 'rgba(255, 90, 20, .9)'; ix.shadowBlur = fs * .07; ix.drawImage(paper, 0, 0);     // halo que entra na imagem
+    ix.shadowBlur = 0; ix.globalCompositeOperation = 'destination-out'; ix.drawImage(paper, 0, 0);      // fica só o que caiu dentro da letra
+    fs = fs0;
     built = true;
     drawTela(performance.now());
   }
@@ -794,20 +806,17 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     cx.globalCompositeOperation = 'destination-out';
     cx.fillText(WORD, 0, 0);
     cx.imageSmoothingEnabled = true;
-    const rasterA = 1 - smooth(0, .09, k);                                 // a textura só aparece parada; no zoom, só vetor
+    const rasterA = 1 - smooth(.02, .2, k);                                 // a textura só aparece parada; no zoom, só vetor
     cx.globalAlpha = rasterA; cx.imageSmoothingQuality = 'high';
     if (rasterA > 0) cx.drawImage(holeC, -box.w / 2, -box.h / 2, box.w, box.h);
     cx.globalAlpha = 1;
     cx.globalCompositeOperation = 'source-over';
     const breathe = .78 + Math.sin(t * 2.1) * .1 + Math.sin(t * 5.3) * .05 + (Math.random() < .05 ? .15 : 0);
-    cx.globalAlpha = clamp(breathe, 0, 1) * rasterA;
-    if (rasterA > 0) cx.drawImage(emberC, -box.w / 2, -box.h / 2, box.w, box.h);
-    // brasa vetorial: um fio fino na borda das letras, nítido em qualquer escala
-    cx.globalAlpha = clamp(breathe, 0, 1) * (1 - smooth(.45, .66, p));
-    cx.shadowColor = 'rgba(255, 110, 30, .9)'; cx.shadowBlur = 10 * DPR;
-    cx.strokeStyle = 'rgba(255, 150, 70, .95)'; cx.lineWidth = 1.1 * DPR / s;
-    cx.strokeText(WORD, 0, 0);
-    cx.shadowBlur = 0;
+    const glowA = clamp(breathe, 0, 1) * (1 - smooth(.04, .3, k));            // some aos poucos no começo do zoom
+    if (glowA > 0) {
+      cx.globalAlpha = glowA * .55; cx.drawImage(emberC, -box.w / 2, -box.h / 2, box.w, box.h);   // calor por fora, discreto
+      cx.globalAlpha = glowA * .85; cx.drawImage(innerC, -box.w / 2, -box.h / 2, box.w, box.h);   // brilho por dentro, integrado à imagem
+    }
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
     cv.style.opacity = (1 - smooth(.66, .78, p)).toFixed(3);              // garantia: no fim, a imagem toma a tela
     tela.style.setProperty('--fl', (smooth(.7, .76, p) * (1 - smooth(.76, .86, p)) * .35).toFixed(3));
