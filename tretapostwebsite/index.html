@@ -118,11 +118,17 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .tela__hint { position: absolute; left: 50%; bottom: 12svh; transform: translateX(-50%); margin: 0; font-size: var(--fs-s); opacity: calc(1 - var(--co) * 3); }
 
 /* ---------- seletor de abertura (só no protótipo) ---------- */
-.picker { position: fixed; z-index: 25; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; padding: 4px;
-          background: rgba(0,0,0,.82); border: 1px solid var(--film-faint); backdrop-filter: blur(8px); font-size: 13px; }
-.picker span { padding: 0 10px 0 8px; color: var(--film-dim); }
-.picker button { appearance: none; border: 0; background: transparent; color: var(--film); font: inherit; font-weight: 600; font-stretch: 108%; padding: 8px 12px; cursor: pointer; }
-.picker button[aria-pressed="true"] { background: var(--film); color: #000; }
+.picker { position: fixed; z-index: 25; left: 50%; bottom: 16px; transform: translateX(-50%); display: grid; gap: 8px; padding: 10px 10px 10px;
+          background: rgba(0,0,0,.88); border: 1px solid var(--leak-orange); backdrop-filter: blur(10px); box-shadow: 0 0 40px rgba(255, 90, 31, .25); }
+.picker__q { margin: 0 4px; font-size: 13px; line-height: 1.2; color: var(--film); font-weight: 600; text-align: center; }
+.picker__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.picker button { appearance: none; border: 1px solid var(--film-faint); background: transparent; color: var(--film); font: inherit; cursor: pointer;
+                 display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; text-align: left; transition: border-color .2s, background .2s; }
+.picker button:hover { border-color: var(--film-dim); }
+.picker button b { font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 18px; width: 30px; height: 30px; display: grid; place-items: center; background: rgba(241,228,211,.1); }
+.picker button span { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.picker button[aria-pressed="true"] { background: var(--film); color: #000; border-color: var(--film); }
+.picker button[aria-pressed="true"] b { background: var(--leak-orange); color: #000; }
 
 /* ---------- serviços: rolo em tela cheia ---------- */
 .services { position: relative; height: 600svh; }
@@ -287,7 +293,7 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   .manifesto { font-size: 12.6vw; } .manifesto__out { justify-self: start; }
   .manifesto__aside, .manifesto__actions { grid-column: 1 / -1; } .manifesto__actions { margin-top: 28px; }
   .hero-tela { height: 260svh; }
-  .picker { bottom: 10px; } .picker span { display: none; } .picker button { padding: 8px 12px; }
+  .picker { bottom: 10px; width: calc(100% - 20px); } .picker__q { font-size: 12px; } .picker button { padding: 6px 10px 6px 6px; } .picker button b { width: 26px; height: 26px; font-size: 16px; }
   .panel--intro .t-h2 { grid-column: 1 / -1; }
   .panel--intro .intro__text { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-top: 18px; }
   .index { grid-column: 1 / -1; grid-row: 3; margin-top: 24px; } .index a { font-size: 22px; padding: 10px 0; }
@@ -584,10 +590,12 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     <a class="foot__top" href="#topo">Voltar ao topo</a>
   </footer>
 </main>
-<div class="picker" role="group" aria-label="Testar abertura">
-  <span>Abertura</span>
-  <button type="button" data-pick="atual" aria-pressed="true">Atual</button>
-  <button type="button" data-pick="tela" aria-pressed="false">Logo vazado</button>
+<div class="picker" role="group" aria-label="Escolha a abertura do site">
+  <p class="picker__q">Para aprovar: qual abertura vocês preferem?</p>
+  <div class="picker__opts">
+    <button type="button" data-pick="atual" aria-pressed="true"><b>A</b><span>Logo com brilho</span></button>
+    <button type="button" data-pick="tela" aria-pressed="false"><b>B</b><span>Logo vazado</span></button>
+  </div>
 </div>
 <script src="/tretapostwebsite/assets/projector.js"></script>
 <script>
