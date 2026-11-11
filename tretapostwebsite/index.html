@@ -135,16 +135,15 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
 .panel:not(.panel--intro) { box-shadow: inset 0 0 120px rgba(255, 240, 220, .22), inset 0 0 18px rgba(255, 250, 240, .25); }
 
 /* borda de película */
-.rim { position: absolute; z-index: 2; left: 0; right: 0; height: 44px; background: linear-gradient(rgba(120, 52, 18, .86), rgba(150, 68, 24, .82)); mix-blend-mode: multiply; }
-.rim::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .6; }
-.rim--top { top: 52px; } .rim--bottom { bottom: 26px; }
+.rim { position: absolute; z-index: 2; left: 0; right: 0; height: 44px; }
+.rim--top { top: 58px; } .rim--bottom { bottom: 24px; }
 .rim__holes { position: absolute; top: 7px; left: 0; display: block; }
 .rim__holes rect[rx] { fill: #000; }
 .rim__codes { position: absolute; left: 0; right: 0; bottom: 1px; display: flex; justify-content: space-between; padding-inline: 40px;
-              font-size: 8px; line-height: 1; letter-spacing: .08em; color: rgba(255, 226, 180, .75); white-space: pre; font-variant-numeric: tabular-nums; }
+              font-size: 8px; line-height: 1; letter-spacing: .08em; color: currentColor; opacity: .55; white-space: pre; font-variant-numeric: tabular-nums; }
 .rim--bottom .rim__codes { top: 1px; bottom: auto; }
 .rim--bottom .rim__holes { top: auto; bottom: 7px; }
-.panel--intro .rim { mix-blend-mode: normal; background: linear-gradient(rgba(120, 52, 18, .55), rgba(150, 68, 24, .5)); }
+.panel--intro .rim__holes rect[rx] { fill: rgba(241, 228, 211, .16); }
 
 /* light leak vivo nos cantos */
 .leak { position: absolute; z-index: 1; width: 70vmax; height: 70vmax; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; filter: blur(30px);
@@ -278,7 +277,8 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
   .panel__lead .muted, .panel__meta { display: none; }
   .panel__items { font-size: 15px; } .panel__items dt, .panel__items dd { padding: 7px 0; }
   .panel .btn { width: 100%; height: 50px; }
-  .rim--top { top: 60px; } .rim--bottom { bottom: 22px; }
+  .rim--top { top: 62px; } .rim--bottom { bottom: 18px; }
+  .rim__codes { display: none; }
   .manifesto { font-size: 12.6vw; } .manifesto__out { justify-self: start; }
   .manifesto__aside, .manifesto__actions { grid-column: 1 / -1; } .manifesto__actions { margin-top: 28px; }
   .hero-tela { height: 260svh; }
@@ -678,28 +678,32 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     fs = W * (W < 860 ? .152 : .158) * DPR;
     setFont(cx);
     const tw = cx.measureText(WORD).width;
-    const bw = Math.ceil(tw + fs * .5), bh = Math.ceil(fs * 1.3);
+    const bw = Math.ceil(tw + fs * .5), bh = Math.ceil(fs * 1.3), SS = 2;   // textura em 2x para borda lisa
     box = { w: bw, h: bh };
     // ponto de ancoragem do zoom: meio da haste do "P"
     const pre = cx.measureText('Treta').width, mP = cx.measureText('P');
     anchor = { x: -tw / 2 + pre + fs * .09, y: (mP.actualBoundingBoxDescent - mP.actualBoundingBoxAscent) / 2 };
     // camadas de apoio: letra cheia (A) e letra espalhada (D) para medir a distância até a borda
     const A = document.createElement('canvas'), D = document.createElement('canvas');
-    for (const c of [A, D, holeC, emberC]) { c.width = bw; c.height = bh; }
+    const BW = bw * SS, BH = bh * SS;
+    for (const c of [A, D, holeC, emberC]) { c.width = BW; c.height = BH; }
     const ax = A.getContext('2d'), dx = D.getContext('2d');
-    setFont(ax); ax.fillStyle = '#fff'; ax.fillText(WORD, bw / 2, bh / 2);
-    setFont(dx); dx.filter = `blur(${fs * .028}px)`; dx.fillStyle = '#fff'; dx.fillText(WORD, bw / 2, bh / 2); dx.fillText(WORD, bw / 2, bh / 2);
-    const a = ax.getImageData(0, 0, bw, bh).data, d = dx.getImageData(0, 0, bw, bh).data;
+    const fs0 = fs; fs = fs0 * SS;
+    setFont(ax); ax.fillStyle = '#fff'; ax.fillText(WORD, BW / 2, BH / 2);
+    setFont(dx); dx.filter = `blur(${fs * .028}px)`; dx.fillStyle = '#fff'; dx.fillText(WORD, BW / 2, BH / 2); dx.fillText(WORD, BW / 2, BH / 2);
+    fs = fs0;
+    const a = ax.getImageData(0, 0, BW, BH).data, d = dx.getImageData(0, 0, BW, BH).data;
     const hx = holeC.getContext('2d'), ex = emberC.getContext('2d');
-    const hi = hx.createImageData(bw, bh), ei = ex.createImageData(bw, bh);
-    const sc = fs / 9;
-    for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) {
-      const i = (y * bw + x) * 4;
+    const hi = hx.createImageData(BW, BH), ei = ex.createImageData(BW, BH);
+    const sc = fs * SS / 9;
+    for (let y = 0; y < BH; y++) for (let x = 0; x < BW; x++) {
+      const i = (y * BW + x) * 4;
       if (a[i + 3] > 128) continue;                                       // dentro da letra: o furo vetorial cuida
       const dist = d[i + 3] / 255;                                        // perto da letra = 1, longe = 0
       const n = vnoise(x / sc, y / sc) * .65 + vnoise(x / (sc * .35), y / (sc * .35)) * .35;
       const v = dist + (n - .5) * .34;
-      if (v > .9) { hi.data[i + 3] = 255; }                              // papel já consumido: furo irregular
+      if (v > .84) { hi.data[i + 3] = Math.round(255 * smooth(.84, .94, v)); }   // papel consumido: furo irregular, borda suave
+      if (v > .9) { continue; }
       else if (v > .66) {                                                 // brasa viva na borda do furo
         const e = (v - .66) / .24;
         ei.data[i] = 255; ei.data[i + 1] = Math.round(90 + 150 * e * e); ei.data[i + 2] = Math.round(20 + 120 * Math.pow(e, 4)); ei.data[i + 3] = Math.round(255 * (.45 + .55 * e));
@@ -730,11 +734,20 @@ body.on-ink .bar { color: #000; } body.on-ink .bar__mark { color: #000; text-sha
     cx.globalCompositeOperation = 'destination-out';
     cx.fillText(WORD, 0, 0);
     cx.imageSmoothingEnabled = true;
-    cx.drawImage(holeC, -box.w / 2, -box.h / 2);
+    const rasterA = 1 - smooth(0, .09, k);                                 // a textura só aparece parada; no zoom, só vetor
+    cx.globalAlpha = rasterA; cx.imageSmoothingQuality = 'high';
+    if (rasterA > 0) cx.drawImage(holeC, -box.w / 2, -box.h / 2, box.w, box.h);
+    cx.globalAlpha = 1;
     cx.globalCompositeOperation = 'source-over';
     const breathe = .78 + Math.sin(t * 2.1) * .1 + Math.sin(t * 5.3) * .05 + (Math.random() < .05 ? .15 : 0);
-    cx.globalAlpha = clamp(breathe, 0, 1) * (1 - smooth(.25, .55, p));
-    cx.drawImage(emberC, -box.w / 2, -box.h / 2);
+    cx.globalAlpha = clamp(breathe, 0, 1) * rasterA;
+    if (rasterA > 0) cx.drawImage(emberC, -box.w / 2, -box.h / 2, box.w, box.h);
+    // brasa vetorial: um fio fino na borda das letras, nítido em qualquer escala
+    cx.globalAlpha = clamp(breathe, 0, 1) * (1 - smooth(.45, .66, p));
+    cx.shadowColor = 'rgba(255, 110, 30, .9)'; cx.shadowBlur = 10 * DPR;
+    cx.strokeStyle = 'rgba(255, 150, 70, .95)'; cx.lineWidth = 1.1 * DPR / s;
+    cx.strokeText(WORD, 0, 0);
+    cx.shadowBlur = 0;
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.globalAlpha = 1;
     cv.style.opacity = (1 - smooth(.66, .78, p)).toFixed(3);              // garantia: no fim, a imagem toma a tela
     tela.style.setProperty('--fl', (smooth(.7, .76, p) * (1 - smooth(.76, .86, p)) * .35).toFixed(3));
