@@ -2,7 +2,7 @@ import os,shutil,sys
 SRC=sys.argv[1]; OUT=sys.argv[2]
 if os.path.exists(OUT): shutil.rmtree(OUT)
 shutil.copytree(SRC,OUT)
-for f in ['index.html','trade-in.html','mir.html','sc4a.html','criaaa.html','404.html']:
+for f in ['index.html','trade-in.html','mir.html','sc4a.html','criaaa.html','pernambucanas.html','404.html']:
     s=open(os.path.join(SRC,f)).read()
     k=s.index('<header')
     head,body=s[:k],s[k:]
