@@ -181,12 +181,55 @@ footer a:hover{color:var(--quiet)}
 .links a,.links .row-i{display:grid;grid-template-columns:4.2em 1fr auto;column-gap:var(--s2);align-items:baseline;padding:var(--s2) 0}
 .links .t{font-size:var(--t-title);line-height:1.12;letter-spacing:-.008em}
 .links a:hover .t{color:var(--quiet)}
+.links.noyr a{grid-template-columns:1fr auto}
 .links .go{font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet)}
 .poem{font-style:italic;color:var(--ink);font-size:var(--t-lead);line-height:1.45}
 .colophon,.text .body.colophon{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s2);row-gap:2px}
 .portrait{grid-column:10 / span 3}
 .side{grid-column:7 / span 6;align-self:end}
 .side .ttl2{font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)}
+
+
+/* lightbox */
+.series figure img,.series .row img,.series .solo img,.series .bleed img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:50;background:var(--wall);display:none;grid-template-rows:auto 1fr auto;padding:var(--s2) var(--gutter)}
+.lb.on{display:grid}
+.lb-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-sans);font-size:var(--t-sans)}
+.lb-top button,.lb-nav button{all:unset;cursor:pointer;color:var(--ink)}
+.lb-top button:focus-visible,.lb-nav button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.lb-stage{display:flex;align-items:center;justify-content:center;min-height:0;padding:var(--s3) 0}
+.lb-stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.lb-foot{display:grid;grid-template-columns:1fr auto;column-gap:var(--s3);align-items:end}
+.lb-nav{display:flex;gap:var(--s3);font-family:var(--f-sans);font-size:var(--t-sans)}
+.lb-count{color:var(--quiet)}
+body.lb-open{overflow:hidden}
+
+/* próxima série */
+.next{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);border-top:1px solid var(--line);margin-top:var(--s7);padding:var(--s3) 0 var(--s5);align-items:start}
+.next .back{grid-column:1 / span 4;margin:0}
+.next .to{grid-column:7 / -1;display:grid;grid-template-columns:minmax(0,1fr) 120px;column-gap:var(--s3);align-items:end}
+.next .to img{width:120px;height:150px;object-fit:cover}
+.next .to .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em;transition:color .2s}
+.next .to:hover .t{color:var(--quiet)}
+
+/* vídeos */
+.vid{position:relative;aspect-ratio:16/9;background:#0f0f0f;overflow:hidden}
+.vid button{all:unset;position:absolute;inset:0;cursor:pointer;display:flex;align-items:flex-end;padding:var(--s2)}
+.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.vid button:hover img{opacity:.85}
+.vid .play{position:relative;font-family:var(--f-sans);font-size:var(--t-sans);color:#fff;background:rgba(0,0,0,.45);padding:6px 10px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vids{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s5) var(--col-gap)}
+.vids figure{gap:var(--s1)}
+.vids .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em}
+
+/* textos */
+.quote{font-size:clamp(26px,2.6vw,38px);line-height:1.25;letter-spacing:-.01em;font-style:italic;text-wrap:balance;max-width:28ch}
+.links a.ext .go::after{content:" ↗"}
+
+/* contato */
+.contact .big{font-size:var(--t-display);line-height:1;letter-spacing:-.022em}
+.contact .addr{margin-top:var(--s3)}
 
 /* menu mobile */
 .menu-btn{all:unset;display:none;cursor:pointer;justify-self:end;grid-column:9 / -1;text-align:right;font-family:var(--f-sans);font-size:var(--t-sans);color:var(--ink);padding:6px 0}
@@ -234,11 +277,19 @@ footer a:hover{color:var(--quiet)}
   .float{display:none}
   .wall .pic,.wall .info,.wall.r .pic,.wall.r .info{grid-column:1 / -1;order:0}
   .wall .pic img,.wall.r .pic img{margin-left:0}
+  .next .back{grid-column:1 / -1;margin-bottom:var(--s3)}
+  .next .to{grid-column:1 / -1;grid-template-columns:1fr 88px}
+  .next .to img{width:88px;height:110px}
+  .vids{grid-template-columns:1fr}
+  .lb{padding:var(--s2)}
+  .lb-foot{grid-template-columns:1fr;row-gap:var(--s2)}
   .side{grid-column:1 / -1}
   .page .s-head h1,.portrait,.cv h2,.cv ul{grid-column:1 / -1}
   .cv h2{margin-bottom:var(--s1)}
   .links a,.links .row-i{grid-template-columns:3.4em 1fr}
   .links .go{grid-column:2}
+  .links.noyr a{grid-template-columns:1fr}
+  .links.noyr .go{grid-column:1}
   .s-head h1,.s-head .mono,.text .label,.text .body,.solo figure,.solo.l figure,.solo.r figure,.solo.narrow figure,.pair figure:first-child,.pair figure:last-child{grid-column:1 / -1}
   .s-head{row-gap:var(--s2)}
   .text{row-gap:var(--s2)}
@@ -459,7 +510,7 @@ footer a:hover{color:var(--quiet)}
     <p class="mono">Vistas da exposição, Galeria Lume, São Paulo, 2025</p>
   </section>
 
-  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#for-sale"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">For Sale</span></span><img src="/caiorosa/img/forsale.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= FOR SALE ================= -->
@@ -510,7 +561,7 @@ footer a:hover{color:var(--quiet)}
       <figcaption class="mono"><em>For Sale Series</em>, instalação da Galeria Lume na Paris Photo, 2023<br>14 fotografias, 65 × 44 cm cada</figcaption></figure>
   </section>
 
-  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#visoes-do-luvemba"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Visões do Luvemba</span></span><img src="/caiorosa/img/luvemba.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= VISÕES DO LUVEMBA ================= -->
@@ -581,7 +632,7 @@ footer a:hover{color:var(--quiet)}
     </div>
   </section>
 
-  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#europe-is-not-my-center"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Europe is Not My Center</span></span><img src="/caiorosa/img/europe.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= EUROPE ================= -->
@@ -593,14 +644,14 @@ footer a:hover{color:var(--quiet)}
   </div>
   <section class="solo narrow grid"><figure><img src="/caiorosa/img/e-1.jpg" alt="Retrato com rede dourada sobre o rosto e camiseta lilás, fundo vermelho"></figure></section>
   <figure class="block bleed"><img src="/caiorosa/img/e-2.jpg" alt="Conjunto de fotografias emolduradas em parede vinho" loading="lazy"></figure>
-  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#rios-falam-rios-cantam"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Rios falam, Rios cantam</span></span><img src="/caiorosa/img/r-boi.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= BIOGRAFIA ================= -->
 <main class="view page" id="v-biografia">
   <div class="s-head grid">
     <h1>Caio Rosa</h1>
-    <p class="mono">Rio de Janeiro, 1992<br>Vive e trabalha em São Paulo</p>
+    <figure class="portrait"><img src="/caiorosa/img/profile.jpg" alt="Retrato de Caio Rosa"><figcaption class="mono">Rio de Janeiro, 1992<br>Vive e trabalha em São Paulo</figcaption></figure>
   </div>
   <section class="text grid">
     <p class="label mono">Biografia</p>
@@ -613,6 +664,7 @@ footer a:hover{color:var(--quiet)}
 
   <section class="block cv">
     <div><h2>Exposições</h2><ul>
+      <li><span class="mono">2026</span><span>15ª Rencontres de Bamako, Bienal Africana de Fotografia, Mali</span></li>
       <li><span class="mono">2025</span><span><i>Rios falam, Rios cantam</i> (individual), Galeria Lume, São Paulo. Curadoria de Cindy Sissokho</span></li>
       <li><span class="mono">2025</span><span><i>Trabalho de Carnaval</i>, Pinacoteca de São Paulo. Curadoria de Ana Maia e Renato Menezes</span></li>
       <li><span class="mono">2025</span><span><i>Chegança</i>, Museu de Vassouras, Rio de Janeiro. Curadoria de Marcelo Campos</span></li>
@@ -683,6 +735,10 @@ footer a:hover{color:var(--quiet)}
       <p style="max-width:52ch">Fotolivro comissionado pela Adidas e pela Solebox Vienna, sobre os parques públicos e os jovens imigrantes de Viena, lançado com o tênis 4D Firecraft.</p>
     </div>
   </section>
+  <section class="block row c2">
+    <img src="/caiorosa/img/c-book3.jpg" alt="Página dupla do fotolivro The Cage" loading="lazy">
+    <img src="/caiorosa/img/c-book2.jpg" alt="Página dupla do fotolivro The Cage" loading="lazy">
+  </section>
   <section class="block row c4">
     <img src="/caiorosa/img/c-1.jpg" alt="Retrato em espelho de barbearia" loading="lazy">
     <img src="/caiorosa/img/c-2.jpg" alt="Jovem sentado em sofá" loading="lazy">
@@ -693,41 +749,75 @@ footer a:hover{color:var(--quiet)}
 
 <!-- ================= SOM ================= -->
 <main class="view page" id="v-som">
-  <div class="s-head grid"><h1>Som</h1></div>
+  <div class="s-head grid"><h1>Som</h1><p class="mono">Rádio, trilhas e arquivo sonoro</p></div>
+
   <section class="grid pair">
     <figure><img src="/caiorosa/img/riodoce.jpg" alt="Arte do programa Rio Doce"></figure>
     <div class="side">
       <p class="mono" style="margin-bottom:var(--s1)">Desde 2020</p>
       <p style="font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)">Rio Doce</p>
       <p style="max-width:52ch;margin-bottom:var(--s3)">Programa mensal na NTS Radio, em Londres, sobre a música brasileira e seus deságues ao redor do mundo.</p>
-      <a class="mono" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px" href="https://www.nts.live/shows/rio-doce">Ouvir na NTS Radio</a>
+      <a class="mono" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px" href="https://www.nts.live/shows/rio-doce">Ouvir na NTS Radio ↗</a>
     </div>
   </section>
+  <section class="block row c3">
+    <img src="/caiorosa/img/rd-1.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
+    <img src="/caiorosa/img/rd-2.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
+    <img src="/caiorosa/img/rd-3.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
+  </section>
+
   <section class="block text grid">
-    <p class="label mono">Arquivo sonoro</p>
-    <div class="body"><p>As gravações de <a href="#rios-falam-rios-cantam" style="border-bottom:1px solid var(--ink)"><i>Rios falam, Rios cantam</i></a>, com Spirito Santo e cantos Vissungo de 1944, podem ser ouvidas na página da exposição.</p></div>
+    <p class="label mono">Arquivo sonoro<br><a href="#rios-falam-rios-cantam" style="color:var(--ink)">Rios falam, Rios cantam</a></p>
+    <div class="body">
+      <p>Gravações de Spirito Santo, Caio Rosa e músicos colaboradores, com cantos de trabalho Vissungo das minas de Diamantina, Minas Gerais, 1944.</p>
+      <ol class="tracks">
+        <li><button type="button" data-src="/caiorosa/audio/faixa-3.mp3"><span class="n">01</span><span class="t">Cantos de mineração, 1944</span><span class="d" data-len="3:08">3:08</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/faixa-1.mp3"><span class="n">02</span><span class="t">Dikenga</span><span class="d" data-len="8:08">8:08</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/faixa-2.mp3"><span class="n">03</span><span class="t">Mahsay</span><span class="d" data-len="7:51">7:51</span><span class="bar"><i></i></span></button></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block text grid">
+    <p class="label mono">Trilha<br><a href="#visoes-do-luvemba" style="color:var(--ink)">Visões do Luvemba</a></p>
+    <div class="body">
+      <p>Trilha da videoinstalação, de Akin Ribeiro e Caio Rosa, com Spirito Santo.</p>
+      <ol class="tracks">
+        <li><button type="button" data-src="/caiorosa/audio/faixa-4.mp3"><span class="n">01</span><span class="t">Luvemba</span><span class="d" data-len="4:45">4:45</span><span class="bar"><i></i></span></button></li>
+      </ol>
+    </div>
   </section>
 </main>
 
 <!-- ================= VÍDEOS ================= -->
 <main class="view page" id="v-videos">
-  <div class="s-head grid"><h1>Vídeos</h1></div>
-  <ol class="links">
-    <li><a href="https://www.youtube.com/watch?v=Ud2hnB7hvFM"><span class="mono"></span><span class="t">O futuro está em seus olhos</span><span class="go">Direção de Caio Rosa · YouTube</span></a></li>
-    <li><a href="https://www.youtube.com/watch?v=yN4YIsXoAWI"><span class="mono"></span><span class="t">Choice, “Toda Noite”</span><span class="go">Produção de Jovem BlackSanta · YouTube</span></a></li>
-    <li><a href="https://www.youtube.com/watch?v=aExtQ4h-Gxc"><span class="mono"></span><span class="t">Choice, “Novo Milionário”</span><span class="go">Produção de Rafik ReeoMix e Velho Beats · YouTube</span></a></li>
-    <li><a href="https://www.youtube.com/watch?v=OLT_UTPnfAw"><span class="mono"></span><span class="t">OF COLOR TV, episódio 3</span><span class="go">YouTube</span></a></li>
-  </ol>
+  <div class="s-head grid"><h1>Vídeos</h1><p class="mono">Direção, fotografia e videoinstalação</p></div>
+  <section class="vids">
+    <figure><div class="vid" data-yt="Ud2hnB7hvFM"><button type="button" aria-label="Assistir O futuro está em seus olhos"><img src="https://i.ytimg.com/vi/Ud2hnB7hvFM/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">O futuro está em seus olhos</span><br><span class="mono">Direção de Caio Rosa</span></figcaption></figure>
+    <figure><div class="vid" data-yt="yN4YIsXoAWI"><button type="button" aria-label="Assistir Choice, “Toda Noite”"><img src="https://i.ytimg.com/vi/yN4YIsXoAWI/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Toda Noite”</span><br><span class="mono">Videoclipe · produção musical de Jovem BlackSanta</span></figcaption></figure>
+    <figure><div class="vid" data-yt="aExtQ4h-Gxc"><button type="button" aria-label="Assistir Choice, “Novo Milionário”"><img src="https://i.ytimg.com/vi/aExtQ4h-Gxc/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Novo Milionário”</span><br><span class="mono">Videoclipe · produção musical de Rafik ReeoMix e Velho Beats</span></figcaption></figure>
+    <figure><div class="vid" data-yt="OLT_UTPnfAw"><button type="button" aria-label="Assistir OF COLOR TV, episódio 3"><img src="https://i.ytimg.com/vi/OLT_UTPnfAw/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">OF COLOR TV, episódio 3</span><br><span class="mono">Com Prince Gurinya</span></figcaption></figure>
+  </section>
+  <section class="block">
+    <a href="#visoes-do-luvemba" class="row c2" style="display:grid">
+      <img src="/caiorosa/img/l-v1.jpg" alt="Videoinstalação Visões do Luvemba projetada em sala escura" loading="lazy">
+      <img src="/caiorosa/img/l-v3.jpg" alt="Videoinstalação Visões do Luvemba projetada em sala escura" loading="lazy">
+    </a>
+    <p class="mono"><em>Visões do Luvemba</em>, videoinstalação, Oi Futuro, Rio de Janeiro, 2023</p>
+  </section>
 </main>
 
 <!-- ================= TEXTOS ================= -->
 <main class="view page" id="v-textos">
-  <div class="s-head grid"><h1>Textos</h1></div>
-  <span class="group-label mono" style="margin-top:0">Textos curatoriais</span>
-  <ol class="links">
-    <li><a href="#rios-falam-rios-cantam"><span class="mono">2025</span><span class="t">Cindy Sissokho, sobre <i>Rios falam, Rios cantam</i></span><span class="go">Ler</span></a></li>
-  </ol>
-  <span class="group-label mono">Imprensa</span>
+  <div class="s-head grid"><h1>Textos</h1><p class="mono">Textos curatoriais e imprensa</p></div>
+  <section class="text grid">
+    <p class="label mono">Cindy Sissokho<br>Rios falam, Rios cantam, 2025</p>
+    <div class="body">
+      <p class="quote">“Elas nos convidam a escutar não apenas o que uma imagem mostra, mas aquilo que sua forma material silenciosamente carrega.”</p>
+      <p><a class="mono" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px" href="#rios-falam-rios-cantam">Ler o texto completo</a></p>
+    </div>
+  </section>
+  <span class="group-label mono" style="margin-top:var(--s6)">Imprensa</span>
   <ol class="links">
     <li><div class="row-i"><span class="mono">2025</span><span class="t">“Caio Rosa Interview”</span><span class="go">Tokyo Radio</span></div></li>
     <li><div class="row-i"><span class="mono">2024</span><span class="t">“A inegociável ironia de Caio Rosa”</span><span class="go">Revista ZUM</span></div></li>
@@ -735,17 +825,24 @@ footer a:hover{color:var(--quiet)}
     <li><div class="row-i"><span class="mono">2023</span><span class="t">Editorial</span><span class="go">SP-Arte</span></div></li>
     <li><div class="row-i"><span class="mono">2022</span><span class="t">“When The Lights Go Out”</span><span class="go">Terrible Magazine</span></div></li>
     <li><div class="row-i"><span class="mono">2021</span><span class="t">“Carnaval Pasteurizado”</span><span class="go">Elle Brasil</span></div></li>
-    <li><div class="row-i"><span class="mono">2020</span><span class="t">“From Brazil, With Love and Optic Games”</span><span class="go">Nataal Media</span></div></li>
+    <li><a class="ext" href="https://nataal.com/from-brazil-with-love-rosa"><span class="mono">2020</span><span class="t">“From Brazil, With Love and Optic Games”</span><span class="go">Nataal</span></a></li>
   </ol>
 </main>
 
 <!-- ================= CONTATO ================= -->
-<main class="view page" id="v-contato">
+<main class="view page contact" id="v-contato">
   <div class="s-head grid"><h1>Contato</h1></div>
-  <ol class="links">
-    <li><a href="https://galerialume.com"><span class="mono"></span><span class="t">Galeria Lume</span><span class="go">Representação · São Paulo</span></a></li>
-    <li><a href="https://www.instagram.com/rosapretanojardim/"><span class="mono"></span><span class="t">Instagram</span><span class="go">@rosapretanojardim</span></a></li>
-    <li><a href="https://www.nts.live/shows/rio-doce"><span class="mono"></span><span class="t">Rio Doce</span><span class="go">NTS Radio</span></a></li>
+  <section class="grid pair">
+    <figure><img src="/caiorosa/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume"></figure>
+    <div class="side">
+      <p class="mono" style="margin-bottom:var(--s1)">Representação</p>
+      <a class="big" href="https://galerialume.com">Galeria Lume</a>
+      <p class="addr mono">Rua Gumercindo Saraiva, 54<br>Jardim Europa, São Paulo<br><a href="https://galerialume.com" style="color:var(--ink)">galerialume.com ↗</a></p>
+    </div>
+  </section>
+  <ol class="links block noyr">
+    <li><a class="ext" href="https://www.instagram.com/rosapretanojardim/"><span class="t">Instagram</span><span class="go">@rosapretanojardim</span></a></li>
+    <li><a class="ext" href="https://www.nts.live/shows/rio-doce"><span class="t">Rio Doce, NTS Radio</span><span class="go">Programa mensal</span></a></li>
   </ol>
 </main>
 
@@ -762,6 +859,11 @@ footer a:hover{color:var(--quiet)}
 </footer>
 
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Obra ampliada">
+  <div class="lb-top"><span class="mono lb-count" id="lbCount"></span><button type="button" id="lbClose">Fechar</button></div>
+  <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
+  <div class="lb-foot"><p class="mono" id="lbCap"></p><div class="lb-nav"><button type="button" id="lbPrev">Anterior</button><button type="button" id="lbNext">Próxima</button></div></div>
+</div>
 <audio id="player" preload="none"></audio>
 
 <script>
@@ -854,11 +956,52 @@ footer a:hover{color:var(--quiet)}
   });
   document.querySelector('#v-b .col-list').addEventListener('mouseleave',function(){show(defSrc,defCap)});
 
+
+  /* vídeos: carrega o player só no clique */
+  document.querySelectorAll('.vid').forEach(function(v){
+    v.querySelector('button').addEventListener('click',function(){
+      v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.dataset.yt+'?autoplay=1&rel=0" title="Vídeo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+    });
+  });
+
+  /* lightbox nas páginas de série */
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap'), lbCount=document.getElementById('lbCount');
+  var set=[], idx=0;
+  function capFor(img){
+    var fig=img.closest('figure'); if(fig){var fc=fig.querySelector('figcaption'); if(fc) return fc.innerHTML;}
+    var sec=img.closest('section'); if(sec){var m=sec.querySelector(':scope > .mono'); if(m) return m.innerHTML;}
+    var h=img.closest('.series').querySelector('h1'); return h?'<em>'+h.textContent+'</em>':'';
+  }
+  function showLb(i){idx=(i+set.length)%set.length; var im=set[idx]; lbImg.src=im.currentSrc||im.src; lbImg.alt=im.alt; lbCap.innerHTML=capFor(im); lbCount.textContent=(idx+1)+' / '+set.length}
+  function openLb(img){
+    var view=img.closest('.series'); set=[].slice.call(view.querySelectorAll('.s-head ~ * img:not(.next img)'));
+    showLb(set.indexOf(img)); lb.classList.add('on'); document.body.classList.add('lb-open'); document.getElementById('lbClose').focus();
+  }
+  function closeLb(){lb.classList.remove('on'); document.body.classList.remove('lb-open')}
+  document.querySelectorAll('.series').forEach(function(v){
+    v.addEventListener('click',function(e){
+      var img=e.target.closest('img'); if(!img||img.closest('.next')||img.closest('a')) return;
+      openLb(img);
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  document.getElementById('lbPrev').addEventListener('click',function(){showLb(idx-1)});
+  document.getElementById('lbNext').addEventListener('click',function(){showLb(idx+1)});
+  document.getElementById('lbStage').addEventListener('click',function(e){if(e.target===this) closeLb()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on')) return;
+    if(e.key==='Escape') closeLb(); if(e.key==='ArrowRight') showLb(idx+1); if(e.key==='ArrowLeft') showLb(idx-1);
+  });
+  var tx=null;
+  lb.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(tx===null) return; var dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>40) showLb(idx+(dx<0?1:-1)); tx=null});
+  window.addEventListener('hashchange',closeLb);
+
   /* arquivo sonoro */
   var player=document.getElementById('player'), cur=null;
   function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
   function reset(li){li.classList.remove('playing'); var d=li.querySelector('.d'); d.textContent=d.dataset.len; li.querySelector('.bar i').style.width='0'}
-  document.querySelectorAll('#tracks button').forEach(function(b){
+  document.querySelectorAll('.tracks button').forEach(function(b){
     b.addEventListener('click',function(){
       var li=b.parentNode;
       if(cur===li){ if(player.paused){player.play().catch(function(){})} else {player.pause()} return; }
