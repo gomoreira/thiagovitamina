@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caio Rosa</title>
+<meta name="description" content="Caio Rosa, Rio de Janeiro, 1992. Fotografia, som, escultura e arquivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Sala branca. Grade de 12 colunas; a obra sempre fala primeiro.
+   EB Garamond para nomes de obras e textos, Geist para navegação, Geist Mono para fichas técnicas. */
+:root{
+  --wall:#ffffff;
+  --ink:#141414;
+  --quiet:#878784;
+  --faint:#d9d9d6;
+  --line:#e8e8e5;
+
+  --f-serif:"EB Garamond","Adobe Garamond Pro",Garamond,Georgia,serif;
+  --f-sans:"Geist","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SF Mono",monospace;
+
+  /* escala tipográfica */
+  --t-mono:11.5px;
+  --t-sans:13px;
+  --t-body:18px;
+  --t-lead:clamp(20px,1.75vw,24px);
+  --t-title:clamp(26px,2.35vw,34px);
+  --t-display:clamp(38px,5.4vw,80px);
+
+  /* escala de espaço */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px;
+  --s5:clamp(48px,5vw,64px);
+  --s6:clamp(72px,8vw,112px);
+  --s7:clamp(104px,13vw,176px);
+  --gutter:clamp(16px,2.5vw,36px);
+  --col-gap:clamp(12px,1.6vw,24px);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--wall);color:var(--ink)}
+body{font-family:var(--f-serif);font-size:var(--t-body);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+img{max-width:100%;display:block}
+ol,ul{list-style:none}
+.mono{font-family:var(--f-mono);font-size:var(--t-mono);line-height:1.6;color:var(--quiet);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.mono em{font-style:normal;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
+
+/* cabeçalho */
+.top{padding:var(--s3) var(--gutter);align-items:baseline;font-family:var(--f-sans);font-size:var(--t-sans)}
+.top .name{grid-column:1 / span 4;font-family:var(--f-serif);font-size:20px;letter-spacing:-.005em}
+.top nav{grid-column:5 / -1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:var(--s1) var(--s3)}
+.top nav a{color:var(--quiet);transition:color .15s}
+.top nav a:hover,.top nav a.cur{color:var(--ink)}
+.top nav .lang{margin-left:var(--s2);font-family:var(--f-serif);font-style:italic;font-size:15px;line-height:1}
+
+.view{display:none;flex:1}
+.view.on{display:block}
+
+/* ---------- A · só texto ---------- */
+.home-a{padding:var(--s6) var(--gutter) var(--s6)}
+.lede{grid-column:1 / span 5;color:var(--quiet);font-size:var(--t-body);margin-bottom:var(--s6)}
+.works{grid-column:1 / -1}
+.tlist li + li{margin-top:clamp(2px,.35vw,6px)}
+.tlist a{display:inline;font-size:var(--t-display);line-height:1.04;letter-spacing:-.022em;transition:color .25s}
+.tlist .yr{display:inline-block;margin-left:.5em;vertical-align:calc(var(--t-display) * .5);line-height:1}
+.tlist:has(a:hover) a{color:var(--faint)}
+.tlist a:hover,.tlist a:focus-visible{color:var(--ink)}
+.group-label{display:block;margin:var(--s6) 0 var(--s2)}
+.tlist.small a{font-size:var(--t-title);line-height:1.18;letter-spacing:-.008em}
+.tlist.small .yr{vertical-align:calc(var(--t-title) * .42)}
+.float{position:fixed;left:0;top:0;width:clamp(220px,22vw,360px);pointer-events:none;opacity:0;transition:opacity .2s;z-index:5}
+.float.on{opacity:1}
+.float img{width:100%;height:auto}
+.float p{margin-top:var(--s1)}
+
+/* ---------- B · índice + obra ---------- */
+.home-b{padding:var(--s6) var(--gutter) var(--s5);align-items:start}
+.home-b.on{display:grid}
+.home-b .lede{grid-column:1 / span 5;margin-bottom:var(--s5)}
+.home-b .col-list{grid-column:1 / span 5;grid-row:2}
+.home-b .stage{grid-column:7 / -1;grid-row:1 / span 2;position:sticky;top:var(--s3);display:flex;flex-direction:column;gap:var(--s1)}
+.ilist{border-top:1px solid var(--line)}
+.ilist li{border-bottom:1px solid var(--line)}
+.ilist a{display:grid;grid-template-columns:3.6em 1fr;column-gap:var(--s2);align-items:baseline;padding:var(--s2) 0 calc(var(--s2) + 2px)}
+.ilist .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em;transition:color .2s}
+.ilist .m{grid-column:2;margin-top:4px}
+.ilist .thumb{display:none}
+.ilist:has(a:hover) .t{color:var(--quiet)}
+.ilist a:hover .t,.ilist a:focus-visible .t{color:var(--ink)}
+.home-b .group-label{margin:var(--s5) 0 var(--s1)}
+.frame{height:min(78vh,880px);display:flex;align-items:flex-start}
+.frame img{max-height:100%;width:auto;object-fit:contain;transition:opacity .25s}
+.frame img.swap{opacity:0}
+
+/* ---------- C · sequência ---------- */
+.home-c{padding:0 var(--gutter)}
+.home-c .lede{padding-top:var(--s6);margin-bottom:var(--s5)}
+.wall{padding:var(--s6) 0;border-top:1px solid var(--line);align-items:end;row-gap:var(--s2)}
+.wall .pic{grid-column:1 / span 7}
+.wall .pic img{max-height:80vh;width:auto}
+.wall .info{grid-column:9 / span 4;display:flex;flex-direction:column;gap:var(--s1)}
+.wall .info .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em}
+.wall.r .pic{grid-column:6 / span 7;order:2}
+.wall.r .pic img{margin-left:auto}
+.wall.r .info{grid-column:1 / span 4;order:1}
+a.wall:hover .t{color:var(--quiet)}
+
+/* ---------- página de série ---------- */
+.series{padding:var(--s5) var(--gutter) 0}
+.back{display:inline-block;margin-bottom:var(--s6);transition:color .15s}
+.back:hover{color:var(--ink)}
+.s-head{align-items:end;margin-bottom:var(--s5)}
+.s-head h1{grid-column:1 / span 8;font-weight:400;font-size:var(--t-display);line-height:.98;letter-spacing:-.022em;text-wrap:balance}
+.s-head .mono{grid-column:10 / span 3}
+figure{display:flex;flex-direction:column;gap:var(--s1)}
+.bleed{margin:0 calc(var(--gutter) * -1)}
+.bleed img{width:100%;height:auto}
+.bleed figcaption{padding:0 var(--gutter)}
+.block{margin-top:var(--s7)}
+.solo figure{grid-column:3 / span 8}
+.solo.l figure{grid-column:1 / span 7}
+.solo.r figure{grid-column:6 / span 7}
+.solo.narrow figure{grid-column:4 / span 5}
+.solo img{max-height:86vh;width:auto}
+.row{display:grid;gap:var(--col-gap)}
+.row.c2{grid-template-columns:repeat(2,1fr)}
+.row.c3{grid-template-columns:repeat(3,1fr)}
+.row.c4{grid-template-columns:repeat(4,1fr)}
+.row + .mono{margin-top:var(--s1)}
+.pair{align-items:end;row-gap:var(--s5)}
+.pair figure:first-child{grid-column:1 / span 5}
+.pair figure:last-child{grid-column:7 / span 6}
+
+.text .label{grid-column:1 / span 3}
+.text .body{grid-column:4 / span 7;max-width:64ch;display:flex;flex-direction:column;gap:1em;text-wrap:pretty;hyphens:auto}
+.text .body > p:first-child{font-size:var(--t-lead);line-height:1.38}
+.text summary{cursor:pointer;list-style:none;font-family:var(--f-mono);font-size:var(--t-mono);color:var(--ink);display:inline-block;padding-bottom:2px;border-bottom:1px solid var(--ink)}
+.text summary::-webkit-details-marker{display:none}
+.text details[open] summary{display:none}
+.text details .more{display:flex;flex-direction:column;gap:1em}
+.text .sig{font-style:italic;color:var(--quiet)}
+
+.tracks{border-top:1px solid var(--line);margin-top:var(--s3)}
+.tracks li{border-bottom:1px solid var(--line)}
+.tracks button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:2.4em 1fr auto;column-gap:var(--s2);align-items:baseline;padding:14px 0;font-family:var(--f-serif);font-size:var(--t-body)}
+.tracks button:focus-visible{outline:1px solid var(--ink);outline-offset:2px}
+.tracks .n,.tracks .d{font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet);font-variant-numeric:tabular-nums}
+.tracks .bar{grid-column:2 / -1;height:1px;background:var(--line);position:relative;margin-top:10px;display:none}
+.tracks .bar i{position:absolute;inset:0 auto 0 0;background:var(--ink);width:0}
+.tracks li.playing .n,.tracks li.playing .d{color:var(--ink)}
+.tracks li.playing .bar{display:block}
+
+.end{border-top:1px solid var(--line);margin-top:var(--s7);padding:var(--s3) 0 var(--s4)}
+
+footer{padding:var(--s3) var(--gutter) var(--s4);border-top:1px solid var(--line);font-family:var(--f-sans);font-size:var(--t-sans);color:var(--quiet);row-gap:var(--s1)}
+footer .f1{grid-column:1 / span 6}
+footer .f2{grid-column:7 / -1;text-align:right}
+footer a{color:var(--ink)}
+footer a:hover{color:var(--quiet)}
+
+
+
+/* ---------- páginas de seção ---------- */
+.page{padding:var(--s5) var(--gutter) 0}
+.page .s-head h1{grid-column:1 / span 9}
+.cv{border-top:1px solid var(--line)}
+.cv > div{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);padding:var(--s3) 0;border-bottom:1px solid var(--line)}
+.cv h2{grid-column:1 / span 3;font:inherit;font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet);padding-top:.35em;font-weight:400}
+.cv ul{grid-column:4 / span 8;display:flex;flex-direction:column;gap:.55em}
+.cv li{display:grid;grid-template-columns:4.2em 1fr;column-gap:var(--s2);align-items:baseline}
+.cv li .mono{color:var(--quiet)}
+.cv li i{font-style:italic}
+.links{border-top:1px solid var(--line)}
+.links li{border-bottom:1px solid var(--line)}
+.links a,.links .row-i{display:grid;grid-template-columns:4.2em 1fr auto;column-gap:var(--s2);align-items:baseline;padding:var(--s2) 0}
+.links .t{font-size:var(--t-title);line-height:1.12;letter-spacing:-.008em}
+.links a:hover .t{color:var(--quiet)}
+.links .go{font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet)}
+.poem{font-style:italic;color:var(--ink);font-size:var(--t-lead);line-height:1.45}
+.colophon,.text .body.colophon{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s2);row-gap:2px}
+.portrait{grid-column:10 / span 3}
+.side{grid-column:7 / span 6;align-self:end}
+.side .ttl2{font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)}
+
+/* menu mobile */
+.menu-btn{all:unset;display:none;cursor:pointer;justify-self:end;grid-column:9 / -1;text-align:right;font-family:var(--f-sans);font-size:var(--t-sans);color:var(--ink);padding:6px 0}
+.menu-btn:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+/* foco por rolagem no mobile (versão A) */
+.peek{display:none;position:fixed;right:var(--gutter);bottom:var(--s3);width:38vw;max-width:180px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:4}
+.peek.on{opacity:1;transform:none}
+.peek img{width:100%;height:auto}
+
+/* revisão interna: alternar homes (sai do site final) */
+.review{position:fixed;left:var(--gutter);bottom:var(--s2);display:none;gap:var(--s2);align-items:baseline;padding:8px 12px;background:var(--wall);border:1px solid var(--line);z-index:10}
+.review.on{display:flex}
+.review a{color:var(--quiet)}
+.review a.cur{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:1024px){
+  .top{position:sticky;top:0;background:var(--wall);z-index:20;padding-top:var(--s2);padding-bottom:var(--s2)}
+  .top .name{grid-column:1 / span 8}
+  .menu-btn{display:block}
+  .top nav{position:fixed;inset:0;z-index:30;background:var(--wall);display:none;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:0;padding:calc(var(--s6) + 8px) var(--gutter) var(--s4);overflow-y:auto}
+  body.menu-open .top nav{display:flex}
+  body.menu-open{overflow:hidden}
+  body.menu-open .menu-btn{position:fixed;right:var(--gutter);top:var(--s2);z-index:31}
+  .top nav a{font-family:var(--f-serif);font-size:38px;line-height:1.2;color:var(--ink);letter-spacing:-.015em}
+  .top nav a.cur{color:var(--quiet)}
+  .top nav .lang{margin:var(--s4) 0 0;font-size:20px;font-style:italic;color:var(--quiet)}
+  .lede,.home-b .lede{grid-column:1 / span 8}
+}
+@media (max-width:820px){
+  .peek{display:block}
+  .review{position:static;margin:0 var(--gutter) var(--s4);justify-content:flex-start}
+  .block{margin-top:var(--s6)}
+  .back{margin-bottom:var(--s5)}
+  .lede,.home-b .lede,.home-b .col-list{grid-column:1 / -1}
+  .home-a,.home-b{padding-top:var(--s5)}
+  .home-a{padding-bottom:45vh}
+  .home-b .stage{display:none}
+  .home-b .col-list{grid-row:auto}
+  .ilist a{grid-template-columns:64px 1fr;align-items:start}
+  .ilist .thumb{display:block;grid-row:1 / span 3;width:64px;height:80px;object-fit:cover}
+  .ilist .y,.ilist .t{grid-column:2}
+  .tlist:has(a:hover) a{color:inherit}
+  .tlist.focus a{color:var(--faint)}
+  .tlist.focus a.act{color:var(--ink)}
+  .float{display:none}
+  .wall .pic,.wall .info,.wall.r .pic,.wall.r .info{grid-column:1 / -1;order:0}
+  .wall .pic img,.wall.r .pic img{margin-left:0}
+  .side{grid-column:1 / -1}
+  .page .s-head h1,.portrait,.cv h2,.cv ul{grid-column:1 / -1}
+  .cv h2{margin-bottom:var(--s1)}
+  .links a,.links .row-i{grid-template-columns:3.4em 1fr}
+  .links .go{grid-column:2}
+  .s-head h1,.s-head .mono,.text .label,.text .body,.solo figure,.solo.l figure,.solo.r figure,.solo.narrow figure,.pair figure:first-child,.pair figure:last-child{grid-column:1 / -1}
+  .s-head{row-gap:var(--s2)}
+  .text{row-gap:var(--s2)}
+  .row.c4{grid-template-columns:repeat(2,1fr)}
+  .row.c3{grid-template-columns:repeat(2,1fr)}
+  .row.c2{grid-template-columns:1fr}
+  footer .f1,footer .f2{grid-column:1 / -1;text-align:left}
+  .review span,.review a span{display:none}
+  .review a{padding:0 2px}
+  .review::before{content:"Home"}
+  :root{--t-display:clamp(34px,9vw,44px)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top grid">
+  <a class="name" href="#" data-home>Caio Rosa</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mainnav">Menu</button>
+  <nav id="mainnav" aria-label="Principal">
+    <a class="cur" href="#" data-home>Trabalhos</a>
+    <a href="#videos">Vídeos</a>
+    <a href="#som">Som</a>
+    <a href="#publicacoes">Publicações</a>
+    <a href="#textos">Textos</a>
+    <a href="#biografia">Biografia</a>
+    <a href="#contato">Contato</a>
+    <a class="lang" href="#" lang="en">English</a>
+  </nav>
+</header>
+
+<!-- ================= A · SÓ TEXTO ================= -->
+<main class="view home-a" id="v-a">
+  <div class="grid">
+    <p class="lede">Rio de Janeiro, 1992. Vive e trabalha em São Paulo.</p>
+    <div class="works">
+      <ol class="tlist" data-float>
+        <li><a href="#rios-falam-rios-cantam" data-img="/caiorosa/img/rios.jpg" data-cap="Cantando pro tempo, 2025">Rios falam, Rios cantam<span class="yr mono">2025</span></a></li>
+        <li><a href="#for-sale" data-img="/caiorosa/img/forsale.jpg" data-cap="For Sale, 2023">For Sale<span class="yr mono">2023</span></a></li>
+        <li><a href="#visoes-do-luvemba" data-img="/caiorosa/img/luvemba.jpg" data-cap="Visões do Luvemba, 2023">Visões do Luvemba<span class="yr mono">2023</span></a></li>
+        <li><a href="#europe-is-not-my-center" data-img="/caiorosa/img/europe.jpg" data-cap="Europe is Not My Center">Europe is Not My Center</a></li>
+      </ol>
+      <span class="group-label mono">Livros e rádio</span>
+      <ol class="tlist small" data-float>
+        <li><a href="#publicacoes" data-img="/caiorosa/img/roots.jpg" data-cap="Memórias Congadeiras, Roots to Fruits, 2024">Memórias Congadeiras<span class="yr mono">2024</span></a></li>
+        <li><a href="#publicacoes" data-img="/caiorosa/img/cage.jpg" data-cap="The Cage, 2021">The Cage<span class="yr mono">2021</span></a></li>
+        <li><a href="#som" data-img="/caiorosa/img/riodoce.jpg" data-cap="Rio Doce, NTS Radio">Rio Doce, NTS Radio<span class="yr mono">desde 2020</span></a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="peek" id="peek" aria-hidden="true"><img src="/caiorosa/img/rios.jpg" alt=""></div>
+  <div class="float" id="float" aria-hidden="true"><img src="/caiorosa/img/rios.jpg" alt=""><p class="mono"></p></div>
+</main>
+
+<!-- ================= B · ÍNDICE + OBRA ================= -->
+<main class="view home-b grid" id="v-b">
+  <p class="lede">Rio de Janeiro, 1992. Vive e trabalha em São Paulo.</p>
+  <div class="col-list">
+    <ol class="ilist" id="ilist">
+      <li><a href="#rios-falam-rios-cantam" data-img="/caiorosa/img/rios.jpg" data-cap="Cantando pro tempo, 2025"><img class="thumb" src="/caiorosa/img/rios.jpg" alt=""><span class="y mono">2025</span><span class="t">Rios falam, Rios cantam</span><span class="m mono">Galeria Lume, São Paulo</span></a></li>
+      <li><a href="#for-sale" data-img="/caiorosa/img/forsale.jpg" data-cap="For Sale, 2023"><img class="thumb" src="/caiorosa/img/forsale.jpg" alt=""><span class="y mono">2023</span><span class="t">For Sale</span><span class="m mono">Coleção Bibliothèque nationale de France</span></a></li>
+      <li><a href="#visoes-do-luvemba" data-img="/caiorosa/img/luvemba.jpg" data-cap="Visões do Luvemba, 2023"><img class="thumb" src="/caiorosa/img/luvemba.jpg" alt=""><span class="y mono">2023</span><span class="t">Visões do Luvemba</span><span class="m mono">Fotografia e videoinstalação</span></a></li>
+      <li><a href="#europe-is-not-my-center" data-img="/caiorosa/img/europe.jpg" data-cap="Europe is Not My Center"><img class="thumb" src="/caiorosa/img/europe.jpg" alt=""><span class="y mono"></span><span class="t">Europe is Not My Center</span><span class="m mono">Fotografia</span></a></li>
+    </ol>
+    <span class="group-label mono">Livros e rádio</span>
+    <ol class="ilist">
+      <li><a href="#publicacoes" data-img="/caiorosa/img/roots.jpg" data-cap="Memórias Congadeiras, Roots to Fruits, 2024"><img class="thumb" src="/caiorosa/img/roots.jpg" alt=""><span class="y mono">2024</span><span class="t">Memórias Congadeiras</span><span class="m mono">Roots to Fruits, Amsterdam</span></a></li>
+      <li><a href="#publicacoes" data-img="/caiorosa/img/cage.jpg" data-cap="The Cage, 2021"><img class="thumb" src="/caiorosa/img/cage.jpg" alt=""><span class="y mono">2021</span><span class="t">The Cage</span><span class="m mono">Fotolivro, Viena</span></a></li>
+      <li><a href="#som" data-img="/caiorosa/img/riodoce.jpg" data-cap="Rio Doce, NTS Radio"><img class="thumb" src="/caiorosa/img/riodoce.jpg" alt=""><span class="y mono">2020</span><span class="t">Rio Doce</span><span class="m mono">Programa mensal, NTS Radio, Londres</span></a></li>
+    </ol>
+  </div>
+  <aside class="stage" aria-live="polite">
+    <div class="frame"><img id="stageImg" src="/caiorosa/img/hero.jpg" alt="Boi de Machado, 2025"></div>
+    <p class="mono" id="stageCap">Boi de Machado, 2025</p>
+  </aside>
+</main>
+
+<!-- ================= C · SEQUÊNCIA ================= -->
+<main class="view home-c" id="v-c">
+  <div class="grid"><p class="lede">Rio de Janeiro, 1992. Vive e trabalha em São Paulo.</p></div>
+  <a class="wall grid" href="#rios-falam-rios-cantam"><div class="pic"><img src="/caiorosa/img/r-boi.jpg" alt="Boi de Machado, 2025" loading="lazy"></div>
+    <div class="info"><span class="mono">2025</span><span class="t">Rios falam, Rios cantam</span><span class="mono">Exposição individual, Galeria Lume, São Paulo</span></div></a>
+  <a class="wall grid r" href="#for-sale"><div class="pic"><img src="/caiorosa/img/forsale.jpg" alt="Autorretrato da série For Sale" loading="lazy"></div>
+    <div class="info"><span class="mono">2023</span><span class="t">For Sale</span><span class="mono">Coleção Bibliothèque nationale de France</span></div></a>
+  <a class="wall grid" href="#visoes-do-luvemba"><div class="pic"><img src="/caiorosa/img/luvemba.jpg" alt="Visões do Luvemba" loading="lazy"></div>
+    <div class="info"><span class="mono">2023</span><span class="t">Visões do Luvemba</span><span class="mono">Fotografia e videoinstalação</span></div></a>
+  <a class="wall grid r" href="#europe-is-not-my-center"><div class="pic"><img src="/caiorosa/img/europe.jpg" alt="Europe is Not My Center" loading="lazy"></div>
+    <div class="info"><span class="t">Europe is Not My Center</span><span class="mono">Fotografia</span></div></a>
+  <a class="wall grid" href="#publicacoes"><div class="pic"><img src="/caiorosa/img/roots.jpg" alt="Capa de Memórias Congadeiras, Roots to Fruits" loading="lazy"></div>
+    <div class="info"><span class="mono">2024</span><span class="t">Memórias Congadeiras</span><span class="mono">Publicação, Roots to Fruits, Amsterdam</span></div></a>
+  <a class="wall grid r" href="#publicacoes"><div class="pic"><img src="/caiorosa/img/cage.jpg" alt="The Cage" loading="lazy"></div>
+    <div class="info"><span class="mono">2021</span><span class="t">The Cage</span><span class="mono">Fotolivro, Viena</span></div></a>
+  <a class="wall grid" href="#som"><div class="pic"><img src="/caiorosa/img/riodoce.jpg" alt="Arte do programa Rio Doce" loading="lazy"></div>
+    <div class="info"><span class="mono">Desde 2020</span><span class="t">Rio Doce</span><span class="mono">Programa mensal, NTS Radio, Londres</span></div></a>
+</main>
+
+<!-- ================= SÉRIE ================= -->
+<main class="view series" id="v-rios-falam-rios-cantam">
+  <a class="back mono" href="#" data-home>Índice</a>
+
+  <div class="s-head grid">
+    <h1>Rios falam, Rios cantam</h1>
+    <p class="mono"><em>Exposição individual</em><br>Galeria Lume, São Paulo<br>2025<br>Curadoria de Cindy Sissokho</p>
+  </div>
+
+  <figure class="bleed">
+    <img src="/caiorosa/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume">
+    <figcaption class="mono">Vista da exposição, Galeria Lume, 2025</figcaption>
+  </figure>
+
+  <section class="block text grid">
+    <p class="label mono">Texto de Cindy Sissokho</p>
+    <div class="body">
+      <p>A exposição reúne um conjunto generoso de obras de Caio Rosa, abrangendo fotografia, escultura, têxtil, instrumento musical e som. Ela articula a investigação contínua do artista sobre ritmo e memória, construindo um espaço onde a materialidade dialoga com a narrativa, e onde a imagem se torna um modo de escuta.</p>
+      <p>A música desempenha um papel central na prática de Rosa, conectando territórios carregados e saberes geracionais. A partir das texturas sonoras do continente africano e de suas ressonâncias nas tradições musicais brasileiras, o artista investiga como o som carrega histórias de deslocamento, resistência e celebração. No centro da exposição está a construção de uma nova marimba, desenvolvida em colaboração com seu pai, o etnomusicólogo Spirito Santo. Esse gesto prolonga uma linhagem de fazer musical.</p>
+      <details>
+        <summary>Continuar lendo</summary>
+        <div class="more">
+          <p>Aqui, a marimba opera tanto como instrumento simbólico quanto como dispositivo escultórico – uma escultura de som. Suas teclas de madeira e seu corpo ressonante evocam histórias migratórias, enquanto, na exposição, ela se torna uma ferramenta de transmissão de saberes entre gerações, do avô ao próprio artista. A marimba recém-construída nos lembra que é moldada por corpos em constante relação.</p>
+          <p>O som torna-se um portal por meio do qual histórias pessoais e coletivas reaparecem em formas que ultrapassam a linguagem. Um arquivo sonoro convida o público a uma experiência de escuta no espaço expositivo. A obra reúne múltiplas gravações, algumas emergindo como ecos distorcidos – fragmentos de histórias que se desdobram em novas interpretações coletivas. O arquivo reúne contribuições de Spirito Santo, Caio Rosa e músicos colaboradores, além de cantos de trabalho Vissungo das minas de Diamantina, em Minas Gerais, datados de 1944. Esses cruzamentos temporais revelam como a prática de Rosa acompanha uma história do som que resiste à linearidade cronológica. Em vez disso, esses elementos convergem, lembrando-nos de que o som está sempre em movimento – estratificado, cíclico e em constante retorno.</p>
+          <p>Esse engajamento com o som ressoa com a proposição de Tina Campt de “escutar imagens”, um método para captar as frequências silenciosas e fugitivas por meio das quais a vida negra se inscreve para além do visível. Para Campt, a escuta possibilita uma relação com as dimensões hápticas e afetivas das imagens. O trabalho de Rosa, de maneira semelhante, convida a uma atenção sensorial que ultrapassa a visualidade. Ele propõe não apenas ver, mas afinar-se com as ressonâncias presentes nos materiais que constituem a superfície fotográfica. Sua prática se expande para além dos enquadramentos tradicionais da fotografia. Emulsão, tecido de algodão, água, papel, entre outros, tornam-se agentes ativos – materiais que também narram quando colocados em diálogo com os arquivos presentes em suas obras.</p>
+          <p>Nesse eco, a exposição apresenta fotografias novas e anteriores em formas diversas, entrelaçando arquivos familiares: seus pais no carnaval, seu avô em uniforme militar, um Caixeta (mestre de Congada) ao lado da primeira marimba de seu pai. Essas imagens funcionam como suportes de narrativa, contribuindo para uma história mais ampla por meio de papéis distintos, porém interligados – ritual, protesto, festividade e pedagogia. As fotografias traçam o tempo ao mesmo tempo em que transformam narrativas pessoais em testemunho coletivo. Em obras como <i>Couro na chuva nunca desafina</i> (1983/2025) e <i>Boi de Machado</i> (2025), a memória aparece como desfoque e deslizamento, moldada pelo movimento e pelo acaso. Essas imagens encarnam o caráter fluido e parcial da lembrança, afastando-se da nitidez técnica em favor de uma temporalidade mais porosa e vivida.</p>
+          <p>Outras obras fotográficas (1981/1983) documentam processos de construção comunitária; essas imagens registram festividades de Congada e escolas de samba no Rio de Janeiro e em Minas Gerais, de onde o artista é originário, reunindo momentos dispersos em um único arquivo vivo. Expandindo-se para além da impressão, uma peça têxtil homenageia seu avô, <i>Memórias Póstumas de São João da Chapada</i> (2025). Esse trabalho evoca as bandeiras carregadas nas procissões de Congada, ativando essa homenagem por meio do tecido, de fios costurados sobre a imagem e de flores Sempre-Vivas. Estas também estão presentes na série de fotoperformances <i>Sempre-Viva – Love Letter</i> (2023). Essas flores vivem para sempre, permanecem vivas apesar de seu desgaste – carregam igualmente um significado afetivo ligado ao seu avô em Minas Gerais, como encontrado na casa da família. Sua cor e forma duradouras incorporam uma permanência silenciosa, na qual a memória persiste mesmo ao se transformar. Mais uma vez, a materialidade carrega ressonância.</p>
+          <p>A prática de Rosa acolhe uma conversa simbólica com os rios – um processo de estar na água, seguir seu fluxo e permitir que ela intervenha na criação da imagem. Esse pensamento se afasta dos processos fotográficos tradicionais, convidando a própria natureza a compor e narrar. O rio torna-se contador de histórias, metáfora de acervos históricos entre comunidades e testemunha do movimento contínuo de corpos, culturas e histórias. Suas novas esculturas em aço, <i>Maps of affect – Singing to Time</i> (2024–2025), expandem esse diálogo ao permitir que oxidação, peso e temperatura participem das superfícies em constante transformação das obras. Essa experimentação continua na série de impressões fotográficas em Van Dyke <i>Couro na chuva nunca desafina</i> (2025), em que o papel orgânico e a imagem centralizam os materiais por trás da história. Ferrugem, marcas d’água, luz e manchas químicas intensificam sua tatilidade, tornando visível a memória de cada componente.</p>
+          <p>Em todas as obras de Rosa percorre um fio condutor: o engajamento com materiais e elementos naturais em seus processos, nos quais a imagem depende de uma relação com a materialidade. Chuva, sol e luz colaboram com reações químicas para formar as texturas de seus trabalhos fotográficos e escultóricos, onde a matéria se torna uma forma viva e ativa na criação. Mais uma vez, aço, cobre, papel orgânico e emulsão fotográfica se transformam nas superfícies das obras, registrando o eco da transmissão cultural e da continuidade ancestral. Elas nos convidam a escutar não apenas o que uma imagem mostra, mas aquilo que sua forma material silenciosamente carrega. A memória das tradições se move e se inscreve em novos processos da vida contemporânea — como a água, como o ritmo, como flores que se recusam a desaparecer com o tempo.</p>
+          <p class="sig">Cindy Sissokho</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="block solo l grid">
+    <figure>
+      <img src="/caiorosa/img/r-boi.jpg" alt="Boi de Machado, 2025" loading="lazy">
+      <figcaption class="mono"><em>Boi de Machado</em>, 2025</figcaption>
+    </figure>
+  </section>
+
+  <section class="block solo r grid">
+    <figure>
+      <img src="/caiorosa/img/r-couro.jpg" alt="Couro na chuva nunca desafina" loading="lazy">
+      <figcaption class="mono"><em>Couro na chuva nunca desafina</em>, 1983/2025<br>Manipulação fotográfica a partir de fotografia do acervo Spirito Santo, ampliação manual em papel c-print<br>78 × 53 cm</figcaption>
+    </figure>
+  </section>
+
+  <section class="block">
+    <div class="row c4">
+      <img src="/caiorosa/img/r-disco1.jpg" alt="Cantando pro tempo, disco de aço oxidado" loading="lazy">
+      <img src="/caiorosa/img/r-disco2.jpg" alt="Cantando pro tempo, disco de aço oxidado" loading="lazy">
+      <img src="/caiorosa/img/r-disco3.jpg" alt="Cantando pro tempo, disco de aço oxidado" loading="lazy">
+      <img src="/caiorosa/img/r-disco4.jpg" alt="Cantando pro tempo, disco de aço oxidado" loading="lazy">
+    </div>
+    <p class="mono"><em>Cantando pro tempo</em>, 2025, série <em>Maps of affect – Singing to Time</em><br>Cobre e ferro sobre chapa de aço carbono oxidada<br>62 cm de diâmetro cada</p>
+  </section>
+
+  <figure class="block bleed">
+    <img src="/caiorosa/img/r-marimba1.jpg" alt="Marimba Nzaidi Mbila suspensa diante de parede vermelha" loading="lazy">
+    <figcaption class="mono"><em>Marimba “Nzaidi Mbila” – Rio que engole todos os rios</em>, 2025, com Spirito Santo<br>Madeira, aço carbono oxidado, couro, corda e tubos de PVC<br>58 × 227 × 60 cm</figcaption>
+  </figure>
+
+  <section class="block text grid">
+    <p class="label mono">Arquivo sonoro</p>
+    <div class="body">
+      <p>Gravações de Spirito Santo, Caio Rosa e músicos colaboradores, com cantos de trabalho Vissungo das minas de Diamantina, Minas Gerais, 1944.</p>
+      <ol class="tracks" id="tracks">
+        <li><button type="button" data-src="/caiorosa/audio/faixa-3.mp3"><span class="n">01</span><span class="t">Cantos de mineração, 1944</span><span class="d" data-len="3:08">3:08</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/faixa-1.mp3"><span class="n">02</span><span class="t">Dikenga</span><span class="d" data-len="8:08">8:08</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/faixa-2.mp3"><span class="n">03</span><span class="t">Mahsay</span><span class="d" data-len="7:51">7:51</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/faixa-4.mp3"><span class="n">04</span><span class="t">Luvemba</span><span class="d" data-len="4:45">4:45</span><span class="bar"><i></i></span></button></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="row c4">
+      <img src="/caiorosa/img/r-veu1.jpg" alt="Obra em papel de fibra com fotografia ao centro" loading="lazy">
+      <img src="/caiorosa/img/r-veu2.jpg" alt="Obra em papel de fibra com fotografia ao centro" loading="lazy">
+      <img src="/caiorosa/img/r-veu3.jpg" alt="Obra em papel de fibra com fotografia ao centro" loading="lazy">
+      <img src="/caiorosa/img/r-veu4.jpg" alt="Obra em papel de fibra com fotografia ao centro" loading="lazy">
+    </div>
+    <p class="mono"><em>Couro na chuva nunca desafina – Véu de carnaval</em>, 2025<br>Emulsão Van Dyke sobre papel de fibra de folha de bananeira, bordado, fotografia analógica do acervo Spirito Santo (1980)<br>45 × 30 cm</p>
+  </section>
+
+  <section class="block solo narrow grid">
+    <figure>
+      <img src="/caiorosa/img/r-memorias.jpg" alt="Memórias Póstumas de São João da Chapada, têxtil suspenso" loading="lazy">
+      <figcaption class="mono"><em>Memórias Póstumas de São João da Chapada</em>, 2025<br>Tecido, fotografia, fios e flores Sempre-Vivas</figcaption>
+    </figure>
+  </section>
+
+  <section class="block pair grid">
+    <figure>
+      <img src="/caiorosa/img/r-sempreviva.jpg" alt="Fotoperformance com flores Sempre-Vivas" loading="lazy">
+      <figcaption class="mono"><em>Sempre-Viva – Love Letter</em>, 2023<br>Fotoperformance</figcaption>
+    </figure>
+    <figure>
+      <img src="/caiorosa/img/r-poliptico.jpg" alt="Políptico de três fotografias" loading="lazy">
+      <figcaption class="mono"><em>Sempre-Viva</em>, políptico<br>Fotografia analógica, ampliação manual<br>3 fotografias, 47 × 32 cm cada</figcaption>
+    </figure>
+  </section>
+
+  <section class="block">
+    <div class="row c2">
+      <img src="/caiorosa/img/r-a.jpg" alt="Fotografia de arquivo com intervenção" loading="lazy">
+      <img src="/caiorosa/img/r-c.jpg" alt="Fotografia com escrita à mão" loading="lazy">
+      <img src="/caiorosa/img/r-b.jpg" alt="Fotografia de arquivo com desenho em linhas brancas" loading="lazy">
+      <img src="/caiorosa/img/r-e.jpg" alt="Fotografia de grupo de Congada" loading="lazy">
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="row c3">
+      <img src="/caiorosa/img/r-vista1.jpg" alt="Vista da exposição" loading="lazy">
+      <img src="/caiorosa/img/r-vista3.jpg" alt="Vista da exposição" loading="lazy">
+      <img src="/caiorosa/img/r-vista4.jpg" alt="Vista da exposição" loading="lazy">
+    </div>
+    <p class="mono">Vistas da exposição, Galeria Lume, São Paulo, 2025</p>
+  </section>
+
+  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+</main>
+
+<!-- ================= FOR SALE ================= -->
+<main class="view series" id="v-for-sale">
+  <a class="back mono" href="#" data-home>Índice</a>
+  <div class="s-head grid">
+    <h1>For Sale</h1>
+    <p class="mono"><em>Série fotográfica</em><br>2023<br>Prix Photo Aliança Francesa 2024<br>Coleção Bibliothèque nationale de France</p>
+  </div>
+
+  <section class="row c4">
+    <img src="/caiorosa/img/f-p1.jpg" alt="Autorretrato de costas, fundo preto">
+    <img src="/caiorosa/img/f-p2.jpg" alt="Autorretrato de perfil, fundo preto">
+    <img src="/caiorosa/img/f-p3.jpg" alt="Autorretrato de perfil, fundo preto">
+    <img src="/caiorosa/img/f-p4.jpg" alt="Autorretrato com as mãos sobre os olhos">
+  </section>
+
+  <section class="block text grid">
+    <p class="label mono">Sobre a série</p>
+    <div class="body">
+      <p class="poem">“Fui Oriente de uma bússola sem norte.<br>Para alguns o outro.<br>A mais-valia da pele brilhante, controversa como o tempo.<br>Para muitos o leite preto que alimenta, o jardim sempre-viva.<br>Absolvição de toda luz e cor.<br>A travessia, o encontro, a passagem.”</p>
+      <p><i>For Sale Series</i> consiste em autorretratos que trazem frases, características físicas, expressões corporais e códigos culturais que visam questionar os estereótipos históricos relacionados à imagem da população negra. A série traz para o presente discussões que partem da minha experiência e reflexão sobre a prática da fotografia, violência estatal, o mercado de arte, saúde mental e a multiplicidade cultural e performática do corpo negro no mundo.</p>
+      <p>O trabalho foi premiado pelo Prix Photo Aliança Francesa 2024 e hoje faz parte da coleção de fotografia contemporânea da Biblioteca Nacional da França.</p>
+    </div>
+  </section>
+
+  <section class="block row c3">
+    <img src="/caiorosa/img/f-s1.jpg" alt="Autorretrato com placa For Sale" loading="lazy">
+    <img src="/caiorosa/img/f-s2.jpg" alt="Autorretrato com placa For Sale" loading="lazy">
+    <img src="/caiorosa/img/f-s3.jpg" alt="Autorretrato com placa For Sale" loading="lazy">
+    <img src="/caiorosa/img/f-s4.jpg" alt="Autorretrato com placa For Sale" loading="lazy">
+    <img src="/caiorosa/img/f-s5.jpg" alt="Autorretrato com placa For Sale" loading="lazy">
+    <img src="/caiorosa/img/f-s6.jpg" alt="Autorretrato de costas com ficha" loading="lazy">
+  </section>
+
+  <section class="block">
+    <div class="row c2">
+      <img src="/caiorosa/img/f-b1.jpg" alt="Píer com a frase Moi l’Europe n’est pas mon centre" loading="lazy">
+      <img src="/caiorosa/img/f-b2.jpg" alt="Muralha de pedra à beira do mar" loading="lazy">
+      <img src="/caiorosa/img/f-b3.jpg" alt="Trilhos de porto com o poema da série" loading="lazy">
+      <img src="/caiorosa/img/f-b4.jpg" alt="Pés e tênis em calçada" loading="lazy">
+    </div>
+  </section>
+
+  <section class="block pair grid">
+    <figure><img src="/caiorosa/img/f-i1.jpg" alt="For Sale instalada na parede da galeria" loading="lazy"></figure>
+    <figure><img src="/caiorosa/img/f-i2.jpg" alt="Detalhe da instalação For Sale" loading="lazy">
+      <figcaption class="mono"><em>For Sale Series</em>, instalação da Galeria Lume na Paris Photo, 2023<br>14 fotografias, 65 × 44 cm cada</figcaption></figure>
+  </section>
+
+  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+</main>
+
+<!-- ================= VISÕES DO LUVEMBA ================= -->
+<main class="view series" id="v-visoes-do-luvemba">
+  <a class="back mono" href="#" data-home>Índice</a>
+  <div class="s-head grid">
+    <h1>Visões do Luvemba</h1>
+    <p class="mono"><em>Fotografia e videoinstalação</em><br>2023</p>
+  </div>
+
+  <section class="solo narrow grid"><figure><img src="/caiorosa/img/l-hero.jpg" alt="Figura mascarada com flor no rosto e manto laranja"></figure></section>
+
+  <section class="block text grid">
+    <p class="label mono">Sobre a série</p>
+    <div class="body">
+      <p>A série de fotografias e a videoinstalação criam um encontro entre a cosmologia Bakongo, onde é possível transitar entre o mundo dos mortos e ancestrais (intangível) e o mundo dos vivos (tangível) por meio de rituais, celebrações, máscaras e música.</p>
+      <p>As imagens buscam construir uma ponte direta entre a cultura do Bate-Bola, nascida nas zonas oeste e norte do Rio de Janeiro, e as culturas tradicionais da África Central que permanecem vivas até hoje na diáspora africana dentro do continente sul-americano.</p>
+      <p>Costumo dizer que essas imagens nascem de um sonho, onde a máscara, a dança e a música servem como ferramenta de acesso a mundos intangíveis.</p>
+    </div>
+  </section>
+
+  <section class="block row c3">
+    <img src="/caiorosa/img/l-1.jpg" alt="Dançarino mascarado sobre areia" loading="lazy">
+    <img src="/caiorosa/img/l-2.jpg" alt="Dançarino mascarado sobre areia" loading="lazy">
+    <img src="/caiorosa/img/l-3.jpg" alt="Dançarino mascarado sobre areia" loading="lazy">
+  </section>
+
+  <figure class="block bleed"><img src="/caiorosa/img/l-wide.jpg" alt="Duas figuras mascaradas sob um manto laranja num campo" loading="lazy"></figure>
+
+  <section class="block row c3">
+    <img src="/caiorosa/img/l-9.jpg" alt="Figura mascarada contra o céu" loading="lazy">
+    <img src="/caiorosa/img/l-10.jpg" alt="Figura mascarada contra o céu" loading="lazy">
+    <img src="/caiorosa/img/l-11.jpg" alt="Figura mascarada contra o céu" loading="lazy">
+  </section>
+
+  <section class="block pair grid">
+    <figure><img src="/caiorosa/img/l-7.jpg" alt="Dançarino em movimento sobre a grama" loading="lazy"></figure>
+    <figure><img src="/caiorosa/img/l-8.jpg" alt="Dançarino curvado sobre a grama" loading="lazy"></figure>
+  </section>
+
+  <section class="block row c3">
+    <img src="/caiorosa/img/l-4.jpg" alt="Dois dançarinos mascarados" loading="lazy">
+    <img src="/caiorosa/img/l-5.jpg" alt="Dois dançarinos mascarados" loading="lazy">
+    <img src="/caiorosa/img/l-6.jpg" alt="Duas figuras mascaradas" loading="lazy">
+  </section>
+
+  <section class="block">
+    <div class="row c2">
+      <img src="/caiorosa/img/l-v1.jpg" alt="Videoinstalação projetada em sala escura" loading="lazy">
+      <img src="/caiorosa/img/l-v2.jpg" alt="Videoinstalação projetada em sala escura" loading="lazy">
+      <img src="/caiorosa/img/l-v3.jpg" alt="Videoinstalação projetada em sala escura" loading="lazy">
+      <img src="/caiorosa/img/l-v4.jpg" alt="Projeção em fachada à noite" loading="lazy">
+    </div>
+    <p class="mono"><em>Visões do Luvemba</em>, videoinstalação, Festival Novas Frequências, Oi Futuro, Rio de Janeiro, 2023</p>
+  </section>
+
+  <section class="block text grid">
+    <p class="label mono">Ficha técnica</p>
+    <div class="body mono colophon">
+      <span>Direção e pesquisa</span><em>Caio Rosa</em>
+      <span>Câmera</span><em>Caio Rosa, Daniel Santos, Alessandro Albrecht</em>
+      <span>Assistente de câmera</span><em>Diego Ximenes</em>
+      <span>Performer</span><em>Antonica Wasaulua</em>
+      <span>Trilha sonora</span><em>Akin Ribeiro, Caio Rosa</em>
+      <span>Músicos</span><em>Caio Rosa, Spirito Santo</em>
+      <span>Mixagem</span><em>Akin Ribeiro, Rodrigo Savastano</em>
+      <span>Edição e cor</span><em>Rodrigo Savastano</em>
+    </div>
+  </section>
+
+  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+</main>
+
+<!-- ================= EUROPE ================= -->
+<main class="view series" id="v-europe-is-not-my-center">
+  <a class="back mono" href="#" data-home>Índice</a>
+  <div class="s-head grid">
+    <h1>Europe is Not My Center</h1>
+    <p class="mono"><em>Fotografia</em></p>
+  </div>
+  <section class="solo narrow grid"><figure><img src="/caiorosa/img/e-1.jpg" alt="Retrato com rede dourada sobre o rosto e camiseta lilás, fundo vermelho"></figure></section>
+  <figure class="block bleed"><img src="/caiorosa/img/e-2.jpg" alt="Conjunto de fotografias emolduradas em parede vinho" loading="lazy"></figure>
+  <div class="end"><a class="mono back" href="#" data-home style="margin:0">Índice</a></div>
+</main>
+
+<!-- ================= BIOGRAFIA ================= -->
+<main class="view page" id="v-biografia">
+  <div class="s-head grid">
+    <h1>Caio Rosa</h1>
+    <p class="mono">Rio de Janeiro, 1992<br>Vive e trabalha em São Paulo</p>
+  </div>
+  <section class="text grid">
+    <p class="label mono">Biografia</p>
+    <div class="body">
+      <p>Caio Rosa é artista visual, fotógrafo e pesquisador. Sua prática explora as relações entre fotografia, som, escultura e materiais de arquivo para investigar a memória, a transmissão cultural e as histórias por trás das imagens.</p>
+      <p>Inspirando-se em arquivos familiares, o trabalho de Rosa dialoga com as tradições culturais afro-brasileiras, entre Rio de Janeiro e Minas Gerais. Por meio de processos fotográficos experimentais, instrumentos musicais, esculturas e instalações sonoras, ele examina como o ritmo, a água e a transformação material podem atuar como portadores da memória histórica.</p>
+      <p>Seu trabalho foi apresentado em instituições e exposições como Pinacoteca de São Paulo, Museu de Vassouras, Rencontres d’Arles, Saatchi Gallery, Fotografiska Stockholm e Academia de Belas Artes de Viena. Em 2026, foi selecionado para a 15ª edição dos Rencontres de Bamako, Bienal Africana de Fotografia, no Mali. Recebeu o Prix Photo Aliança Francesa em 2024 e foi artista residente na Cité internationale des arts, em Paris.</p>
+    </div>
+  </section>
+
+  <section class="block cv">
+    <div><h2>Exposições</h2><ul>
+      <li><span class="mono">2025</span><span><i>Rios falam, Rios cantam</i> (individual), Galeria Lume, São Paulo. Curadoria de Cindy Sissokho</span></li>
+      <li><span class="mono">2025</span><span><i>Trabalho de Carnaval</i>, Pinacoteca de São Paulo. Curadoria de Ana Maia e Renato Menezes</span></li>
+      <li><span class="mono">2025</span><span><i>Chegança</i>, Museu de Vassouras, Rio de Janeiro. Curadoria de Marcelo Campos</span></li>
+      <li><span class="mono">2024</span><span><i>Palhaço, Quem é?!</i>, Paço das Artes, São Paulo</span></li>
+      <li><span class="mono">2024</span><span><i>Ecos Malês</i>, Casa das Histórias, Salvador</span></li>
+      <li><span class="mono">2024</span><span><i>RAW!</i>, Fortes D’Aloia &amp; Gabriel e Galeria Hoa, São Paulo</span></li>
+      <li><span class="mono">2024</span><span>Virada Cultural, Praça das Artes, São Paulo</span></li>
+      <li><span class="mono">2023</span><span><i>Watertower Favoriten</i>, Academia de Belas Artes de Viena</span></li>
+      <li><span class="mono">2023</span><span>ArtRio, Rio de Janeiro · Paris Photo, Paris</span></li>
+      <li><span class="mono">2021–22</span><span><i>The New Black Vanguard</i>, Rencontres d’Arles; Musée des Beaux-Arts, Le Locle; Fotografiska, Estocolmo; Saatchi Gallery, Londres</span></li>
+      <li><span class="mono">2021–22</span><span>SP-Arte, Rotas Brasileiras, São Paulo</span></li>
+      <li><span class="mono">2021–22</span><span><i>Abre Alas 17</i>, A Gentil Carioca, Rio de Janeiro</span></li>
+      <li><span class="mono">2021</span><span><i>Lance</i>, Centro Cultural São Paulo</span></li>
+      <li><span class="mono">2021</span><span><i>When The Lights Go Out</i>, HFA Space, Viena</span></li>
+      <li><span class="mono">2021</span><span><i>The Cage</i>, Viena</span></li>
+      <li><span class="mono">2021</span><span>Festival Arte Core, MAM Rio</span></li>
+      <li><span class="mono">2021</span><span><i>Visões do Luvemba</i>, Galeria Lume, São Paulo</span></li>
+    </ul></div>
+    <div><h2>Residências</h2><ul>
+      <li><span class="mono">2026</span><span>Terra Afefé, Chapada Diamantina, Bahia</span></li>
+      <li><span class="mono">2024–25</span><span>Cité internationale des arts, Paris</span></li>
+    </ul></div>
+    <div><h2>Prêmios e bolsas</h2><ul>
+      <li><span class="mono">2024</span><span>Prix Photo Aliança Francesa</span></li>
+      <li><span class="mono">2024</span><span>Bibliothèque nationale de France · Institut français · Réseau Diagonal</span></li>
+    </ul></div>
+    <div><h2>Coleções</h2><ul>
+      <li><span class="mono"></span><span>Pinacoteca de São Paulo</span></li>
+      <li><span class="mono"></span><span>Bibliothèque nationale de France</span></li>
+      <li><span class="mono"></span><span>Kareem Dean Collection</span></li>
+    </ul></div>
+  </section>
+</main>
+
+<!-- ================= PUBLICAÇÕES ================= -->
+<main class="view page" id="v-publicacoes">
+  <div class="s-head grid"><h1>Publicações</h1></div>
+
+  <section class="grid pair">
+    <figure><img src="/caiorosa/img/m-1.jpg" alt="Publicação Roots to Fruits aberta"></figure>
+    <div class="side">
+      <p class="mono" style="margin-bottom:var(--s1)">2024</p>
+      <p class="t" style="font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)">Memórias Congadeiras</p>
+      <p style="margin-bottom:var(--s3);max-width:52ch">A publicação reflete sobre o arquivo fotográfico do músico autodidata e etnomusicólogo Spirito Santo (1947), com foco na cultura das Congadas em Minas Gerais. No artigo, Caio Rosa e seu pai exploram as viagens de campo realizadas na década de 1970 e a relevância desse arquivo hoje.</p>
+      <div class="mono colophon">
+        <span>Autores</span><em>Spirito Santo, Caio Rosa</em>
+        <span>Edição</span><em>Juliana R. Senna, Mirelle van Tulder</em>
+        <span>Tradução</span><em>Juliana R. Senna</em>
+        <span>Revisão final</span><em>Tamara Hartman</em>
+        <span>Design gráfico</span><em>Mirelle van Tulder</em>
+        <span>Impressão</span><em>Riso Paradiso</em>
+        <span>Editora</span><em>Roots to Fruits, Amsterdam</em>
+        <span>Páginas</span><em>48</em>
+      </div>
+    </div>
+  </section>
+  <section class="block row c3">
+    <img src="/caiorosa/img/m-2.jpg" alt="Página dupla com fotografias de Congada" loading="lazy">
+    <img src="/caiorosa/img/m-3.jpg" alt="Página dupla com fotografias de Congada" loading="lazy">
+    <img src="/caiorosa/img/m-4.jpg" alt="Página dupla com fotografias de Congada" loading="lazy">
+  </section>
+
+  <section class="block grid pair" style="border-top:1px solid var(--line);padding-top:var(--s6)">
+    <figure><img src="/caiorosa/img/c-book1.jpg" alt="Capa do fotolivro The Cage" loading="lazy"></figure>
+    <div class="side">
+      <p class="mono" style="margin-bottom:var(--s1)">2021</p>
+      <p style="font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)">The Cage</p>
+      <p style="max-width:52ch">Fotolivro comissionado pela Adidas e pela Solebox Vienna, sobre os parques públicos e os jovens imigrantes de Viena, lançado com o tênis 4D Firecraft.</p>
+    </div>
+  </section>
+  <section class="block row c4">
+    <img src="/caiorosa/img/c-1.jpg" alt="Retrato em espelho de barbearia" loading="lazy">
+    <img src="/caiorosa/img/c-2.jpg" alt="Jovem sentado em sofá" loading="lazy">
+    <img src="/caiorosa/img/c-3.jpg" alt="Dois jovens em terreno urbano" loading="lazy">
+    <img src="/caiorosa/img/c-4.jpg" alt="Dois jovens lutando boxe" loading="lazy">
+  </section>
+</main>
+
+<!-- ================= SOM ================= -->
+<main class="view page" id="v-som">
+  <div class="s-head grid"><h1>Som</h1></div>
+  <section class="grid pair">
+    <figure><img src="/caiorosa/img/riodoce.jpg" alt="Arte do programa Rio Doce"></figure>
+    <div class="side">
+      <p class="mono" style="margin-bottom:var(--s1)">Desde 2020</p>
+      <p style="font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)">Rio Doce</p>
+      <p style="max-width:52ch;margin-bottom:var(--s3)">Programa mensal na NTS Radio, em Londres, sobre a música brasileira e seus deságues ao redor do mundo.</p>
+      <a class="mono" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px" href="https://www.nts.live/shows/rio-doce">Ouvir na NTS Radio</a>
+    </div>
+  </section>
+  <section class="block text grid">
+    <p class="label mono">Arquivo sonoro</p>
+    <div class="body"><p>As gravações de <a href="#rios-falam-rios-cantam" style="border-bottom:1px solid var(--ink)"><i>Rios falam, Rios cantam</i></a>, com Spirito Santo e cantos Vissungo de 1944, podem ser ouvidas na página da exposição.</p></div>
+  </section>
+</main>
+
+<!-- ================= VÍDEOS ================= -->
+<main class="view page" id="v-videos">
+  <div class="s-head grid"><h1>Vídeos</h1></div>
+  <ol class="links">
+    <li><a href="https://www.youtube.com/watch?v=Ud2hnB7hvFM"><span class="mono"></span><span class="t">O futuro está em seus olhos</span><span class="go">Direção de Caio Rosa · YouTube</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=yN4YIsXoAWI"><span class="mono"></span><span class="t">Choice, “Toda Noite”</span><span class="go">Produção de Jovem BlackSanta · YouTube</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=aExtQ4h-Gxc"><span class="mono"></span><span class="t">Choice, “Novo Milionário”</span><span class="go">Produção de Rafik ReeoMix e Velho Beats · YouTube</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=OLT_UTPnfAw"><span class="mono"></span><span class="t">OF COLOR TV, episódio 3</span><span class="go">YouTube</span></a></li>
+  </ol>
+</main>
+
+<!-- ================= TEXTOS ================= -->
+<main class="view page" id="v-textos">
+  <div class="s-head grid"><h1>Textos</h1></div>
+  <span class="group-label mono" style="margin-top:0">Textos curatoriais</span>
+  <ol class="links">
+    <li><a href="#rios-falam-rios-cantam"><span class="mono">2025</span><span class="t">Cindy Sissokho, sobre <i>Rios falam, Rios cantam</i></span><span class="go">Ler</span></a></li>
+  </ol>
+  <span class="group-label mono">Imprensa</span>
+  <ol class="links">
+    <li><div class="row-i"><span class="mono">2025</span><span class="t">“Caio Rosa Interview”</span><span class="go">Tokyo Radio</span></div></li>
+    <li><div class="row-i"><span class="mono">2024</span><span class="t">“A inegociável ironia de Caio Rosa”</span><span class="go">Revista ZUM</span></div></li>
+    <li><div class="row-i"><span class="mono">2024</span><span class="t">“Quantas imagens de Machado cabem na história?”</span><span class="go">Itaú Cultural</span></div></li>
+    <li><div class="row-i"><span class="mono">2023</span><span class="t">Editorial</span><span class="go">SP-Arte</span></div></li>
+    <li><div class="row-i"><span class="mono">2022</span><span class="t">“When The Lights Go Out”</span><span class="go">Terrible Magazine</span></div></li>
+    <li><div class="row-i"><span class="mono">2021</span><span class="t">“Carnaval Pasteurizado”</span><span class="go">Elle Brasil</span></div></li>
+    <li><div class="row-i"><span class="mono">2020</span><span class="t">“From Brazil, With Love and Optic Games”</span><span class="go">Nataal Media</span></div></li>
+  </ol>
+</main>
+
+<!-- ================= CONTATO ================= -->
+<main class="view page" id="v-contato">
+  <div class="s-head grid"><h1>Contato</h1></div>
+  <ol class="links">
+    <li><a href="https://galerialume.com"><span class="mono"></span><span class="t">Galeria Lume</span><span class="go">Representação · São Paulo</span></a></li>
+    <li><a href="https://www.instagram.com/rosapretanojardim/"><span class="mono"></span><span class="t">Instagram</span><span class="go">@rosapretanojardim</span></a></li>
+    <li><a href="https://www.nts.live/shows/rio-doce"><span class="mono"></span><span class="t">Rio Doce</span><span class="go">NTS Radio</span></a></li>
+  </ol>
+</main>
+
+<nav class="review mono" id="review" aria-label="Revisão interna: alternativas de home">
+  <span>Home</span>
+  <a href="#" data-h="">A<span>, só texto</span></a>
+  <a href="#home-b" data-h="home-b">B<span>, índice e obra</span></a>
+  <a href="#home-c" data-h="home-c">C<span>, sequência</span></a>
+</nav>
+
+<footer class="grid">
+  <span class="f1">Representado por <a href="https://galerialume.com">Galeria Lume</a>, São Paulo</span>
+  <span class="f2"><a href="https://www.instagram.com/rosapretanojardim/">Instagram</a></span>
+</footer>
+
+
+<audio id="player" preload="none"></audio>
+
+<script>
+(function(){
+  var views={'':'v-a','home-b':'v-b','home-c':'v-c','rios-falam-rios-cantam':'v-rios-falam-rios-cantam','for-sale':'v-for-sale','visoes-do-luvemba':'v-visoes-do-luvemba','europe-is-not-my-center':'v-europe-is-not-my-center','biografia':'v-biografia','publicacoes':'v-publicacoes','som':'v-som','videos':'v-videos','textos':'v-textos','contato':'v-contato'};
+  var review=document.getElementById('review');
+  var lastHome='';
+  function route(){
+    var h=location.hash.slice(1); if(!(h in views)) h='';
+    var id=views[h];
+    document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===id)});
+    var isHome=/^v-[abc]$/.test(id);
+    if(isHome) lastHome=h;
+    review.classList.toggle('on',isHome);
+    var pk=document.getElementById('peek'); if(pk) pk.classList.remove('on');
+    review.querySelectorAll('a').forEach(function(a){a.classList.toggle('cur',a.dataset.h===h)});
+    document.querySelectorAll('[data-home]').forEach(function(a){a.setAttribute('href','#'+lastHome)});
+    var sec={'videos':1,'som':1,'publicacoes':1,'textos':1,'biografia':1,'contato':1};
+    document.querySelectorAll('#mainnav a:not(.lang)').forEach(function(a){
+      var t=a.getAttribute('href').slice(1);
+      a.classList.toggle('cur', sec[h] ? t===h : a.hasAttribute('data-home'));
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route); route();
+
+  document.querySelectorAll('a[href="#"]:not([data-home]):not([data-h])').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault()});
+  });
+
+  /* A: imagem acompanha o cursor */
+  var fl=document.getElementById('float'), fimg=fl.querySelector('img'), fcap=fl.querySelector('p');
+  document.querySelectorAll('[data-float] a').forEach(function(a){
+    a.addEventListener('mouseenter',function(){fimg.src=a.dataset.img; fcap.textContent=a.dataset.cap; fl.classList.add('on')});
+    a.addEventListener('mouseleave',function(){fl.classList.remove('on')});
+    new Image().src=a.dataset.img;
+  });
+  document.getElementById('v-a').addEventListener('mousemove',function(e){
+    var w=fl.offsetWidth, hgt=fl.offsetHeight, x=e.clientX+32, y=e.clientY-hgt/2;
+    if(x+w>innerWidth-16) x=e.clientX-w-32;
+    y=Math.max(16,Math.min(y,innerHeight-hgt-16));
+    fl.style.transform='translate('+x+'px,'+y+'px)';
+  });
+
+
+  /* menu mobile */
+  var mb=document.querySelector('.menu-btn');
+  function closeMenu(){document.body.classList.remove('menu-open'); mb.setAttribute('aria-expanded','false'); mb.textContent='Menu'}
+  mb.addEventListener('click',function(){
+    var open=!document.body.classList.contains('menu-open');
+    document.body.classList.toggle('menu-open',open); mb.setAttribute('aria-expanded',open?'true':'false'); mb.textContent=open?'Fechar':'Menu';
+  });
+  document.querySelectorAll('#mainnav a').forEach(function(a){a.addEventListener('click',closeMenu)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeMenu()});
+
+  /* A no mobile: a obra do título no centro da tela aparece no canto */
+  var mq=matchMedia('(max-width:820px)'), peek=document.getElementById('peek'), pimg=peek.querySelector('img');
+  var tl=document.querySelectorAll('[data-float]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      if(!mq.matches||scrollY<40) return;
+      es.forEach(function(e){
+        var a=e.target;
+        if(e.isIntersecting){
+          tl.forEach(function(l){l.classList.add('focus'); l.querySelectorAll('a').forEach(function(x){x.classList.remove('act')})});
+          a.classList.add('act'); pimg.src=a.dataset.img; peek.classList.add('on');
+        }
+      });
+      if(!document.querySelector('[data-float] a.act')) peek.classList.remove('on');
+    },{rootMargin:'-46% 0px -46% 0px'});
+    document.querySelectorAll('[data-float] a').forEach(function(a){io.observe(a)});
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) peek.classList.remove('on')})}).observe(document.querySelector('footer'));
+    var lede=document.querySelector('#v-a .lede');
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){peek.classList.remove('on'); tl.forEach(function(l){l.classList.remove('focus'); l.querySelectorAll('a').forEach(function(x){x.classList.remove('act')})})}
+    })},{rootMargin:'0px 0px -40% 0px'}).observe(lede);
+  }
+
+  /* B: troca de obra */
+  var img=document.getElementById('stageImg'), cap=document.getElementById('stageCap');
+  var defSrc=img.getAttribute('src'), defCap=cap.textContent, t;
+  function show(src,c){
+    if(img.getAttribute('src')===src) return;
+    img.classList.add('swap'); clearTimeout(t);
+    t=setTimeout(function(){img.onload=function(){img.classList.remove('swap')}; img.src=src; cap.textContent=c},140);
+  }
+  document.querySelectorAll('.ilist a').forEach(function(a){
+    a.addEventListener('mouseenter',function(){show(a.dataset.img,a.dataset.cap)});
+    a.addEventListener('focus',function(){show(a.dataset.img,a.dataset.cap)});
+  });
+  document.querySelector('#v-b .col-list').addEventListener('mouseleave',function(){show(defSrc,defCap)});
+
+  /* arquivo sonoro */
+  var player=document.getElementById('player'), cur=null;
+  function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+  function reset(li){li.classList.remove('playing'); var d=li.querySelector('.d'); d.textContent=d.dataset.len; li.querySelector('.bar i').style.width='0'}
+  document.querySelectorAll('#tracks button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var li=b.parentNode;
+      if(cur===li){ if(player.paused){player.play().catch(function(){})} else {player.pause()} return; }
+      if(cur) reset(cur);
+      cur=li; li.classList.add('playing');
+      player.src=b.dataset.src; player.play().catch(function(){reset(li); cur=null});
+    });
+  });
+  player.addEventListener('timeupdate',function(){
+    if(!cur||!player.duration) return;
+    cur.querySelector('.bar i').style.width=(player.currentTime/player.duration*100)+'%';
+    cur.querySelector('.d').textContent=fmt(player.currentTime)+' / '+cur.querySelector('.d').dataset.len;
+  });
+  player.addEventListener('ended',function(){if(cur) reset(cur); cur=null});
+})();
+</script>
+</body>
+</html>
