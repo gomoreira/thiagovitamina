@@ -41,7 +41,7 @@
   let boost = 0, boostTarget = 0;   // intensidade do vazamento
   let lastY = scrollY, velocity = 0; // velocidade de scroll (px/frame suavizada)
   let hovering = false;
-  let analyser = null, wave = null, analyserL = null, analyserR = null, waveL = null, waveR = null, freq = null;
+  let analyser = null, wave = null, analyserL = null, analyserR = null, waveL = null, waveR = null, freq = null, specL = null, specR = null;
 
   /* ---------- grão: tile de ruído reposicionado a 24 qps ---------- */
   const gctx = grain.getContext("2d");
@@ -87,6 +87,18 @@
   };
   // três pistas: canal esquerdo, canal direito (área variável, espelhadas) e uma pista fina central que pulsa com o grave
   let bass = 0;
+  // espectro como o analisador do Fadel (Pro-Q): escala log 30 Hz–16 kHz, inclinação de 4,5 dB/oitava, curva suavizada.
+  // na faixa vertical: graves embaixo, agudos em cima.
+  const F0 = 30, F1 = 16000;
+  function specAmp(arr, frac) {
+    const sr = ctx.sampleRate, bins = arr.length, hz = sr / 2 / bins;
+    const f = F0 * Math.pow(F1 / F0, frac);
+    const lo = Math.max(1, Math.floor(f * Math.pow(2, -1 / 12) / hz)), hi = Math.max(lo, Math.ceil(f * Math.pow(2, 1 / 12) / hz));
+    let sum = 0, n = 0;
+    for (let i = lo; i <= hi && i < bins; i++) { sum += Math.pow(10, arr[i] / 10); n++; }
+    const db = 10 * Math.log10(sum / Math.max(1, n) + 1e-12) + 4.5 * Math.log2(f / 1000);
+    return Math.pow(Math.min(1, Math.max(0, (db + 112) / 58)), 1.4);
+  }
   function trackAmp(arr, y, step, fallbackShift) {
     if (arr && soundOn) {
       const i = Math.floor(((y + stripOffset * .25) / step) % arr.length + arr.length) % arr.length;
@@ -101,12 +113,22 @@
     sctx.globalCompositeOperation = "lighter";
     const step = 2 * u;
     const layers = [
-      { dx: -1.2 * u, max: 7 * u, arr: waveL, shift: 0,  rgb: [70, 190, 215], a: .26, k: .5 },
-      { dx: 1.2 * u,  max: 6 * u, arr: waveR, shift: 37, rgb: [255, 92, 40],  a: .24, k: .55 },
+      { dx: -1.2 * u, max: 7 * u, arr: specL, shift: 0,  rgb: [70, 190, 215], a: .26, k: .5 },
+      { dx: 1.2 * u,  max: 6 * u, arr: specR, shift: 37, rgb: [255, 92, 40],  a: .24, k: .55 },
     ];
-    for (let y = 0; y < h; y += step) {
+    const live = soundOn && specL;
+    if (live) {
+      // curva contínua por pista, suavizada entre linhas vizinhas
       for (const L of layers) {
-        const amp = trackAmp(L.arr, y, step, L.shift), half = amp * L.max;
+        const rows = Math.ceil(h / step), vals = new Float32Array(rows);
+        for (let r = 0; r < rows; r++) vals[r] = specAmp(L.arr, 1 - (r * step) / h);
+        for (let pass = 0; pass < 2; pass++) for (let r = 1; r < rows - 1; r++) vals[r] = (vals[r - 1] + vals[r] * 2 + vals[r + 1]) / 4;
+        L.vals = vals;
+      }
+    }
+    for (let y = 0, r = 0; y < h; y += step, r++) {
+      for (const L of layers) {
+        const amp = live ? L.vals[r] : trackAmp(null, y, step, L.shift), half = amp * L.max;
         sctx.fillStyle = `rgba(${L.rgb[0]},${L.rgb[1]},${L.rgb[2]},${L.a + amp * L.k})`;
         sctx.fillRect(cx + L.dx - half, y, half * 2, step * .7);
       }
@@ -160,7 +182,7 @@
     root.style.setProperty("--leak-boost", boost.toFixed(3));
     stripOffset += 14 + dy * 1.2;          // o filme corre sempre; o scroll acelera
     if (analyser && soundOn) {
-      analyserL.getByteTimeDomainData(waveL); analyserR.getByteTimeDomainData(waveR);
+      analyserL.getFloatFrequencyData(specL); analyserR.getFloatFrequencyData(specR);
       analyser.getByteFrequencyData(freq);
       let e = 0; for (let i = 1; i < 12; i++) e += freq[i]; e /= 11 * 255;
       bass += (e - bass) * .35;
@@ -183,6 +205,8 @@
     const split = ctx.createChannelSplitter(2);
     analyserL = ctx.createAnalyser(); analyserR = ctx.createAnalyser(); analyserL.fftSize = analyserR.fftSize = 1024;
     waveL = new Uint8Array(1024); waveR = new Uint8Array(1024);
+    analyserL.fftSize = analyserR.fftSize = 4096; analyserL.smoothingTimeConstant = analyserR.smoothingTimeConstant = .82;
+    specL = new Float32Array(2048); specR = new Float32Array(2048);
     master.connect(split); split.connect(analyserL, 0); split.connect(analyserR, 1);
     if (track) {
       // a faixa óptica desenha a onda da própria música
