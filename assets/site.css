@@ -614,3 +614,6 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .t.sa .win{left:6cqw;width:64cqw;top:20cqw;bottom:auto}
 .t.sa .panel{flex:none;aspect-ratio:16/9}
 .t.sa .ph{--w:18cqw;left:73cqw;top:22cqw}
+/* v12 · SoundCloud for Artists: wider window from the top, phone in front on the right */
+.t.sa .win{left:5cqw;width:84cqw;top:8cqw}
+.t.sa .ph{--w:21cqw;left:72cqw;top:19cqw}
