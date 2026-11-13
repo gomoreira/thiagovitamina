@@ -618,3 +618,5 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 /* v12 · SoundCloud for Artists: wider window from the top, phone in front on the right */
 .t.sa .win{left:5cqw;width:84cqw;top:8cqw}
 .t.sa .ph{--w:21cqw;left:72cqw;top:19cqw}
+
+.next a.open,.next a.open:visited{font-family:var(--text);font-size:var(--t-base);font-weight:400;letter-spacing:0;color:var(--link);text-decoration:underline;text-underline-offset:.2em}
