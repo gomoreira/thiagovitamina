@@ -557,11 +557,11 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .t.ti .scr img+img{opacity:0}
 .t.ti .p2 .scr img+img{transition-delay:.08s}.t.ti .p3 .scr img+img{transition-delay:.16s}
 @media (hover:hover){
-  .case:hover .t .bg,.live article:hover .t .bg{transform:scale(1.035)}
-  .case:hover .t .win,.live article:hover .t .win{transform:translateY(-1cqw)}
-  .case:hover .t .ph,.live article:hover .t .ph{transform:translateY(-2cqw)}
-  .live article:hover .t .panel img{transform:translateY(-44%)}
-  .case:hover .t.ti .scr img+img{opacity:1}
+  .t:hover .bg{transform:scale(1.035)}
+  .t:hover .win{transform:translateY(-1cqw)}
+  .t:hover .ph{transform:translateY(-2cqw)}
+  .t:hover .panel img{transform:translateY(-44%)}
+  .t.ti:hover .scr img+img{opacity:1}
 }
 .t.is-on .bg{transform:scale(1.035)}.t.is-on .win{transform:translateY(-1cqw)}.t.is-on .ph{transform:translateY(-2cqw)}
 .t.is-on .panel img{transform:translateY(-44%)}.t.ti.is-on .scr img+img{opacity:1}
@@ -571,5 +571,18 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .t.mi .win{left:10cqw;right:10cqw;width:auto;top:6.5cqw;bottom:-3cqw;display:flex;flex-direction:column;border-radius:1.25cqw 1.25cqw 0 0;padding-bottom:0}
 .t.mi .panel{flex:1;min-height:0;border-radius:.75cqw .75cqw 0 0}
 .media.thumb .t.mi .panel img{transform:translateY(0)}
-@media (hover:hover){.case:hover .t.mi .panel img{transform:translateY(-50cqw)}}
-.t.mi.is-on .panel img{transform:translateY(-50cqw)}
+@media (hover:hover){.media.thumb .t.mi:hover .panel img{transform:translateY(-50cqw)}}
+.media.thumb .t.mi.is-on .panel img{transform:translateY(-50cqw)}
+
+/* v10 · Allstate phones now bleed off the bottom edge, like every other case */
+.t.ti .ph{--w:19cqw}
+.t.ti .p1{left:19cqw;top:27cqw}.t.ti .p2{left:40.5cqw;top:23cqw}.t.ti .p3{left:62cqw;top:19cqw}
+/* SoundCloud for Artists: window bleeds off the bottom, phone beside it; hover scrolls the phone to Earn more */
+.t.sa .win{left:7cqw;width:62cqw;top:8cqw;bottom:-3cqw;display:flex;flex-direction:column;border-radius:1.25cqw 1.25cqw 0 0;padding-bottom:0}
+.t.sa .panel{flex:1;min-height:0;border-radius:.75cqw .75cqw 0 0;background:var(--night)}
+.t.sa .ph{--w:17cqw;left:72cqw;right:auto;top:24cqw}
+.media.thumb .t.sa .scr{background:var(--night)}
+.media.thumb .t.sa .scr img{height:auto;bottom:auto;object-fit:initial;transition:transform 1.8s var(--ease)}
+.media.thumb .t.sa .panel img{transform:none}
+@media (hover:hover){.media.thumb .t.sa:hover .scr img{transform:translateY(-46%)}}
+.media.thumb .t.sa.is-on .scr img{transform:translateY(-46%)}
