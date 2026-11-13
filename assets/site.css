@@ -566,3 +566,10 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .t.is-on .bg{transform:scale(1.035)}.t.is-on .win{transform:translateY(-1cqw)}.t.is-on .ph{transform:translateY(-2cqw)}
 .t.is-on .panel img{transform:translateY(-44%)}.t.ti.is-on .scr img+img{opacity:1}
 @media (prefers-reduced-motion:reduce){.t .m,.t .bg,.t img{transition:none!important}}
+
+/* v9 · MIR thumb: one wide window that bleeds off the bottom; hover scrolls the report to its first dark chapter */
+.t.mi .win{left:10cqw;right:10cqw;width:auto;top:6.5cqw;bottom:-3cqw;display:flex;flex-direction:column;border-radius:1.25cqw 1.25cqw 0 0;padding-bottom:0}
+.t.mi .panel{flex:1;min-height:0;border-radius:.75cqw .75cqw 0 0}
+.media.thumb .t.mi .panel img{transform:translateY(0)}
+@media (hover:hover){.case:hover .t.mi .panel img{transform:translateY(-50cqw)}}
+.t.mi.is-on .panel img{transform:translateY(-50cqw)}
