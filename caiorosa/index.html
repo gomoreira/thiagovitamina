@@ -52,7 +52,9 @@ ol,ul{list-style:none}
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
 
 /* cabeçalho */
-.top{padding:var(--s3) var(--gutter);align-items:baseline;font-family:var(--f-sans);font-size:var(--t-sans)}
+.top{position:sticky;top:0;z-index:20;background:var(--wall);padding:var(--s3) var(--gutter);align-items:baseline;font-family:var(--f-sans);font-size:var(--t-sans);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.top.away{transform:translateY(-100%)}
+.top.lifted{box-shadow:0 1px 0 var(--line)}
 .top .name{grid-column:1 / span 4;font-family:var(--f-serif);font-size:20px;letter-spacing:-.005em}
 .top nav{grid-column:5 / -1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:var(--s1) var(--s3)}
 .top nav a{color:var(--quiet);transition:color .15s}
@@ -63,18 +65,21 @@ ol,ul{list-style:none}
 .view.on{display:block}
 
 /* ---------- A · só texto ---------- */
-.home-a{padding:var(--s6) var(--gutter) var(--s6)}
+.home-a{padding:var(--s5) var(--gutter) var(--s6)}
 .lede{grid-column:1 / span 5;color:var(--quiet);font-size:var(--t-body);margin-bottom:var(--s6)}
 .works{grid-column:1 / -1}
 .tlist li + li{margin-top:clamp(2px,.35vw,6px)}
-.tlist a{display:inline;font-size:var(--t-display);line-height:1.04;letter-spacing:-.022em;transition:color .25s}
+.tlist a{display:inline;font-size:var(--t-display);line-height:1.04;letter-spacing:-.022em;transition:letter-spacing .45s cubic-bezier(.2,.7,.2,1)}
+.tlist a:hover,.tlist a:focus-visible,.tlist a.act{font-style:italic;letter-spacing:-.008em}
+.tlist a .yr{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.tlist a:hover .yr,.tlist a.act .yr{transform:translateX(.25em)}
 .tlist .yr{display:inline-block;margin-left:.5em;vertical-align:calc(var(--t-display) * .5);line-height:1}
-.tlist:has(a:hover) a{color:var(--faint)}
-.tlist a:hover,.tlist a:focus-visible{color:var(--ink)}
 .group-label{display:block;margin:var(--s6) 0 var(--s2)}
+.works > .tlist:first-child{margin-top:0}
 .tlist.small a{font-size:var(--t-title);line-height:1.18;letter-spacing:-.008em}
 .tlist.small .yr{vertical-align:calc(var(--t-title) * .42)}
-.float{position:fixed;left:0;top:0;width:clamp(220px,22vw,360px);pointer-events:none;opacity:0;transition:opacity .2s;z-index:5}
+.float{position:fixed;right:var(--gutter);top:50%;width:clamp(220px,22vw,340px);pointer-events:none;opacity:0;transform:translateY(-46%);transition:opacity .35s,transform .5s cubic-bezier(.2,.7,.2,1);z-index:5}
+.float.on{transform:translateY(-50%)}
 .float.on{opacity:1}
 .float img{width:100%;height:auto}
 .float p{margin-top:var(--s1)}
@@ -84,7 +89,7 @@ ol,ul{list-style:none}
 .home-b.on{display:grid}
 .home-b .lede{grid-column:1 / span 5;margin-bottom:var(--s5)}
 .home-b .col-list{grid-column:1 / span 5;grid-row:2}
-.home-b .stage{grid-column:7 / -1;grid-row:1 / span 2;position:sticky;top:var(--s3);display:flex;flex-direction:column;gap:var(--s1)}
+.home-b .stage{grid-column:7 / -1;grid-row:1 / span 2;position:sticky;top:calc(var(--s3) + 64px);display:flex;flex-direction:column;gap:var(--s1)}
 .ilist{border-top:1px solid var(--line)}
 .ilist li{border-bottom:1px solid var(--line)}
 .ilist a{display:grid;grid-template-columns:3.6em 1fr;column-gap:var(--s2);align-items:baseline;padding:var(--s2) 0 calc(var(--s2) + 2px)}
@@ -112,7 +117,7 @@ ol,ul{list-style:none}
 a.wall:hover .t{color:var(--quiet)}
 
 /* ---------- página de série ---------- */
-.series{padding:var(--s5) var(--gutter) 0}
+.series{padding:var(--s6) var(--gutter) 0}
 .back{display:inline-block;margin-bottom:var(--s6);transition:color .15s}
 .back:hover{color:var(--ink)}
 .s-head{align-items:end;margin-bottom:var(--s5)}
@@ -162,12 +167,15 @@ footer{padding:var(--s3) var(--gutter) var(--s4);border-top:1px solid var(--line
 footer .f1{grid-column:1 / span 6}
 footer .f2{grid-column:7 / -1;text-align:right}
 footer a{color:var(--ink)}
+footer .credit{margin-left:var(--s4);color:var(--quiet)}
+footer .credit a{color:var(--quiet);border-bottom:1px solid var(--line)}
+footer .credit a:hover{color:var(--ink)}
 footer a:hover{color:var(--quiet)}
 
 
 
 /* ---------- páginas de seção ---------- */
-.page{padding:var(--s5) var(--gutter) 0}
+.page{padding:var(--s6) var(--gutter) 0}
 .page .s-head h1{grid-column:1 / span 9}
 .cv{border-top:1px solid var(--line)}
 .cv > div{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);padding:var(--s3) 0;border-bottom:1px solid var(--line)}
@@ -207,7 +215,7 @@ body.lb-open{overflow:hidden}
 /* próxima série */
 .next{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);border-top:1px solid var(--line);margin-top:var(--s7);padding:var(--s3) 0 var(--s5);align-items:start}
 .next .back{grid-column:1 / span 4;margin:0}
-.next .to{grid-column:7 / -1;display:grid;grid-template-columns:minmax(0,1fr) 120px;column-gap:var(--s3);align-items:end}
+.next .to{grid-column:7 / -1;justify-self:stretch;display:grid;grid-template-columns:minmax(0,1fr) 120px;column-gap:var(--s3);align-items:end}
 .next .to img{width:120px;height:150px;object-fit:cover}
 .next .to .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em;transition:color .2s}
 .next .to:hover .t{color:var(--quiet)}
@@ -246,7 +254,7 @@ body.lb-open{overflow:hidden}
 .review a.cur{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 
 @media (max-width:1024px){
-  .top{position:sticky;top:0;background:var(--wall);z-index:20;padding-top:var(--s2);padding-bottom:var(--s2)}
+  .top{padding-top:var(--s2);padding-bottom:var(--s2)}
   .top .name{grid-column:1 / span 8}
   .menu-btn{display:block}
   .top nav{position:fixed;inset:0;z-index:30;background:var(--wall);display:none;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:0;padding:calc(var(--s6) + 8px) var(--gutter) var(--s4);overflow-y:auto}
@@ -271,9 +279,6 @@ body.lb-open{overflow:hidden}
   .ilist a{grid-template-columns:64px 1fr;align-items:start}
   .ilist .thumb{display:block;grid-row:1 / span 3;width:64px;height:80px;object-fit:cover}
   .ilist .y,.ilist .t{grid-column:2}
-  .tlist:has(a:hover) a{color:inherit}
-  .tlist.focus a{color:var(--faint)}
-  .tlist.focus a.act{color:var(--ink)}
   .float{display:none}
   .wall .pic,.wall .info,.wall.r .pic,.wall.r .info{grid-column:1 / -1;order:0}
   .wall .pic img,.wall.r .pic img{margin-left:0}
@@ -297,6 +302,8 @@ body.lb-open{overflow:hidden}
   .row.c3{grid-template-columns:repeat(2,1fr)}
   .row.c2{grid-template-columns:1fr}
   footer .f1,footer .f2{grid-column:1 / -1;text-align:left}
+  footer .f2{display:flex;justify-content:space-between}
+  footer .credit{margin-left:0}
   .review span,.review a span{display:none}
   .review a{padding:0 2px}
   .review::before{content:"Home"}
@@ -325,7 +332,6 @@ body.lb-open{overflow:hidden}
 <!-- ================= A · SÓ TEXTO ================= -->
 <main class="view home-a" id="v-a">
   <div class="grid">
-    <p class="lede">Rio de Janeiro, 1992. Vive e trabalha em São Paulo.</p>
     <div class="works">
       <ol class="tlist" data-float>
         <li><a href="#rios-falam-rios-cantam" data-img="/caiorosa/img/rios.jpg" data-cap="Cantando pro tempo, 2025">Rios falam, Rios cantam<span class="yr mono">2025</span></a></li>
@@ -334,10 +340,10 @@ body.lb-open{overflow:hidden}
         <li><a href="#europe-is-not-my-center" data-img="/caiorosa/img/europe.jpg" data-cap="Europe is Not My Center">Europe is Not My Center</a></li>
       </ol>
       <span class="group-label mono">Livros e rádio</span>
-      <ol class="tlist small" data-float>
+      <ol class="tlist" data-float>
         <li><a href="#publicacoes" data-img="/caiorosa/img/roots.jpg" data-cap="Memórias Congadeiras, Roots to Fruits, 2024">Memórias Congadeiras<span class="yr mono">2024</span></a></li>
         <li><a href="#publicacoes" data-img="/caiorosa/img/cage.jpg" data-cap="The Cage, 2021">The Cage<span class="yr mono">2021</span></a></li>
-        <li><a href="#som" data-img="/caiorosa/img/riodoce.jpg" data-cap="Rio Doce, NTS Radio">Rio Doce, NTS Radio<span class="yr mono">desde 2020</span></a></li>
+        <li><a href="#som" data-img="/caiorosa/img/riodoce.jpg" data-cap="Rio Doce, NTS Radio">Rio Doce, NTS Radio<span class="yr mono">2020–</span></a></li>
       </ol>
     </div>
   </div>
@@ -389,7 +395,6 @@ body.lb-open{overflow:hidden}
 
 <!-- ================= SÉRIE ================= -->
 <main class="view series" id="v-rios-falam-rios-cantam">
-  <a class="back mono" href="#" data-home>Índice</a>
 
   <div class="s-head grid">
     <h1>Rios falam, Rios cantam</h1>
@@ -510,12 +515,11 @@ body.lb-open{overflow:hidden}
     <p class="mono">Vistas da exposição, Galeria Lume, São Paulo, 2025</p>
   </section>
 
-  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#for-sale"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">For Sale</span></span><img src="/caiorosa/img/forsale.jpg" alt="" loading="lazy"></a></nav>
+  <nav class="next" aria-label="Navegação entre séries"><a class="to" href="#for-sale"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">For Sale</span></span><img src="/caiorosa/img/forsale.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= FOR SALE ================= -->
 <main class="view series" id="v-for-sale">
-  <a class="back mono" href="#" data-home>Índice</a>
   <div class="s-head grid">
     <h1>For Sale</h1>
     <p class="mono"><em>Série fotográfica</em><br>2023<br>Prix Photo Aliança Francesa 2024<br>Coleção Bibliothèque nationale de France</p>
@@ -561,12 +565,11 @@ body.lb-open{overflow:hidden}
       <figcaption class="mono"><em>For Sale Series</em>, instalação da Galeria Lume na Paris Photo, 2023<br>14 fotografias, 65 × 44 cm cada</figcaption></figure>
   </section>
 
-  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#visoes-do-luvemba"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Visões do Luvemba</span></span><img src="/caiorosa/img/luvemba.jpg" alt="" loading="lazy"></a></nav>
+  <nav class="next" aria-label="Navegação entre séries"><a class="to" href="#visoes-do-luvemba"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Visões do Luvemba</span></span><img src="/caiorosa/img/luvemba.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= VISÕES DO LUVEMBA ================= -->
 <main class="view series" id="v-visoes-do-luvemba">
-  <a class="back mono" href="#" data-home>Índice</a>
   <div class="s-head grid">
     <h1>Visões do Luvemba</h1>
     <p class="mono"><em>Fotografia e videoinstalação</em><br>2023</p>
@@ -632,19 +635,18 @@ body.lb-open{overflow:hidden}
     </div>
   </section>
 
-  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#europe-is-not-my-center"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Europe is Not My Center</span></span><img src="/caiorosa/img/europe.jpg" alt="" loading="lazy"></a></nav>
+  <nav class="next" aria-label="Navegação entre séries"><a class="to" href="#europe-is-not-my-center"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Europe is Not My Center</span></span><img src="/caiorosa/img/europe.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= EUROPE ================= -->
 <main class="view series" id="v-europe-is-not-my-center">
-  <a class="back mono" href="#" data-home>Índice</a>
   <div class="s-head grid">
     <h1>Europe is Not My Center</h1>
     <p class="mono"><em>Fotografia</em></p>
   </div>
   <section class="solo narrow grid"><figure><img src="/caiorosa/img/e-1.jpg" alt="Retrato com rede dourada sobre o rosto e camiseta lilás, fundo vermelho"></figure></section>
   <figure class="block bleed"><img src="/caiorosa/img/e-2.jpg" alt="Conjunto de fotografias emolduradas em parede vinho" loading="lazy"></figure>
-  <nav class="next" aria-label="Navegação entre séries"><a class="mono back" href="#" data-home>Índice</a><a class="to" href="#rios-falam-rios-cantam"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Rios falam, Rios cantam</span></span><img src="/caiorosa/img/r-boi.jpg" alt="" loading="lazy"></a></nav>
+  <nav class="next" aria-label="Navegação entre séries"><a class="to" href="#rios-falam-rios-cantam"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Rios falam, Rios cantam</span></span><img src="/caiorosa/img/r-boi.jpg" alt="" loading="lazy"></a></nav>
 </main>
 
 <!-- ================= BIOGRAFIA ================= -->
@@ -855,7 +857,7 @@ body.lb-open{overflow:hidden}
 
 <footer class="grid">
   <span class="f1">Representado por <a href="https://galerialume.com">Galeria Lume</a>, São Paulo</span>
-  <span class="f2"><a href="https://www.instagram.com/rosapretanojardim/">Instagram</a></span>
+  <span class="f2"><a href="https://www.instagram.com/rosapretanojardim/">Instagram</a><span class="credit">Site por <a href="https://thiagovitamina.com">Thiago Vitamina</a></span></span>
 </footer>
 
 
@@ -886,7 +888,7 @@ body.lb-open{overflow:hidden}
       var t=a.getAttribute('href').slice(1);
       a.classList.toggle('cur', sec[h] ? t===h : a.hasAttribute('data-home'));
     });
-    window.scrollTo(0,0);
+    window.scrollTo(0,0); var tp=document.querySelector('.top'); if(tp) tp.classList.remove('away');
   }
   window.addEventListener('hashchange',route); route();
 
@@ -901,13 +903,20 @@ body.lb-open{overflow:hidden}
     a.addEventListener('mouseleave',function(){fl.classList.remove('on')});
     new Image().src=a.dataset.img;
   });
-  document.getElementById('v-a').addEventListener('mousemove',function(e){
-    var w=fl.offsetWidth, hgt=fl.offsetHeight, x=e.clientX+32, y=e.clientY-hgt/2;
-    if(x+w>innerWidth-16) x=e.clientX-w-32;
-    y=Math.max(16,Math.min(y,innerHeight-hgt-16));
-    fl.style.transform='translate('+x+'px,'+y+'px)';
-  });
 
+
+
+
+  /* cabeçalho: some ao descer, volta ao subir */
+  var top=document.querySelector('.top'), lastY=scrollY;
+  addEventListener('scroll',function(){
+    var y=scrollY;
+    if(document.body.classList.contains('menu-open')||document.body.classList.contains('lb-open')) return;
+    top.classList.toggle('lifted', y>8);
+    if(y>lastY+4 && y>120) top.classList.add('away');
+    else if(y<lastY-4 || y<120) top.classList.remove('away');
+    lastY=y;
+  },{passive:true});
 
   /* menu mobile */
   var mb=document.querySelector('.menu-btn');
@@ -936,10 +945,10 @@ body.lb-open{overflow:hidden}
     },{rootMargin:'-46% 0px -46% 0px'});
     document.querySelectorAll('[data-float] a').forEach(function(a){io.observe(a)});
     new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) peek.classList.remove('on')})}).observe(document.querySelector('footer'));
-    var lede=document.querySelector('#v-a .lede');
+    var lede=document.querySelector('#v-a .works');
     new IntersectionObserver(function(es){es.forEach(function(e){
       if(e.isIntersecting){peek.classList.remove('on'); tl.forEach(function(l){l.classList.remove('focus'); l.querySelectorAll('a').forEach(function(x){x.classList.remove('act')})})}
-    })},{rootMargin:'0px 0px -40% 0px'}).observe(lede);
+    })},{rootMargin:'0px 0px -92% 0px'}).observe(lede);
   }
 
   /* B: troca de obra */
