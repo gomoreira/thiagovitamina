@@ -586,3 +586,23 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .media.thumb .t.sa .panel img{transform:none}
 @media (hover:hover){.media.thumb .t.sa:hover .scr img{transform:translateY(-46%)}}
 .media.thumb .t.sa.is-on .scr img{transform:translateY(-46%)}
+
+/* CRIAAA thumb: the landing behind, an artist site made with it in front; hover turns the artist site to its works page */
+.t.cr .win{width:54cqw;bottom:-3cqw;display:flex;flex-direction:column;border-radius:1.25cqw 1.25cqw 0 0;padding-bottom:0}
+.t.cr .w1{left:6cqw;top:6cqw}
+.t.cr .w2{left:40cqw;top:16cqw;transition-delay:.08s}
+.t.cr .panel{flex:1;min-height:0;position:relative;border-radius:.75cqw .75cqw 0 0}
+.media.thumb .t.cr .panel img{transform:none}
+.media.thumb .t.cr .w2 .panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top;transition:opacity .6s var(--ease)}
+.media.thumb .t.cr .w2 .panel img+img{opacity:0}
+@media (hover:hover){.media.thumb .t.cr:hover .w2 .panel img+img{opacity:1}}
+.media.thumb .t.cr.is-on .w2 .panel img+img{opacity:1}
+
+/* Pernambucanas thumb: two phones, the first question and the account created; hover moves each one step on */
+.t.pn .ph{--w:20cqw;right:auto}
+.t.pn .p1{left:28cqw;top:18cqw}.t.pn .p2{left:52cqw;top:24cqw;transition-delay:.08s}
+.media.thumb .t.pn .scr img{transition:opacity .6s var(--ease)}
+.media.thumb .t.pn .scr img+img{opacity:0}
+.media.thumb .t.pn .p2 .scr img+img{transition-delay:.12s}
+@media (hover:hover){.media.thumb .t.pn:hover .scr img+img{opacity:1}}
+.media.thumb .t.pn.is-on .scr img+img{opacity:1}
