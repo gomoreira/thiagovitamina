@@ -606,3 +606,11 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .media.thumb .t.pn .p2 .scr img+img{transition-delay:.12s}
 @media (hover:hover){.media.thumb .t.pn:hover .scr img+img{opacity:1}}
 .media.thumb .t.pn.is-on .scr img+img{opacity:1}
+/* v11 · bigger phones where they stand alone; SoundCloud for Artists window sized to the hero so no black band shows */
+.t.ti .ph{--w:22cqw}
+.t.ti .p1{left:14cqw;top:22cqw}.t.ti .p2{left:39cqw;top:17cqw}.t.ti .p3{left:64cqw;top:12cqw}
+.t.pn .ph{--w:24cqw}
+.t.pn .p1{left:24cqw;top:14cqw}.t.pn .p2{left:52cqw;top:21cqw}
+.t.sa .win{left:6cqw;width:64cqw;top:20cqw;bottom:auto}
+.t.sa .panel{flex:none;aspect-ratio:16/9}
+.t.sa .ph{--w:18cqw;left:73cqw;top:22cqw}
