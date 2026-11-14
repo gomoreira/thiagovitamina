@@ -10,5 +10,5 @@ for f in ['index.html','trade-in.html','mir.html','sc4a.html','criaaa.html','per
          '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
          '<meta name="theme-color" content="#ffffff">\n'+head.strip()+'\n</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n'+body.strip()+'\n</body>\n</html>\n')
     open(os.path.join(OUT,f),'w').write(doc)
-open(os.path.join(OUT,'vercel.json'),'w').write('{\n  "cleanUrls": true,\n  "trailingSlash": false\n}\n')
+shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','vercel.json'),os.path.join(OUT,'vercel.json'))
 print('built',OUT)

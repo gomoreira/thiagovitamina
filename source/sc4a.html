@@ -23,9 +23,8 @@
 <script src="/assets/analytics.js"></script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&display=swap">
+<link rel="preload" href="/assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/funnel-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
 <script src="assets/site.js" defer></script>
@@ -187,7 +186,7 @@ figcaption{margin-top:var(--sp-2)}
     <div class="col">
       <figure class="demo homeframe small" aria-labelledby="r1-cap">
         <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span>
-          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 1, scroll inside the frame"><img src="img/sc4a/r1-full.jpg" alt="The first prototype, an academy: a hero promising to master SoundCloud success, paid courses with levels and prices, student testimonials and a one-time offer for full access." width="1440" height="4418" loading="lazy"></div>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 1, scroll inside the frame"><img src="img/sc4a/r1-full.webp" alt="The first prototype, an academy: a hero promising to master SoundCloud success, paid courses with levels and prices, student testimonials and a one-time offer for full access." width="1440" height="4418" loading="lazy"></div>
         </div>
         <figcaption class="label" id="r1-cap">Round 1. Scroll inside the frame.</figcaption>
       </figure>
@@ -199,7 +198,7 @@ figcaption{margin-top:var(--sp-2)}
     <div class="col">
       <figure class="demo homeframe small" aria-labelledby="r2-cap">
         <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 2 · Lovable</span></span>
-          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 2, scroll inside the frame"><img src="img/sc4a/r2-full.jpg" alt="The second prototype, Creator Hub: a dark hero with a sound wave, then one section each for Upload, Get Heard and Get Paid, each with a lead guide and smaller guides, then plans and questions." width="1440" height="6356" loading="lazy"></div>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 2, scroll inside the frame"><img src="img/sc4a/r2-full.webp" alt="The second prototype, Creator Hub: a dark hero with a sound wave, then one section each for Upload, Get Heard and Get Paid, each with a lead guide and smaller guides, then plans and questions." width="1440" height="6356" loading="lazy"></div>
         </div>
         <figcaption class="label" id="r2-cap">Round 2. Scroll inside the frame.</figcaption>
       </figure>
@@ -220,7 +219,7 @@ figcaption{margin-top:var(--sp-2)}
   <div class="split">
     <figure class="demo homeframe" aria-labelledby="r3-cap">
         <div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span>
-          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 3, scroll inside the frame"><img src="img/sc4a/r3-full.jpg" alt="The third prototype: the SoundCloud logo, a live show in the hero, real SoundCloud videos as guides in one card pattern across the three steps, and the real Artist and Artist Pro plans." width="1440" height="7531" loading="lazy"></div>
+          <div class="bw-scroll" tabindex="0" aria-label="Prototype round 3, scroll inside the frame"><img src="img/sc4a/r3-full.webp" alt="The third prototype: the SoundCloud logo, a live show in the hero, real SoundCloud videos as guides in one card pattern across the three steps, and the real Artist and Artist Pro plans." width="1440" height="7531" loading="lazy"></div>
         </div>
         <figcaption class="label" id="r3-cap">Round 3, with real content. Scroll inside the frame.</figcaption>
       </figure>
@@ -234,9 +233,9 @@ figcaption{margin-top:var(--sp-2)}
 <section class="wrap block" aria-labelledby="ev">
   <div class="head"><h2 class="sec-title" id="ev">Five versions</h2></div>
   <div class="evo">
-      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span><img src="img/sc4a/r1-hero.jpg" alt="Round 1 hero: Master your SoundCloud success, with illustrations and course numbers" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 1. An academy.</figcaption></figure>
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 1 · Lovable</span></span><img src="img/sc4a/r1-hero.webp" alt="Round 1 hero: Master your SoundCloud success, with illustrations and course numbers" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 1. An academy.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 2 · Lovable</span></span><img src="img/sc4a/r2-hero.jpg" alt="Round 2 hero: Welcome to Creator Hub over a sound wave, with Upload, Get Heard and Get Paid in the navigation" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 2. The three steps.</figcaption></figure>
-      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span><img src="img/sc4a/r3-hero.jpg" alt="Round 3 hero: Welcome to Creator Hub over a photo of an artist on stage" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 3. Real content.</figcaption></figure>
+      <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Round 3 · Lovable</span></span><img src="img/sc4a/r3-hero.webp" alt="Round 3 hero: Welcome to Creator Hub over a photo of an artist on stage" width="1440" height="810" loading="lazy"></div><figcaption class="label">Round 3. Real content.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>Final prototype · Framer</span></span><img src="img/sc4a/framer-hero.jpg" alt="Final prototype hero on the new brand: Your sound. Your scene. Your moment., next to artist videos" width="1440" height="810" loading="lazy"></div><figcaption class="label">Final prototype. The new brand.</figcaption></figure>
       <figure><div class="bw"><span class="bw-bar" aria-hidden="true"><i></i><i></i><i></i><span>artists.soundcloud.com</span></span><img src="img/sc4a/live-hero.jpg" alt="Live site hero: Your sound. Your scene. Your moment., surrounded by artist videos" width="1440" height="810" loading="lazy"></div><figcaption class="label">Live. Built in Webflow.</figcaption></figure>
   </div>
@@ -256,7 +255,7 @@ figcaption{margin-top:var(--sp-2)}
   <div class="head"><h2 class="sec-title" id="mob">Mobile</h2></div>
   <div class="split">
     <figure class="phone-fig">
-      <div class="phone-panel"><div class="phone-wrap scroll"><div class="phone scroll" tabindex="0" aria-label="The live site on a phone, scroll inside the frame"><img src="img/sc4a/m-live.jpg" alt="The live site on a phone: the hero line stacked over artist videos, the earn more banner, the big numbers, creator spotlights and the first Get started guide." width="750" height="7600" loading="lazy"></div></div></div>
+      <div class="phone-panel"><div class="phone-wrap scroll"><div class="phone scroll" tabindex="0" aria-label="The live site on a phone, scroll inside the frame"><img src="img/sc4a/m-live.webp" alt="The live site on a phone: the hero line stacked over artist videos, the earn more banner, the big numbers, creator spotlights and the first Get started guide." width="750" height="7600" loading="lazy"></div></div></div>
       <figcaption class="label">The live site on a phone. Scrolls.</figcaption>
     </figure>
     <div class="body">

@@ -23,9 +23,8 @@
 <script src="/assets/analytics.js"></script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&display=swap">
+<link rel="preload" href="/assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/funnel-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
 <script src="assets/site.js" defer></script>
@@ -186,7 +185,7 @@ figcaption{margin-top:var(--sp-2)}
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/07-phone.png" alt="Now type your mobile number" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Phone</figcaption></figure>
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/08-document-choose.png" alt="We need a photo of one of your documents: RG or CPF" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Document</figcaption></figure>
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/09-face-tip-3.png" alt="Tip before the selfie: center your face in the frame" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Selfie tip</figcaption></figure>
-      <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/09-face-capture.jpg" alt="Selfie camera with an oval guide for the face" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Selfie</figcaption></figure>
+      <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/09-face-capture.webp" alt="Selfie camera with an oval guide for the face" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Selfie</figcaption></figure>
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/10-terms.png" alt="Accept the user agreement and privacy policy to create the account" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Terms</figcaption></figure>
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/11-password.png" alt="Create a password, with the rules listed under the field" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Password</figcaption></figure>
       <figure><div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/12-account-created.png" alt="Your account was created, with optional next steps: delivery address and preferred store" width="375" height="812" loading="lazy"></div></div><figcaption class="label">Account ready</figcaption></figure>
@@ -214,8 +213,8 @@ figcaption{margin-top:var(--sp-2)}
       <p>The RG fields from the old flow became one photo. Tips come before the camera, and a review comes after: did it come out well? Confirm it or take another. The selfie works the same way.</p>
     </div>
     <div class="pair">
-      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/08-document-capture.jpg" alt="Camera framing an ID card" width="375" height="812" loading="lazy"></div></div>
-      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/08-document-review.jpg" alt="Did it come out well? The photo of the ID with continue and take another" width="375" height="812" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/08-document-capture.webp" alt="Camera framing an ID card" width="375" height="812" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/08-document-review.webp" alt="Did it come out well? The photo of the ID with continue and take another" width="375" height="812" loading="lazy"></div></div>
     </div>
   </div>
 </section>
@@ -229,7 +228,7 @@ figcaption{margin-top:var(--sp-2)}
     </div>
     <div class="pair">
       <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/12-account-created.png" alt="Your account was created, with delivery address and preferred store as optional next steps" width="375" height="812" loading="lazy"></div></div>
-      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/14-store-selected.png" alt="Preferred store chosen on a map, with the option to change it" width="375" height="812" loading="lazy"></div></div>
+      <div class="phone-wrap"><div class="phone"><img src="img/pernambucanas/14-store-selected.webp" alt="Preferred store chosen on a map, with the option to change it" width="375" height="812" loading="lazy"></div></div>
     </div>
   </div>
   <div class="col" aria-labelledby="out">
@@ -255,12 +254,12 @@ figcaption{margin-top:var(--sp-2)}
     </div>
   </div>
   <figure class="wide">
-    <img src="img/pernambucanas/home-sketches.png" alt="Five wireframes testing ways to show the account and the card together: stacked, side by side and overlapping" width="1680" height="726" loading="lazy">
+    <img src="img/pernambucanas/home-sketches.webp" alt="Five wireframes testing ways to show the account and the card together: stacked, side by side and overlapping" width="1680" height="726" loading="lazy">
     <figcaption class="label">Wireframes: ways to show the account and the card together.</figcaption>
   </figure>
   <div class="pair wide">
-    <figure><div class="phone-wrap long"><div class="phone long" tabindex="0" aria-label="Digital account home, scroll inside the frame"><img src="img/pernambucanas/home-account.png" alt="Digital account home in yellow: balance, Pix, investments, pay bills, insurance, latest transactions, the card bill, shortcuts and help" width="375" height="1450" loading="lazy"></div></div><figcaption class="label">Account, scrolls</figcaption></figure>
-    <figure><div class="phone-wrap long"><div class="phone long" tabindex="0" aria-label="Card home, scroll inside the frame"><img src="img/pernambucanas/home-card.png" alt="Card home in dark blue: the same layout as the account home, with a button to see the digital account balance" width="375" height="1450" loading="lazy"></div></div><figcaption class="label">Card, scrolls</figcaption></figure>
+    <figure><div class="phone-wrap long"><div class="phone long" tabindex="0" aria-label="Digital account home, scroll inside the frame"><img src="img/pernambucanas/home-account.webp" alt="Digital account home in yellow: balance, Pix, investments, pay bills, insurance, latest transactions, the card bill, shortcuts and help" width="375" height="1450" loading="lazy"></div></div><figcaption class="label">Account, scrolls</figcaption></figure>
+    <figure><div class="phone-wrap long"><div class="phone long" tabindex="0" aria-label="Card home, scroll inside the frame"><img src="img/pernambucanas/home-card.webp" alt="Card home in dark blue: the same layout as the account home, with a button to see the digital account balance" width="375" height="1450" loading="lazy"></div></div><figcaption class="label">Card, scrolls</figcaption></figure>
   </div>
 </section>
 

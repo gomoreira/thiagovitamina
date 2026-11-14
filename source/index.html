@@ -23,9 +23,8 @@
 <script src="/assets/analytics.js"></script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="format-detection" content="telephone=no,email=no,address=no">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400..800&family=Funnel+Sans:wght@400..600&display=swap">
+<link rel="preload" href="/assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/funnel-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/ink.js" defer></script>
 <script src="assets/site.js" defer></script>
@@ -431,11 +430,13 @@ function render(){
 }
 
 /* pointer */
-let ptr=null,ghost=true,gt=0,lastT=0;
+let ptr=null,ghost=true,gt=0,lastT=0,idle=0,looping=false,lastPaint=0,slow=0,lowPower=false;
+const GHOST_FOR=8,DRY_AFTER=6;   // the demo brush paints for a few seconds, then the ink dries and the simulation sleeps
+function wakeLoop(){if(started&&!looping){looping=true;lastT=performance.now();requestAnimationFrame(loop)}}
 function toUv(e){const r=paint.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]}
 function moveTo(e){if(!started)return;const [x,y]=toUv(e);
   if(ghost){ghost=false;hint.textContent='Paint to see the work'}
-  if(ptr){ptr.dx=(x-ptr.x);ptr.dy=(y-ptr.y)}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true}
+  if(ptr){ptr.dx=(x-ptr.x);ptr.dy=(y-ptr.y)}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true;idle=0;wakeLoop()}
 paint.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')moveTo(e)});
 paint.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')ptr=null});
 /* touch: paint while the finger drags, even when the page scrolls under it */
@@ -443,22 +444,31 @@ paint.addEventListener('touchstart',e=>{ptr=null;moveTo(e.touches[0])},{passive:
 paint.addEventListener('touchmove',e=>moveTo(e.touches[0]),{passive:true});
 paint.addEventListener('touchend',()=>{ptr=null},{passive:true});
 if(matchMedia('(hover: none)').matches)hint.textContent='Drag your finger to paint';
-paint.addEventListener('pointerdown',e=>{if(!started)return;ghost=false;const [x,y]=toUv(e);
+paint.addEventListener('pointerdown',e=>{if(!started)return;ghost=false;idle=0;wakeLoop();const [x,y]=toUv(e);
   for(let i=0;i<6;i++){const a=Math.random()*6.28;splat(x,y,Math.cos(a)*900,Math.sin(a)*900,1.4,.0032)}});
 
 function loop(now){
-  if(!started)return;
-  const dt=Math.min(.0166,(now-lastT)/1000||.016);lastT=now;
-  if(visible&&ready){
-    if(rise<1){rise=Math.min(1,rise+1/40);drawText()}
-    if(ghost&&!reduce&&rise>=1){gt+=dt;const b=1-HH/H,x=.5+.34*Math.sin(gt*1.15),y=b+(1-b)*(.5+.2*Math.sin(gt*1.9+1));
-      const nx=.5+.34*Math.sin((gt+dt)*1.15),ny=b+(1-b)*(.5+.2*Math.sin((gt+dt)*1.9+1));splat(x,y,(nx-x)*4200,(ny-y)*4200,.7,.0034)}
+  if(!started){looping=false;return}
+  const real=Math.min(.25,(now-lastT)/1000||.016),dt=Math.min(.0166,real);lastT=now;
+  if(!visible){looping=false;return}
+  if(ready){
+    if(rise<1){rise=lowPower?1:Math.min(1,rise+real/.66);drawText()}   // the letters rise in about two thirds of a second, on any device
+    if(!lowPower&&gt>.6&&gt<3.5&&real>.07&&++slow>=4){lowPower=true;ghost=false}   // a device that can't keep up gets still ink: it wakes only under a finger or cursor
+    const demo=ghost&&!reduce&&!lowPower&&rise>=1&&gt<GHOST_FOR;
+    if(demo){gt+=real;const b=1-HH/H,x=.5+.34*Math.sin(gt*1.15),y=b+(1-b)*(.5+.2*Math.sin(gt*1.9+1));
+      const nx=.5+.34*Math.sin((gt+dt)*1.15),ny=b+(1-b)*(.5+.2*Math.sin((gt+dt)*1.9+1));splat(x,y,(nx-x)*4200,(ny-y)*4200,.7,.0034);idle=0}
     if(ptr&&ptr.moved){const sp=Math.hypot(ptr.dx,ptr.dy);splat(ptr.x,ptr.y,ptr.dx*5000,ptr.dy*5000,.6+Math.min(.9,sp*25),.0026+Math.min(.004,sp*.06));ptr.moved=false}
-    step(dt);render();
+    if(!demo)gt+=real;
+    idle+=real;
+    const wet=idle<DRY_AFTER||rise<1;
+    if(wet)step(dt);
+    const vidLive=!lowPower&&hasVid&&hv.readyState>=2&&!hv.paused;
+    if(wet||(vidLive&&now-lastPaint>66)){render();lastPaint=now}   // once dry, only the video moves: 15 fps is enough
+    if(!wet&&!vidLive){looping=false;return}   // dried and nothing moving: sleep until the next touch
   }
   requestAnimationFrame(loop);
 }
-new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&hasVid)hv.play().catch(()=>{});else hv.pause()}).observe(paint);
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible){if(hasVid)hv.play().catch(()=>{});wakeLoop()}else hv.pause()}).observe(paint);
 
 async function play(){
   const id=++run;seq.hidden=false;
@@ -473,7 +483,7 @@ function finish(){
   hv.src=clips[0];hv.play().catch(()=>{});
   rise=reduce?1:0;drawText();
   if(reduce){started=true;for(let i=0;i<8;i++)splat(.6+Math.random()*.15,.45+Math.random()*.1,0,0,1.2,.004);step(.016);render();started=false;return}
-  if(!started){started=true;lastT=performance.now();requestAnimationFrame(loop)}
+  if(!started){started=true;wakeLoop()}
 }
 seq.addEventListener('click',()=>{run++;finish()});
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(ready&&(Math.abs(paint.clientWidth-W)>2||Math.abs(paint.clientHeight-H)>40)){initGL()}},150)});

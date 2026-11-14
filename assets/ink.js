@@ -64,7 +64,7 @@ function ink(el,theme){
   function render(){const u=use('show',[1/cv.width,1/cv.height]);gl.uniform1i(u.uDye,bind(0,dye.r.t));gl.uniform3fv(u.uBg,T.bg);gl.uniform3fv(u.uRim,T.rim);gl.uniform3fv(u.uFill,T.fill);blit(null)}
   init();render();
   if(reduce)return;
-  let ptr=null,visible=false,running=false,last=0,idle=0;
+  let ptr=null,visible=false,running=false,last=0,idle=0,slow=0;
   const uv=e=>{const r=el.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]};
   function move(e){const [x,y]=uv(e);if(ptr){ptr.dx=x-ptr.x;ptr.dy=y-ptr.y}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true;idle=0;wake()}
   el.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')move(e)});
@@ -73,9 +73,10 @@ function ink(el,theme){
   el.addEventListener('touchmove',e=>move(e.touches[0]),{passive:true});
   el.addEventListener('touchend',()=>{ptr=null},{passive:true});
   function loop(now){
-    const dt=Math.min(.0166,(now-last)/1000||.016);last=now;
+    const real=(now-last)/1000||.016,dt=Math.min(.0166,real);last=now;
     if(ptr&&ptr.moved){const sp=Math.hypot(ptr.dx,ptr.dy);splat(ptr.x,ptr.y,ptr.dx*5000,ptr.dy*5000,.6+Math.min(.9,sp*25),.0022+Math.min(.004,sp*.06));ptr.moved=false}
-    step(dt);render();idle+=dt;
+    step(dt);render();idle+=Math.min(real,.25);if(real>.07&&++slow>=4&&!ptr)idle=6;   // a device that can't keep up lets the ink rest at once   // dries on the wall clock, so slow devices sleep on time too
+   
     if(visible&&idle<6){requestAnimationFrame(loop)}else running=false;   // sleeps after the ink has dried
   }
   function wake(){if(!running&&visible){running=true;last=performance.now();requestAnimationFrame(loop)}}
