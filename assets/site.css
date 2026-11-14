@@ -620,3 +620,4 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .t.sa .ph{--w:21cqw;left:72cqw;top:19cqw}
 
 .next a.open,.next a.open:visited{font-family:var(--text);font-size:var(--t-base);font-weight:400;letter-spacing:0;color:var(--link);text-decoration:underline;text-underline-offset:.2em}
+.demo.homeframe{min-width:0;max-width:100%}.homeframe .bw{max-width:100%}
