@@ -268,7 +268,7 @@ body.lb-open{overflow:hidden}
 }
 @media (max-width:820px){
   .peek{display:block}
-  .review{position:static;margin:0 var(--gutter) var(--s4);justify-content:flex-start}
+  .review{left:var(--gutter);right:var(--gutter);bottom:var(--s2);justify-content:center;padding:10px 12px}
   .block{margin-top:var(--s6)}
   .back{margin-bottom:var(--s5)}
   .lede,.home-b .lede,.home-b .col-list{grid-column:1 / -1}
@@ -304,9 +304,9 @@ body.lb-open{overflow:hidden}
   footer .f1,footer .f2{grid-column:1 / -1;text-align:left}
   footer .f2{display:flex;justify-content:space-between}
   footer .credit{margin-left:0}
-  .review span,.review a span{display:none}
-  .review a{padding:0 2px}
-  .review::before{content:"Home"}
+  .review a span{display:none}
+  .review a{padding:0 6px}
+  .peek{bottom:calc(var(--s2) + 56px)}
   :root{--t-display:clamp(34px,9vw,44px)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
