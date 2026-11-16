@@ -170,7 +170,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--link);outline-offse
 .reach a.val:visited{color:var(--paper)}
 .reach a.val .arw{width:.5em;height:.5em;transition:transform .25s ease}
 .reach a.val:hover .arw{transform:translate(4px,-4px)}
-.reach a.val:hover{color:var(--visited-dark)}
+/* contact lines stay white in every state: the ink can sit under them, and lilac over plum fails AAA */
+.reach a.val:hover,.reach a.val:active,.reach a.val:focus{color:var(--paper)}
+@media (hover:hover){.reach a.val:hover{text-decoration:underline;text-decoration-color:var(--link-dark);text-decoration-thickness:2px;text-underline-offset:.15em}}
 .copybtn{font-family:var(--mono);font-size:var(--t-sm);letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--paper);border:1px solid var(--paper);padding:var(--sp-2) var(--sp-3);cursor:pointer}
 .copybtn:hover{background:var(--paper);color:var(--ink)}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-2) var(--sp-4);padding-block:var(--sp-7) var(--sp-4)}
@@ -721,3 +723,5 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 /* Bauhaus: the video grows into the band while the modules break apart */
 .bh-reveal{transform-origin:50% 100%;will-change:transform}
 @media (prefers-reduced-motion:reduce){.bh-reveal{transform:none!important}}
+
+.reach a.val:visited,.reach a.val:visited:hover{color:var(--paper)}
