@@ -729,3 +729,10 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 @media (prefers-reduced-motion:reduce){.bh-reveal{transform:none!important}}
 
 .reach a.val:visited,.reach a.val:visited:hover{color:var(--paper)}
+
+/* About: the experience rows draw their line and settle one after another */
+.rv-on .xp details{position:relative;border-bottom-color:transparent}
+.rv-on .xp details::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--rule);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+.rv-on .xp summary{opacity:0;transform:translateY(var(--sp-3));transition:opacity .6s cubic-bezier(.2,.8,.2,1) calc(var(--d,0s) + .1s),transform .6s cubic-bezier(.2,.8,.2,1) calc(var(--d,0s) + .1s)}
+.rv-on .xp details.in::after{transform:none}
+.rv-on .xp details.in summary{opacity:1;transform:none}

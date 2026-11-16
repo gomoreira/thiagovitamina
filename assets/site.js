@@ -96,11 +96,12 @@ let t0=performance.now();draw(0);setInterval(()=>draw((performance.now()-t0)/100
 
 /* second act: each case and each live site rises into place once, when it enters the screen */
 (()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
-const items=[...document.querySelectorAll('.case,.live article')];if(!items.length)return;
+const items=[...document.querySelectorAll('.case,.live article,.xp details')];if(!items.length)return;
 document.documentElement.classList.add('rv-on');
-items.forEach(el=>{[...(el.matches('.case')?el.querySelector('.copy').children:el.children)].forEach((c,i)=>c.style.setProperty('--i',i))});
+items.forEach(el=>{if(el.matches('details'))return;[...(el.matches('.case')?el.querySelector('.copy').children:el.children)].forEach((c,i)=>c.style.setProperty('--i',i))});
 const io=new IntersectionObserver(es=>{
   const enter=es.filter(e=>e.isIntersecting).map(e=>e.target).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);
-  enter.forEach((el,k)=>{if(el.closest('.live'))el.style.setProperty('--d',(k*.12)+'s');el.classList.add('in');io.unobserve(el)})},
+  enter.sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top||0);
+  enter.forEach((el,k)=>{if(el.closest('.live'))el.style.setProperty('--d',(k*.12)+'s');if(el.matches('details'))el.style.setProperty('--d',(k*.09)+'s');el.classList.add('in');io.unobserve(el)})},
   {rootMargin:'0px 0px -12% 0px',threshold:.01});
 items.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.88)el.classList.add('in');else io.observe(el)});})();
