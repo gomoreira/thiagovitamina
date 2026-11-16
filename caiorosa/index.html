@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Caio Rosa</title>
 <meta name="description" content="Caio Rosa, Rio de Janeiro, 1992. Fotografia, som, escultura e arquivo.">
@@ -129,6 +129,12 @@ figure{display:flex;flex-direction:column;gap:var(--s1)}
 .solo.r figure{grid-column:6 / span 7}
 .solo.narrow figure{grid-column:4 / span 5}
 .solo img{max-height:86vh;width:auto}
+.feature{display:block;margin:0 var(--gutter) var(--s6);color:inherit}
+.feature img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.feature .f-cap{display:flex;flex-direction:column;gap:6px;margin-top:var(--s2)}
+.feature .t{font-size:var(--t-title);line-height:1.1;transition:color .2s}
+.feature:hover .t,.feature:focus-visible .t{color:var(--quiet)}
+.solo img.fit{max-height:calc(100svh - var(--hh,72px) - 7rem)}
 .row{display:grid;gap:var(--col-gap)}
 .row.c2{grid-template-columns:repeat(2,1fr)}
 .row.c3{grid-template-columns:repeat(3,1fr)}
@@ -145,6 +151,8 @@ figure{display:flex;flex-direction:column;gap:var(--s1)}
 .text summary::-webkit-details-marker{display:none}
 .text details[open] summary{display:none}
 .text details .more{display:flex;flex-direction:column;gap:1em}
+.text details .ficha{margin-top:var(--s2)}
+.text details[open] summary.keep{display:inline-block;margin-bottom:var(--s2)}
 .text .sig{font-style:italic;color:var(--quiet)}
 
 .tracks{border-top:1px solid var(--line);margin-top:var(--s3)}
@@ -413,10 +421,10 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 <main class="view home-b grid" id="v-b">
   <div class="col-list">
     <ol class="ilist" id="ilist">
-      <li><a href="#rios-falam-rios-cantam" data-img="/caiorosa/img/rios.jpg" data-cap="Cantando pro tempo, 2025"><img class="thumb" src="/caiorosa/img/rios.jpg" alt=""><span class="y mono">2025</span><span class="t">Rios falam, Rios cantam</span><span class="m mono">Galeria Lume, São Paulo</span></a></li>
-      <li><a href="#for-sale" data-img="/caiorosa/img/forsale.jpg" data-cap="For Sale, 2023"><img class="thumb" src="/caiorosa/img/forsale.jpg" alt=""><span class="y mono">2023</span><span class="t">For Sale</span><span class="m mono">Coleção Bibliothèque nationale de France</span></a></li>
-      <li><a href="#visoes-do-luvemba" data-img="/caiorosa/img/luvemba.jpg" data-cap="Visões do Luvemba, 2023"><img class="thumb" src="/caiorosa/img/luvemba.jpg" alt=""><span class="y mono">2023</span><span class="t">Visões do Luvemba</span><span class="m mono">Fotografia e videoinstalação</span></a></li>
-      <li><a href="#europe-is-not-my-center" data-img="/caiorosa/img/europe.jpg" data-cap="Europe is Not My Center"><img class="thumb" src="/caiorosa/img/europe.jpg" alt=""><span class="y mono"></span><span class="t">Europe is Not My Center</span><span class="m mono">Fotografia</span></a></li>
+      <li><a href="#rios-falam-rios-cantam" data-img="/caiorosa/img/rios.jpg" data-cap="Cantando pro tempo, 2025"><img class="thumb" src="/caiorosa/img/rios.jpg" alt=""><span class="y mono">2025</span><span class="t">Rios falam, Rios cantam</span></a></li>
+      <li><a href="#for-sale" data-img="/caiorosa/img/forsale.jpg" data-cap="For Sale, 2023"><img class="thumb" src="/caiorosa/img/forsale.jpg" alt=""><span class="y mono">2023</span><span class="t">For Sale</span></a></li>
+      <li><a href="#visoes-do-luvemba" data-img="/caiorosa/img/luvemba.jpg" data-cap="Visões do Luvemba, 2023"><img class="thumb" src="/caiorosa/img/luvemba.jpg" alt=""><span class="y mono">2023</span><span class="t">Visões do Luvemba</span></a></li>
+      <li><a href="#europe-is-not-my-center" data-img="/caiorosa/img/europe.jpg" data-cap="Europe is Not My Center, 2021"><img class="thumb" src="/caiorosa/img/europe.jpg" alt=""><span class="y mono">2021</span><span class="t">Europe is Not My Center</span></a></li>
     </ol>
     <span class="group-label mono">Livros e rádio</span>
     <ol class="ilist">
@@ -426,8 +434,8 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     </ol>
   </div>
   <aside class="stage" aria-live="polite">
-    <div class="frame"><img id="stageImg" src="/caiorosa/img/hero.jpg" alt="Boi de Machado, 2025"></div>
-    <p class="mono" id="stageCap">Boi de Machado, 2025</p>
+    <div class="frame"><img id="stageImg" src="/caiorosa/img/r-capa.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume"></div>
+    <p class="mono" id="stageCap">Rios falam, Rios cantam, Galeria Lume, 2025</p>
   </aside>
 </main>
 
@@ -518,6 +526,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <figcaption class="mono"><em>Marimba “Nzaidi Mbila” – Rio que engole todos os rios</em>, 2025, com Spirito Santo<br>Madeira, aço carbono oxidado, couro, corda e tubos de PVC<br>58 × 227 × 60 cm</figcaption>
   </figure>
 
+  <section class="block solo r grid">
+    <figure>
+      <img src="/caiorosa/img/r-marimba2.jpg" alt="Marimba suspensa diante de parede vermelha, vista lateral" loading="lazy">
+      <figcaption class="mono"><em>Marimba “Nzaidi Mbila”</em>, vista da exposição, Galeria Lume, 2025</figcaption>
+    </figure>
+  </section>
+
   <section class="block text grid">
     <p class="label mono">Arquivo sonoro</p>
     <div class="body">
@@ -543,7 +558,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 
   <section class="block solo narrow grid">
     <figure>
-      <img src="/caiorosa/img/r-memorias.jpg" alt="Memórias Póstumas de São João da Chapada, têxtil suspenso" loading="lazy">
+      <img class="fit" src="/caiorosa/img/r-memorias.jpg" alt="Memórias Póstumas de São João da Chapada, têxtil suspenso" loading="lazy">
       <figcaption class="mono"><em>Memórias Póstumas de São João da Chapada</em>, 2025<br>Tecido, fotografia, fios e flores Sempre-Vivas</figcaption>
     </figure>
   </section>
@@ -566,6 +581,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
       <img src="/caiorosa/img/r-b.jpg" alt="Fotografia de arquivo com desenho em linhas brancas" loading="lazy">
       <img src="/caiorosa/img/r-e.jpg" alt="Fotografia de grupo de Congada" loading="lazy">
     </div>
+  </section>
+
+  <section class="block solo l grid">
+    <figure>
+      <img src="/caiorosa/img/r-ca5558.jpg" alt="Visitante diante de fotografia de arquivo emoldurada" loading="lazy">
+      <figcaption class="mono">Vista da exposição, Galeria Lume, 2025</figcaption>
+    </figure>
   </section>
 
   <section class="block">
@@ -598,8 +620,8 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <p class="label mono">Sobre a série</p>
     <div class="body">
       <p class="poem">“Fui Oriente de uma bússola sem norte.<br>Para alguns o outro.<br>A mais-valia da pele brilhante, controversa como o tempo.<br>Para muitos o leite preto que alimenta, o jardim sempre-viva.<br>Absolvição de toda luz e cor.<br>A travessia, o encontro, a passagem.”</p>
-      <p><i>For Sale Series</i> consiste em autorretratos que trazem frases, características físicas, expressões corporais e códigos culturais que visam questionar os estereótipos históricos relacionados à imagem da população negra. A série traz para o presente discussões que partem da minha experiência e reflexão sobre a prática da fotografia, violência estatal, o mercado de arte, saúde mental e a multiplicidade cultural e performática do corpo negro no mundo.</p>
-      <p>O trabalho foi premiado pelo Prix Photo Aliança Francesa 2024 e hoje faz parte da coleção de fotografia contemporânea da Biblioteca Nacional da França.</p>
+      <p>A <i>For Sale Series</i> é composta por autorretratos e documentos de arquivo que incorporam frases, poesia, características físicas, expressões corporais e códigos culturais, buscando questionar estereótipos históricos associados à imagem das pessoas negras. A série traz para o presente discussões que emergem da minha própria experiência e de reflexões sobre a prática fotográfica, a violência de Estado, o mercado de arte, a saúde mental e a multiplicidade cultural e performativa do corpo negro no mundo.</p>
+      <p>O trabalho recebeu o Prix Photo Aliança Francesa 2024 e atualmente integra a coleção de fotografia contemporânea da Biblioteca Nacional da França (BnF).</p>
     </div>
   </section>
 
@@ -622,10 +644,16 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </section>
 
   <section class="block pair grid">
-    <figure><img src="/caiorosa/img/f-i1.jpg" alt="For Sale instalada na parede da galeria" loading="lazy"></figure>
+    <figure><img src="/caiorosa/img/f-i1.jpg" alt="For Sale instalada na parede da galeria" loading="lazy">
+      <figcaption class="mono"><em>For Sale Series</em>, Galeria da Aliança Francesa</figcaption></figure>
     <figure><img src="/caiorosa/img/f-i2.jpg" alt="Detalhe da instalação For Sale" loading="lazy">
-      <figcaption class="mono"><em>For Sale Series</em>, instalação da Galeria Lume na Paris Photo, 2023<br>14 fotografias, 65 × 44 cm cada</figcaption></figure>
+      <figcaption class="mono"><em>For Sale Series</em>, SP-Arte</figcaption></figure>
   </section>
+
+  <figure class="block bleed">
+    <img src="/caiorosa/img/f-paris.jpg" alt="For Sale instalada em parede vermelha na Paris Photo" loading="lazy">
+    <figcaption class="mono"><em>For Sale Series</em>, instalação da Galeria Lume na Paris Photo, 2023<br>14 fotografias, 65 × 44 cm cada</figcaption>
+  </figure>
 
   <nav class="next" aria-label="Navegação entre séries"><a class="to" href="#visoes-do-luvemba"><span><span class="mono" style="display:block;margin-bottom:6px">Próxima série</span><span class="t">Visões do Luvemba</span></span><img src="/caiorosa/img/luvemba.jpg" alt="" loading="lazy"></a></nav>
 </main>
@@ -704,7 +732,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 <main class="view series" id="v-europe-is-not-my-center">
   <div class="s-head grid">
     <h1>Europe is Not My Center</h1>
-    <p class="mono"><em>Fotografia</em></p>
+    <p class="mono"><em>Fotografia</em><br>2021<br><em>The New Black Vanguard</em>, Rencontres d’Arles, Arles, FR; Musée des Beaux-Arts, Le Locle, CH; Fotografiska, Stockholm, SE; Saatchi Gallery, London, UK</p>
   </div>
   <section class="solo narrow grid"><figure><img src="/caiorosa/img/e-1.jpg" alt="Retrato com rede dourada sobre o rosto e camiseta lilás, fundo vermelho"></figure></section>
   <figure class="block bleed"><img src="/caiorosa/img/e-2.jpg" alt="Conjunto de fotografias emolduradas em parede vinho" loading="lazy"></figure>
@@ -796,7 +824,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <div class="side">
       <p class="mono" style="margin-bottom:var(--s1)">2021</p>
       <p style="font-size:var(--t-title);line-height:1.1;margin-bottom:var(--s2)">The Cage</p>
-      <p style="max-width:52ch">Retratos de jovens imigrantes nos parques públicos de Viena. Encomenda da Adidas e da Solebox Vienna para o lançamento do tênis 4D Firecraft.</p>
+      <p style="max-width:52ch">Retratos de jovens imigrantes nos parques públicos de Viena. Comissionado pela Adidas e Solebox para o lançamento do tênis 4D Firecraft.</p>
     </div>
   </section>
   <section class="block row c2">
@@ -807,7 +835,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <img src="/caiorosa/img/c-1.jpg" alt="Retrato em espelho de barbearia" loading="lazy">
     <img src="/caiorosa/img/c-2.jpg" alt="Jovem sentado em sofá" loading="lazy">
     <img src="/caiorosa/img/c-3.jpg" alt="Dois jovens em terreno urbano" loading="lazy">
-    <img src="/caiorosa/img/c-4.jpg" alt="Dois jovens lutando boxe" loading="lazy">
+    <img src="/caiorosa/img/c-new.jpg" alt="Jovem recostado junto à janela" loading="lazy">
   </section>
 </main>
 
@@ -825,20 +853,27 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     </div>
   </section>
   <section class="block row c3">
-    <img src="/caiorosa/img/rd-1.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
-    <img src="/caiorosa/img/rd-2.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
-    <img src="/caiorosa/img/rd-3.jpg" alt="Arte de episódio do Rio Doce" loading="lazy">
+    <img src="/caiorosa/img/rd-4.jpg" alt="Arte do episódio de 27 de setembro do Rio Doce" loading="lazy">
+    <img src="/caiorosa/img/rd-5.jpg" alt="Arte do episódio Moacir Santos Special do Rio Doce" loading="lazy">
+    <img src="/caiorosa/img/rd-6.jpg" alt="Arte do episódio de 25 de outubro do Rio Doce" loading="lazy">
   </section>
 
   <section class="block text grid">
-    <p class="label mono">Arquivo sonoro<br><a href="#rios-falam-rios-cantam" style="color:var(--ink)">Rios falam, Rios cantam</a></p>
+    <p class="label mono">Instalação sonora<br><a href="#rios-falam-rios-cantam" style="color:var(--ink)">Rios falam, Rios cantam</a></p>
     <div class="body">
-      <p>Gravações de Spirito Santo, Caio Rosa e músicos colaboradores, com cantos de trabalho Vissungo das minas de Diamantina, Minas Gerais, 1944.</p>
+      <p>Peças sonoras <i>Mahsai</i>, <i>Dikenga</i> e <i>Luvemba</i> em conversa com o arquivo sonoro de Vissungueiros naturais de Diamantina, Minas Gerais, gravado em 1944.</p>
       <ol class="tracks">
-        <li><button type="button" data-src="/caiorosa/audio/faixa-3.mp3"><span class="n">01</span><span class="t">Cantos de mineração, 1944</span><span class="d" data-len="3:08">3:08</span><span class="bar"><i></i></span></button></li>
-        <li><button type="button" data-src="/caiorosa/audio/faixa-1.mp3"><span class="n">02</span><span class="t">Dikenga</span><span class="d" data-len="8:08">8:08</span><span class="bar"><i></i></span></button></li>
-        <li><button type="button" data-src="/caiorosa/audio/faixa-2.mp3"><span class="n">03</span><span class="t">Mahsay</span><span class="d" data-len="7:51">7:51</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/a-lavra.mp3"><span class="n">01</span><span class="t">A Lavra</span><span class="d" data-len="28:17">28:17</span><span class="bar"><i></i></span></button></li>
       </ol>
+      <details>
+        <summary class="keep">Ficha técnica</summary>
+        <div class="mono colophon ficha">
+          <span>Gravação e mixagem</span><em>Ricardo Calafate, Estúdio Umuarana, Rio de Janeiro</em>
+          <span>Mahsai</span><em>Criação e direção musical de Spirito Santo. Marimba e kalimba: Spirito Santo. Marimba base: Caio Rosa. Alaúde: Victor Hugo Rosa. Baixo: Carlito Gepe. Violinha de lata: Caio Rosa. Chorumela artesanal e clarinete: Jônatas Conrado. Percussão: Dilmar José, Elly Werneck. Kayembe e violoncelo: Renan Rimou</em>
+          <span>Dikenga</span><em>Criação e direção musical de Spirito Santo. Pluriarco: Spirito Santo. Baixo: Carlito Gepe. Violinha: Caio Rosa. Percussão (dum dum, caxixi): Elly Werneck. Violoncelo: Renan Rimou. Sax: Jônatas Conrado. Coro e garrafas: todos</em>
+          <span>Luvemba</span><em>Criação e direção musical de Caio Rosa. Marimbas: Caio Rosa, Spirito Santo. Berimboloko: Spirito Santo. Produção musical: Caio Rosa, Akin Ribeiro</em>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -856,18 +891,15 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 <!-- ================= VÍDEOS ================= -->
 <main class="view page" id="v-videos">
   <div class="s-head grid"><h1>Vídeos</h1></div>
+  <a class="feature" href="#visoes-do-luvemba">
+    <img src="/caiorosa/img/l-v1.jpg" alt="Videoinstalação Visões do Luvemba projetada em sala escura">
+    <span class="f-cap"><span class="t">Visões do Luvemba</span><span class="mono">Videoinstalação, Festival Novas Frequências, Oi Futuro, Rio de Janeiro, 2023 · Ver a série</span></span>
+  </a>
   <section class="vids">
     <figure><div class="vid" data-yt="Ud2hnB7hvFM"><button type="button" aria-label="Assistir O futuro está em seus olhos"><img src="https://i.ytimg.com/vi/Ud2hnB7hvFM/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">O futuro está em seus olhos</span><br><span class="mono">Direção de Caio Rosa</span></figcaption></figure>
     <figure><div class="vid" data-yt="yN4YIsXoAWI"><button type="button" aria-label="Assistir Choice, “Toda Noite”"><img src="https://i.ytimg.com/vi/yN4YIsXoAWI/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Toda Noite”</span><br><span class="mono">Videoclipe, produção musical de Jovem BlackSanta</span></figcaption></figure>
     <figure><div class="vid" data-yt="aExtQ4h-Gxc"><button type="button" aria-label="Assistir Choice, “Novo Milionário”"><img src="https://i.ytimg.com/vi/aExtQ4h-Gxc/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Novo Milionário”</span><br><span class="mono">Videoclipe, produção musical de Rafik ReeoMix e Velho Beats</span></figcaption></figure>
     <figure><div class="vid" data-yt="OLT_UTPnfAw"><button type="button" aria-label="Assistir OF COLOR TV, episódio 3"><img src="https://i.ytimg.com/vi/OLT_UTPnfAw/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">OF COLOR TV, episódio 3</span><br><span class="mono">Com Prince Gurinya</span></figcaption></figure>
-  </section>
-  <section class="block">
-    <a href="#visoes-do-luvemba" class="row c2" style="display:grid">
-      <img src="/caiorosa/img/l-v1.jpg" alt="Videoinstalação Visões do Luvemba projetada em sala escura" loading="lazy">
-      <img src="/caiorosa/img/l-v3.jpg" alt="Videoinstalação Visões do Luvemba projetada em sala escura" loading="lazy">
-    </a>
-    <p class="mono"><em>Visões do Luvemba</em>, videoinstalação, Oi Futuro, Rio de Janeiro, 2023</p>
   </section>
 </main>
 
@@ -883,12 +915,12 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </section>
   <span class="group-label mono" style="margin-top:var(--s6)">Imprensa</span>
   <ol class="links">
-    <li><div class="row-i"><span class="mono">2025</span><span class="t">“Caio Rosa Interview”</span><span class="go">Tokyo Radio</span></div></li>
-    <li><div class="row-i"><span class="mono">2024</span><span class="t">“A inegociável ironia de Caio Rosa”</span><span class="go">Revista ZUM</span></div></li>
-    <li><div class="row-i"><span class="mono">2024</span><span class="t">“Quantas imagens de Machado cabem na história?”</span><span class="go">Itaú Cultural</span></div></li>
-    <li><div class="row-i"><span class="mono">2023</span><span class="t">Editorial</span><span class="go">SP-Arte</span></div></li>
-    <li><div class="row-i"><span class="mono">2022</span><span class="t">“When The Lights Go Out”</span><span class="go">Terrible Magazine</span></div></li>
-    <li><div class="row-i"><span class="mono">2021</span><span class="t">“Carnaval Pasteurizado”</span><span class="go">Elle Brasil</span></div></li>
+    <li><a class="ext" href="https://open.spotify.com/episode/0f5Fm6WHUQfSQZUUHCWILj"><span class="mono">2025</span><span class="t">“Caio Rosa Interview”</span><span class="go">Tokyo Radio</span></a></li>
+    <li><a class="ext" href="https://revistazum.com.br/entrevistas/a-inegociavel-ironia-de-caio-rosa/"><span class="mono">2024</span><span class="t">“A inegociável ironia de Caio Rosa”</span><span class="go">Revista ZUM</span></a></li>
+    <li><a class="ext" href="https://www.youtube.com/watch?v=dGDJfwgITbA"><span class="mono">2024</span><span class="t">“Quantas imagens de Machado cabem na história?”</span><span class="go">Itaú Cultural</span></a></li>
+    <li><a class="ext" href="https://www.sp-arte.com/editorial/eustaquio-neves-em-conversa-com-caio-rosa"><span class="mono">2023</span><span class="t">Eustáquio Neves em conversa com Caio Rosa</span><span class="go">SP-Arte</span></a></li>
+    <li><a class="ext" href="https://www.studioterrible.com/shop/terrible-magazine-no03"><span class="mono">2022</span><span class="t">“When The Lights Go Out”</span><span class="go">Terrible Magazine</span></a></li>
+    <li><a class="ext" href="https://assets.elle.com.br/wp-content/revistadigital08/carnaval/"><span class="mono">2021</span><span class="t">“Carnaval Pasteurizado”</span><span class="go">Elle Brasil</span></a></li>
     <li><a class="ext" href="https://nataal.com/from-brazil-with-love-rosa"><span class="mono">2020</span><span class="t">“From Brazil, With Love and Optic Games”</span><span class="go">Nataal</span></a></li>
   </ol>
 </main>
@@ -1023,7 +1055,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     {h:'rios-falam-rios-cantam',t:'Rios falam, Rios cantam',y:'2025',m:'Exposição individual, Galeria Lume',img:'/caiorosa/img/rios.jpg',big:'/caiorosa/img/r-boi.jpg'},
     {h:'for-sale',t:'For Sale',y:'2023',m:'Coleção Bibliothèque nationale de France',img:'/caiorosa/img/forsale.jpg',big:'/caiorosa/img/forsale.jpg'},
     {h:'visoes-do-luvemba',t:'Visões do Luvemba',y:'2023',m:'Fotografia e videoinstalação',img:'/caiorosa/img/luvemba.jpg',big:'/caiorosa/img/luvemba.jpg'},
-    {h:'europe-is-not-my-center',t:'Europe is Not My Center',y:'',m:'Fotografia',img:'/caiorosa/img/europe.jpg',big:'/caiorosa/img/europe.jpg'},
+    {h:'europe-is-not-my-center',t:'Europe is Not My Center',y:'2021',m:'Fotografia',img:'/caiorosa/img/europe.jpg',big:'/caiorosa/img/europe.jpg'},
     {h:'publicacoes',t:'Memórias Congadeiras',y:'2024',m:'Publicação, Roots to Fruits',img:'/caiorosa/img/roots.jpg',big:'/caiorosa/img/roots.jpg'},
     {h:'publicacoes',t:'The Cage',y:'2021',m:'Fotolivro, Viena',img:'/caiorosa/img/cage.jpg',big:'/caiorosa/img/cage.jpg'},
     {h:'som',t:'Rio Doce',y:'2020',m:'Programa mensal, NTS Radio',img:'/caiorosa/img/riodoce.jpg',big:'/caiorosa/img/riodoce.jpg'}
