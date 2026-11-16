@@ -736,3 +736,16 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .rv-on .xp summary{opacity:0;transform:translateY(var(--sp-3));transition:opacity .6s cubic-bezier(.2,.8,.2,1) calc(var(--d,0s) + .1s),transform .6s cubic-bezier(.2,.8,.2,1) calc(var(--d,0s) + .1s)}
 .rv-on .xp details.in::after{transform:none}
 .rv-on .xp details.in summary{opacity:1;transform:none}
+
+/* ===== from the card to the case: the card's image and title travel to their place on the case page =====
+   Cross-document view transitions. Browsers without them just navigate. */
+@view-transition{navigation:auto}
+.case-hero h1{view-transition-name:case-title}
+.case-hero + .wrap .media{view-transition-name:case-media}
+::view-transition-group(case-media),::view-transition-group(case-title){animation-duration:.7s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(case-media),::view-transition-new(case-media){height:100%;object-fit:cover;animation-duration:.7s}
+::view-transition-old(root){animation:vt-out .35s cubic-bezier(.2,.8,.2,1) both}
+::view-transition-new(root){animation:vt-in .5s cubic-bezier(.2,.8,.2,1) .15s both}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0;transform:translateY(var(--sp-4))}}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}

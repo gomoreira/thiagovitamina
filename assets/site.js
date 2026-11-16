@@ -105,3 +105,13 @@ const io=new IntersectionObserver(es=>{
   enter.forEach((el,k)=>{if(el.closest('.live'))el.style.setProperty('--d',(k*.12)+'s');if(el.matches('details'))el.style.setProperty('--d',(k*.09)+'s');el.classList.add('in');io.unobserve(el)})},
   {rootMargin:'0px 0px -12% 0px',threshold:.01});
 items.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.88)el.classList.add('in');else io.observe(el)});})();
+
+/* from the card to the case: name the clicked card's image and title so they travel to the case page, and back */
+(()=>{const name=(href,on)=>{const file=new URL(href,location.href).pathname.split('/').pop();
+  const a=document.querySelector('.case h3 a[href="'+file+'"]');if(!a)return null;const c=a.closest('.case'),m=c.querySelector('.media');
+  m.style.viewTransitionName=on?'case-media':'';a.style.viewTransitionName=on?'case-title':'';return c};
+addEventListener('pageswap',e=>{if(!e.viewTransition||!e.activation)return;const to=e.activation.entry&&e.activation.entry.url;if(!to)return;
+  if(name(to,true))e.viewTransition.finished.finally(()=>name(to,false))});
+addEventListener('pagereveal',e=>{if(!e.viewTransition||!window.navigation||!navigation.activation)return;const from=navigation.activation.from&&navigation.activation.from.url;if(!from)return;
+  const c=name(from,true);if(!c){return}
+  c.classList.add('in');e.viewTransition.finished.finally(()=>name(from,false))});})();
