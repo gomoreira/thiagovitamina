@@ -39,14 +39,17 @@ document.querySelectorAll('.btn-ink').forEach(b=>{const set=e=>{const r=b.getBou
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){g.remove();return}
 const C=['#D9372B','#F2B705','#1F5FAD','#141414','#EDE6D6'],T=['sq','qc','ci','hc','qc','sq'];
 let cells=[];
-function build(){const cols=innerWidth<820?8:14,rows=Math.round(cols*9/16);g.style.gridTemplateColumns='repeat('+cols+',1fr)';g.style.gridTemplateRows='repeat('+rows+',1fr)';g.innerHTML='';cells=[];
+function build(){const cols=innerWidth<820?6:10,rows=Math.round(cols*9/16);g.style.gridTemplateColumns='repeat('+cols+',1fr)';g.style.gridTemplateRows='repeat('+rows+',1fr)';g.innerHTML='';cells=[];
   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const i=document.createElement('i');i.className=T[(r*7+c*3)%T.length];i.style.setProperty('--c',C[(r*5+c*2)%C.length]);
     const rot=[0,90,180,270][(r+c*3)%4];i.style.transform='rotate('+rot+'deg)';g.append(i);
     const d=(c/cols)*.55+(r/rows)*.25+((r*13+c*7)%10)/10*.2;cells.push({el:i,rot,d})}}
 function draw(){const r=box.getBoundingClientRect(),vh=innerHeight;
-  const p=Math.min(1,Math.max(0,(vh-r.top)/(vh*0.95)));
-  for(const c of cells){const q=Math.min(1,Math.max(0,(p*1.25-c.d)/.3));const e=q*q*(3-2*q);
-    c.el.style.transform='rotate('+(c.rot+e*90)+'deg) scale('+(1-e)+')';c.el.style.opacity=1-e}
+  // the video grows in as it enters; the modules hold until it is well in view, then break apart
+  const g0=Math.min(1,Math.max(0,(vh-r.top)/(vh*.6))),ge=1-Math.pow(1-g0,3);
+  box.style.transform='scale('+(.84+.16*ge).toFixed(4)+')';
+  const p=Math.min(1,Math.max(0,(vh*.72-r.top)/(vh*.6)));
+  for(const c of cells){const q=Math.min(1,Math.max(0,(p*1.3-c.d)/.3));const e=q*q*(3-2*q);
+    c.el.style.transform='rotate('+(c.rot+e*180)+'deg) translateY('+(e*-40)+'%) scale('+(1-e)+')';c.el.style.opacity=1-e}
   g.style.visibility=p>=1&&cells.every(c=>c.el.style.opacity==='0')?'hidden':'visible'}
 let t=false;addEventListener('scroll',()=>{if(t)return;t=true;requestAnimationFrame(()=>{draw();t=false})},{passive:true});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{build();draw()},150)});
@@ -75,3 +78,14 @@ const draw=t=>{for(let i=0;i<N;i++){const a=i/N*Math.PI*2;
     if(i===0){const z=p[N-1];x.moveTo((z[0]+a[0])/2,(z[1]+a[1])/2)}x.quadraticCurveTo(a[0],a[1],m[0],m[1])}
   x.fill();png.href=c.toDataURL('image/png')};
 let t0=performance.now();draw(0);setInterval(()=>draw((performance.now()-t0)/1000),125);})();
+
+/* second act: each case and each live site rises into place once, when it enters the screen */
+(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+const items=[...document.querySelectorAll('.case,.live article')];if(!items.length)return;
+document.documentElement.classList.add('rv-on');
+items.forEach(el=>{[...(el.matches('.case')?el.querySelector('.copy').children:el.children)].forEach((c,i)=>c.style.setProperty('--i',i))});
+const io=new IntersectionObserver(es=>{
+  const enter=es.filter(e=>e.isIntersecting).map(e=>e.target).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);
+  enter.forEach((el,k)=>{if(el.closest('.live'))el.style.setProperty('--d',(k*.12)+'s');el.classList.add('in');io.unobserve(el)})},
+  {rootMargin:'0px 0px -12% 0px',threshold:.01});
+items.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.88)el.classList.add('in');else io.observe(el)});})();
