@@ -721,7 +721,11 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .rv-on .case.in .copy > *,.rv-on .live article.in > :not(.media){opacity:1;transform:none}
 
 /* Bauhaus: the video grows into the band while the modules break apart */
-.bh-reveal{transform-origin:50% 100%;will-change:transform}
+.bh-track{position:relative;overflow-x:clip;margin-bottom:var(--sp-5)}
+.bh-pin{position:sticky}
+.bh-track .bh-reveal{margin-bottom:0;transform-origin:50% 50%;will-change:transform}
+.bh-track .bh-reveal{overflow:visible}
+.bh-track .bh-reveal video{position:relative}
 @media (prefers-reduced-motion:reduce){.bh-reveal{transform:none!important}}
 
 .reach a.val:visited,.reach a.val:visited:hover{color:var(--paper)}

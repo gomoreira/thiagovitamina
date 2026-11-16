@@ -34,26 +34,41 @@ size();check();})();
 /* ink buttons: remember where the cursor came in */
 document.querySelectorAll('.btn-ink').forEach(b=>{const set=e=>{const r=b.getBoundingClientRect();b.style.setProperty('--x',(e.clientX-r.left)+'px');b.style.setProperty('--y',(e.clientY-r.top)+'px');b.style.setProperty('--k',Math.ceil(Math.hypot(r.width,r.height)/6)+1)};
   b.addEventListener('pointerenter',set);b.addEventListener('pointerleave',set)});
-/* Bauhaus reveal: modules turn and shrink away as the video scrolls into view */
+/* Bauhaus reveal, driven by the scroll.
+   Approach: the modules fly in and lock into a closed grid (the school closes).
+   Pinned: the band holds on screen, the grid breaks apart and the video grows to the full width. */
 (()=>{const box=document.querySelector('.bh-reveal');if(!box)return;const g=box.querySelector('.bh-grid');
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){g.remove();return}
+const track=document.createElement('div');track.className='bh-track';box.before(track);
+const pin=document.createElement('div');pin.className='bh-pin';track.append(pin);pin.append(box);
 const C=['#D9372B','#F2B705','#1F5FAD','#141414','#EDE6D6'],T=['sq','qc','ci','hc','qc','sq'];
-let cells=[];
+let cells=[],extra=0,top0=0,maxS=1;
+const cl=v=>Math.min(1,Math.max(0,v)),sm=q=>q*q*(3-2*q);
 function build(){const cols=innerWidth<820?6:10,rows=Math.round(cols*9/16);g.style.gridTemplateColumns='repeat('+cols+',1fr)';g.style.gridTemplateRows='repeat('+rows+',1fr)';g.innerHTML='';cells=[];
   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const i=document.createElement('i');i.className=T[(r*7+c*3)%T.length];i.style.setProperty('--c',C[(r*5+c*2)%C.length]);
-    const rot=[0,90,180,270][(r+c*3)%4];i.style.transform='rotate('+rot+'deg)';g.append(i);
-    const d=(c/cols)*.55+(r/rows)*.25+((r*13+c*7)%10)/10*.2;cells.push({el:i,rot,d})}}
-function draw(){const r=box.getBoundingClientRect(),vh=innerHeight;
-  // the video grows in as it enters; the modules hold until it is well in view, then break apart
-  const g0=Math.min(1,Math.max(0,(vh-r.top)/(vh*.6))),ge=1-Math.pow(1-g0,3);
-  box.style.transform='scale('+(.84+.16*ge).toFixed(4)+')';
-  const p=Math.min(1,Math.max(0,(vh*.72-r.top)/(vh*.6)));
-  for(const c of cells){const q=Math.min(1,Math.max(0,(p*1.3-c.d)/.3));const e=q*q*(3-2*q);
-    c.el.style.transform='rotate('+(c.rot+e*180)+'deg) translateY('+(e*-40)+'%) scale('+(1-e)+')';c.el.style.opacity=1-e}
-  g.style.visibility=p>=1&&cells.every(c=>c.el.style.opacity==='0')?'hidden':'visible'}
+    const rot=[0,90,180,270][(r+c*3)%4],h=((r*13+c*7)%10)/10,ang=(r*37+c*61)%360*Math.PI/180,dist=120+h*220;
+    g.append(i);cells.push({el:i,rot,d:(c/cols)*.55+(r/rows)*.25+h*.2,a:(1-c/cols)*.5+h*.5,ox:Math.cos(ang)*dist,oy:Math.sin(ang)*dist,spin:(h>.5?1:-1)*180})}}
+function size(){box.style.transform='';const mw=box.offsetWidth,mh=box.offsetHeight,vh=innerHeight;
+  extra=Math.round(vh*(innerWidth<820?.7:1.1));top0=Math.max(0,Math.round((vh-mh)/2));
+  pin.style.top=top0+'px';track.style.height=(mh+extra)+'px';
+  maxS=Math.max(1,Math.min(innerWidth/mw,(vh*.94)/mh))}
+function draw(){const r=track.getBoundingClientRect(),vh=innerHeight;
+  const enter=cl((vh-r.top)/Math.max(1,vh-top0));            // 0 when the band appears, 1 when it pins
+  const t=cl((top0-r.top)/extra);                          // progress while pinned
+  const grow=sm(cl((t-.3)/.6));
+  box.style.transform='scale('+((.86+.14*sm(enter))*(1+(maxS-1)*grow)).toFixed(4)+')';
+  const brk=cl((t-.12)/.55);
+  let gone=true;
+  for(const c of cells){
+    const qa=sm(cl((enter*1.35-c.a*.35)/.65)),qb=sm(cl((brk*1.3-c.d)/.3));
+    const x=c.ox*(1-qa),y=c.oy*(1-qa)-qb*40,rot=c.rot+c.spin*(1-qa)+qb*180,sc=(.5+.5*qa)*(1-qb),op=qa*(1-qb);
+    c.el.style.transform='translate('+x.toFixed(1)+'%,'+y.toFixed(1)+'%) rotate('+rot.toFixed(1)+'deg) scale('+sc.toFixed(3)+')';
+    c.el.style.opacity=op.toFixed(3);if(op>.001)gone=false}
+  g.style.visibility=gone&&brk>=1?'hidden':'visible'}
 let t=false;addEventListener('scroll',()=>{if(t)return;t=true;requestAnimationFrame(()=>{draw();t=false})},{passive:true});
-let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{build();draw()},150)});
-build();draw();})();
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{build();size();draw()},150)});
+addEventListener('load',()=>{size();draw()});
+build();size();draw();})();
 
 /* ink hover on names and titles: the ink starts where the cursor enters and leaves where it exits */
 (()=>{if(!matchMedia('(hover: hover)').matches)return;
