@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Caio Rosa</title>
 <link rel="preload" as="image" href="/caiorosa/img/r-capa-1800.webp" fetchpriority="high">
+<link rel="alternate" hreflang="pt-BR" href="https://thiagovitamina.com/caiorosa/">
+<link rel="alternate" hreflang="en" href="https://thiagovitamina.com/caiorosa/en/">
 <meta name="description" content="Caio Rosa, Rio de Janeiro, 1992. Fotografia, som, escultura e arquivo.">
 <link rel="preload" href="/caiorosa/fonts/garamond-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/caiorosa/fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -453,7 +455,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <a href="#textos">Textos</a>
     <a href="#biografia">Biografia</a>
     <a href="#contato">Contato</a>
-    <a class="lang" href="#" lang="en">English</a>
+    <a class="lang" href="/caiorosa/en/" lang="en" hreflang="en">English</a>
   </nav>
 </header>
 
@@ -1066,6 +1068,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     if(h1){ h1.setAttribute('tabindex','-1'); h1.id=h1.id||('t-'+id); }
     var sk=document.querySelector('.skip'); if(sk&&h1) sk.setAttribute('href','#'+h1.id);
     if(routed && h1) h1.focus({preventScroll:true});
+    var lg=document.querySelector('.top .lang'); if(lg){ lg.setAttribute('href', lg.getAttribute('href').split('#')[0] + (location.hash||'')); }
     routed=true;
     window.scrollTo(0,0); if(id==='v-c'&&window.__filmInit) window.__filmInit(); if(id==='v-d'&&window.__dialInit) window.__dialInit(); var tp=document.querySelector('.top'); if(tp) tp.classList.remove('away');
   }
