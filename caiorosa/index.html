@@ -208,7 +208,7 @@ footer a:hover{color:var(--quiet)}
 
 
 /* ---------- páginas de seção ---------- */
-.page{padding:var(--s6) var(--gutter) 0}
+.page{padding:var(--s6) var(--gutter) var(--s7)}
 .page .s-head h1{grid-column:1 / span 9}
 .cv{border-top:1px solid var(--line)}
 .cv > div{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);padding:var(--s3) 0;border-bottom:1px solid var(--line)}
@@ -274,8 +274,15 @@ body.lb-open{overflow:hidden}
 /* contato */
 .contact .big{font-size:var(--t-display);line-height:1;letter-spacing:-.022em}
 .contact .addr{margin-top:var(--s3)}
-.contact .big.mail{font-size:clamp(28px,3.4vw,52px);overflow-wrap:anywhere}
-.contact .rep{margin-top:var(--s5);padding-top:var(--s2);border-top:1px solid var(--line);color:var(--quiet)}
+.contact .pair{align-items:stretch}
+.cinfo{grid-column:7 / -1;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.cinfo > div{display:grid;grid-template-columns:minmax(0,1fr);row-gap:6px;padding:var(--s2) 0 calc(var(--s2) + 2px);border-bottom:1px solid var(--line)}
+.cinfo dt{color:var(--quiet)}
+.cinfo dd{margin:0;font-size:var(--t-title);line-height:1.15;letter-spacing:-.008em;overflow-wrap:anywhere}
+.cinfo dd a{color:var(--ink);transition:color .2s}
+.cinfo dd a:hover,.cinfo dd a:focus-visible{color:var(--quiet)}
+.cinfo .rep{margin-top:auto;border-top:1px solid var(--line)}
+.cinfo .rep dd .mono{display:block;margin-top:8px;color:var(--quiet);font-size:var(--t-mono);letter-spacing:0}
 
 
 /* ---------- C · rolo de filme ---------- */
@@ -389,7 +396,8 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   .hint-d{display:none}
   .hint-m{display:inline}
   .it{gap:var(--s2);left:44px}
-  .side{grid-column:1 / -1}
+  .side,.cinfo{grid-column:1 / -1}
+  .cinfo .rep{margin-top:var(--s4)}
   .page .s-head h1,.portrait,.cv h2,.cv ul{grid-column:1 / -1}
   .cv h2{margin-bottom:var(--s1)}
   .links a,.links .row-i{grid-template-columns:3.4em 1fr}
@@ -929,10 +937,10 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <span class="f-cap"><span class="t">Visões do Luvemba</span><span class="mono">Videoinstalação, Festival Novas Frequências, Oi Futuro, Rio de Janeiro, 2023 · Ver a série</span></span>
   </a>
   <section class="vids">
-    <figure><div class="vid" data-yt="Ud2hnB7hvFM"><button type="button" aria-label="Assistir O futuro está em seus olhos"><img src="https://i.ytimg.com/vi/Ud2hnB7hvFM/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">O futuro está em seus olhos</span><br><span class="mono">Direção de Caio Rosa</span></figcaption></figure>
-    <figure><div class="vid" data-yt="yN4YIsXoAWI"><button type="button" aria-label="Assistir Choice, “Toda Noite”"><img src="https://i.ytimg.com/vi/yN4YIsXoAWI/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Toda Noite”</span><br><span class="mono">Videoclipe, produção musical de Jovem BlackSanta</span></figcaption></figure>
-    <figure><div class="vid" data-yt="aExtQ4h-Gxc"><button type="button" aria-label="Assistir Choice, “Novo Milionário”"><img src="https://i.ytimg.com/vi/aExtQ4h-Gxc/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Novo Milionário”</span><br><span class="mono">Videoclipe, produção musical de Rafik ReeoMix e Velho Beats</span></figcaption></figure>
-    <figure><div class="vid" data-yt="OLT_UTPnfAw"><button type="button" aria-label="Assistir OF COLOR TV, episódio 3"><img src="https://i.ytimg.com/vi/OLT_UTPnfAw/hqdefault.jpg" alt="" loading="lazy"><span class="play">Assistir</span></button></div><figcaption><span class="t">OF COLOR TV, episódio 3</span><br><span class="mono">Com Prince Gurinya</span></figcaption></figure>
+    <figure><div class="vid" data-yt="Ud2hnB7hvFM"><button type="button" aria-label="Assistir O futuro está em seus olhos"><img src="https://i.ytimg.com/vi/Ud2hnB7hvFM/maxresdefault.jpg" alt="" loading="lazy" data-fb="1"><span class="play">Assistir</span></button></div><figcaption><span class="t">O futuro está em seus olhos</span><br><span class="mono">Direção de Caio Rosa</span></figcaption></figure>
+    <figure><div class="vid" data-yt="yN4YIsXoAWI"><button type="button" aria-label="Assistir Choice, “Toda Noite”"><img src="https://i.ytimg.com/vi/yN4YIsXoAWI/maxresdefault.jpg" alt="" loading="lazy" data-fb="1"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Toda Noite”</span><br><span class="mono">Videoclipe, produção musical de Jovem BlackSanta</span></figcaption></figure>
+    <figure><div class="vid" data-yt="aExtQ4h-Gxc"><button type="button" aria-label="Assistir Choice, “Novo Milionário”"><img src="https://i.ytimg.com/vi/aExtQ4h-Gxc/maxresdefault.jpg" alt="" loading="lazy" data-fb="1"><span class="play">Assistir</span></button></div><figcaption><span class="t">Choice, “Novo Milionário”</span><br><span class="mono">Videoclipe, produção musical de Rafik ReeoMix e Velho Beats</span></figcaption></figure>
+    <figure><div class="vid" data-yt="OLT_UTPnfAw"><button type="button" aria-label="Assistir OF COLOR TV, episódio 3"><img src="https://i.ytimg.com/vi/OLT_UTPnfAw/maxresdefault.jpg" alt="" loading="lazy" data-fb="1"><span class="play">Assistir</span></button></div><figcaption><span class="t">OF COLOR TV, episódio 3</span><br><span class="mono">Com Prince Gurinya</span></figcaption></figure>
   </section>
 </main>
 
@@ -963,16 +971,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   <div class="s-head grid"><h1>Contato</h1></div>
   <section class="grid pair">
     <figure><img src="/caiorosa/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume"></figure>
-    <div class="side">
-      <p class="mono" style="margin-bottom:var(--s1)">Contato</p>
-      <a class="big mail" href="mailto:caiospiritosanto@gmail.com">caiospiritosanto@gmail.com</a>
-      <p class="addr mono"><a href="https://wa.me/5521965895764" style="color:var(--ink)">+55 21 96589-5764</a><br><a href="https://www.instagram.com/rosapretanojardim/" style="color:var(--ink)">@rosapretanojardim ↗</a></p>
-      <p class="mono rep">Representação<br><a href="https://galerialume.com" style="color:var(--ink)">Galeria Lume ↗</a><br>Rua Gumercindo Saraiva, 54<br>Jardim Europa, São Paulo</p>
-    </div>
+    <dl class="cinfo">
+      <div><dt class="mono">E-mail</dt><dd><a href="mailto:caiospiritosanto@gmail.com">caiospiritosanto@gmail.com</a></dd></div>
+      <div><dt class="mono">Telefone e WhatsApp</dt><dd><a href="https://wa.me/5521965895764">+55 21 96589-5764</a></dd></div>
+      <div><dt class="mono">Instagram</dt><dd><a href="https://www.instagram.com/rosapretanojardim/">@rosapretanojardim</a></dd></div>
+      <div class="rep"><dt class="mono">Representação</dt><dd><a href="https://galerialume.com">Galeria Lume</a><span class="mono">Rua Gumercindo Saraiva, 54, Jardim Europa, São Paulo</span></dd></div>
+    </dl>
   </section>
-  <ol class="links block noyr">
-    <li><a class="ext" href="https://www.nts.live/shows/rio-doce"><span class="t">Rio Doce, NTS Radio</span><span class="go">Programa mensal</span></a></li>
-  </ol>
 </main>
 
 <nav class="review mono" id="review" aria-label="Revisão interna: alternativas de home">
@@ -1205,6 +1210,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   document.querySelector('#v-b .col-list').addEventListener('mouseleave',function(){show(defSrc,defCap)});
 
 
+  /* thumbs do YouTube: tenta a maior, cai pra menor se não existir */
+  document.querySelectorAll('img[data-fb]').forEach(function(im){
+    var steps=['maxresdefault','sddefault','hqdefault'];
+    function chk(){ if(im.naturalWidth && im.naturalWidth<=120){ var i=steps.findIndex(function(k){return im.src.indexOf(k)>-1}); if(i>-1&&i<steps.length-1) im.src=im.src.replace(steps[i],steps[i+1]); } }
+    im.addEventListener('load',chk); im.addEventListener('error',function(){var i=steps.findIndex(function(k){return im.src.indexOf(k)>-1}); if(i>-1&&i<steps.length-1) im.src=im.src.replace(steps[i],steps[i+1])});
+    if(im.complete) chk();
+  });
   /* vídeos: carrega o player só no clique */
   document.querySelectorAll('.vid').forEach(function(v){
     v.querySelector('button').addEventListener('click',function(){
