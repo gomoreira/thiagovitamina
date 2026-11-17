@@ -944,8 +944,8 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 
 <nav class="review mono" id="review" aria-label="Revisão interna: alternativas de home">
   <span>Versão</span>
-  <a href="#" data-h="">A<span>, só texto</span></a>
-  <a href="#home-b" data-h="home-b">B<span>, índice e obra</span></a>
+  <a href="#home-a" data-h="home-a">A<span>, só texto</span></a>
+  <a href="#" data-h="">B<span>, índice e obra</span></a>
   <a href="#home-c" data-h="home-c">C<span>, filme</span></a>
   <a href="#home-d" data-h="home-d">D<span>, dial</span></a>
 </nav>
@@ -965,17 +965,17 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 
 <script>
 (function(){
-  var views={'':'v-a','home-b':'v-b','home-c':'v-c','home-d':'v-d','rios-falam-rios-cantam':'v-rios-falam-rios-cantam','for-sale':'v-for-sale','visoes-do-luvemba':'v-visoes-do-luvemba','europe-is-not-my-center':'v-europe-is-not-my-center','biografia':'v-biografia','publicacoes':'v-publicacoes','som':'v-som','videos':'v-videos','textos':'v-textos','contato':'v-contato'};
+  var views={'':'v-b','home-b':'v-b','home-a':'v-a','home-c':'v-c','home-d':'v-d','rios-falam-rios-cantam':'v-rios-falam-rios-cantam','for-sale':'v-for-sale','visoes-do-luvemba':'v-visoes-do-luvemba','europe-is-not-my-center':'v-europe-is-not-my-center','biografia':'v-biografia','publicacoes':'v-publicacoes','som':'v-som','videos':'v-videos','textos':'v-textos','contato':'v-contato'};
   var review=document.getElementById('review');
   var lastHome='';
   function route(){
-    var h=location.hash.slice(1); if(!(h in views)) h='';
+    var h=location.hash.slice(1); if(!(h in views)||h==='home-b') h='';
     var id=views[h];
     document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===id)});
     var isHome=/^v-[abcd]$/.test(id);
     document.body.classList.toggle('on-c', id==='v-c' && !matchMedia('(max-width:820px)').matches);
     if(isHome) lastHome=h;
-    review.classList.toggle('on',isHome);
+    review.classList.toggle('on',/^home-[acd]$/.test(h));
     var pk=document.getElementById('peek'); if(pk) pk.classList.remove('on');
     review.querySelectorAll('a').forEach(function(a){a.classList.toggle('cur',a.dataset.h===h)});
     document.querySelectorAll('[data-home]').forEach(function(a){a.setAttribute('href','#'+lastHome)});
