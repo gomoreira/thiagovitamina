@@ -142,7 +142,10 @@ figure>img{align-self:flex-start;height:auto}
 .row.c4{grid-template-columns:repeat(4,1fr)}
 .row + .mono{margin-top:var(--s1)}
 .pair{align-items:end;row-gap:var(--s5)}
-.pair.mid{align-items:center}
+@media (min-width:821px){.pair.flush{column-gap:0;align-items:start}
+.pair.flush figure:first-child{grid-column:1 / span 6}
+.pair.flush figure:last-child{grid-column:7 / span 6}
+.pair.flush figure>img{width:100%}}
 .pair figure:first-child{grid-column:1 / span 5}
 .pair figure:last-child{grid-column:7 / span 6}
 
@@ -165,7 +168,31 @@ figure>img{align-self:flex-start;height:auto}
 .tracks .bar{grid-column:2 / -1;height:1px;background:var(--line);position:relative;margin-top:10px;display:none}
 .tracks .bar i{position:absolute;inset:0 auto 0 0;background:var(--ink);width:0}
 .tracks li.playing .n,.tracks li.playing .d{color:var(--ink)}
-.tracks li.playing .bar{display:block}
+.tracks li.playing .bar{display:none}
+.tracks .n{position:relative}
+.tracks .n .ic{position:absolute;left:0;top:50%;transform:translateY(-55%);width:10px;height:11px;opacity:0;transition:opacity .15s}
+.tracks .n .ic::before,.tracks .n .ic::after{content:"";position:absolute;top:0;height:100%}
+.tracks .n .ic::before{left:1px;border-left:9px solid var(--ink);border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;height:0}
+.tracks li.playing:not(.paused) .n .ic::before{border:0;width:3px;height:100%;background:var(--ink);left:0}
+.tracks li.playing:not(.paused) .n .ic::after{width:3px;background:var(--ink);left:6px}
+.tracks .n .num{transition:opacity .15s}
+.tracks button:hover .n .num,.tracks li.playing .n .num{opacity:0}
+.tracks button:hover .n .ic,.tracks li.playing .n .ic{opacity:1}
+.tracks .ctl{display:none;grid-template-columns:2.4em 1fr auto;column-gap:var(--s2);align-items:center;padding:0 0 16px}
+.tracks li.playing .ctl{display:grid}
+.tracks .ctl .seek{grid-column:2}
+.tracks .ctl .vol{display:flex;align-items:center;gap:10px}
+.tracks .ctl .vol button{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet)}
+.tracks .ctl .vol button:hover,.tracks .ctl .vol button:focus-visible{color:var(--ink)}
+.tracks input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;width:100%;height:18px;margin:0;cursor:pointer}
+.tracks .vol input[type=range]{width:84px}
+.tracks input[type=range]::-webkit-slider-runnable-track{height:1px;background:linear-gradient(var(--ink),var(--ink)) 0/var(--p,0%) 100% no-repeat,var(--line)}
+.tracks input[type=range]::-moz-range-track{height:1px;background:var(--line)}
+.tracks input[type=range]::-moz-range-progress{height:1px;background:var(--ink)}
+.tracks input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:var(--ink);margin-top:-4px}
+.tracks input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:50%;background:var(--ink)}
+.tracks input[type=range]:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+@media (pointer:coarse){.tracks .ctl .vol{display:none}.tracks .ctl{grid-template-columns:2.4em 1fr}}
 
 .end{border-top:1px solid var(--line);margin-top:var(--s7);padding:var(--s3) 0 var(--s4)}
 
@@ -538,15 +565,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </section>
 
   <section class="block text grid">
-    <p class="label mono">Arquivo sonoro</p>
+    <p class="label mono">Instalação sonora</p>
     <div class="body">
-      <p>Gravações de Spirito Santo, Caio Rosa e músicos colaboradores, com cantos de trabalho Vissungo das minas de Diamantina, Minas Gerais, 1944.</p>
+      <p>Peças sonoras <i>Mahsai</i>, <i>Dikenga</i> e <i>Luvemba</i> em conversa com o arquivo sonoro de Vissungueiros naturais de Diamantina, Minas Gerais, gravado em 1944.</p>
       <ol class="tracks" id="tracks">
-        <li><button type="button" data-src="/caiorosa/audio/faixa-3.mp3"><span class="n">01</span><span class="t">Cantos de mineração, 1944</span><span class="d" data-len="3:08">3:08</span><span class="bar"><i></i></span></button></li>
-        <li><button type="button" data-src="/caiorosa/audio/faixa-1.mp3"><span class="n">02</span><span class="t">Dikenga</span><span class="d" data-len="8:08">8:08</span><span class="bar"><i></i></span></button></li>
-        <li><button type="button" data-src="/caiorosa/audio/faixa-2.mp3"><span class="n">03</span><span class="t">Mahsay</span><span class="d" data-len="7:51">7:51</span><span class="bar"><i></i></span></button></li>
-        <li><button type="button" data-src="/caiorosa/audio/faixa-4.mp3"><span class="n">04</span><span class="t">Luvemba</span><span class="d" data-len="4:45">4:45</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-src="/caiorosa/audio/a-lavra.mp3"><span class="n">01</span><span class="t">A Lavra</span><span class="d" data-len="28:17">28:17</span><span class="bar"><i></i></span></button></li>
       </ol>
+      <p class="mono" style="margin-top:var(--s2)"><a href="#som" style="color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px">Ficha técnica na página Som</a></p>
     </div>
   </section>
 
@@ -567,7 +592,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     </figure>
   </section>
 
-  <section class="block pair grid mid">
+  <section class="block pair grid flush">
     <figure>
       <img src="/caiorosa/img/r-sempreviva.jpg" alt="Fotoperformance com flores Sempre-Vivas" loading="lazy">
       <figcaption class="mono"><em>Sempre-Viva – Love Letter</em>, 2023<br>Fotoperformance</figcaption>
@@ -1219,19 +1244,38 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   /* arquivo sonoro */
   var player=document.getElementById('player'), cur=null;
   function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
-  function reset(li){li.classList.remove('playing'); var d=li.querySelector('.d'); d.textContent=d.dataset.len; li.querySelector('.bar i').style.width='0'}
-  document.querySelectorAll('.tracks button').forEach(function(b){
+  var vol=1, muted=false;
+  function paint(r){r.style.setProperty('--p',(r.value/r.max*100)+'%')}
+  function reset(li){li.classList.remove('playing','paused'); var d=li.querySelector('.d'); d.textContent=d.dataset.len; var sk=li.querySelector('.seek'); sk.value=0; paint(sk)}
+  function syncVol(){document.querySelectorAll('.tracks .vol').forEach(function(v){var r=v.querySelector('input'); r.value=muted?0:vol; paint(r); v.querySelector('button').textContent=(muted||vol==0)?'Som desligado':'Volume'})}
+  document.querySelectorAll('.tracks button[data-src]').forEach(function(b){
+    var li=b.parentNode, n=b.querySelector('.n'), t=b.querySelector('.t').textContent;
+    n.innerHTML='<span class="num">'+n.textContent+'</span><span class="ic" aria-hidden="true"></span>';
+    b.setAttribute('aria-label','Tocar '+t);
+    var c=document.createElement('div'); c.className='ctl';
+    c.innerHTML='<input class="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição em '+t+'"><span class="vol"><button type="button">Volume</button><input type="range" min="0" max="1" step="0.05" value="1" aria-label="Volume"></span>';
+    li.appendChild(c);
+    var sk=c.querySelector('.seek'), seeking=false;
+    sk.addEventListener('input',function(){seeking=true; paint(sk); if(cur===li&&player.duration){li.querySelector('.d').textContent=fmt(sk.value/1000*player.duration)+' / '+li.querySelector('.d').dataset.len}});
+    sk.addEventListener('change',function(){if(cur===li&&player.duration){player.currentTime=sk.value/1000*player.duration} seeking=false});
+    sk.addEventListener('pointerup',function(){seeking=false});
+    li._sk=sk; li._seeking=function(){return seeking};
+    var vr=c.querySelector('.vol input'), vb=c.querySelector('.vol button');
+    vr.addEventListener('input',function(){vol=+vr.value; muted=false; player.volume=vol; player.muted=false; syncVol()});
+    vb.addEventListener('click',function(){muted=!muted; player.muted=muted; if(!muted&&vol==0){vol=.8; player.volume=vol} syncVol()});
     b.addEventListener('click',function(){
-      var li=b.parentNode;
       if(cur===li){ if(player.paused){player.play().catch(function(){})} else {player.pause()} return; }
       if(cur) reset(cur);
       cur=li; li.classList.add('playing');
-      player.src=b.dataset.src; player.play().catch(function(){reset(li); cur=null});
+      player.src=b.dataset.src; player.volume=vol; player.muted=muted; player.play().catch(function(){reset(li); cur=null});
     });
   });
+  syncVol();
+  player.addEventListener('play',function(){if(cur){cur.classList.remove('paused'); cur.querySelector('button').setAttribute('aria-label','Pausar '+cur.querySelector('.t').textContent)}});
+  player.addEventListener('pause',function(){if(cur){cur.classList.add('paused'); cur.querySelector('button').setAttribute('aria-label','Tocar '+cur.querySelector('.t').textContent)}});
   player.addEventListener('timeupdate',function(){
     if(!cur||!player.duration) return;
-    cur.querySelector('.bar i').style.width=(player.currentTime/player.duration*100)+'%';
+    if(!cur._seeking()){cur._sk.value=Math.round(player.currentTime/player.duration*1000); paint(cur._sk)}
     cur.querySelector('.d').textContent=fmt(player.currentTime)+' / '+cur.querySelector('.d').dataset.len;
   });
   player.addEventListener('ended',function(){if(cur) reset(cur); cur=null});
