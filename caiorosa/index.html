@@ -1065,10 +1065,9 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   });
   /* pré-carrega as imagens de hover só em telas com mouse, depois que a página termina de carregar */
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){
-    window.addEventListener('load',function(){
-      var go=function(){var seen={};document.querySelectorAll('[data-img]').forEach(function(a){var u=a.dataset.img; if(!seen[u]){seen[u]=1; new Image().src=u}})};
-      ('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500);
-    });
+    var done=false, go=function(){if(done) return; done=true; var seen={};document.querySelectorAll('[data-img]').forEach(function(a){var u=a.dataset.img; if(!seen[u]){seen[u]=1; new Image().src=u}})};
+    /* só quando o mouse chega perto da lista: quem não passa o mouse não baixa nada */
+    document.querySelectorAll('#ilist, [data-float]').forEach(function(l){l.addEventListener('pointerenter',go,{once:true}); l.addEventListener('focusin',go,{once:true})});
   }
 
 
