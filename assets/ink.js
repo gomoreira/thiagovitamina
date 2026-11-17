@@ -3,8 +3,8 @@
 (()=>{
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const THEMES={
-  light:{bg:[1,1,1],rim:[.333,.102,.545],fill:[.894,.839,.969]},   // white page, plum rim, lilac fill: black text stays readable
-  dark:{bg:[0,0,0],rim:[.788,.651,.949],fill:[.333,.102,.545]}     // black band, lilac rim, plum fill: white text stays readable
+  light:{bg:[1,1,1],rim:[.333,.102,.545],fill:[.894,.839,.969],gain:1,size:1},   // white page, plum rim, lilac fill: black text stays readable
+  dark:{bg:[0,0,0],rim:[.788,.651,.949],fill:[.333,.102,.545],gain:1.4,size:2.2}     // black band, lilac rim, plum fill: white text stays readable
 };
 const VS=`#version 300 es
 in vec2 aPos;uniform vec2 uTexel;out vec2 vUv,vL,vR,vT,vB;
@@ -64,7 +64,7 @@ function ink(el,theme){
   function render(){const u=use('show',[1/cv.width,1/cv.height]);gl.uniform1i(u.uDye,bind(0,dye.r.t));gl.uniform3fv(u.uBg,T.bg);gl.uniform3fv(u.uRim,T.rim);gl.uniform3fv(u.uFill,T.fill);blit(null)}
   init();render();
   if(reduce)return;
-  let ptr=null,visible=false,running=false,last=0,idle=0,slow=0;
+  let ptr=null,visible=false,running=false,last=0,idle=0,slow=0,drops=[],dropped=false;
   const uv=e=>{const r=el.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]};
   function move(e){const [x,y]=uv(e);if(ptr){ptr.dx=x-ptr.x;ptr.dy=y-ptr.y}else ptr={dx:0,dy:0};ptr.x=x;ptr.y=y;ptr.moved=true;idle=0;wake()}
   el.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')move(e)});
@@ -74,13 +74,17 @@ function ink(el,theme){
   el.addEventListener('touchend',()=>{ptr=null},{passive:true});
   function loop(now){
     const real=(now-last)/1000||.016,dt=Math.min(.0166,real);last=now;
-    if(ptr&&ptr.moved){const sp=Math.hypot(ptr.dx,ptr.dy);splat(ptr.x,ptr.y,ptr.dx*5000,ptr.dy*5000,.6+Math.min(.9,sp*25),.0022+Math.min(.004,sp*.06));ptr.moved=false}
+    if(ptr&&ptr.moved){const sp=Math.hypot(ptr.dx,ptr.dy);splat(ptr.x,ptr.y,ptr.dx*5000,ptr.dy*5000,(.6+Math.min(.9,sp*25))*T.gain,(.0022+Math.min(.004,sp*.06))*T.size);ptr.moved=false}
+    while(drops.length&&drops[0].t<=now){const d=drops.shift();splat(d.x,d.y,d.dx,d.dy,d.a,d.r);idle=0}
     step(dt);render();idle+=Math.min(real,.25);if(real>.07&&++slow>=4&&!ptr)idle=6;   // a device that can't keep up lets the ink rest at once   // dries on the wall clock, so slow devices sleep on time too
    
     if(visible&&idle<6){requestAnimationFrame(loop)}else running=false;   // sleeps after the ink has dried
   }
   function wake(){if(!running&&visible){running=true;last=performance.now();requestAnimationFrame(loop)}}
-  new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)wake()}).observe(el);
+  // dark bands: when the section is revealed, one drop rises from below and spreads under the headline
+  const drop=()=>{if(dropped||theme!=='dark')return;dropped=true;const t0=performance.now(),x0=.62+Math.random()*.16;
+    for(let i=0;i<8;i++){const k=i/7;drops.push({t:t0+i*60,x:x0+Math.sin(k*3)*.02,y:.04+k*.22,dx:(Math.random()-.5)*160,dy:520*(1-k*.6),a:1.2,r:.004+.012*k})}};
+  new IntersectionObserver(es=>{const e=es[0];visible=e.isIntersecting;if(e.intersectionRatio>.35)drop();if(visible)wake()},{threshold:[0,.35,.6]}).observe(el);
   let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(Math.abs(el.clientWidth-W)>2||Math.abs(el.clientHeight-H)>2){init();render()}},150)});
 }
 const go=()=>document.querySelectorAll('[data-ink]').forEach(el=>{try{ink(el,el.dataset.ink)}catch(e){console.error(e)}});
