@@ -1035,6 +1035,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     });
     var view=document.getElementById(id), h1=view.querySelector('h1');
     var name=h1 && !h1.classList.contains('sr-only') ? h1.textContent.trim() : '';
+    if(id==='v-biografia') name='Biografia';
     document.title = name ? name+' · Caio Rosa' : 'Caio Rosa';
     if(h1){ h1.setAttribute('tabindex','-1'); h1.id=h1.id||('t-'+id); }
     var sk=document.querySelector('.skip'); if(sk&&h1) sk.setAttribute('href','#'+h1.id);
