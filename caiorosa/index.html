@@ -120,6 +120,7 @@ a.wall:hover .t{color:var(--quiet)}
 .s-head h1{grid-column:1 / span 8;font-weight:400;font-size:var(--t-display);line-height:.98;letter-spacing:-.022em;text-wrap:balance}
 .s-head .mono{grid-column:10 / span 3}
 figure{display:flex;flex-direction:column;gap:var(--s1)}
+figure>img{align-self:flex-start;height:auto}
 .bleed{margin:0 calc(var(--gutter) * -1)}
 .bleed img{width:100%;height:auto}
 .bleed figcaption{padding:0 var(--gutter)}
@@ -141,6 +142,7 @@ figure{display:flex;flex-direction:column;gap:var(--s1)}
 .row.c4{grid-template-columns:repeat(4,1fr)}
 .row + .mono{margin-top:var(--s1)}
 .pair{align-items:end;row-gap:var(--s5)}
+.pair.mid{align-items:center}
 .pair figure:first-child{grid-column:1 / span 5}
 .pair figure:last-child{grid-column:7 / span 6}
 
@@ -242,6 +244,8 @@ body.lb-open{overflow:hidden}
 /* contato */
 .contact .big{font-size:var(--t-display);line-height:1;letter-spacing:-.022em}
 .contact .addr{margin-top:var(--s3)}
+.contact .big.mail{font-size:clamp(28px,3.4vw,52px);overflow-wrap:anywhere}
+.contact .rep{margin-top:var(--s5);padding-top:var(--s2);border-top:1px solid var(--line);color:var(--quiet)}
 
 
 /* ---------- C · rolo de filme ---------- */
@@ -563,7 +567,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     </figure>
   </section>
 
-  <section class="block pair grid">
+  <section class="block pair grid mid">
     <figure>
       <img src="/caiorosa/img/r-sempreviva.jpg" alt="Fotoperformance com flores Sempre-Vivas" loading="lazy">
       <figcaption class="mono"><em>Sempre-Viva – Love Letter</em>, 2023<br>Fotoperformance</figcaption>
@@ -931,13 +935,13 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   <section class="grid pair">
     <figure><img src="/caiorosa/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume"></figure>
     <div class="side">
-      <p class="mono" style="margin-bottom:var(--s1)">Representação</p>
-      <a class="big" href="https://galerialume.com">Galeria Lume</a>
-      <p class="addr mono">Rua Gumercindo Saraiva, 54<br>Jardim Europa, São Paulo<br><a href="https://galerialume.com" style="color:var(--ink)">galerialume.com ↗</a></p>
+      <p class="mono" style="margin-bottom:var(--s1)">Contato</p>
+      <a class="big mail" href="mailto:caiospiritosanto@gmail.com">caiospiritosanto@gmail.com</a>
+      <p class="addr mono"><a href="https://wa.me/5521965895764" style="color:var(--ink)">+55 21 96589-5764</a><br><a href="https://www.instagram.com/rosapretanojardim/" style="color:var(--ink)">@rosapretanojardim ↗</a></p>
+      <p class="mono rep">Representação<br><a href="https://galerialume.com" style="color:var(--ink)">Galeria Lume ↗</a><br>Rua Gumercindo Saraiva, 54<br>Jardim Europa, São Paulo</p>
     </div>
   </section>
   <ol class="links block noyr">
-    <li><a class="ext" href="https://www.instagram.com/rosapretanojardim/"><span class="t">Instagram</span><span class="go">@rosapretanojardim</span></a></li>
     <li><a class="ext" href="https://www.nts.live/shows/rio-doce"><span class="t">Rio Doce, NTS Radio</span><span class="go">Programa mensal</span></a></li>
   </ol>
 </main>
