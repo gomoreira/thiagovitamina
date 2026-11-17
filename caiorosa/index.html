@@ -200,7 +200,7 @@ footer{padding:var(--s3) var(--gutter) var(--s4);border-top:1px solid var(--line
 footer .f1{grid-column:1 / span 6}
 footer .f2{grid-column:7 / -1;text-align:right}
 footer a{color:var(--ink)}
-footer .credit{margin-left:var(--s4);color:var(--quiet)}
+footer .credit{color:var(--quiet)}
 footer .credit a{color:var(--quiet);border-bottom:1px solid var(--line)}
 footer .credit a:hover{color:var(--ink)}
 footer a:hover{color:var(--quiet)}
@@ -248,10 +248,13 @@ body.lb-open{overflow:hidden}
 /* próxima série */
 .next{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);border-top:1px solid var(--line);margin-top:var(--s7);padding:var(--s3) 0 var(--s5);align-items:start}
 .next .back{grid-column:1 / span 4;margin:0}
-.next .to{grid-column:7 / -1;justify-self:stretch;display:grid;grid-template-columns:minmax(0,1fr) 120px;column-gap:var(--s3);align-items:end}
-.next .to img{width:120px;height:150px;object-fit:cover}
-.next .to .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em;transition:color .2s}
-.next .to:hover .t{color:var(--quiet)}
+.next .to{grid-column:1 / -1;display:grid;grid-template-columns:subgrid;align-items:start;color:inherit}
+.next .to > span{display:contents}
+.next .to .mono{grid-column:1 / span 3;margin:0 !important;padding-top:.9em}
+.next .to .t{grid-column:4 / span 7;font-size:var(--t-display);line-height:.98;letter-spacing:-.022em;transition:color .2s}
+.next .to img{grid-column:11 / -1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:opacity .25s}
+.next .to:hover .t,.next .to:focus-visible .t{color:var(--quiet)}
+.next .to:hover img{opacity:.85}
 
 /* vídeos */
 .vid{position:relative;aspect-ratio:16/9;background:#0f0f0f;overflow:hidden}
@@ -360,8 +363,9 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   .wall .pic,.wall .info,.wall.r .pic,.wall.r .info{grid-column:1 / -1;order:0}
   .wall .pic img,.wall.r .pic img{margin-left:0}
   .next .back{grid-column:1 / -1;margin-bottom:var(--s3)}
-  .next .to{grid-column:1 / -1;grid-template-columns:1fr 88px}
-  .next .to img{width:88px;height:110px}
+  .next .to .mono{grid-column:1 / -1;padding:0 0 var(--s1)}
+  .next .to .t{grid-column:1 / span 8;font-size:var(--t-title);line-height:1.1}
+  .next .to img{grid-column:9 / -1}
   .vids{grid-template-columns:1fr}
   .lb{padding:var(--s2)}
   .lb-foot{grid-template-columns:1fr;row-gap:var(--s2)}
@@ -981,7 +985,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 
 <footer class="grid">
   <span class="f1">Representado por <a href="https://galerialume.com">Galeria Lume</a>, São Paulo</span>
-  <span class="f2"><a href="https://www.instagram.com/rosapretanojardim/">Instagram</a><span class="credit">Site por <a href="https://thiagovitamina.com">Thiago Vitamina</a></span></span>
+  <span class="f2"><span class="credit">Site por <a href="https://thiagovitamina.com">Thiago Vitamina</a></span></span>
 </footer>
 
 
