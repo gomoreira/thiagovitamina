@@ -10,7 +10,8 @@ print(f"{len(viagens)} viagens:", ", ".join(v["slug"] for v in viagens))
 (OUT / "index.html").write_text(f"""<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>Andante · em construção</title>
-<link rel="stylesheet" href="{BASE}/assets/css/tokens.css">
+<link rel="preload" href="{BASE}/assets/fonts/gambarino-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{BASE}/assets/css/fonts.css"><link rel="stylesheet" href="{BASE}/assets/css/tokens.css">
 <style>body{{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--ground);color:var(--ink);font-family:var(--sans)}}</style>
-</head><body><main><p>Andante · em construção</p></main></body></html>
+</head><body><main><p style="font-family:var(--display);font-size:48px;margin:0">Andante</p><p>em construção</p></main></body></html>
 """)
