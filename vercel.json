@@ -51,5 +51,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/caiorosa",
+      "destination": "https://rosapreta.com.br/",
+      "permanent": true
+    },
+    {
+      "source": "/caiorosa/:path*",
+      "destination": "https://rosapreta.com.br/:path*",
+      "permanent": true
+    }
   ]
 }
