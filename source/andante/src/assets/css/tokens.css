@@ -33,5 +33,5 @@
 }
 @media (min-width:600px){ :root{ --edge:32px } }
 @media (min-width:820px){ :root{ --edge:40px; --fs-hero:44px; --fs-h2:36px; --fs-title:40px; --fs-display:48px } }
-@media (min-width:1100px){ :root{ --edge:48px; --fs-hero:64px; --fs-h2:44px; --fs-title:48px; --fs-display:56px; --fs-lead:19px } }
-@media (min-width:1440px){ :root{ --edge:64px } }
+@media (min-width:1100px){ :root{ --edge:48px; --fs-hero:64px; --fs-h2:44px; --fs-title:48px; --fs-display:56px; --fs-lead:22px; --fs-body:18px; --fs-small:14px } }
+@media (min-width:1440px){ :root{ --edge:64px; --fs-hero:80px; --fs-display:64px; --fs-h2:48px } }
