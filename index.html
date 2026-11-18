@@ -425,7 +425,7 @@ function step(dt){
 }
 
 /* video inside the ink: a playlist of the live sites */
-const clips=['v/hero_reel.mp4'];let ci=0,hasVid=0;
+const clips=['v/hero_reel.mp4?v=3'];let ci=0,hasVid=0;
 const hv=document.createElement('video');hv.muted=true;hv.playsInline=true;hv.preload='auto';
 hv.addEventListener('playing',()=>hasVid=1);
 hv.loop=true;hv.addEventListener('loadedmetadata',()=>{hv.playbackRate=1.3});
