@@ -125,19 +125,6 @@ ol,ul{list-style:none}
 .frame img{max-height:100%;width:auto;object-fit:contain;transition:opacity .25s}
 .frame img.swap{opacity:0}
 
-/* ---------- C · sequência ---------- */
-.home-c{padding:0 var(--gutter)}
-.home-c .lede{padding-top:var(--s6);margin-bottom:var(--s5)}
-.wall{padding:var(--s6) 0;border-top:1px solid var(--line);align-items:end;row-gap:var(--s2)}
-.wall .pic{grid-column:1 / span 7}
-.wall .pic img{max-height:80vh;width:auto}
-.wall .info{grid-column:9 / span 4;display:flex;flex-direction:column;gap:var(--s1)}
-.wall .info .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em}
-.wall.r .pic{grid-column:6 / span 7;order:2}
-.wall.r .pic img{margin-left:auto}
-.wall.r .info{grid-column:1 / span 4;order:1}
-a.wall:hover .t{color:var(--quiet)}
-
 /* ---------- página de série ---------- */
 .series{padding:var(--s6) var(--gutter) 0}
 .back{display:inline-block;margin-bottom:var(--s6);transition:color .15s}
@@ -319,61 +306,9 @@ body.lb-open{overflow:hidden}
 .cinfo .rep dd .mono{display:block;margin-top:8px;color:var(--quiet);font-size:var(--t-mono);letter-spacing:0}
 
 
-/* ---------- C · rolo de filme ---------- */
-.home-c{padding:0}
-.film{position:relative}
-.film-stick{position:sticky;top:var(--hh,72px);height:calc(100svh - var(--hh,72px) - var(--fh,64px));overflow:hidden;display:grid;grid-template-rows:1fr;padding:var(--s3) 0 var(--s3)}
-body.on-c footer{position:fixed;left:0;right:0;bottom:0;background:var(--wall);z-index:15}
-body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
-.film-head,.film-foot{display:flex;justify-content:space-between;padding:0 var(--gutter);border-bottom:1px solid var(--line);padding-bottom:var(--s1)}
-.hint-m{display:none}
-.film-foot{border-bottom:0;border-top:1px solid var(--line);padding-top:var(--s1);padding-bottom:0}
-.track{display:flex;align-items:stretch;gap:var(--s5);padding:0 var(--gutter);min-height:0;will-change:transform}
-.fr{flex:0 0 auto;display:grid;grid-template-rows:minmax(0,1fr) auto;row-gap:var(--s1);height:100%}
-.fr .fn{color:var(--quiet)}
-.fr img{height:100%;width:auto;max-width:none;object-fit:contain;object-position:left bottom}
-.fr .cap{display:flex;flex-direction:column;gap:2px}
-.fr .t{font-size:var(--t-title);line-height:1.1;letter-spacing:-.008em;transition:color .2s}
-.fr:hover .t{color:var(--quiet)}
-.fr.cur .fn{color:var(--ink)}
-
-/* ---------- D · dial ---------- */
-.home-d{padding:0 var(--gutter)}
-.dial-wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);align-items:center;min-height:calc(100svh - 90px)}
-.dial{grid-column:1 / span 7;position:relative;height:min(74svh,760px);perspective:1400px;perspective-origin:0 50%;outline:none;cursor:default;touch-action:none;user-select:none;-webkit-user-select:none}
-.dial:focus-visible{outline:1px solid var(--line);outline-offset:8px}
-.drum{position:absolute;inset:0;transform-style:preserve-3d}
-.it{position:absolute;left:48px;top:50%;display:flex;align-items:baseline;gap:var(--s3);white-space:nowrap;transform-origin:0 50%;will-change:transform,opacity;cursor:pointer}
-.it .y{width:3.2em;flex:none;font-family:var(--f-mono);font-size:var(--t-mono);color:var(--quiet);font-variant-numeric:tabular-nums}
-.it .t{font-size:clamp(34px,4.4vw,66px);line-height:1;letter-spacing:-.02em;color:var(--ink)}
-.it .t{transition:color .2s}
-.it:not(.on):hover .t{color:var(--quiet)}
-.it.on .y{color:var(--ink)}
-.tk{position:absolute;left:10px;top:50%;width:8px;height:1px;background:var(--faint);will-change:transform,opacity}
-.tk.major{left:4px;width:14px;background:var(--quiet)}
-.scale-line{position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--line)}
-.pointer{position:absolute;left:0;top:50%;width:26px;height:2px;background:var(--ink);transform:translateY(-1px)}
-.pointer.tic{animation:tic .16s ease-out}
-@keyframes tic{0%{width:20px}60%{width:30px}100%{width:26px}}
-.dial-fig{grid-column:9 / -1;display:flex;flex-direction:column;gap:var(--s1)}
-.dial-frame{height:min(64svh,680px);display:flex;align-items:center}
-.dial-frame img{max-height:100%;width:auto;transition:opacity .16s}
-.dial-frame img.swap{opacity:0}
-
 /* menu mobile */
 .menu-btn{all:unset;display:none;cursor:pointer;justify-self:end;grid-column:9 / -1;text-align:right;font-family:var(--f-sans);font-size:var(--t-sans);color:var(--ink);padding:6px 0}
 .menu-btn:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
-/* foco por rolagem no mobile (versão A) */
-.peek{display:none;position:fixed;right:var(--gutter);bottom:var(--s3);width:38vw;max-width:180px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:4}
-.peek.on{opacity:1;transform:none}
-.peek img{width:100%;height:auto}
-
-/* revisão interna: alternar homes (sai do site final) */
-.review{position:fixed;left:var(--gutter);bottom:var(--s2);display:none;gap:var(--s2);align-items:baseline;padding:8px 12px;background:var(--wall);border:1px solid var(--line);z-index:10}
-.review.on{display:flex}
-.review a{color:var(--quiet)}
-.review a.cur{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-
 @media (max-width:1024px){
   .top{padding-top:var(--s2);padding-bottom:var(--s2)}
   .top .name{grid-column:1 / span 8}
@@ -473,29 +408,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </nav>
 </header>
 
-<!-- ================= A · SÓ TEXTO ================= -->
-<main class="view home-a" id="v-a" hidden>
-  <h1 class="sr-only" tabindex="-1">Caio Rosa, works</h1>
-  <div class="grid">
-    <div class="works">
-      <ol class="tlist" data-float>
-        <li><a href="/en/rios-falam-rios-cantam" data-img="/img/rios-1280.webp" data-cap="Singing to Time, 2025">Rivers Talk, Rivers Sing<span class="yr mono">2025</span></a></li>
-        <li><a href="/en/for-sale" data-img="/img/forsale-1194.webp" data-cap="For Sale, 2023">For Sale<span class="yr mono">2023</span></a></li>
-        <li><a href="/en/visoes-do-luvemba" data-img="/img/luvemba-1193.webp" data-cap="Visões do Luvemba, 2023">Visões do Luvemba<span class="yr mono">2023</span></a></li>
-        <li><a href="/en/europe-is-not-my-center" data-img="/img/europe-1200.webp" data-cap="Europe is Not My Center">Europe is Not My Center</a></li>
-      </ol>
-      <span class="group-label mono">Books and radio</span>
-      <ol class="tlist" data-float>
-        <li><a href="/en/publicacoes" data-img="/img/roots-621.jpg" data-cap="Memórias Congadeiras, Roots to Fruits, 2024">Memórias Congadeiras<span class="yr mono">2024</span></a></li>
-        <li><a href="/en/publicacoes" data-img="/img/cage-1193.webp" data-cap="The Cage, 2021">The Cage<span class="yr mono">2021</span></a></li>
-        <li><a href="/en/som" data-img="/img/riodoce-1280.webp" data-cap="Rio Doce, NTS Radio">Rio Doce, NTS Radio<span class="yr mono">2020–</span></a></li>
-      </ol>
-    </div>
-  </div>
-  <div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
-  <div class="float" id="float" aria-hidden="true"><img alt=""></div>
-</main>
-
 <!-- ================= B · ÍNDICE + OBRA ================= -->
 <main class="view home-b grid" id="v-b" hidden>
   <h1 class="sr-only" tabindex="-1">Caio Rosa, works</h1>
@@ -517,32 +429,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     <div class="frame"><img id="stageImg" src="/img/r-capa-1800.webp" alt="Installation view of Rivers Talk, Rivers Sing at Galeria Lume" width="1800" height="1200" loading="lazy" decoding="async"></div>
     <p class="mono" id="stageCap">Rivers Talk, Rivers Sing, Galeria Lume, 2025. Photo: Filipe Berndt</p>
   </aside>
-</main>
-
-<!-- ================= C · ROLO DE FILME ================= -->
-<main class="view home-c" id="v-c" hidden>
-  <h1 class="sr-only" tabindex="-1">Caio Rosa, works</h1>
-  <div class="film" id="film">
-    <div class="film-stick">
-      <div class="track" id="track"></div>
-          </div>
-  </div>
-</main>
-
-<!-- ================= D · DIAL ================= -->
-<main class="view home-d" id="v-d" hidden>
-  <h1 class="sr-only" tabindex="-1">Caio Rosa, works</h1>
-  <div class="dial-wrap">
-    <div class="dial" id="dial" tabindex="0" role="listbox" aria-label="Series and publications" aria-activedescendant="">
-      <div class="drum" id="drum"></div>
-      <span class="scale-line" aria-hidden="true"></span>
-      <span class="pointer" id="pointer" aria-hidden="true"></span>
-    </div>
-    <figure class="dial-fig">
-      <div class="dial-frame"><img id="dimg" src="/img/rios.jpg" alt="" width="1800" height="1800" srcset="/img/rios-320.webp 320w, /img/rios-640.webp 640w, /img/rios-960.webp 960w, /img/rios-1280.webp 1280w, /img/rios-1600.webp 1600w, /img/rios-1800.webp 1800w" sizes="(max-width:820px) 100vw, 50vw" data-full="/img/rios-1800.webp" decoding="async" loading="lazy"></div>
-      <figcaption class="mono" id="dcap"></figcaption>
-    </figure>
-  </div>
 </main>
 
 <!-- ================= SÉRIE ================= -->
@@ -659,11 +545,11 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
       <figure><img src="/img/r-a.jpg" alt="Archival photograph with drawing and affective map" loading="lazy" width="1500" height="2194" srcset="/img/r-a-320.webp 320w, /img/r-a-640.webp 640w, /img/r-a-960.webp 960w, /img/r-a-1280.webp 1280w, /img/r-a-1500.webp 1500w" sizes="(max-width:820px) 100vw, 50vw" data-full="/img/r-a-1500.webp" decoding="async">
         <figcaption class="mono"><em>Faca de ponta no meu gogó</em> (A knife point at my throat), 2022<br>Drawing and affective map, hand-enlargement process, c-print<br>123 × 85 cm</figcaption></figure>
       <figure><img src="/img/r-c.jpg" alt="Photograph with Congada song lyrics" loading="lazy" width="1500" height="2192" srcset="/img/r-c-320.webp 320w, /img/r-c-640.webp 640w, /img/r-c-960.webp 960w, /img/r-c-1280.webp 1280w, /img/r-c-1500.webp 1500w" sizes="(max-width:820px) 100vw, 50vw" data-full="/img/r-c-1500.webp" decoding="async">
-        <figcaption class="mono"><em>A voz do meu pai, ouço atento</em> (My father’s voice, I listen closely)<br>Congada song lyrics, transfer onto hand enlargement, c-print<br>84 × 56.5 cm</figcaption></figure>
+        <figcaption class="mono"><em>A voz do meu pai, ouço atento</em> (My father’s voice, I listen closely), 2022<br>Congada song lyrics, transfer onto hand enlargement, c-print<br>84 × 56.5 cm</figcaption></figure>
       <figure><img src="/img/r-b.jpg" alt="Archival photograph with drawing in white lines" loading="lazy" width="1500" height="1018" srcset="/img/r-b-320.webp 320w, /img/r-b-640.webp 640w, /img/r-b-960.webp 960w, /img/r-b-1280.webp 1280w, /img/r-b-1500.webp 1500w" sizes="(max-width:820px) 100vw, 50vw" data-full="/img/r-b-1500.webp" decoding="async">
-        <figcaption class="mono"><em>Caminhando com os olhos e não com as pernas</em> (Walking with the eyes, not the legs)<br>Drawing and transfer onto hand enlargement, c-print paper<br>78.5 × 53.5 cm</figcaption></figure>
+        <figcaption class="mono"><em>Caminhando com os olhos e não com as pernas</em> (Walking with the eyes, not the legs), 2022<br>Drawing and transfer onto hand enlargement, c-print paper<br>78.5 × 53.5 cm</figcaption></figure>
       <figure><img src="/img/r-e.jpg" alt="Congada group photograph with affective map" loading="lazy" width="1500" height="1007" srcset="/img/r-e-320.webp 320w, /img/r-e-640.webp 640w, /img/r-e-960.webp 960w, /img/r-e-1280.webp 1280w, /img/r-e-1500.webp 1500w" sizes="(max-width:820px) 100vw, 50vw" data-full="/img/r-e-1500.webp" decoding="async">
-        <figcaption class="mono"><em>1890, Sempre Viva</em><br>Affective map, hand-enlargement process, c-print<br>84 × 56.5 cm</figcaption></figure>
+        <figcaption class="mono"><em>1890, Sempre Viva</em>, 2022<br>Affective map, hand-enlargement process, c-print<br>84 × 56.5 cm</figcaption></figure>
     </div>
   </section>
 
@@ -864,6 +750,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
       <li><span class="mono">2024</span><span><i>Ecos Malês</i>, Casa das Histórias, Salvador</span></li>
       <li><span class="mono">2024</span><span><i>RAW!</i>, Fortes D’Aloia &amp; Gabriel and Galeria Hoa, São Paulo</span></li>
       <li><span class="mono">2024</span><span>Virada Cultural, Praça das Artes, São Paulo</span></li>
+      <li><span class="mono">2023</span><span><i>Visões do Luvemba</i>, Galeria Lume, São Paulo</span></li>
       <li><span class="mono">2023</span><span><i>Watertower Favoriten</i>, Academy of Fine Arts Vienna</span></li>
       <li><span class="mono">2023</span><span>ArtRio, Rio de Janeiro; Paris Photo, Paris</span></li>
       <li><span class="mono">2021–22</span><span><i>The New Black Vanguard</i>, Rencontres d’Arles; Musée des Beaux-Arts, Le Locle; Fotografiska, Stockholm; Saatchi Gallery, London</span></li>
@@ -873,7 +760,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
       <li><span class="mono">2021</span><span><i>When The Lights Go Out</i>, HFA Space, Vienna</span></li>
       <li><span class="mono">2021</span><span><i>The Cage</i>, Vienna</span></li>
       <li><span class="mono">2021</span><span>Festival Arte Core, MAM Rio</span></li>
-      <li><span class="mono">2023</span><span><i>Visões do Luvemba</i>, Galeria Lume, São Paulo</span></li>
     </ul></div>
     <div><h2>Residencies</h2><ul>
       <li><span class="mono">2026</span><span>Terra Afefé, Chapada Diamantina, Bahia</span></li>
@@ -1039,13 +925,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </section>
 </main>
 
-<nav class="review mono" id="review" aria-label="Internal review: home alternatives">
-  <span>Version</span>
-  <a href="#home-a" data-h="home-a">A<span>, text only</span></a>
-  <a href="#" data-h="">B<span>, index and work</span></a>
-  <a href="#home-c" data-h="home-c">C<span>, film</span></a>
-  <a href="#home-d" data-h="home-d">D<span>, dial</span></a>
-</nav>
 
 <footer class="grid">
   <span class="f1">Represented by <a href="https://galerialume.com">Galeria Lume</a>, São Paulo</span>
@@ -1062,20 +941,19 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
 
 <script>
 (function(){
-  var views={'':'v-b','home-b':'v-b','home-a':'v-a','home-c':'v-c','home-d':'v-d','rios-falam-rios-cantam':'v-rios-falam-rios-cantam','for-sale':'v-for-sale','visoes-do-luvemba':'v-visoes-do-luvemba','europe-is-not-my-center':'v-europe-is-not-my-center','biografia':'v-biografia','publicacoes':'v-publicacoes','som':'v-som','videos':'v-videos','textos':'v-textos','contato':'v-contato'};
+  var views={'':'v-b','home-b':'v-b','rios-falam-rios-cantam':'v-rios-falam-rios-cantam','for-sale':'v-for-sale','visoes-do-luvemba':'v-visoes-do-luvemba','europe-is-not-my-center':'v-europe-is-not-my-center','biografia':'v-biografia','publicacoes':'v-publicacoes','som':'v-som','videos':'v-videos','textos':'v-textos','contato':'v-contato'};
   var BASE=document.documentElement.getAttribute('data-base')||'/';
   function url(h){return !h ? BASE : /^home-/.test(h) ? BASE+'#'+h : BASE+h}
   function slugOf(path,hash){
     var p=path; if(p.indexOf(BASE)===0) p=p.slice(BASE.length); else if(p+'/'===BASE) p=''; else return null;
     p=p.replace(/(^|\/)(index|site)\.html$/,'').replace(/\/$/,'');
-    if(!p && /^#home-[abcd]$/.test(hash||'')) return hash.slice(1);
+    if(!p && /^#home-[abcd]$/.test(hash||'') && hash.slice(1) in views) return hash.slice(1);
     return p in views ? p : null;
   }
   /* links antigos com # (ex.: /caiorosa#for-sale) viram a URL nova */
   function legacy(){var h=location.hash.slice(1); if(h && h in views && !/^home-/.test(h) && slugOf(location.pathname,'')==='') history.replaceState(null,'',url(h));}
   document.querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href').slice(1); if(h && h in views && !/^home-/.test(h)) a.setAttribute('href',url(h))});
   function navTo(h){var u=url(h); if(u!==location.pathname+location.hash) history.pushState(null,'',u); route()}
-  var review=document.getElementById('review');
   var lastHome='';
   var lgEl=document.querySelector('.top .lang'), lgBase=lgEl?(lgEl.getAttribute('data-base')||lgEl.getAttribute('href').split('#')[0]):'';
   function route(){
@@ -1084,11 +962,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     var id=views[h];
     document.querySelectorAll('.view').forEach(function(v){var on=v.id===id; v.classList.toggle('on',on); v.hidden=!on});
     var isHome=/^v-[abcd]$/.test(id);
-    document.body.classList.toggle('on-c', id==='v-c' && !matchMedia('(max-width:820px)').matches);
     if(isHome) lastHome=h;
-    review.classList.toggle('on',/^home-[acd]$/.test(h));
-    var pk=document.getElementById('peek'); if(pk) pk.classList.remove('on');
-    review.querySelectorAll('a').forEach(function(a){a.classList.toggle('cur',a.dataset.h===h)});
     document.querySelectorAll('[data-home]').forEach(function(a){a.setAttribute('href',url(lastHome))});
     var sec={'videos':1,'som':1,'publicacoes':1,'textos':1,'biografia':1,'contato':1};
     document.querySelectorAll('#mainnav a:not(.lang)').forEach(function(a){
@@ -1105,7 +979,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     if(routed && h1) h1.focus({preventScroll:true});
     if(lgEl){ lgEl.setAttribute('href', lgBase + (h && !/^home-/.test(h) ? h : '') + (/^home-/.test(h) ? '#'+h : '')); }
     routed=true;
-    window.scrollTo(0,0); if(id==='v-c'&&window.__filmInit) window.__filmInit(); if(id==='v-d'&&window.__dialInit) window.__dialInit(); var tp=document.querySelector('.top'); if(tp) tp.classList.remove('away');
+    window.scrollTo(0,0); var tp=document.querySelector('.top'); if(tp) tp.classList.remove('away');
   }
   var routed=false;
   window.addEventListener('hashchange',route); window.addEventListener('popstate',route); route();
@@ -1124,12 +998,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     a.addEventListener('click',function(e){e.preventDefault()});
   });
 
-  /* A: imagem acompanha o cursor */
-  var fl=document.getElementById('float'), fimg=fl.querySelector('img');
-  document.querySelectorAll('[data-float] a').forEach(function(a){
-    a.addEventListener('mouseenter',function(){fimg.src=a.dataset.img; fl.classList.add('on')});
-    a.addEventListener('mouseleave',function(){fl.classList.remove('on')});
-  });
   /* pré-carrega as imagens de hover só em telas com mouse, depois que a página termina de carregar */
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     var done=false, go=function(){if(done) return; done=true; var seen={};document.querySelectorAll('[data-img]').forEach(function(a){var u=a.dataset.img; if(!seen[u]){seen[u]=1; new Image().src=u}})};
@@ -1146,7 +1014,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   addEventListener('scroll',function(){
     var y=scrollY;
     if(document.body.classList.contains('menu-open')||document.body.classList.contains('lb-open')) return;
-    if(document.getElementById('v-c').classList.contains('on')){top.classList.remove('away'); top.classList.toggle('lifted', y>8); lastY=y; return;}
     top.classList.toggle('lifted', y>8);
     if(y>lastY+4 && y>120) top.classList.add('away');
     else if(y<lastY-4 || y<120) top.classList.remove('away');
@@ -1162,137 +1029,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   });
   document.querySelectorAll('#mainnav a').forEach(function(a){a.addEventListener('click',closeMenu)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape' && document.body.classList.contains('menu-open')){closeMenu(); mb.focus()}});
-
-  /* A no mobile: a obra do título no centro da tela aparece no canto */
-  var mq=matchMedia('(max-width:820px)'), peek=document.getElementById('peek'), pimg=peek.querySelector('img');
-  var tl=document.querySelectorAll('[data-float]');
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){
-      if(!mq.matches||scrollY<40) return;
-      es.forEach(function(e){
-        var a=e.target;
-        if(e.isIntersecting){
-          tl.forEach(function(l){l.classList.add('focus'); l.querySelectorAll('a').forEach(function(x){x.classList.remove('act')})});
-          a.classList.add('act'); pimg.src=a.dataset.img; peek.classList.add('on');
-        }
-      });
-      if(!document.querySelector('[data-float] a.act')) peek.classList.remove('on');
-    },{rootMargin:'-46% 0px -46% 0px'});
-    document.querySelectorAll('[data-float] a').forEach(function(a){io.observe(a)});
-    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) peek.classList.remove('on')})}).observe(document.querySelector('footer'));
-    var lede=document.querySelector('#v-a .works');
-    new IntersectionObserver(function(es){es.forEach(function(e){
-      if(e.isIntersecting){peek.classList.remove('on'); tl.forEach(function(l){l.classList.remove('focus'); l.querySelectorAll('a').forEach(function(x){x.classList.remove('act')})})}
-    })},{rootMargin:'0px 0px -92% 0px'}).observe(lede);
-  }
-
-
-  /* dados compartilhados por C e D */
-  var WORKS=[
-    {h:'rios-falam-rios-cantam',t:'Rivers Talk, Rivers Sing',y:'2025',m:'Solo exhibition, Galeria Lume',img:'/img/rios-1280.webp',big:'/img/r-boi-1800.webp'},
-    {h:'for-sale',t:'For Sale',y:'2023',m:'Collection of the Bibliothèque nationale de France',img:'/img/forsale-1194.webp',big:'/img/forsale-1194.webp'},
-    {h:'visoes-do-luvemba',t:'Visões do Luvemba',y:'2023',m:'Photography and video installation',img:'/img/luvemba-1193.webp',big:'/img/luvemba-1193.webp'},
-    {h:'europe-is-not-my-center',t:'Europe is Not My Center',y:'2021',m:'Photography',img:'/img/europe-1200.webp',big:'/img/europe-1200.webp'},
-    {h:'publicacoes',t:'Memórias Congadeiras',y:'2024',m:'Publication, Roots to Fruits',img:'/img/roots-621.jpg',big:'/img/roots-621.jpg'},
-    {h:'publicacoes',t:'The Cage',y:'2021',m:'Photobook, Vienna',img:'/img/cage-1193.webp',big:'/img/cage-1193.webp'},
-    {h:'som',t:'Rio Doce',y:'2020',m:'Monthly show, NTS Radio',img:'/img/riodoce-1280.webp',big:'/img/riodoce-1800.webp'}
-  ];
-  function pad(n){return (n<10?'0':'')+n}
-
-  /* C: rolo de filme */
-  var track=document.getElementById('track'), film=document.getElementById('film');
-  track.innerHTML=WORKS.map(function(w,i){
-    return '<a class="fr" href="'+url(w.h)+'"><img src="'+w.big+'" alt="'+w.t+'" loading="lazy"><span class="cap"><span class="mono">'+(w.y||'&nbsp;')+'</span><span class="t">'+w.t+'</span><span class="mono">'+w.m+'</span></span></a>';
-  }).join('');
-  var frames=[].slice.call(track.children), mqF=matchMedia('(max-width:820px)');
-  function filmSize(){
-    if(mqF.matches){film.style.height='';return}
-    var extra=track.scrollWidth-innerWidth;
-    film.style.height=(film.firstElementChild.offsetHeight+Math.max(0,extra))+'px';
-  }
-  function filmMove(){
-    if(!document.getElementById('v-c').classList.contains('on')) return;
-    var cur=0;
-    if(!mqF.matches){
-      var max=Math.max(0,track.scrollWidth-innerWidth), st=film.firstElementChild.offsetHeight, hh=document.querySelector('.top').offsetHeight, p=Math.min(Math.max((scrollY-(film.getBoundingClientRect().top+scrollY-hh))/Math.max(1,film.offsetHeight-st),0),1);
-      track.style.transform='translateX('+(-p*max)+'px)';
-    }
-    var mid=innerWidth/2, best=1e9;
-    frames.forEach(function(f,i){var r=f.getBoundingClientRect(), d=Math.abs(r.left+r.width/2-mid); if(d<best){best=d;cur=i}});
-    frames.forEach(function(f,i){f.classList.toggle('cur',i===cur)});
-  }
-  addEventListener('scroll',filmMove,{passive:true});
-  track.addEventListener('scroll',filmMove,{passive:true});
-  addEventListener('resize',function(){filmSize();filmMove()});
-  frames.forEach(function(f){var im=f.querySelector('img'); im.addEventListener('load',function(){filmSize()})});
-
-  /* D: dial */
-  var drum=document.getElementById('drum'), dial=document.getElementById('dial'), ptr=document.getElementById('pointer');
-  var dimg=document.getElementById('dimg'), dcap=document.getElementById('dcap');
-  var N=WORKS.length, STEP=17, pos=0, target=0, active=-1, raf=null;
-  var items=WORKS.map(function(w,i){
-    var el=document.createElement('div'); el.className='it'; el.id='dial-'+i; el.setAttribute('role','option');
-    el.innerHTML='<span class="y">'+(w.y||'')+'</span><span class="t">'+w.t+'</span>';
-    el.addEventListener('click',function(){ if(i===active) navTo(w.h); else go(i); });
-    drum.appendChild(el); return el;
-  });
-  var ticks=[];
-  for(var k=-5;k<=N*5+5;k++){var tk=document.createElement('span'); tk.className='tk'+(k%5===0?' major':''); tk.dataset.p=k/5; drum.appendChild(tk); ticks.push(tk)}
-  function R(){return dial.clientHeight*0.46}
-  function place(el,p){
-    var a=(p-pos)*STEP, rad=a*Math.PI/180;
-    if(Math.abs(a)>84){el.style.opacity=0;el.style.visibility='hidden';return}
-    el.style.visibility='visible';
-    var c=Math.cos(rad);
-    el.style.transform='translateY(-50%) translateY('+(R()*Math.sin(rad))+'px) scaleY('+Math.max(.05,c).toFixed(3)+')';
-    el.style.opacity=Math.max(0,Math.pow(c,3));
-  }
-  function render(){
-    items.forEach(function(el,i){place(el,i)});
-    ticks.forEach(function(t){place(t,+t.dataset.p)});
-    var now=Math.round(pos);
-    if(now!==active){
-      active=now; items.forEach(function(el,i){el.classList.toggle('on',i===now)});
-      dial.setAttribute('aria-activedescendant','dial-'+now);
-      ptr.classList.remove('tic'); void ptr.offsetWidth; ptr.classList.add('tic');
-      var w=WORKS[now]; dimg.classList.add('swap');
-      setTimeout(function(){dimg.src=w.img; dimg.alt=w.t; dcap.innerHTML='<em>'+w.t+'</em>'+(w.y?', '+w.y:'')+'<br>'+w.m; dimg.classList.remove('swap')},120);
-    }
-  }
-  function loop(){
-    var d=target-pos; pos+= Math.abs(d)<0.002 ? d : d*0.2; render();
-    raf = Math.abs(target-pos)>0.0005 ? requestAnimationFrame(loop) : null;
-  }
-  function go(i){target=Math.max(0,Math.min(N-1,i)); if(!raf) raf=requestAnimationFrame(loop)}
-  var wheelLock=0, acc=0;
-  dial.addEventListener('wheel',function(e){
-    e.preventDefault(); acc+=e.deltaY; var t=performance.now();
-    if(Math.abs(acc)>30 && t-wheelLock>90){go(Math.round(target)+(acc>0?1:-1)); acc=0; wheelLock=t}
-  },{passive:false});
-
-  dial.addEventListener('keydown',function(e){
-    if(e.key==='ArrowDown'){go(Math.round(target)+1);e.preventDefault()}
-    if(e.key==='ArrowUp'){go(Math.round(target)-1);e.preventDefault()}
-    if(e.key==='Enter'){navTo(WORKS[active].h)}
-  });
-  var ty=null, tpos=0, moved=false;
-  dial.addEventListener('pointerdown',function(e){ if(e.pointerType==='mouse') return; ty=e.clientY; tpos=pos; moved=false; dial.setPointerCapture(e.pointerId)});
-  dial.addEventListener('pointermove',function(e){
-    if(ty===null) return; var dy=e.clientY-ty; if(Math.abs(dy)>4) moved=true;
-    pos=Math.max(-.4,Math.min(N-.6,tpos-dy/(R()*Math.sin(STEP*Math.PI/180)))); target=pos; render();
-  });
-  dial.addEventListener('pointerup',function(e){ if(ty===null) return; ty=null; if(moved){go(Math.round(pos))} });
-  window.__filmInit=function(){filmSize();filmMove()}; window.__dialInit=function(){if(!window.__dialPre){window.__dialPre=1; WORKS.forEach(function(w){new Image().src=w.img})} render()};
-  if(location.hash==='#home-c') setTimeout(window.__filmInit,50);
-  render();
-  dimg.addEventListener('click',function(){navTo(WORKS[active].h)}); dimg.style.cursor='pointer';
-
-  document.getElementById('v-a').addEventListener('mousemove',function(e){
-    var w=fl.offsetWidth, hgt=fl.offsetHeight, x=e.clientX+32, y=e.clientY-hgt/2;
-    if(x+w>innerWidth-16) x=e.clientX-w-32;
-    y=Math.max(16,Math.min(y,innerHeight-hgt-16));
-    fl.style.transform='translate('+x+'px,'+y+'px)';
-  });
 
   /* B: troca de obra */
   var img=document.getElementById('stageImg'), cap=document.getElementById('stageCap');
@@ -1406,5 +1142,6 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   player.addEventListener('ended',function(){if(cur) reset(cur); cur=null});
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
