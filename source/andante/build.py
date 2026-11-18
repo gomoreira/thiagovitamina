@@ -135,8 +135,10 @@ def viagem(v):
     out.append(f'''<section class="band band--white trip-sec" aria-labelledby="s-visao"><div class="wrap">{head("Visão geral", "A viagem", "s-visao")}
 <div class="trip-two"><div class="prose">{vis}</div><dl class="ficha">{ficha}</dl></div>
 <ul class="gallery" role="list" aria-label="Fotos da viagem">{gal}</ul></div></section>''')
-    pq = v["para_quem"]; perfis = "".join(f'<li class="tile"><span class="small">{i+1:02d}</span><h3 class="serif">{t}</h3><p>{x}</p></li>' for i, (t, x) in enumerate(pq["perfis"]))
-    out.append(f'''<section class="band band--sky trip-sec" id="para-quem" aria-labelledby="s-quem"><div class="wrap">{head("Para quem é", "Para quem é<br>esta viagem", "s-quem")}
+    pq = v.get("para_quem")
+    if pq:
+      perfis = "".join(f'<li class="tile"><span class="small">{i+1:02d}</span><h3 class="serif">{t}</h3><p>{x}</p></li>' for i, (t, x) in enumerate(pq["perfis"]))
+      out.append(f'''<section class="band band--sky trip-sec" id="para-quem" aria-labelledby="s-quem"><div class="wrap">{head("Para quem é", "Para quem é<br>esta viagem", "s-quem")}
 <p class="serif it trip-lead">{pq["lead"]}</p><ul class="tiles" role="list">{perfis}</ul></div></section>''')
     esc = "".join(f'<li class="choice"><h3 class="serif">{t}</h3><p>{x}</p></li>' for t, x in v["escolhas"])
     out.append(f'''<section class="band band--olive trip-sec" aria-labelledby="s-esc"><div class="wrap">{head("O que define esta viagem", "Nossas escolhas", "s-esc")}<ul class="choices" role="list">{esc}</ul></div></section>''')
@@ -154,7 +156,7 @@ def viagem(v):
     an = "".join(f'<li class="host">{foto(None, "host__img", alt)}<h3 class="serif">{n}</h3><p class="small">{r}</p><p>{x}</p></li>' for n, r, x, alt in v["anfitrioes"])
     out.append(f'''<section class="band band--lilac trip-sec" id="anfitrioes" aria-labelledby="s-anf"><div class="wrap">{head("Quem conduz", "Anfitriões", "s-anf")}<ul class="hosts" role="list">{an}</ul></div></section>''')
     ht = "".join(f'<li class="tile tile--media">{foto(None, "tile__img tile__img--short", alt)}<div><h3 class="serif">{n}</h3><p class="small">{m}</p><p>{x}</p></div></li>' for n, m, x, alt in v["hoteis"])
-    out.append(f'''<section class="band band--sky trip-sec" aria-labelledby="s-hot"><div class="wrap">{head("Hospedagem", "Onde ficamos", "s-hot")}<ul class="tiles tiles--hotels" role="list">{ht}</ul></div></section>''')
+    out.append(f'''<section class="band band--sky trip-sec" aria-labelledby="s-hot"><div class="wrap">{head("Hospedagem", "Onde ficamos", "s-hot")}<ul class="tiles tiles--hotels" role="list">{ht}</ul>{f'<p class="small hotel-note">{v["hoteis_nota"]}</p>' if v.get("hoteis_nota") else ""}</div></section>''')
     fq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in v["faq"])
     out.append(f'''<section class="band band--earth trip-sec" aria-labelledby="s-faq"><div class="wrap">{head("Perguntas frequentes", "Antes de reservar", "s-faq")}<div class="acc acc--light acc--faq">{fq}</div></div></section>''')
     r = v["reserva"]

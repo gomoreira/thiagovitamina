@@ -370,3 +370,4 @@ body.is-locked{overflow:hidden}
   .tiles--hotels{grid-template-columns:repeat(3,1fr)}
   .hero--trip h1{font-size:var(--fs-display)}
 }
+.hotel-note{margin-top:var(--s6)!important;font-weight:400}

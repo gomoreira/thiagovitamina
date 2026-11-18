@@ -21,5 +21,249 @@
     ]
   ],
   "ordem": 3,
-  "img": "gaga-piemonte"
+  "img": "gaga-piemonte",
+  "pagina": true,
+  "hero": {
+    "img": "gaga-piemonte",
+    "alt": "Silhuetas de pessoas num terraço ao pôr do sol, olhando a cidade e as montanhas",
+    "titulo_serif": "Gaga e",
+    "titulo_caps": "Piemonte",
+    "meta": "10 dias · Movimento"
+  },
+  "descricao": "10 dias entre o Monferrato, as Langhe e o Vale de Aosta, começando pelo corpo.",
+  "fatos": [
+    "[DATAS DA PARTIDA]",
+    "[N.º] vagas restantes"
+  ],
+  "frase": "Cada roteiro nasce de escolhas intransigentes e improváveis.",
+  "conduz": [
+    [
+      "[NOME]",
+      "Professor de Gaga"
+    ],
+    [
+      "[NOME]",
+      "Produtor das Langhe"
+    ]
+  ],
+  "visao": [
+    "Os três primeiros dias são de Gaga, a linguagem de movimento criada por Ohad Naharin, na Orsolina28, um centro de dança entre as colinas e os vinhedos do Monferrato. Aulas diárias, comida da estação e tempo de sobra. Não é preciso saber dançar.",
+    "Com o corpo acordado, seguimos para as Langhe e o Roero, entre Barolo, queijos, avelãs e trufas, e subimos até o pé do Mont Blanc, antes da última noite em Turim."
+  ],
+  "ficha": [
+    [
+      "Onde",
+      "Itália: Monferrato, Langhe e Roero, Vale de Aosta e Turim"
+    ],
+    [
+      "Quando",
+      "[DATAS DA PARTIDA]"
+    ],
+    [
+      "Duração",
+      "10 dias"
+    ],
+    [
+      "Grupo",
+      "[N.º MÁXIMO DE PESSOAS]"
+    ],
+    [
+      "Esforço",
+      "Aulas de movimento abertas a qualquer corpo, a partir de 18 anos. Sem experiência em dança."
+    ],
+    [
+      "Preço",
+      "[PREÇO POR PESSOA]"
+    ]
+  ],
+  "galeria": [
+    [
+      "gaga-piemonte",
+      "Silhuetas de pessoas num terraço ao pôr do sol, olhando a cidade e as montanhas"
+    ],
+    [
+      null,
+      "Vista aérea de um estúdio de teto branco entre vinhedos, com as colinas do Monferrato ao fundo"
+    ],
+    [
+      null,
+      "Pessoas dançando descalças num estúdio aberto, com árvores ao fundo"
+    ],
+    [
+      null,
+      "Langhe"
+    ]
+  ],
+  "escolhas": [
+    [
+      "Corpo em movimento",
+      "Três dias de Gaga e Gaga/metodika na Orsolina28, com comida da estação e glamping entre vinhedos."
+    ],
+    [
+      "O coração das Langhe",
+      "Barolo e Barbaresco com quem os produz, a fazenda de um queijeiro, as avelãs e a trufa branca no outono."
+    ],
+    [
+      "Até o pé do Mont Blanc",
+      "Caminhada pelo vale da Aosta ao pé do lado francês, regada pelos vinhedos de montanha de Carema."
+    ]
+  ],
+  "roteiro": [
+    [
+      "Chegada ao Monferrato",
+      "Glamping na Orsolina28, Moncalvo",
+      [
+        "Transfer da estação de Asti",
+        "Primeira aula de Gaga",
+        "Jantar com ingredientes da estação"
+      ]
+    ],
+    [
+      "Gaga",
+      "Glamping na Orsolina28, Moncalvo",
+      [
+        "Aula de Gaga pela manhã",
+        "Almoço no centro",
+        "Aula de Gaga/metodika à tarde",
+        "Tempo livre: piscina, vinhedos, descanso"
+      ]
+    ],
+    [
+      "Gaga",
+      "Glamping na Orsolina28, Moncalvo",
+      [
+        "Aula de Gaga pela manhã",
+        "Conversa com os professores",
+        "Tempo livre para explorar o Monferrato",
+        "Jantar no centro"
+      ]
+    ],
+    [
+      "Rumo às Langhe",
+      "Cascina Galarej, Serralunga d'Alba",
+      [
+        "Última aula de Gaga",
+        "Transfer privado até Serralunga d'Alba",
+        "Jantar numa osteria da região"
+      ]
+    ],
+    [
+      "O Roero",
+      "Cascina Galarej, Serralunga d'Alba",
+      [
+        "Visita à fazenda de um queijeiro",
+        "Fritto misto no Roero",
+        "[TARDE LIVRE]"
+      ]
+    ],
+    [
+      "Barolo e Barbaresco",
+      "Cascina Galarej, Serralunga d'Alba",
+      [
+        "Degustação com um produtor de Barolo e Barbaresco",
+        "Jantar nas colinas de Rodello"
+      ]
+    ],
+    [
+      "Avelãs e trufas",
+      "Cascina Galarej, Serralunga d'Alba",
+      [
+        "Visita a uma fazenda de avelãs",
+        "Busca da trufa em Montelupo Albese",
+        "Jantar num restaurante com estrela Michelin"
+      ]
+    ],
+    [
+      "Do arroz ao gelo",
+      "Auberge de la Maison, Courmayeur",
+      [
+        "Visita a uma propriedade de arroz em Casalbeltrame",
+        "Almoço no caminho",
+        "Subida ao Vale de Aosta"
+      ]
+    ],
+    [
+      "Mont Blanc",
+      "Auberge de la Maison, Courmayeur",
+      [
+        "Teleférico Skyway Monte Bianco",
+        "Fontina e vinho em plena altitude",
+        "Visita a Aosta",
+        "Jantar de fondue e raclette"
+      ]
+    ],
+    [
+      "Carema e Turim",
+      "[HOTEL EM TURIM]",
+      [
+        "Vinhedos de montanha de Carema com o produtor",
+        "Almoço na adega",
+        "Jantar de despedida em Turim"
+      ]
+    ]
+  ],
+  "inclui": [
+    "3 noites em glamping compartilhado na Orsolina28",
+    "Aulas de Gaga e Gaga/metodika",
+    "Refeições na Orsolina28",
+    "Transfers privados",
+    "Degustações e visitas a produtores",
+    "[OUTRAS REFEIÇÕES INCLUÍDAS]"
+  ],
+  "nao_inclui": [
+    "[VOOS ATÉ TURIM]",
+    "[SEGURO DE VIAGEM]",
+    "[BEBIDAS E EXTRAS]"
+  ],
+  "anfitrioes": [
+    [
+      "[NOME]",
+      "Professor de Gaga",
+      "[Três linhas sobre quem é, o que faz e por que conduz este grupo.]",
+      "Foto do professor de Gaga"
+    ],
+    [
+      "[NOME]",
+      "Produtor das Langhe",
+      "[Três linhas sobre quem é, o que faz e por que conduz este grupo.]",
+      "Foto do produtor das Langhe"
+    ]
+  ],
+  "hoteis": [
+    [
+      "Orsolina28",
+      "Glamping · Moncalvo · 3 noites",
+      "Centro de dança entre as colinas e os vinhedos do Monferrato.",
+      "Foto da Orsolina28"
+    ],
+    [
+      "Cascina Galarej",
+      "Serralunga d'Alba · 4 noites",
+      "Nas Langhe, no antigo domínio real de Fontanafredda.",
+      "Foto da Cascina Galarej"
+    ]
+  ],
+  "hoteis_nota": "Também: Auberge de la Maison (Courmayeur) e [HOTEL EM TURIM].",
+  "faq": [
+    [
+      "Preciso saber dançar?",
+      "Não. As aulas de Gaga são abertas a qualquer pessoa a partir de 18 anos, sem experiência em dança ou em Gaga."
+    ],
+    [
+      "Como é o glamping na Orsolina28?",
+      "[RESPOSTA EM DUAS OU TRÊS LINHAS]"
+    ],
+    [
+      "Como funciona o pagamento?",
+      "[RESPOSTA EM DUAS OU TRÊS LINHAS]"
+    ],
+    [
+      "E se eu precisar cancelar?",
+      "[RESPOSTA EM DUAS OU TRÊS LINHAS]"
+    ]
+  ],
+  "reserva": {
+    "linha": "[DATAS DA PARTIDA] · 10 dias · [PREÇO POR PESSOA]",
+    "nota": "[N.º] vagas restantes neste grupo."
+  }
 }

@@ -21,5 +21,232 @@
     ]
   ],
   "ordem": 1,
-  "img": "peru"
+  "img": "peru",
+  "pagina": true,
+  "hero": {
+    "img": "peru",
+    "alt": "Terraços circulares de Moray, no Vale Sagrado, com montanhas ao fundo",
+    "titulo_serif": "Vale Sagrado",
+    "titulo_caps": "Peru",
+    "meta": "8 dias · Cusco, Vale Sagrado e Machu Picchu"
+  },
+  "descricao": "8 dias entre Cusco, o Vale Sagrado, Ollantaytambo e Machu Picchu, da terra à mesa.",
+  "fatos": [
+    "[DATAS DA PARTIDA]",
+    "[N.º] vagas restantes"
+  ],
+  "frase": "Cada roteiro nasce de escolhas intransigentes e improváveis.",
+  "conduz": [
+    [
+      "[NOME]",
+      "Etnobotânico"
+    ],
+    [
+      "Andrés Asdame",
+      "Arqueoastrônomo"
+    ]
+  ],
+  "visao": [
+    "Começamos em Cusco, entre as pedras incas e a cozinha contemporânea do Chicha. Depois descemos ao Vale Sagrado, onde um etnobotânico conduz o grupo por dois dias inteiros: da colheita às técnicas andinas de cultivo e preparo, até a mesa de quem vive ali.",
+    "De Ollantaytambo, sobe-se de trem até Machu Picchu com o arqueoastrônomo Andrés Asdame, que lê a engenharia inca como tecnologia. Caminhadas leves, dias com tempo livre e a logística toda resolvida nos bastidores."
+  ],
+  "ficha": [
+    [
+      "Onde",
+      "Peru: Cusco, Vale Sagrado (Urubamba), Ollantaytambo e Machu Picchu"
+    ],
+    [
+      "Quando",
+      "[DATAS DA PARTIDA]"
+    ],
+    [
+      "Duração",
+      "8 dias, 7 noites"
+    ],
+    [
+      "Grupo",
+      "De 8 a 10 pessoas"
+    ],
+    [
+      "Esforço",
+      "Caminhadas leves. Altitude de até 3.400 m em Cusco."
+    ],
+    [
+      "Preço",
+      "[PREÇO POR PESSOA]"
+    ]
+  ],
+  "galeria": [
+    [
+      "peru",
+      "Terraços circulares concêntricos de pedra e relva dourada, vistos de cima"
+    ],
+    [
+      null,
+      "Pastora com ovelhas num campo de terra vermelha, com montanhas ao fundo"
+    ],
+    [
+      null,
+      "Vale Sagrado"
+    ],
+    [
+      null,
+      "Machu Picchu"
+    ]
+  ],
+  "escolhas": [
+    [
+      "O contraste gastronômico",
+      "Dois dias no campo e à mesa com um etnobotânico no Vale Sagrado e, em Cusco, o jantar no Chicha, de Gastón Acurio."
+    ],
+    [
+      "Machu Picchu sob outra lente",
+      "A visita guiada pelo arqueoastrônomo Andrés Asdame, que lê o céu e a engenharia inca como pura tecnologia."
+    ],
+    [
+      "A liberdade na estrutura",
+      "Hotéis boutique, transporte privado e trens resolvidos nos bastidores. No palco, você caminha no próprio ritmo e sente o ar rarefeito."
+    ]
+  ],
+  "roteiro": [
+    [
+      "Chegada a Cusco",
+      "Palacio Manco Capac, Cusco (ou similar)",
+      [
+        "Chegada no fim do dia",
+        "Recepção no aeroporto e transfer privado ao hotel"
+      ]
+    ],
+    [
+      "Cusco, entre o antigo e o novo",
+      "Palacio Manco Capac, Cusco (ou similar)",
+      [
+        "Centro histórico pela manhã, com guia local",
+        "Almoço e tarde livres",
+        "Jantar no Chicha, de Gastón Acurio"
+      ]
+    ],
+    [
+      "Rumo ao Vale Sagrado",
+      "[HOTEL EM URUBAMBA]",
+      [
+        "Transfer de Cusco a Urubamba",
+        "[PARADA NO CAMINHO]",
+        "Almoço [A DEFINIR]",
+        "Tarde livre para chegar devagar"
+      ]
+    ],
+    [
+      "A despensa andina, parte 1",
+      "[HOTEL EM URUBAMBA]",
+      [
+        "Dia inteiro com o etnobotânico",
+        "[ATIVIDADES: COLHEITA, TÉCNICAS ANDINAS, COZINHA]",
+        "Jantar livre"
+      ]
+    ],
+    [
+      "A despensa andina, parte 2",
+      "[HOTEL EM URUBAMBA]",
+      [
+        "Dia inteiro com o etnobotânico",
+        "[ATIVIDADES: COMUNIDADES E PRODUTORES]",
+        "Jantar livre"
+      ]
+    ],
+    [
+      "Ollantaytambo",
+      "El Albergue, Ollantaytambo (ou similar)",
+      [
+        "Transfer até Ollantaytambo",
+        "Almoço no Museo Alqa",
+        "Caminhada leve, com artesãos locais ou um sítio arqueológico",
+        "Jantar livre"
+      ]
+    ],
+    [
+      "Machu Picchu",
+      "El Albergue, Ollantaytambo (ou similar)",
+      [
+        "Trem Vistadome ou Hiram Bingham até Machu Picchu",
+        "Visita guiada pelo arqueoastrônomo Andrés Asdame",
+        "Volta a Ollantaytambo no fim do dia"
+      ]
+    ],
+    [
+      "Despedida",
+      "",
+      [
+        "Manhã livre e café da manhã",
+        "Transfer privado ao aeroporto de Cusco"
+      ]
+    ]
+  ],
+  "inclui": [
+    "Hotéis boutique com café da manhã",
+    "Transfers e transporte privado",
+    "Guia acompanhante durante toda a viagem",
+    "Dois dias com o etnobotânico",
+    "Visita a Machu Picchu com Andrés Asdame",
+    "Trem Vistadome ou Hiram Bingham",
+    "Entradas em Machu Picchu, sítios arqueológicos e museus",
+    "Jantar no Chicha e almoço no Museo Alqa"
+  ],
+  "nao_inclui": [
+    "[VOOS ATÉ CUSCO]",
+    "[SEGURO DE VIAGEM]",
+    "Refeições indicadas como livres",
+    "[BEBIDAS E EXTRAS]"
+  ],
+  "anfitrioes": [
+    [
+      "[NOME]",
+      "Etnobotânico",
+      "[Três linhas sobre quem é, o que faz e por que conduz este grupo.]",
+      "Foto do etnobotânico"
+    ],
+    [
+      "Andrés Asdame",
+      "Arqueoastrônomo",
+      "[Três linhas sobre quem é, o que faz e por que conduz este grupo.]",
+      "Foto de Andrés Asdame"
+    ]
+  ],
+  "hoteis": [
+    [
+      "Palacio Manco Capac",
+      "Hotel boutique · Cusco · 2 noites",
+      "[Duas linhas sobre o lugar e por que foi escolhido.]",
+      "Foto do Palacio Manco Capac"
+    ],
+    [
+      "El Albergue",
+      "Hotel boutique · Ollantaytambo · 2 noites",
+      "[Duas linhas sobre o lugar e por que foi escolhido.]",
+      "Foto do El Albergue"
+    ]
+  ],
+  "hoteis_nota": "Ou similares, conforme a disponibilidade. Em Urubamba: [HOTEL A DEFINIR], 3 noites.",
+  "faq": [
+    [
+      "Qual é o nível de esforço físico?",
+      "As caminhadas são leves e curtas, no ritmo de cada um. Não é preciso experiência em trilha, só disposição para andar."
+    ],
+    [
+      "Como lidar com a altitude?",
+      "Cusco fica a 3.400 m. O roteiro começa devagar e desce logo ao Vale Sagrado, mais baixo, para o corpo se adaptar. [ORIENTAÇÃO MÉDICA A CONFIRMAR]"
+    ],
+    [
+      "Como funciona o pagamento?",
+      "[SINAL 100% REEMBOLSÁVEL ATÉ 90 DIAS ANTES DA PARTIDA, A CONFIRMAR]"
+    ],
+    [
+      "E se eu precisar cancelar?",
+      "[MULTAS SÓ A PARTIR DE 90 DIAS ANTES DA PARTIDA, A CONFIRMAR]"
+    ]
+  ],
+  "reserva": {
+    "linha": "[DATAS DA PARTIDA] · 8 dias · [PREÇO POR PESSOA]",
+    "nota": "[N.º] vagas restantes neste grupo."
+  }
 }
