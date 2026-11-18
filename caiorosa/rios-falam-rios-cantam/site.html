@@ -514,7 +514,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     </ol>
   </div>
   <aside class="stage" aria-hidden="true">
-    <div class="frame"><img id="stageImg" src="/img/r-capa-1800.webp" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume" width="1800" height="1200" fetchpriority="high" decoding="async"></div>
+    <div class="frame"><img id="stageImg" src="/img/r-capa-1800.webp" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume" width="1800" height="1200" loading="lazy" decoding="async"></div>
     <p class="mono" id="stageCap">Rios falam, Rios cantam, Galeria Lume, 2025. Foto: Filipe Berndt</p>
   </aside>
 </main>
@@ -554,7 +554,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
   </div>
 
   <figure class="bleed">
-    <img src="/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume" width="2346" height="1564" srcset="/img/r-vista2-320.webp 320w, /img/r-vista2-640.webp 640w, /img/r-vista2-960.webp 960w, /img/r-vista2-1280.webp 1280w, /img/r-vista2-1600.webp 1600w, /img/r-vista2-2000.webp 2000w, /img/r-vista2-2346.webp 2346w" sizes="100vw" data-full="/img/r-vista2-2346.webp" decoding="async" loading="lazy">
+    <img src="/img/r-vista2.jpg" alt="Vista da exposição Rios falam, Rios cantam na Galeria Lume" width="2346" height="1564" srcset="/img/r-vista2-320.webp 320w, /img/r-vista2-640.webp 640w, /img/r-vista2-960.webp 960w, /img/r-vista2-1280.webp 1280w, /img/r-vista2-1600.webp 1600w, /img/r-vista2-2000.webp 2000w, /img/r-vista2-2346.webp 2346w" sizes="100vw" data-full="/img/r-vista2-2346.webp" decoding="async" fetchpriority="high">
     <figcaption class="mono">Vista da exposição, Galeria Lume, 2025. Foto: Filipe Berndt</figcaption>
   </figure>
 
@@ -1234,7 +1234,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     var el=document.createElement('div'); el.className='it'; el.id='dial-'+i; el.setAttribute('role','option');
     el.innerHTML='<span class="y">'+(w.y||'')+'</span><span class="t">'+w.t+'</span>';
     el.addEventListener('click',function(){ if(i===active) navTo(w.h); else go(i); });
-    drum.appendChild(el); new Image().src=w.img; return el;
+    drum.appendChild(el); return el;
   });
   var ticks=[];
   for(var k=-5;k<=N*5+5;k++){var tk=document.createElement('span'); tk.className='tk'+(k%5===0?' major':''); tk.dataset.p=k/5; drum.appendChild(tk); ticks.push(tk)}
@@ -1282,7 +1282,7 @@ body.on-c .review{bottom:calc(var(--fh,64px) + 8px)}
     pos=Math.max(-.4,Math.min(N-.6,tpos-dy/(R()*Math.sin(STEP*Math.PI/180)))); target=pos; render();
   });
   dial.addEventListener('pointerup',function(e){ if(ty===null) return; ty=null; if(moved){go(Math.round(pos))} });
-  window.__filmInit=function(){filmSize();filmMove()}; window.__dialInit=function(){render()};
+  window.__filmInit=function(){filmSize();filmMove()}; window.__dialInit=function(){if(!window.__dialPre){window.__dialPre=1; WORKS.forEach(function(w){new Image().src=w.img})} render()};
   if(location.hash==='#home-c') setTimeout(window.__filmInit,50);
   render();
   dimg.addEventListener('click',function(){navTo(WORKS[active].h)}); dimg.style.cursor='pointer';

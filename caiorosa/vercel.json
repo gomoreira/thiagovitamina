@@ -51,6 +51,14 @@
     {
       "src": "/en/(rios-falam-rios-cantam|for-sale|visoes-do-luvemba|europe-is-not-my-center|biografia|publicacoes|som|videos|textos|contato)",
       "dest": "/en/$1/site.html"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
     }
   ]
 }
