@@ -2,5 +2,24 @@
   "slug": "gaga-piemonte",
   "titulo": "Gaga e Piemonte",
   "status": "rascunho",
-  "resumo": "10 dias · Movimento"
+  "resumo": "10 dias · Movimento",
+  "meta": "10 dias · Movimento · [DATAS DA PARTIDA] · [N.º DE VAGAS] · [PREÇO]",
+  "img_alt": "Silhuetas de pessoas num terraço ao pôr do sol, olhando a cidade e as montanhas, uma delas fotografando com o celular",
+  "img_pos": "60% 50%",
+  "destaques": [
+    [
+      "Corpo em movimento",
+      "Três dias de Gaga, a linguagem de movimento criada por Ohad Naharin, num centro de dança entre as colinas e os vinhedos do Monferrato. Aulas diárias, comida da estação e tempo de sobra. Não é preciso saber dançar."
+    ],
+    [
+      "O coração de Langhe",
+      "Barolo e Barbaresco provados com quem os produz, a fazenda de um queijeiro, as avelãs do Piemonte e a busca pela trufa branca, no auge do outono."
+    ],
+    [
+      "Até o pé do Mont Blanc",
+      "O teleférico até o Mont Blanc, fontina e vinho em plena altitude, fondue em Courmayeur e os vinhedos de montanha de Carema, antes da última noite em Turim."
+    ]
+  ],
+  "ordem": 3,
+  "img": "gaga-piemonte"
 }

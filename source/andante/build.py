@@ -8,6 +8,29 @@ PREVIEW = BASE != ""
 if OUT.exists(): shutil.rmtree(OUT)
 shutil.copytree(SRC / "assets", OUT / "assets")
 
+# imagens: WebP + JPEG em várias larguras, gerados a partir de src/img/*.jpg
+from PIL import Image
+WIDTHS = (480, 800, 1200, 1600)
+IMGS = {}
+(OUT / "assets/img").mkdir(parents=True, exist_ok=True)
+for src in sorted((SRC / "img").glob("*.jpg")):
+    im = Image.open(src).convert("RGB"); ws = [w for w in WIDTHS if w <= im.width] or [im.width]
+    for w in ws:
+        r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+        r.save(OUT / f"assets/img/{src.stem}-{w}.webp", "WEBP", quality=78, method=6)
+        r.save(OUT / f"assets/img/{src.stem}-{w}.jpg", "JPEG", quality=80, optimize=True, progressive=True)
+    IMGS[src.stem] = (ws, im.width, im.height)
+
+def img(name, cls="", alt="", loading="lazy", sizes="(min-width:1100px) 50vw, 100vw", pos=""):
+    ws, w, h = IMGS[name]
+    sset = lambda ext: ", ".join(f"{BASE}/assets/img/{name}-{x}.{ext} {x}w" for x in ws)
+    big = ws[-1]; hh = round(h * big / w)
+    style = f' style="object-position:{pos}"' if pos else ""
+    fetch = ' fetchpriority="high"' if loading == "eager" else ""
+    return (f'<picture><source type="image/webp" srcset="{sset("webp")}" sizes="{sizes}">'
+            f'<img class="{cls}" src="{BASE}/assets/img/{name}-{ws[min(1,len(ws)-1)]}.jpg" srcset="{sset("jpg")}" sizes="{sizes}" '
+            f'width="{big}" height="{hh}" alt="{alt}" loading="{loading}" decoding="async"{fetch}{style}></picture>')
+
 site = json.loads((SRC / "data/site.json").read_text())
 viagens = [json.loads(p.read_text()) for p in sorted((SRC / "data/viagens").glob("*.json"))]
 tpl = (SRC / "templates/base.html").read_text()
@@ -60,11 +83,26 @@ def page(path, title, content, current="", description=site["descricao"]):
         html = html.replace("{{" + k + "}}", v)
     dest = OUT / path / "index.html"; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_text(html)
 
-# Início: estrutura de seções (o conteúdo entra na etapa de construção)
-secoes = [("por-que-viajar", "Por que viajar"), ("grupos", "Grupos"), ("quem-somos", "Quem somos"), ("contato", "Contato")]
-inicio = '''<section class="on-dark" style="min-height:100svh;display:flex;align-items:flex-end"><div class="wrap" style="padding-bottom:var(--s16)">
-<h1 style="font-size:var(--fs-hero);line-height:1;font-weight:400"><span class="serif it">O que interessa<br>é o </span><span class="caps">tempo<br>vivido</span></h1></div></section>''' + "".join(
-    f'<section id="{i}" style="padding-block:var(--s16)"><div class="wrap"><h2 class="h2">{t}</h2><span class="rule" aria-hidden="true" style="margin-top:var(--s6)"></span><p style="margin-top:var(--s6)">Em construção.</p></div></section>' for i, t in secoes)
+import re, urllib.parse
+def whatsapp(viagem=None):
+    n = re.sub(r"\D", "", site.get("whatsapp", ""))
+    if not n: return "#contato"  # número ainda não definido
+    msg = f"Oi! Quero saber da viagem {viagem}." if viagem else "Oi! Quero saber dos próximos grupos da Andante."
+    return f"https://wa.me/{n}?text={urllib.parse.quote(msg)}"
+
+def card(v):
+    acc = "".join(f'<details><summary>{t}</summary><p>{x}</p></details>' for t, x in v["destaques"])
+    return (f'<li class="card">{img(v["img"], "card__img", v["img_alt"], sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw", pos=v.get("img_pos",""))}'
+            f'<div class="card__body"><h3 class="card__title"><a href="{BASE}/viagens/{v["slug"]}/">{v["titulo"]}</a></h3>'
+            f'<p class="card__meta">{v["meta"]}</p><div class="acc">{acc}</div>'
+            f'<p class="card__cta"><a class="btn btn--solid" href="{whatsapp(v["titulo"])}" data-track="whatsapp" data-viagem="{v["slug"]}">Reserve seu lugar</a></p></div></li>')
+
+viagens.sort(key=lambda v: v.get("ordem", 99))
+symbol = (SRC / "partials/symbol.svg").read_text().strip()
+inicio = (SRC / "templates/inicio.html").read_text()
+inicio = re.sub(r"\{\{img:([^|}]+)\|([^|}]*)\|([^|}]*)(?:\|([^}]*))?\}\}",
+                lambda m: img(m[1], m[2], m[3], m[4] or "lazy", sizes="100vw" if m[1] == "hero" else "(min-width:820px) 42vw, 100vw"), inicio)
+inicio = inicio.replace("{{symbol}}", symbol).replace("{{cards}}", "".join(card(v) for v in viagens)).replace("{{whatsapp}}", whatsapp())
 page("", "Andante · Viagens bem vividas", inicio, "home")
 for v in viagens:
     c = f'<section class="on-dark" style="min-height:70svh;display:flex;align-items:flex-end"><div class="wrap" style="padding-bottom:var(--s16)"><h1 class="serif" style="font-size:var(--fs-title);line-height:1.05">{v["titulo"]}</h1><p class="small" style="margin-top:var(--s4)">{v["resumo"]}</p></div></section>'

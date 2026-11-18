@@ -2,5 +2,24 @@
   "slug": "pais-basco",
   "titulo": "País Basco Francês",
   "status": "rascunho",
-  "resumo": "8 dias · Gravel"
+  "resumo": "8 dias · Gravel",
+  "meta": "8 dias · Gravel · 5 a 12 de setembro de 2027 · € 5.575 por pessoa",
+  "img_alt": "Mulher comendo num piquenique numa mesa de madeira, com vista para colinas verdes e o mar",
+  "img_pos": "0% 50%",
+  "destaques": [
+    [
+      "Do vinho ao mar",
+      "Começamos em Margaux, entre os châteaux do Médoc, com degustação ao lado de produtores e jantar no castelo. Depois, a floresta de pinheiros nos leva ao Atlântico, para um aperitivo na praia ao pôr do sol."
+    ],
+    [
+      "As vistas de gravel",
+      "Caminhos variados, leves e fora do asfalto: a Vélodyssée até Lacanau, a lagoa de Cousseau, as florestas e vilas das Landes até Hossegor e, no fim, as encostas de La Rhune, na fronteira com a Espanha."
+    ],
+    [
+      "Além da bicicleta",
+      "Surfe, ioga de frente para o mar e um dia livre em Contis. No País Basco, a sidraria de Arbonne e a cozinha de Bayonne, até o descanso em Biarritz."
+    ]
+  ],
+  "ordem": 2,
+  "img": "pais-basco"
 }

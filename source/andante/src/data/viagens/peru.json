@@ -2,5 +2,24 @@
   "slug": "peru",
   "titulo": "Vale Sagrado Peru",
   "status": "rascunho",
-  "resumo": "8 dias"
+  "resumo": "8 dias",
+  "meta": "8 dias · [DATAS DA PARTIDA] · [N.º DE VAGAS] · [PREÇO]",
+  "img_alt": "Terraços circulares de Moray, no Vale Sagrado, com montanhas ao fundo",
+  "img_pos": "50% 55%",
+  "destaques": [
+    [
+      "O contraste gastronômico",
+      "Do almoço intimista guiado por um etnobotânico no coração do Vale Sagrado à mesa contemporânea do Chicha, de Gastón Acurio, unindo a despensa ancestral andina à alta gastronomia urbana."
+    ],
+    [
+      "Sob lentes de vanguarda",
+      "Ollantaytambo e Machu Picchu não como uma aula de história comum, mas sob o rigor científico e a cosmovisão de um arqueoastrônomo, entendendo a engenharia ancestral como pura tecnologia."
+    ],
+    [
+      "O Vale de quem o pertence",
+      "Caminhar pelo próprio esforço, sentir o ar rarefeito e pertencer de verdade com quem vive o vale sagrado além do turismo."
+    ]
+  ],
+  "ordem": 1,
+  "img": "peru"
 }
