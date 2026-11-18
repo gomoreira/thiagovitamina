@@ -7,6 +7,14 @@ BASE = os.environ.get("ANDANTE_BASE", "/andante")
 PREVIEW = BASE != ""
 if OUT.exists(): shutil.rmtree(OUT)
 shutil.copytree(SRC / "assets", OUT / "assets")
+shutil.copy(SRC / "assets/icons/favicon.ico", OUT / "favicon.ico")
+(OUT / "site.webmanifest").write_text(json.dumps({
+    "name": "Andante", "short_name": "Andante", "lang": "pt-BR",
+    "start_url": f"{BASE}/", "display": "browser",
+    "background_color": "#000000", "theme_color": "#000000",
+    "icons": [{"src": f"{BASE}/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+              {"src": f"{BASE}/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png"}]
+}, ensure_ascii=False, indent=2))
 
 # imagens: WebP + JPEG em várias larguras, gerados a partir de src/img/*.jpg
 from PIL import Image
