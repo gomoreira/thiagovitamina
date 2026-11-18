@@ -1,133 +1,329 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <url>
 <loc>https://rosapreta.com.br/</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/rios-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/forsale-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/luvemba-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/europe-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/roots-621.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/cage-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/riodoce-1800.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/rios-falam-rios-cantam</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista2-2346.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-boi-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-couro-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-marimba1-2346.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-marimba2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-memorias-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-sempreviva-1216.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-poliptico-1232.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-a-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-c-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-b-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-e-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-d-1000.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-ca5558-1441.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/forsale-1194.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/rios-falam-rios-cantam"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/rios-falam-rios-cantam"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/rios-falam-rios-cantam"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/for-sale</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p1-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p2-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p3-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p4-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s1-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s2-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s4-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s5-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s6-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b1-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b3-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-i1-1350.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-i2-768.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-paris-2880.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/luvemba-1193.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/for-sale"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/for-sale"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/for-sale"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/visoes-do-luvemba</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/l-hero-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-1-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-2-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-wide-2880.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-9-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-10-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-11-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-7-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-8-2005.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-4-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-5-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-6-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-v3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-v4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/europe-1200.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/visoes-do-luvemba"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/visoes-do-luvemba"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/visoes-do-luvemba"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/europe-is-not-my-center</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/e-1-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/e-2-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-boi-1800.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/europe-is-not-my-center"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/europe-is-not-my-center"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/europe-is-not-my-center"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/biografia</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/profile-1110.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/biografia"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/biografia"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/biografia"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/publicacoes</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/m-1-1350.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-2-1776.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-4-1776.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book1-1440.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-1-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-2-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-new-1061.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/publicacoes"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/publicacoes"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/publicacoes"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/som</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/riodoce-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-4-1080.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-5-1080.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-6-1024.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/som"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/som"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/som"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/videos</loc>
+<lastmod>2026-11-18</lastmod>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/videos"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/videos"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/videos"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/textos</loc>
+<lastmod>2026-11-18</lastmod>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/textos"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/textos"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/textos"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/contato</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista2-2346.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/contato"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/contato"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/contato"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/rios-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/forsale-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/luvemba-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/europe-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/roots-621.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/cage-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/riodoce-1800.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/rios-falam-rios-cantam</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista2-2346.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-boi-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-couro-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-disco4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-marimba1-2346.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-marimba2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-veu4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-memorias-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-sempreviva-1216.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-poliptico-1232.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-a-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-c-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-b-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-e-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-d-1000.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-ca5558-1441.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista1-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/forsale-1194.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/rios-falam-rios-cantam"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/rios-falam-rios-cantam"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/rios-falam-rios-cantam"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/for-sale</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p1-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p2-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p3-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-p4-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s1-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s2-1194.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s4-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s5-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-s6-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b1-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b3-1500.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-b4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-i1-1350.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-i2-768.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/f-paris-2880.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/luvemba-1193.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/for-sale"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/for-sale"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/for-sale"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/visoes-do-luvemba</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/l-hero-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-1-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-2-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-wide-2880.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-9-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-10-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-11-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-7-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-8-2005.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-4-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-5-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-6-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-v3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/l-v4-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/europe-1200.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/visoes-do-luvemba"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/visoes-do-luvemba"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/visoes-do-luvemba"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/europe-is-not-my-center</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/e-1-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/e-2-1200.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/r-boi-1800.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/europe-is-not-my-center"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/europe-is-not-my-center"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/europe-is-not-my-center"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/biografia</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/profile-1110.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/biografia"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/biografia"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/biografia"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/publicacoes</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/m-1-1350.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-2-1776.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/m-4-1776.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book1-1440.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book3-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-book2-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-1-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-2-1193.jpg</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-3-1193.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/c-new-1061.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/publicacoes"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/publicacoes"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/publicacoes"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/som</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/riodoce-1800.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-4-1080.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-5-1080.webp</image:loc></image:image>
+<image:image><image:loc>https://rosapreta.com.br/img/rd-6-1024.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/som"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/som"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/som"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/videos</loc>
+<lastmod>2026-11-18</lastmod>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/videos"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/videos"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/videos"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/textos</loc>
+<lastmod>2026-11-18</lastmod>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/textos"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/textos"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/textos"/>
 </url>
 <url>
 <loc>https://rosapreta.com.br/en/contato</loc>
+<lastmod>2026-11-18</lastmod>
+<image:image><image:loc>https://rosapreta.com.br/img/r-vista2-2346.webp</image:loc></image:image>
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://rosapreta.com.br/contato"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://rosapreta.com.br/en/contato"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://rosapreta.com.br/contato"/>
