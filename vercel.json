@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/caiorosa/(img|fonts|audio)/(.*)",
+      "source": "/caiorosa/(img|fonts|audio|og)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

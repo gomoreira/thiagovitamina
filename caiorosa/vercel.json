@@ -1,40 +1,56 @@
 {
-  "cleanUrls": false,
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
-      "destination": "/site.html"
+      "src": "/(img|fonts|audio|og)/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400"
+      },
+      "continue": true
     },
     {
-      "source": "/en",
-      "destination": "/en/site.html"
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
+      },
+      "continue": true
     },
     {
-      "source": "/en/",
-      "destination": "/en/site.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
+      "src": "/(.*/)?(index|site)\\.html",
+      "status": 308,
+      "headers": {
+        "Location": "/$1"
+      }
     },
     {
-      "source": "/en/index.html",
-      "destination": "/en/",
-      "permanent": true
-    }
-  ],
-  "headers": [
+      "src": "/((?:en/)?(?:rios-falam-rios-cantam|for-sale|visoes-do-luvemba|europe-is-not-my-center|biografia|publicacoes|som|videos|textos|contato))/",
+      "status": 308,
+      "headers": {
+        "Location": "/$1"
+      }
+    },
     {
-      "source": "/(img|fonts|audio)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=604800, stale-while-revalidate=86400"
-        }
-      ]
+      "src": "/en",
+      "status": 308,
+      "headers": {
+        "Location": "/en/"
+      }
+    },
+    {
+      "src": "/",
+      "dest": "/site.html"
+    },
+    {
+      "src": "/en/",
+      "dest": "/en/site.html"
+    },
+    {
+      "src": "/(rios-falam-rios-cantam|for-sale|visoes-do-luvemba|europe-is-not-my-center|biografia|publicacoes|som|videos|textos|contato)",
+      "dest": "/$1/site.html"
+    },
+    {
+      "src": "/en/(rios-falam-rios-cantam|for-sale|visoes-do-luvemba|europe-is-not-my-center|biografia|publicacoes|som|videos|textos|contato)",
+      "dest": "/en/$1/site.html"
     }
   ]
 }
