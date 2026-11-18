@@ -104,7 +104,69 @@ inicio = re.sub(r"\{\{img:([^|}]+)\|([^|}]*)\|([^|}]*)(?:\|([^}]*))?\}\}",
                 lambda m: img(m[1], m[2], m[3], m[4] or "lazy", sizes="100vw" if m[1] == "hero" else "(min-width:820px) 42vw, 100vw"), inicio)
 inicio = inicio.replace("{{symbol}}", symbol).replace("{{cards}}", "".join(card(v) for v in viagens)).replace("{{whatsapp}}", whatsapp())
 page("", "Andante · Viagens bem vividas", inicio, "home")
+def foto(name, cls, alt, sizes="100vw", pos=""):
+    if name and name in IMGS: return img(name, cls, alt, sizes=sizes, pos=pos)
+    return f'<div class="ph {cls}" role="img" aria-label="{alt}"><span aria-hidden="true">Foto provisória</span></div>'
+
+def head(label, title, hid):
+    return f'<div class="sec-head"><p class="small">{label}</p><h2 class="h2" id="{hid}">{title}</h2><span class="rule" aria-hidden="true"></span></div>'
+
+def ul(items, cls="list"):
+    return f'<ul class="{cls}" role="list">' + "".join(f"<li>{i}</li>" for i in items) + "</ul>"
+
+LEG = {"bike": '<path d="M0,3 L26,3" stroke="#f00000" stroke-width="3"/>', "van": '<path d="M0,3 L26,3" stroke="#f00000" stroke-width="1.6" stroke-dasharray="4 4"/>', "opcao": '<path d="M0,3 L26,3" stroke="#000" stroke-width="1" stroke-dasharray="2 3"/>'}
+
+def viagem(v):
+    h, wa, out = v["hero"], whatsapp(v["titulo"]), []
+    out.append(f'''<section class="hero hero--trip on-dark" aria-labelledby="t-titulo">{img(h["img"], "hero__img", h["alt"], "eager", sizes="100vw")}
+<div class="wrap hero__wrap"><div class="hero__frame" aria-hidden="true"></div>
+<div class="hero__title"><nav class="crumb small" aria-label="Você está em"><a href="{home}#grupos">Grupos</a> / <span aria-current="page">{v["titulo"]}</span></nav>
+<h1 id="t-titulo"><span class="serif it">{h["titulo_serif"]}</span><br><span class="caps">{h["titulo_caps"]}</span></h1></div>
+<p class="hero__meta small">{h["meta"]}</p></div></section>''')
+    fatos = "".join(f"<li>{f}</li>" for f in v["fatos"])
+    conduz = "".join(f'<li><span class="avatar" aria-hidden="true">{n[0]}</span><span><span class="serif person">{n}</span><span class="small">{r}</span></span></li>' for n, r in v["conduz"])
+    out.append(f'''<section class="trip-intro on-dark"><div class="wrap trip-intro__grid">
+<div><p class="lead">{v["descricao"]}</p><ul class="facts serif" role="list">{fatos}</ul></div>
+<div><p class="serif it trip-intro__quote">{v["frase"]}</p><a class="btn btn--line" href="#reserva">Reserve seu lugar</a>
+<div class="hosts-mini"><p class="small">Quem conduz</p><ul role="list">{conduz}</ul></div></div></div></section>''')
+    ficha = "".join(f"<div><dt class=\"small\">{a}</dt><dd class=\"serif\">{b}</dd></div>" for a, b in v["ficha"])
+    gal = "".join(f"<li>{foto(n, 'gallery__img', a, sizes='(min-width:820px) 25vw, 50vw')}</li>" for n, a in v["galeria"])
+    vis = "".join(f"<p>{x}</p>" for x in v["visao"])
+    out.append(f'''<section class="band band--white trip-sec" aria-labelledby="s-visao"><div class="wrap">{head("Visão geral", "A viagem", "s-visao")}
+<div class="trip-two"><div class="prose">{vis}</div><dl class="ficha">{ficha}</dl></div>
+<ul class="gallery" role="list" aria-label="Fotos da viagem">{gal}</ul></div></section>''')
+    pq = v["para_quem"]; perfis = "".join(f'<li class="tile"><span class="small">{i+1:02d}</span><h3 class="serif">{t}</h3><p>{x}</p></li>' for i, (t, x) in enumerate(pq["perfis"]))
+    out.append(f'''<section class="band band--sky trip-sec" id="para-quem" aria-labelledby="s-quem"><div class="wrap">{head("Para quem é", "Para quem é<br>esta viagem", "s-quem")}
+<p class="serif it trip-lead">{pq["lead"]}</p><ul class="tiles" role="list">{perfis}</ul></div></section>''')
+    esc = "".join(f'<li class="choice"><h3 class="serif">{t}</h3><p>{x}</p></li>' for t, x in v["escolhas"])
+    out.append(f'''<section class="band band--olive trip-sec" aria-labelledby="s-esc"><div class="wrap">{head("O que define esta viagem", "Nossas escolhas", "s-esc")}<ul class="choices" role="list">{esc}</ul></div></section>''')
+    mapa = (SRC / f"data/mapas/{v['mapa']}.svg").read_text().strip() if v.get("mapa") else ""
+    leg = "".join(f'<li><svg width="26" height="6" aria-hidden="true">{LEG[k]}</svg>{t}</li>' for k, t in v.get("legenda", []))
+    dias = "".join(f'''<details><summary><span><span class="small">Dia {i+1}</span><span class="serif day-title">{t}</span></span></summary>
+<div class="day">{f'<p class="small day-stay">Hospedagem · {hosp}</p>' if hosp else ''}{ul(itens, 'bullets')}</div></details>''' for i, (t, hosp, itens) in enumerate(v["roteiro"]))
+    out.append(f'''<section class="band band--forest trip-sec" id="roteiro" aria-labelledby="s-rot"><div class="wrap">{head("Dia a dia", "Roteiro", "s-rot")}
+<div class="route">{f'<figure class="map">{mapa}<ul class="map__legend" role="list">{leg}</ul></figure>' if mapa else ''}<div class="acc acc--light days">{dias}</div></div></div></section>''')
+    out.append(f'''<section class="band band--mist trip-sec" aria-labelledby="s-inc"><div class="wrap">{head("Inclui e não inclui", "O que está incluído", "s-inc")}
+<div class="acc acc--big"><details><summary>Inclui</summary>{ul(v["inclui"], "lines")}</details><details><summary>Não inclui</summary>{ul(v["nao_inclui"], "lines")}</details></div></div></section>''')
+    if v.get("bikes"):
+        b = v["bikes"]; bk = "".join(f'<li class="tile tile--media">{foto(None, "tile__img", alt)}<div><span class="small">{tipo}</span><h3 class="serif">{n}</h3><p>{x}</p></div></li>' for tipo, n, x, alt in b["itens"])
+        out.append(f'''<section class="band band--white trip-sec" id="bicicletas" aria-labelledby="s-bike"><div class="wrap">{head("Bicicletas", "Sua bike na viagem", "s-bike")}<p class="trip-text">{b["texto"]}</p><ul class="tiles tiles--2" role="list">{bk}</ul></div></section>''')
+    an = "".join(f'<li class="host">{foto(None, "host__img", alt)}<h3 class="serif">{n}</h3><p class="small">{r}</p><p>{x}</p></li>' for n, r, x, alt in v["anfitrioes"])
+    out.append(f'''<section class="band band--lilac trip-sec" id="anfitrioes" aria-labelledby="s-anf"><div class="wrap">{head("Quem conduz", "Anfitriões", "s-anf")}<ul class="hosts" role="list">{an}</ul></div></section>''')
+    ht = "".join(f'<li class="tile tile--media">{foto(None, "tile__img tile__img--short", alt)}<div><h3 class="serif">{n}</h3><p class="small">{m}</p><p>{x}</p></div></li>' for n, m, x, alt in v["hoteis"])
+    out.append(f'''<section class="band band--sky trip-sec" aria-labelledby="s-hot"><div class="wrap">{head("Hospedagem", "Onde ficamos", "s-hot")}<ul class="tiles tiles--hotels" role="list">{ht}</ul></div></section>''')
+    fq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in v["faq"])
+    out.append(f'''<section class="band band--earth trip-sec" aria-labelledby="s-faq"><div class="wrap">{head("Perguntas frequentes", "Antes de reservar", "s-faq")}<div class="acc acc--light acc--faq">{fq}</div></div></section>''')
+    r = v["reserva"]
+    out.append(f'''<section class="band band--black trip-sec" id="reserva" aria-labelledby="s-res"><div class="wrap narrow"><h2 class="h2" id="s-res">Reserve seu lugar</h2><span class="rule" aria-hidden="true"></span>
+<p class="serif res-line">{r["linha"]}</p><p class="serif it res-note">{r["nota"]}</p>
+<div class="res-ctas"><a class="btn btn--solid" href="{wa}" data-track="whatsapp" data-viagem="{v["slug"]}">Reserve seu lugar</a><a class="btn btn--line" href="{home}#grupos">Ver outros grupos</a></div></div></section>''')
+    return "\n".join(out)
+
 for v in viagens:
-    c = f'<section class="on-dark" style="min-height:70svh;display:flex;align-items:flex-end"><div class="wrap" style="padding-bottom:var(--s16)"><h1 class="serif" style="font-size:var(--fs-title);line-height:1.05">{v["titulo"]}</h1><p class="small" style="margin-top:var(--s4)">{v["resumo"]}</p></div></section>'
-    page(f"viagens/{v['slug']}", f"{v['titulo']} · Andante", c)
+    if v.get("pagina"):
+        c = viagem(v)
+    else:
+        c = f'<section class="on-dark" style="min-height:70svh;display:flex;align-items:flex-end"><div class="wrap" style="padding-bottom:var(--s16)"><h1 class="serif" style="font-size:var(--fs-title);line-height:1.05">{v["titulo"]}</h1><p class="small" style="margin-top:var(--s4)">{v["resumo"]}</p></div></section>'
+    page(f"viagens/{v['slug']}", f"{v['titulo']} · Andante", c, description=v.get("descricao", site["descricao"]))
 print(f"{len(viagens)} viagens:", ", ".join(v["slug"] for v in viagens), "→", OUT)

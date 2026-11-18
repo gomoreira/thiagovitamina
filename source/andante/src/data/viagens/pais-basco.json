@@ -21,5 +21,304 @@
     ]
   ],
   "ordem": 2,
-  "img": "pais-basco"
+  "img": "pais-basco",
+  "pagina": true,
+  "hero": {
+    "img": "pb-hero",
+    "alt": "Ciclista de gravel numa trilha de terra entre pinheiros, numa encosta de montanha ao sol",
+    "titulo_serif": "País Basco",
+    "titulo_caps": "Francês",
+    "meta": "8 dias · Gravel"
+  },
+  "descricao": "8 dias de Bordeaux ao País Basco, entre vinhedos, florestas e o Atlântico, de bicicleta.",
+  "fatos": [
+    "5 a 12 de setembro de 2027",
+    "4 vagas restantes"
+  ],
+  "frase": "Cada roteiro nasce de escolhas intransigentes e improváveis.",
+  "conduz": [
+    [
+      "Camille Etchegaray",
+      "Guia de gravel credenciada"
+    ],
+    [
+      "Julien Lacoste",
+      "Gerente de destino"
+    ]
+  ],
+  "visao": [
+    "Começamos em Margaux, entre os châteaux do Médoc, com degustação ao lado de quem faz o vinho e jantar com chef particular. Pela Vélodyssée e pela floresta de pinheiros chegamos ao Atlântico, e a costa vai se abrindo de Lacanau a Contis e Hossegor, até o País Basco.",
+    "São cinco dias de pedal, com cerca de 60% fora do asfalto, alternados com surfe, ioga, sauna e boa mesa. A logística fica com a gente: transfers privados, bagagem levada de hotel em hotel e van de apoio para quem quiser encurtar um trecho."
+  ],
+  "ficha": [
+    [
+      "Onde",
+      "França: Médoc, Lacanau, Contis, Hossegor, Bayonne e País Basco"
+    ],
+    [
+      "Quando",
+      "5 a 12 de setembro de 2027"
+    ],
+    [
+      "Duração",
+      "8 dias, 7 noites"
+    ],
+    [
+      "Grupo",
+      "De 4 a 12 pessoas"
+    ],
+    [
+      "Esforço",
+      "Cinco dias de gravel, de 25 a 60 km por dia e no máximo 300 m de subida. Bicicleta elétrica disponível e van de apoio."
+    ],
+    [
+      "Preço",
+      "€ 5.575 por pessoa, em quarto duplo (parte terrestre)"
+    ]
+  ],
+  "galeria": [
+    [
+      "pb-galeria-1",
+      "Ciclista de gravel numa trilha de terra entre pinheiros, numa encosta de montanha ao sol"
+    ],
+    [
+      null,
+      "Ciclista sentada junto a uma placa de Baigorry e Bidarray, com a bicicleta de gravel na relva"
+    ],
+    [
+      null,
+      "Ciclista de gravel em movimento, mãos no guidão, com a vegetação borrada pela velocidade"
+    ],
+    [
+      null,
+      "Pátio de pedra clara em Margaux, com mesas ao ar livre, vasos e bicicletas"
+    ]
+  ],
+  "para_quem": {
+    "lead": "Para quem é apaixonado por gravel ou só quer uma pausa ativa, cheia de natureza.",
+    "perfis": [
+      [
+        "Quem nunca pedalou em gravel",
+        "Os trechos são quase planos até o País Basco, sem pressa e sem competição. Basta pedalar com conforto por duas ou três horas."
+      ],
+      [
+        "Quem já pedala",
+        "Até 60 km por dia, cerca de 60% fora do asfalto, e a opção de esticar mais 30 km até Lacanau."
+      ],
+      [
+        "Grupos de níveis diferentes",
+        "A bicicleta elétrica deixa todo mundo no mesmo ritmo. Saímos juntos e chegamos juntos."
+      ],
+      [
+        "Quem quer mais do que a bike",
+        "Surfe, ioga, sauna e boa mesa, com a van de apoio para quem quiser encurtar um trecho."
+      ]
+    ]
+  },
+  "escolhas": [
+    [
+      "Do vinho ao mar",
+      "Degustação no Château Haut Breton Larigaudière e jantar com chef particular em Margaux. Depois, o aperitivo na praia ao pôr do sol."
+    ],
+    [
+      "Cinco dias de gravel",
+      "A Vélodyssée até Lacanau, a lagoa de Cousseau, as florestas das Landes até Hossegor e as trilhas a partir de Bayonne."
+    ],
+    [
+      "Além da bicicleta",
+      "Surfe, ioga de frente para o mar, sauna e spa. No País Basco, a Rhune, Saint-Jean-de-Luz ou um dia inteiro de descanso."
+    ]
+  ],
+  "mapa": "pais-basco",
+  "legenda": [
+    [
+      "bike",
+      "De bicicleta"
+    ],
+    [
+      "van",
+      "Transfer de van"
+    ],
+    [
+      "opcao",
+      "Opções do dia 7"
+    ]
+  ],
+  "roteiro": [
+    [
+      "Chegada e vinho em Margaux",
+      "La Bastide de Margaux, Margaux",
+      [
+        "Chegada a Bordeaux e transfer privado até Margaux",
+        "Prólogo opcional de gravel: 30 km, 100 m de subida, cerca de 2h30",
+        "Degustação no Château Haut Breton Larigaudière, a 3 minutos de bicicleta do hotel",
+        "Jantar com chef particular na La Bastide de Margaux"
+      ]
+    ],
+    [
+      "Vinhedos e florestas",
+      "Hôtel du Golf La Baignoire, Lacanau Océan",
+      [
+        "De bicicleta de Margaux a Hourtin: 60 km, 112 m de subida, cerca de 5 horas",
+        "Opção de seguir pedalando até Lacanau (mais 30 km planos) ou ir de van",
+        "Sauna depois do pedal, com massagem opcional"
+      ]
+    ],
+    [
+      "Entre a lagoa e o mar",
+      "Hôtel du Golf La Baignoire, Lacanau Océan",
+      [
+        "Volta de gravel pela lagoa de Cousseau: 25 km, 100 m de subida, cerca de 2 horas",
+        "Aula de surfe e ioga de frente para o oceano",
+        "Pôr do sol na praia"
+      ]
+    ],
+    [
+      "Dia livre e Contis",
+      "Hôtel de la Plage, Contis",
+      [
+        "Manhã livre e brunch em Lacanau Océan",
+        "Transfer privado até Contis (2 horas)",
+        "Surfe, ioga, farol, floresta ou fat bike ao pôr do sol"
+      ]
+    ],
+    [
+      "As florestas das Landes",
+      "Hôtel 70 Hectares, Hossegor",
+      [
+        "Gravel de Contis a Hossegor: 56 km, 91 m de subida, cerca de 5h30",
+        "Florestas, trilhas costeiras e pequenas vilas",
+        "Ioga, spa ou massagem no hotel, a 13 minutos de bicicleta da praia"
+      ]
+    ],
+    [
+      "Bayonne e o País Basco",
+      "Indarra, País Basco",
+      [
+        "Transfer de 30 minutos até Bayonne",
+        "Pedal de 30 km, 300 m de subida, cerca de 3 horas",
+        "Descoberta de Bayonne, o coração do País Basco"
+      ]
+    ],
+    [
+      "Um dia para escolher",
+      "Indarra, País Basco",
+      [
+        "Caminhada na Rhune, a montanha mais famosa do País Basco: 10 km ida e volta, ou trem até o topo",
+        "Ou Saint-Jean-de-Luz, com compras e cultura",
+        "Ou descanso no hotel: spa, piscina, massagem e leitura",
+        "Almoço livre"
+      ]
+    ],
+    [
+      "Despedida",
+      "",
+      [
+        "Café da manhã",
+        "Transfer para a estação ou o aeroporto de Biarritz"
+      ]
+    ]
+  ],
+  "inclui": [
+    "7 noites em hotéis escolhidos a dedo, em quarto duplo, com café da manhã",
+    "Todos os almoços e jantares (exceto o almoço do dia 7), com o jantar de chef particular em Margaux e lanches nos dias de pedal",
+    "Bicicleta de gravel de alto padrão, elétrica ou convencional, de frota nova em 2027",
+    "Degustação num château do Médoc, 2 aulas de ioga e 1 aula de surfe",
+    "Transfers privados em todos os trechos de van, com a bagagem levada de hotel em hotel",
+    "Transfer de chegada em Bordeaux e de saída em Biarritz",
+    "Guia local credenciado e gerente de destino cuidando de toda a logística",
+    "Van de apoio durante toda a viagem e kit de boas-vindas"
+  ],
+  "nao_inclui": [
+    "Voos internacionais",
+    "Seguro de viagem",
+    "Bebidas alcoólicas nas refeições",
+    "Extras opcionais: massagens, spa, trem da Rhune e despesas pessoais",
+    "Suplemento de quarto individual: [VALOR A CONFIRMAR]"
+  ],
+  "bikes": {
+    "texto": "Bicicletas de alto padrão da GravelUp, de frota nova em 2027. Escolha entre a gravel convencional e a elétrica.",
+    "itens": [
+      [
+        "Gravel",
+        "Origine Graxx GTO",
+        "Leve e ágil, feita para longas distâncias e terrenos mais duros.",
+        "Bicicleta gravel Origine Graxx vermelha, de perfil"
+      ],
+      [
+        "Gravel elétrica",
+        "Origine Help",
+        "Assistência elétrica nas subidas e para acompanhar o grupo. Anda bem também sem ela.",
+        "Bicicleta gravel elétrica Origine Help verde, de perfil"
+      ]
+    ]
+  },
+  "anfitrioes": [
+    [
+      "Camille Etchegaray",
+      "Guia de gravel credenciada",
+      "Nasceu em Bayonne e pedala entre o Médoc e La Rhune há dez anos. Conhece cada atalho das Landes.",
+      "Ciclista sorridente de boné e camisa de ciclismo verde, contra o céu claro"
+    ],
+    [
+      "Julien Lacoste",
+      "Gerente de destino",
+      "Cresceu em Margaux e cuida de toda a logística: hotéis, transfers, bagagens e bicicletas.",
+      "Três amigos sorrindo numa mesa de madeira à sombra das árvores, com o mar ao fundo"
+    ]
+  ],
+  "hoteis": [
+    [
+      "La Bastide de Margaux",
+      "Margaux · 1 noite",
+      "No coração do Médoc, a três minutos de bicicleta do château da degustação. Jantar com chef particular na primeira noite.",
+      "Pátio de pedra clara em Margaux, com mesas ao ar livre, vasos e bicicletas"
+    ],
+    [
+      "Hôtel du Golf La Baignoire",
+      "Lacanau Océan · 2 noites",
+      "Junto ao campo de golfe de Lacanau, entre a floresta de pinheiros e o oceano, com sauna depois do pedal.",
+      "Recepção do hotel com janelas de vidro do chão ao teto voltadas para os pinheiros"
+    ],
+    [
+      "Hôtel de la Plage",
+      "Contis · 1 noite",
+      "Em Contis, um dos segredos mais bem guardados das Landes, entre a floresta e o farol.",
+      "Fachada do Hôtel de la Plage em Contis, de madeira e telhado vermelho, com as dunas e o mar ao fundo"
+    ],
+    [
+      "Hôtel 70 Hectares",
+      "Hossegor · 1 noite",
+      "Perto do campo de golfe de Hossegor, a 13 minutos de bicicleta da praia, com ioga, spa e massagem.",
+      "Piscina entre pinheiros com espreguiçadeiras e guarda-sóis verdes"
+    ],
+    [
+      "Indarra",
+      "País Basco · 2 noites",
+      "No País Basco, com spa, piscina e cantos de leitura para o dia livre.",
+      "Foto do hotel Indarra"
+    ]
+  ],
+  "faq": [
+    [
+      "Preciso ter experiência em gravel?",
+      "Não. Basta pedalar com conforto por duas ou três horas. Os trechos são quase planos até o País Basco, há bicicletas elétricas e o guia ajusta o ritmo ao grupo."
+    ],
+    [
+      "Posso pular um trecho de bicicleta?",
+      "Sim. A van de apoio acompanha o grupo e leva quem quiser encurtar um dia ou pular um trecho."
+    ],
+    [
+      "Como funciona o pagamento?",
+      "Um sinal de 30% garante a vaga. O restante é pago até 60 dias antes da partida, em reais ou euros."
+    ],
+    [
+      "E se eu precisar cancelar?",
+      "Até 90 dias antes da partida, o sinal é devolvido integralmente. Depois disso, a multa varia conforme a data e está descrita no contrato."
+    ]
+  ],
+  "reserva": {
+    "linha": "5 a 12 de setembro de 2027 · 8 dias · € 5.575 por pessoa",
+    "nota": "Em quarto duplo, parte terrestre. 4 vagas restantes neste grupo."
+  }
 }
