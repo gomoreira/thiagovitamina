@@ -2,156 +2,123 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#000000">
-<title>Andante · Viagens bem vividas</title>
-<meta name="description" content="Viagens em pequenos grupos para viver a cidade, e não só ver os pontos turísticos.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<link rel="preload" href="/andante/assets/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/andante/assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="/andante/assets/icons/favicon.ico" sizes="32x32">
-<link rel="icon" href="/andante/assets/icons/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/andante/assets/icons/apple-touch-icon.png">
-<link rel="manifest" href="/andante/site.webmanifest">
-<meta name="theme-color" content="#000000">
-<link rel="stylesheet" href="/andante/assets/css/fonts.css">
-<link rel="stylesheet" href="/andante/assets/css/tokens.css">
-<link rel="stylesheet" href="/andante/assets/css/site.css">
-<script src="/andante/assets/js/site.js" defer></script>
+<title>Andante · duas versões para revisão</title>
+<link rel="icon" href="/andante/favicon.ico" sizes="32x32">
+<link rel="icon" href="/andante/original/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/andante/original/assets/css/fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:16px;line-height:1.5;color:#000;background:#fff;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,figure{margin:0}
+a{color:inherit;text-underline-offset:.2em}
+:focus-visible{outline:2px solid #f00000;outline-offset:3px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 20px}
+header{background:#000;color:#fff;padding:48px 0 64px}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+h1{font-size:40px;line-height:1.05;margin-top:16px}
+.lead{font-size:20px;line-height:1.4;max-width:40ch;margin-top:24px}
+.open{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 32px;font-weight:500;text-decoration:none;border:1px solid #f00000}
+.btn--solid{background:#e60000;border-color:#e60000;color:#fff}
+section{padding:64px 0;border-top:1px solid #e3e3e3}
+h2{font-size:32px;line-height:1.15;font-weight:600}
+h2+p{margin-top:16px;max-width:60ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.pair figure{display:flex;flex-direction:column;gap:8px}
+figcaption{font-size:14px;font-weight:500}
+.pair img{display:block;width:100%;height:auto;border:1px solid #e3e3e3}
+.cols{display:grid;gap:48px;margin-top:32px}
+h3{font-size:20px;line-height:1.3;font-weight:600}
+ul{margin-top:16px;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:60ch}
+table{margin-top:16px;border-collapse:collapse;width:100%;max-width:520px}
+th,td{text-align:left;padding:8px 16px 8px 0;border-bottom:1px solid #e3e3e3}
+th{font-size:14px;font-weight:500}
+td+td,th+th{width:96px}
+.note{font-size:14px;color:#545454;margin-top:16px;max-width:60ch}
+@media (min-width:820px){
+  .wrap{padding:0 40px}
+  h1{font-size:64px}
+  .cols{grid-template-columns:1fr 1fr;gap:64px}
+  .pair--mobile{max-width:900px}
+}
+@media (min-width:1100px){ .wrap{padding:0 64px} section{padding:104px 0} h2{font-size:48px} }
+</style>
 </head>
 <body>
-<a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<header class="header" data-inert-when-menu><div class="wrap header__bar">
-<button class="header__menu" type="button" data-menu-open aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6h20M2 12h20M2 18h20"/></svg></button>
-<a class="header__logo" href="/andante/" aria-label="Andante, página inicial"><svg class="logo" role="img" aria-label="Andante" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630.59 93.87"><path d="M491.45,24.78h1.25c0-1,.17-2.02.5-3.07.33-1.04.84-2,1.51-2.89.67-.88,1.51-1.61,2.51-2.19,1-.58,2.17-.88,3.51-.88h14.54v69.97c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.09.75-1.760.75h-.62v1.25h17.8v-1.25h-.62c-.67,0-1.23-.25-1.7-.75-.46-.5-.88-1.08-1.25-1.75-.37-.67-.65-1.4-.82-2.19-.17-.8-.25-1.52-.25-2.2V15.75h14.8c1.34,0,2.51.29,3.51.88,1,.58,1.84,1.32,2.51,2.19.67.88,1.170,1.84,1.51,2.89.33,1.05.5,2.07.5,3.07h1.25v-13.67h-56.3v13.67ZM151.32,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95L110.69,11.11h-12.66v1.25h.63c.84,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.34.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.240,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM65.64,90.24c-1.04-1.59-1.86-3.22-2.45-4.89L35.11,9.61,6.39,86.1c-.67,1.76-1.52,3.28-2.57,4.58-1.05,1.29-2.11,1.94-3.2,1.94h-.62v1.25h13.92v-1.25h-.63c-.67,0-1.3-.31-1.88-.94-.59-.63-.88-1.48-.88-2.57,0-.58.13-1.21.38-1.88l10.91-29.97h21.95l11.28,30.47c.25.75.38,1.46.38,2.13,0,1.84-1,2.76-3.01,2.76h-.63v1.25h18.56v-1.25h-.63c-1.67,0-3.03-.79-4.08-2.38ZM23.07,52.99l9.66-26.21,9.65,26.21h-19.31ZM445.06,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95l-45.52-71.73h-12.66v1.25h.63c.83,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.33.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.24,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM629.34,79.2c0,.84-.19,1.86-.56,3.07-.38,1.21-.96,2.34-1.76,3.38-.8,1.05-1.78,1.94-2.95,2.7-1.17.75-2.55,1.13-4.14,1.13h-27.46v-37.99h20.82c2.01,0,3.64.55,4.89,1.63,1.25,1.09,1.88,2.38,1.88,3.89h1.25v-15.67h-1.25c0,1.59-.65,2.97-1.94,4.14-1.3,1.17-2.9,1.76-4.83,1.76h-20.82V15.5h25.2c2.84,0,4.93.73,6.27,2.19,1.33,1.46,2.09,3.16,2.26,5.08h1.25v-11.66h-48.28v1.25h.63c.67,0,1.25.23,1.75.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.32,1.42.32,2.01v67.08c0,.67-.11,1.38-.32,2.13-.21.75-.5,1.46-.88,2.13-.38.67-.82,1.24-1.32,1.69-.5.46-1.09.69-1.75.69h-.63v1.25h51.41v-14.67h-1.25ZM254.92,23.84c-3.64-3.89-8.09-6.98-13.35-9.28-5.27-2.3-11.21-3.45-17.81-3.45h-24.2v1.25h.63c.67,0,1.25.23,1.75.69.5.46.92,1.02,1.26,1.7.33.67.58,1.38.75,2.13.17.75.25,1.42.25,2.01v66.83c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.05.75-1.63.75h-.63v1.25h22.57c7.27,0,13.67-1.19,19.19-3.57,5.52-2.38,10.11-5.5,13.79-9.34,3.68-3.84,6.43-8.21,8.27-13.1,1.84-4.89,2.76-9.89,2.76-14.98,0-5.43-.96-10.66-2.88-15.67-1.92-5.02-4.7-9.47-8.34-13.35ZM254.29,70.17c-2.3,4.35-5.3,7.96-8.99,10.85-3.69,2.88-7.82,5.01-12.38,6.39-4.57,1.38-9.12,2.07-13.64,2.07h-6.66V15.5h6.41c5.530,0,10.67,1.05,15.4,3.13,4.74,2.09,8.84,4.91,12.32,8.46,3.48,3.55,6.18,7.71,8.11,12.48,1.93,4.76,2.89,9.82,2.89,15.17,0,5.94-1.15,11.08-3.46,15.43ZM359.41,89.82c-1.16-1.77-2.07-3.59-2.72-5.45l-24.67-66.52-4.84,13.4,23.09,62.62h14.38v-1.4h-.7c-1.86,0-3.38-.88-4.54-2.65ZM298.99,91.43c-.65-.7-.98-1.65-.98-2.87,0-.65.14-1.35.42-2.09l29.12-80.65-2.16-5.81-34.97,93.87h11.36v-1.4h-.7c-.74,0-1.440-.35-2.09-1.05Z"/></svg></a>
-<nav class="header__nav" aria-label="Principal"><a href="/andante/#por-que-viajar">Por que viajar</a><a href="/andante/#grupos">Grupos</a><a href="/andante/#quem-somos">Quem somos</a><a href="/andante/#contato">Contato</a></nav>
-<a class="btn btn--solid header__cta" href="/andante/#grupos">Reserve seu lugar</a>
-</div></header>
-<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden><div class="wrap menu__inner">
-<div class="menu__top"><button class="menu__close" type="button" data-menu-close aria-label="Fechar menu"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l16 16M20 4L4 20"/></svg></button>
-<a class="header__logo" href="/andante/" aria-label="Andante, página inicial"><svg class="logo" role="img" aria-label="Andante" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630.59 93.87"><path d="M491.45,24.78h1.25c0-1,.17-2.02.5-3.07.33-1.04.84-2,1.51-2.89.67-.88,1.51-1.61,2.51-2.19,1-.58,2.17-.88,3.51-.88h14.54v69.97c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.09.75-1.760.75h-.62v1.25h17.8v-1.25h-.62c-.67,0-1.23-.25-1.7-.75-.46-.5-.88-1.08-1.25-1.75-.37-.67-.65-1.4-.82-2.19-.17-.8-.25-1.52-.25-2.2V15.75h14.8c1.34,0,2.51.29,3.51.88,1,.58,1.84,1.32,2.51,2.19.67.88,1.170,1.84,1.51,2.89.33,1.05.5,2.07.5,3.07h1.25v-13.67h-56.3v13.67ZM151.32,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95L110.69,11.11h-12.66v1.25h.63c.84,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.34.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.240,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM65.64,90.24c-1.04-1.59-1.86-3.22-2.45-4.89L35.11,9.61,6.39,86.1c-.67,1.76-1.52,3.28-2.57,4.58-1.05,1.29-2.11,1.94-3.2,1.94h-.62v1.25h13.92v-1.25h-.63c-.67,0-1.3-.31-1.88-.94-.59-.63-.88-1.48-.88-2.57,0-.58.13-1.21.38-1.88l10.91-29.97h21.95l11.28,30.47c.25.75.38,1.46.38,2.13,0,1.84-1,2.76-3.01,2.76h-.63v1.25h18.56v-1.25h-.63c-1.67,0-3.03-.79-4.08-2.38ZM23.07,52.99l9.66-26.21,9.65,26.21h-19.31ZM445.06,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95l-45.52-71.73h-12.66v1.25h.63c.83,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.33.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.24,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM629.34,79.2c0,.84-.19,1.86-.56,3.07-.38,1.21-.96,2.34-1.76,3.38-.8,1.05-1.78,1.94-2.95,2.7-1.17.75-2.55,1.13-4.14,1.13h-27.46v-37.99h20.82c2.01,0,3.64.55,4.89,1.63,1.25,1.09,1.88,2.38,1.88,3.89h1.25v-15.67h-1.25c0,1.59-.65,2.97-1.94,4.14-1.3,1.17-2.9,1.76-4.83,1.76h-20.82V15.5h25.2c2.84,0,4.93.73,6.27,2.19,1.33,1.46,2.09,3.16,2.26,5.08h1.25v-11.66h-48.28v1.25h.63c.67,0,1.25.23,1.75.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.32,1.42.32,2.01v67.08c0,.67-.11,1.38-.32,2.13-.21.75-.5,1.46-.88,2.13-.38.67-.82,1.24-1.32,1.69-.5.46-1.09.69-1.75.69h-.63v1.25h51.41v-14.67h-1.25ZM254.92,23.84c-3.64-3.89-8.09-6.98-13.35-9.28-5.27-2.3-11.21-3.45-17.81-3.45h-24.2v1.25h.63c.67,0,1.25.23,1.75.69.5.46.92,1.02,1.26,1.7.33.67.58,1.38.75,2.13.17.75.25,1.42.25,2.01v66.83c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.05.75-1.63.75h-.63v1.25h22.57c7.27,0,13.67-1.19,19.19-3.57,5.52-2.38,10.11-5.5,13.79-9.34,3.68-3.84,6.43-8.21,8.27-13.1,1.84-4.89,2.76-9.89,2.76-14.98,0-5.43-.96-10.66-2.88-15.67-1.92-5.02-4.7-9.47-8.34-13.35ZM254.29,70.17c-2.3,4.35-5.3,7.96-8.99,10.85-3.69,2.88-7.82,5.01-12.38,6.39-4.57,1.38-9.12,2.07-13.64,2.07h-6.66V15.5h6.41c5.530,0,10.67,1.05,15.4,3.13,4.74,2.09,8.84,4.91,12.32,8.46,3.48,3.55,6.18,7.71,8.11,12.48,1.93,4.76,2.89,9.82,2.89,15.17,0,5.94-1.15,11.08-3.46,15.43ZM359.41,89.82c-1.16-1.77-2.07-3.59-2.72-5.45l-24.67-66.52-4.84,13.4,23.09,62.62h14.38v-1.4h-.7c-1.86,0-3.38-.88-4.54-2.65ZM298.99,91.43c-.65-.7-.98-1.65-.98-2.87,0-.65.14-1.35.42-2.09l29.12-80.65-2.16-5.81-34.97,93.87h11.36v-1.4h-.7c-.74,0-1.440-.35-2.09-1.05Z"/></svg></a></div>
-<div class="menu__box"><p class="menu__label" aria-hidden="true">Menu</p>
-<nav aria-label="Menu principal"><ul class="menu__list" role="list"><li><a href="/andante/" aria-current="page">Home<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a></li><li><a href="/andante/#por-que-viajar">Por que viajar<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a></li><li><a href="/andante/#grupos">Grupos<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a></li><li><a href="/andante/#quem-somos">Quem somos<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a></li><li><a href="/andante/#contato">Contato<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a></li></ul></nav></div>
-<div class="menu__ctas"><a class="btn btn--solid" href="/andante/#grupos">Reserve seu lugar</a><a class="btn btn--line" href="/andante/#contato">Faça parte</a></div>
-<div class="menu__foot"><p class="tagline"><b>VIAGENS</b> <i>bem vividas.</i></p></div>
-</div></div>
-<main id="conteudo" data-inert-when-menu>
-<section class="hero on-dark" aria-labelledby="hero-titulo">
-  <picture><source type="image/webp" srcset="/andante/assets/img/hero-480.webp 480w, /andante/assets/img/hero-800.webp 800w, /andante/assets/img/hero-1200.webp 1200w, /andante/assets/img/hero-1600.webp 1600w" sizes="100vw"><img class="hero__img" src="/andante/assets/img/hero-800.jpg" srcset="/andante/assets/img/hero-480.jpg 480w, /andante/assets/img/hero-800.jpg 800w, /andante/assets/img/hero-1200.jpg 1200w, /andante/assets/img/hero-1600.jpg 1600w" sizes="100vw" width="1600" height="2133" alt="Lago entre plantações e montanhas, no Vale Sagrado" loading="eager" decoding="async" fetchpriority="high"></picture>
-  <div class="wrap hero__wrap">
-    <div class="hero__frame" aria-hidden="true"></div>
-    <h1 class="hero__title" id="hero-titulo"><span class="serif it">O que interessa<br>é o </span><span class="caps">tempo<br>vivido</span></h1>
-  </div>
-  <svg class="symbol" aria-hidden="true" focusable="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450.59 569.86"><path d="M52.05,555.02c-3.97-4.25-5.950-10.02-5.950-17.39,0-3.94.85-8.17,2.55-12.71L225.41,35.3,212.31,0,0,569.86h69v-8.48h-4.25c-4.51,0-8.76-2.11-12.7-6.36ZM446.36,561.38c-11.31,0-20.51-5.36-27.57-16.1-7.06-10.74-12.57-21.77-16.54-33.08L252.49,108.36l-29.37,81.34,140.17,380.16h87.29v-8.48h-4.23Z"/></svg>
-</section>
-
-<section class="intro on-dark">
-  <div class="wrap intro__wrap">
-    <p class="lead intro__text">Encontre, caminhe, deguste, pedale, sue, mergulhe, experimente, converse, se atreva, em viagens que cobram a sua presença.</p>
-    <a class="btn btn--line" href="#grupos">Conheça os grupos</a>
-  </div>
-</section>
-
-<section class="band band--olive" aria-labelledby="fundo-titulo">
-  <div class="wrap split">
-    <div class="split__text">
-      <h2 class="h2" id="fundo-titulo">Não é sobre ir longe,<br>é sobre ir mais fundo</h2>
-      <span class="rule" aria-hidden="true"></span>
-      <p>Grupos de viagens para quem busca a combinação de profundidade e movimento.</p>
-      <a class="more" href="#por-que-viajar">Saiba mais<span class="rule" aria-hidden="true"></span></a>
-    </div>
-    <figure class="split__media"><picture><source type="image/webp" srcset="/andante/assets/img/mergulho-480.webp 480w, /andante/assets/img/mergulho-800.webp 800w" sizes="(min-width:820px) 42vw, 100vw"><img class="media-4x5" src="/andante/assets/img/mergulho-800.jpg" srcset="/andante/assets/img/mergulho-480.jpg 480w, /andante/assets/img/mergulho-800.jpg 800w" sizes="(min-width:820px) 42vw, 100vw" width="800" height="999" alt="Pessoa de vestido claro em movimento, desfocada, numa encosta ao entardecer" loading="lazy" decoding="async"></picture></figure>
-  </div>
-</section>
-
-<section class="why" id="por-que-viajar" aria-label="Por que viajar">
+<header>
   <div class="wrap">
-    <div class="why__grid">
-      <article class="why__item">
-        <div class="why__top"><h2 class="why__title serif">O tempo que<br>volta a pulsar</h2><a class="why__arw" href="#grupos" aria-label="Ver os grupos"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-        <p>A gente dança entre vinhedos, pedala de um château até o mar, cozinha uma pachamanca debaixo da terra com mestres quéchuas. Coisas que você nunca tinha imaginado fazer.</p>
-      </article>
-      <article class="why__item">
-        <div class="why__top"><h2 class="why__title serif">Você pisa<br>fora do mapa</h2><a class="why__arw" href="#grupos" aria-label="Ver os grupos"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path d="M3 12h17M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-        <p>Caminhos que os locais percorrem, lugares longe dos circuitos, paisagens que cobram presença e silêncio. É indo por elas que você se reconhece.</p>
-      </article>
+    <p>Andante · revisão de 18/11</p>
+    <h1>Duas versões do site, <span class="serif"><i>para escolher juntos</i></span></h1>
+    <p class="lead">A versão original segue o mobile do Figma. A versão Vitamina é o mesmo site com um sistema de tipografia, espaçamento e grid aplicado em todas as telas. O conteúdo, as cores e as fotos são os mesmos nas duas.</p>
+    <div class="open">
+      <a class="btn btn--solid" href="/andante/original/">Abrir a versão original</a>
+      <a class="btn" href="/andante/vitamina/">Abrir a versão Vitamina</a>
     </div>
-    <a class="btn btn--solid why__cta" href="#grupos">Veja os grupos</a>
   </div>
-</section>
-
-<section class="quote" aria-label="Manifesto">
+</header>
+<main>
+<section aria-labelledby="t-mobile">
   <div class="wrap">
-    <div class="quote__frame">
-      <p class="quote__text"><span class="serif it">É sobre fazer parte<br>do que lá </span><span class="caps">acontece</span><span class="serif">.</span></p>
-    </div>
+    <h2 id="t-mobile">No celular</h2>
+    <p>O início da página em 390px de largura, o tamanho de um iPhone.</p>
+    <div class="pair pair--mobile"><figure><figcaption>Versão original</figcaption><a href="/andante/original/"><img src="/andante/review/original-390.webp" alt="Início da página no celular na versão original" loading="lazy" decoding="async"></a></figure><figure><figcaption>Versão Vitamina</figcaption><a href="/andante/vitamina/"><img src="/andante/review/vitamina-390.webp" alt="Início da página no celular na versão vitamina" loading="lazy" decoding="async"></a></figure></div>
   </div>
 </section>
-
-<section class="band band--forest on-dark-ish" aria-labelledby="muda-titulo">
-  <div class="wrap change">
-    <h2 class="h2" id="muda-titulo">O que muda</h2>
-    <table class="change__table">
-      <thead><tr><th scope="col">Você larga</th><th scope="col">Você leva</th></tr></thead>
-      <tbody>
-        <tr><td>O automático</td><td>Presença</td></tr>
-        <tr><td>O scroll passivo</td><td>Pertencimento</td></tr>
-        <tr><td>O turismo de roteiro</td><td>O lugar sentido na pele</td></tr>
-        <tr><td>O ruído que estressa</td><td>O silêncio que expande</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="band band--lilac" id="quem-somos" aria-labelledby="quem-titulo">
-  <div class="wrap split split--media-first">
-    <figure class="split__media"><picture><source type="image/webp" srcset="/andante/assets/img/feito-por-480.webp 480w, /andante/assets/img/feito-por-800.webp 800w" sizes="(min-width:820px) 42vw, 100vw"><img class="media-4x5" src="/andante/assets/img/feito-por-800.jpg" srcset="/andante/assets/img/feito-por-480.jpg 480w, /andante/assets/img/feito-por-800.jpg 800w" sizes="(min-width:820px) 42vw, 100vw" width="800" height="1000" alt="Três pessoas num mirante de madeira ao pôr do sol, de costas, olhando as montanhas" loading="lazy" decoding="async"></picture></figure>
-    <div class="split__text">
-      <h2 class="h2" id="quem-titulo">Feito por quem também<br>valoriza o mesmo</h2>
-      <span class="rule" aria-hidden="true"></span>
-      <p>Montamos cada grupo a partir da nossa própria vida e de uma rede de gente interessante que cultivamos.</p>
-    </div>
-  </div>
-</section>
-
-<section class="band band--white" aria-labelledby="categoria-titulo">
-  <div class="wrap narrow">
-    <h2 class="h2 h2--bold" id="categoria-titulo">Nossos grupos não<br>cabem em nenhuma<br>categoria.</h2>
-    <span class="rule" aria-hidden="true"></span>
-    <p>A não ser nas histórias que nos inspiram. Aquelas que vamos encontrando pelo caminho, que desafiam naquilo que vale, em lugares que a gente nem se atreve imaginar.</p>
-  </div>
-</section>
-
-<section class="band band--sky" id="grupos" aria-labelledby="grupos-titulo">
+<section aria-labelledby="t-desktop">
   <div class="wrap">
-    <header class="groups__head">
-      <h2 class="h2" id="grupos-titulo">Grupos</h2>
-      <span class="rule" aria-hidden="true"></span>
-      <p class="serif it groups__lead">Cada roteiro nasce de escolhas intransigentes, que fogem do óbvio.</p>
-    </header>
-    <ul class="cards" role="list"><li class="card"><picture><source type="image/webp" srcset="/andante/assets/img/peru-480.webp 480w, /andante/assets/img/peru-800.webp 800w, /andante/assets/img/peru-1200.webp 1200w, /andante/assets/img/peru-1600.webp 1600w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw"><img class="card__img" src="/andante/assets/img/peru-800.jpg" srcset="/andante/assets/img/peru-480.jpg 480w, /andante/assets/img/peru-800.jpg 800w, /andante/assets/img/peru-1200.jpg 1200w, /andante/assets/img/peru-1600.jpg 1600w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw" width="1600" height="1155" alt="Terraços circulares de Moray, no Vale Sagrado, com montanhas ao fundo" loading="lazy" decoding="async" style="object-position:50% 55%"></picture><div class="card__body"><h3 class="card__title"><a href="/andante/viagens/peru/">Vale Sagrado Peru</a></h3><p class="card__meta">8 dias · [DATAS DA PARTIDA] · [N.º DE VAGAS] · [PREÇO]</p><div class="acc"><details><summary>O contraste gastronômico</summary><p>Do almoço intimista guiado por um etnobotânico no coração do Vale Sagrado à mesa contemporânea do Chicha, de Gastón Acurio, unindo a despensa ancestral andina à alta gastronomia urbana.</p></details><details><summary>Sob lentes de vanguarda</summary><p>Ollantaytambo e Machu Picchu não como uma aula de história comum, mas sob o rigor científico e a cosmovisão de um arqueoastrônomo, entendendo a engenharia ancestral como pura tecnologia.</p></details><details><summary>O Vale de quem o pertence</summary><p>Caminhar pelo próprio esforço, sentir o ar rarefeito e pertencer de verdade com quem vive o vale sagrado além do turismo.</p></details></div><p class="card__cta"><a class="btn btn--solid" href="#contato" data-track="whatsapp" data-viagem="peru">Reserve seu lugar</a></p></div></li><li class="card"><picture><source type="image/webp" srcset="/andante/assets/img/pais-basco-480.webp 480w, /andante/assets/img/pais-basco-800.webp 800w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw"><img class="card__img" src="/andante/assets/img/pais-basco-800.jpg" srcset="/andante/assets/img/pais-basco-480.jpg 480w, /andante/assets/img/pais-basco-800.jpg 800w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw" width="800" height="686" alt="Mulher comendo num piquenique numa mesa de madeira, com vista para colinas verdes e o mar" loading="lazy" decoding="async" style="object-position:0% 50%"></picture><div class="card__body"><h3 class="card__title"><a href="/andante/viagens/pais-basco/">País Basco Francês</a></h3><p class="card__meta">8 dias · Gravel · 5 a 12 de setembro de 2027 · € 5.575 por pessoa</p><div class="acc"><details><summary>Do vinho ao mar</summary><p>Começamos em Margaux, entre os châteaux do Médoc, com degustação ao lado de produtores e jantar no castelo. Depois, a floresta de pinheiros nos leva ao Atlântico, para um aperitivo na praia ao pôr do sol.</p></details><details><summary>As vistas de gravel</summary><p>Caminhos variados, leves e fora do asfalto: a Vélodyssée até Lacanau, a lagoa de Cousseau, as florestas e vilas das Landes até Hossegor e, no fim, as encostas de La Rhune, na fronteira com a Espanha.</p></details><details><summary>Além da bicicleta</summary><p>Surfe, ioga de frente para o mar e um dia livre em Contis. No País Basco, a sidraria de Arbonne e a cozinha de Bayonne, até o descanso em Biarritz.</p></details></div><p class="card__cta"><a class="btn btn--solid" href="#contato" data-track="whatsapp" data-viagem="pais-basco">Reserve seu lugar</a></p></div></li><li class="card"><picture><source type="image/webp" srcset="/andante/assets/img/gaga-piemonte-480.webp 480w, /andante/assets/img/gaga-piemonte-800.webp 800w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw"><img class="card__img" src="/andante/assets/img/gaga-piemonte-800.jpg" srcset="/andante/assets/img/gaga-piemonte-480.jpg 480w, /andante/assets/img/gaga-piemonte-800.jpg 800w" sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw" width="800" height="683" alt="Silhuetas de pessoas num terraço ao pôr do sol, olhando a cidade e as montanhas, uma delas fotografando com o celular" loading="lazy" decoding="async" style="object-position:60% 50%"></picture><div class="card__body"><h3 class="card__title"><a href="/andante/viagens/gaga-piemonte/">Gaga e Piemonte</a></h3><p class="card__meta">10 dias · Movimento · [DATAS DA PARTIDA] · [N.º DE VAGAS] · [PREÇO]</p><div class="acc"><details><summary>Corpo em movimento</summary><p>Três dias de Gaga, a linguagem de movimento criada por Ohad Naharin, num centro de dança entre as colinas e os vinhedos do Monferrato. Aulas diárias, comida da estação e tempo de sobra. Não é preciso saber dançar.</p></details><details><summary>O coração de Langhe</summary><p>Barolo e Barbaresco provados com quem os produz, a fazenda de um queijeiro, as avelãs do Piemonte e a busca pela trufa branca, no auge do outono.</p></details><details><summary>Até o pé do Mont Blanc</summary><p>O teleférico até o Mont Blanc, fontina e vinho em plena altitude, fondue em Courmayeur e os vinhedos de montanha de Carema, antes da última noite em Turim.</p></details></div><p class="card__cta"><a class="btn btn--solid" href="#contato" data-track="whatsapp" data-viagem="gaga-piemonte">Reserve seu lugar</a></p></div></li></ul>
+    <h2 id="t-desktop">No computador</h2>
+    <p>O início da página em 1440px de largura.</p>
+    <div class="pair"><figure><figcaption>Versão original</figcaption><a href="/andante/original/"><img src="/andante/review/original-1440.webp" alt="Início da página no computador na versão original" loading="lazy" decoding="async"></a></figure><figure><figcaption>Versão Vitamina</figcaption><a href="/andante/vitamina/"><img src="/andante/review/vitamina-1440.webp" alt="Início da página no computador na versão vitamina" loading="lazy" decoding="async"></a></figure></div>
   </div>
 </section>
-
-<section class="band band--earth" id="contato" aria-labelledby="contato-titulo">
-  <div class="wrap narrow">
-    <h2 class="h2" id="contato-titulo">Receba a gente<br>no seu território</h2>
-    <span class="rule" aria-hidden="true"></span>
-    <p>Quer saber dos próximos grupos ou tirar uma dúvida? Fale com a gente.</p>
-    <a class="btn btn--solid contato__cta" href="#contato" data-track="whatsapp" data-viagem="geral">Falar no WhatsApp</a>
+<section aria-labelledby="t-muda">
+  <div class="wrap">
+    <h2 id="t-muda">O que muda na versão Vitamina</h2>
+    <p>Hoje o site tem medidas escritas uma a uma, copiadas do desenho. A versão Vitamina troca essas medidas por poucas regras que valem para o site inteiro. Assim, cada página nova já nasce no mesmo ritmo, sem precisar desenhar tudo de novo. Foram 123 medidas ajustadas.</p>
+    <div class="cols">
+      <div>
+        <h3>Tipografia em 7 tamanhos</h3>
+        <table>
+          <thead><tr><th scope="col">Uso</th><th scope="col">Celular</th><th scope="col">Computador</th></tr></thead>
+          <tbody><tr><td>Legenda</td><td>14</td><td>14</td></tr><tr><td>Texto e botões</td><td>16</td><td>18</td></tr><tr><td>Destaque</td><td>20</td><td>22</td></tr><tr><td>Título pequeno</td><td>24</td><td>28</td></tr><tr><td>Título de seção</td><td>32</td><td>48</td></tr><tr><td>Título grande</td><td>40</td><td>64</td></tr><tr><td>Abertura</td><td>52</td><td>88</td></tr></tbody>
+        </table>
+        <p class="note">Antes eram 15 tamanhos escritos à mão, fora de uma escala. Valores em pixels.</p>
+      </div>
+      <div>
+        <h3>Botões maiores</h3>
+        <ul>
+          <li>O texto dos botões passa do tamanho de legenda para o tamanho do texto corrido: 16px no celular e 18px no computador.</li>
+          <li>A altura passa de 44px para 52px no celular e 56px no computador.</li>
+          <li>É o ponto em que a pessoa decide reservar, então ele precisa ser lido sem esforço.</li>
+        </ul>
+        <h3 style="margin-top:48px">Espaçamento e grid</h3>
+        <ul>
+          <li>Todo espaço entre elementos sai de uma escala só: 4, 8, 16, 24, 32, 48, 64 e 104px.</li>
+          <li>Grid de 4 colunas no celular, 8 no tablet e 12 no computador, com a mesma calha em todas as seções.</li>
+          <li>As entrelinhas seguem uma grade de 4px, o que deixa os blocos de texto mais alinhados entre si.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
-
+<section aria-labelledby="t-ambas">
+  <div class="wrap">
+    <h2 id="t-ambas">O que já vale para as duas</h2>
+    <p>Isso não muda o desenho. É o mínimo para o site funcionar bem para todo mundo e aparecer no Google.</p>
+    <ul>
+      <li>O vermelho do botão ficou um tom mais fechado (#e60000) para o texto branco ter contraste suficiente. No #f00000 ele fica abaixo do mínimo de leitura.</li>
+      <li>Todo link e botão tem pelo menos 44px de área de toque.</li>
+      <li>Navegação completa pelo teclado, com o foco sempre visível, e menu que fecha com Esc.</li>
+      <li>Leitura correta por leitor de tela (VoiceOver), com descrição em todas as fotos.</li>
+      <li>Fotos em formato leve e no tamanho certo para cada tela, para a página abrir rápido no 4G.</li>
+      <li>Testado em 320, 390, 820, 1100 e 1440px de largura, sem rolagem para os lados.</li>
+      <li>Ícone do site na aba do navegador e na tela inicial do celular.</li>
+      <li>Em seguida: SEO, prévia de compartilhamento no WhatsApp e nas redes, e medição de visitas.</li>
+    </ul>
+  </div>
+</section>
 </main>
-<footer class="footer" data-inert-when-menu><div class="wrap">
-<div class="footer__top"><a class="footer__logo" href="/andante/" aria-label="Andante, página inicial"><svg class="logo" role="img" aria-label="Andante" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630.59 93.87"><path d="M491.45,24.78h1.25c0-1,.17-2.02.5-3.07.33-1.04.84-2,1.51-2.89.67-.88,1.51-1.61,2.51-2.19,1-.58,2.17-.88,3.51-.88h14.54v69.97c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.09.75-1.760.75h-.62v1.25h17.8v-1.25h-.62c-.67,0-1.23-.25-1.7-.75-.46-.5-.88-1.08-1.25-1.75-.37-.67-.65-1.4-.82-2.19-.17-.8-.25-1.52-.25-2.2V15.75h14.8c1.34,0,2.51.29,3.51.88,1,.58,1.84,1.32,2.51,2.19.67.88,1.170,1.84,1.51,2.89.33,1.05.5,2.07.5,3.07h1.25v-13.67h-56.3v13.67ZM151.32,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95L110.69,11.11h-12.66v1.25h.63c.84,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.34.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.240,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM65.64,90.24c-1.04-1.59-1.86-3.22-2.45-4.89L35.11,9.61,6.39,86.1c-.67,1.76-1.52,3.28-2.57,4.58-1.05,1.29-2.11,1.94-3.2,1.94h-.62v1.25h13.92v-1.25h-.63c-.67,0-1.3-.31-1.88-.94-.59-.63-.88-1.48-.88-2.57,0-.58.13-1.21.38-1.88l10.91-29.97h21.95l11.28,30.47c.25.75.38,1.46.38,2.13,0,1.84-1,2.76-3.01,2.76h-.63v1.25h18.56v-1.25h-.63c-1.67,0-3.03-.79-4.08-2.38ZM23.07,52.99l9.66-26.21,9.65,26.21h-19.31ZM445.06,12.36h.62c.67,0,1.26.23,1.76.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.31,1.42.31,2.01v63.95l-45.52-71.73h-12.66v1.25h.63c.83,0,1.55.23,2.13.69.59.46,1.04,1.02,1.38,1.7.34.67.57,1.38.69,2.13.13.75.19,1.42.19,2.01v66.83c0,.67-.11,1.4-.31,2.2-.21.79-.48,1.52-.82,2.19-.33.67-.78,1.25-1.32,1.75-.54.5-1.11.75-1.69.75h-.63v1.25h13.92v-1.25h-.62c-.67,0-1.25-.25-1.76-.75-.5-.5-.94-1.08-1.32-1.75-.37-.67-.65-1.4-.81-2.19-.17-.8-.25-1.52-.25-2.2V21.9l45.39,71.97h7.77V18.89c0-.59.08-1.25.25-2.01.17-.75.44-1.46.82-2.13.38-.67.82-1.24,1.32-1.7.5-.46,1.09-.69,1.75-.69h.63v-1.25h-14.04v1.25ZM629.34,79.2c0,.84-.19,1.86-.56,3.07-.38,1.21-.96,2.34-1.76,3.38-.8,1.05-1.78,1.94-2.95,2.7-1.17.75-2.55,1.13-4.14,1.13h-27.46v-37.99h20.82c2.01,0,3.64.55,4.89,1.63,1.25,1.09,1.88,2.38,1.88,3.89h1.25v-15.67h-1.25c0,1.59-.65,2.97-1.94,4.14-1.3,1.17-2.9,1.76-4.83,1.76h-20.82V15.5h25.2c2.84,0,4.93.73,6.27,2.19,1.33,1.46,2.09,3.16,2.26,5.08h1.25v-11.66h-48.28v1.25h.63c.67,0,1.25.23,1.75.69.5.46.94,1.02,1.32,1.7.38.67.67,1.38.88,2.13.21.75.32,1.42.32,2.01v67.08c0,.67-.11,1.38-.32,2.13-.21.75-.5,1.46-.88,2.13-.38.67-.82,1.24-1.32,1.69-.5.46-1.09.69-1.75.69h-.63v1.25h51.41v-14.67h-1.25ZM254.92,23.84c-3.64-3.89-8.09-6.98-13.35-9.28-5.27-2.3-11.21-3.45-17.81-3.45h-24.2v1.25h.63c.67,0,1.25.23,1.75.69.5.46.92,1.02,1.26,1.7.33.67.58,1.38.75,2.13.17.75.25,1.42.25,2.01v66.83c0,.67-.08,1.4-.25,2.2-.17.79-.44,1.52-.82,2.19-.38.67-.82,1.25-1.32,1.75-.5.5-1.05.75-1.63.75h-.63v1.25h22.57c7.27,0,13.67-1.19,19.19-3.57,5.52-2.38,10.11-5.5,13.79-9.34,3.68-3.84,6.43-8.21,8.27-13.1,1.84-4.89,2.76-9.89,2.76-14.98,0-5.43-.96-10.66-2.88-15.67-1.92-5.02-4.7-9.47-8.34-13.35ZM254.29,70.17c-2.3,4.35-5.3,7.96-8.99,10.85-3.69,2.88-7.82,5.01-12.38,6.39-4.57,1.38-9.12,2.07-13.64,2.07h-6.66V15.5h6.41c5.530,0,10.67,1.05,15.4,3.13,4.74,2.09,8.84,4.91,12.32,8.46,3.48,3.55,6.18,7.71,8.11,12.48,1.93,4.76,2.89,9.82,2.89,15.17,0,5.94-1.15,11.08-3.46,15.43ZM359.41,89.82c-1.16-1.77-2.07-3.59-2.72-5.45l-24.67-66.52-4.84,13.4,23.09,62.62h14.38v-1.4h-.7c-1.86,0-3.38-.88-4.54-2.65ZM298.99,91.43c-.65-.7-.98-1.65-.98-2.87,0-.65.14-1.35.42-2.09l29.12-80.65-2.16-5.81-34.97,93.87h11.36v-1.4h-.7c-.74,0-1.440-.35-2.09-1.05Z"/></svg></a>
-<nav class="footer__nav" aria-label="Rodapé">
-<div class="footer__col"><h2>Viagens</h2><a href="/andante/#grupos">Grupos</a><a href="/andante/viagens/peru/">Vale Sagrado Peru</a><a href="/andante/viagens/pais-basco/">País Basco Francês</a><a href="/andante/viagens/gaga-piemonte/">Gaga e Piemonte</a></div>
-<div class="footer__col"><h2>Andante</h2><a href="/andante/">Home</a><a href="/andante/#por-que-viajar">Por que viajar</a><a href="/andante/#quem-somos">Quem somos</a><a href="/andante/#contato">Faça parte</a></div>
-<div class="footer__col"><h2>Ajuda</h2><a href="/andante/#contato">Contato</a></div>
-</nav></div>
-<p class="footer__tag tagline"><b>VIAGENS</b> <i>bem vividas.</i></p>
-<p class="footer__copy">© Andante</p>
-</div></footer>
 </body>
 </html>

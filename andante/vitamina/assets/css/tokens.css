@@ -1,0 +1,37 @@
+/* Andante · tokens
+   Fonte da verdade visual: Figma do Lucas + wireframes aprovados.
+   Fontes e cores provisórias até a confirmação do Lucas (ver README). */
+:root{
+  /* cor */
+  --ink:#000000;        /* texto, fundos pretos (hero, menu, rodapé) */
+  --paper:#ffffff;      /* fundo padrão */
+  --red:#f00000;        /* marca: o "A", molduras, contornos, item ativo */
+  --red-fill:#e60000;   /* fundo de botão com texto branco: 4,81:1 (AA). O #f00000 dá 4,46:1 e não passa */
+  --olive:#c8c157;      /* faixa "Não é sobre ir longe" */
+  --sky:#d1dfe5;        /* faixa Grupos */
+  --earth:#68481e;      /* faixa Contato */
+  --forest:#34451b;     /* faixa O que muda */
+  --forest-line:#b6ad20;
+  --lilac:#d9d4e9;      /* faixa Quem somos */
+  --line-dark:rgba(255,255,255,.35);
+
+  /* tipo */
+  --sans:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --fs-small:13px; --fs-body:16px; --fs-lead:17px;
+  --fs-h3:22px; --fs-h2:28px; --fs-title:34px; --fs-display:38px; --fs-hero:30px;
+
+  /* espaço (escala do design system) */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px; --s12:48px; --s16:64px; --s24:96px;
+
+  /* layout */
+  --edge:20px;          /* margem lateral no mobile */
+  --max:1440px;
+  --header-h:68px;
+  --radius:0;           /* nada é arredondado */
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+@media (min-width:600px){ :root{ --edge:32px } }
+@media (min-width:820px){ :root{ --edge:40px; --fs-hero:44px; --fs-h2:36px; --fs-title:40px; --fs-display:48px } }
+@media (min-width:1100px){ :root{ --edge:48px; --fs-hero:64px; --fs-h2:44px; --fs-title:48px; --fs-display:56px; --fs-lead:22px; --fs-body:18px; --fs-small:14px } }
+@media (min-width:1440px){ :root{ --edge:64px; --fs-hero:80px; --fs-display:64px; --fs-h2:48px } }

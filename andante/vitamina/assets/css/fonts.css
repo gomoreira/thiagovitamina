@@ -1,0 +1,8 @@
+/* Outfit e Instrument Serif: SIL Open Font License 1.1 (provisórias até o Lucas confirmar as fontes da identidade)
+   Gambarino (ITF Free Font License) e Familjen Grotesk (OFL) ficam no projeto caso a identidade final use as duas. */
+@font-face{font-family:"Outfit";src:url("../fonts/outfit-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../fonts/outfit-latin-500-normal.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../fonts/outfit-latin-600-normal.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Outfit";src:url("../fonts/outfit-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("../fonts/instrument-serif-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("../fonts/instrument-serif-latin-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}

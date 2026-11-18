@@ -5,9 +5,15 @@ ROOT = pathlib.Path(__file__).parent; SRC = ROOT / "src"
 OUT = pathlib.Path(os.environ.get("ANDANTE_OUT", ROOT.parent.parent / "andante"))
 BASE = os.environ.get("ANDANTE_BASE", "/andante")
 PREVIEW = BASE != ""
+# Revisão com o cliente: "original" (Figma do Lucas) ou "vitamina" (sistema de tipo, espaço e grid)
+VARIANT = os.environ.get("ANDANTE_VARIANT", "")
 if OUT.exists(): shutil.rmtree(OUT)
 shutil.copytree(SRC / "assets", OUT / "assets")
 shutil.copy(SRC / "assets/icons/favicon.ico", OUT / "favicon.ico")
+if VARIANT == "vitamina":
+    import sistema
+    # a Vitamina troca o site.css pela cópia passada na régua do sistema
+    (OUT / "assets/css/site.css").write_text(sistema.build((SRC / "assets/css/site.css").read_text()))
 (OUT / "site.webmanifest").write_text(json.dumps({
     "name": "Andante", "short_name": "Andante", "lang": "pt-BR",
     "start_url": f"{BASE}/", "display": "browser",
@@ -83,11 +89,23 @@ def footer():
 <p class="footer__copy">© Andante</p>
 </div></footer>'''
 
+def variant_bar(path):
+    if not VARIANT: return ""
+    root = BASE.rsplit("/", 1)[0]
+    sub = f"/{path}" if path else "/"
+    other = "vitamina" if VARIANT == "original" else "original"
+    nome = {"original": "Versão original", "vitamina": "Versão Vitamina"}
+    return (f'<nav class="variant" aria-label="Versões para revisão"><a href="{root}/">Comparar</a>'
+            f'<span aria-current="true">{nome[VARIANT]}</span>'
+            f'<a href="{root}/{other}{sub}">Ver {nome[other].lower().replace("versão ", "a ")}</a></nav>')
+
 def page(path, title, content, current="", description=site["descricao"]):
     html = tpl
     for k, v in {"title": title, "description": description, "base": BASE, "content": content,
                  "robots": '<meta name="robots" content="noindex, nofollow">' if PREVIEW else "",
-                 "header": header(current), "menu": menu(current), "footer": footer()}.items():
+                 "header": header(current), "menu": menu(current), "footer": footer(),
+                 "variant_css": "",
+                 "variant_bar": variant_bar(path)}.items():
         html = html.replace("{{" + k + "}}", v)
     dest = OUT / path / "index.html"; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_text(html)
 

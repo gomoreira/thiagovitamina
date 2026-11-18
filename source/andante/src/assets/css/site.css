@@ -403,3 +403,10 @@ body.is-locked{overflow:hidden}
   .hero--trip h1{font-size:var(--fs-display)}
 }
 .hotel-note{margin-top:var(--s6)!important;font-weight:400}
+
+/* seletor de versão (só na revisão, nunca em produção) */
+.variant{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:4px;background:var(--ink);color:var(--paper);font-size:14px;line-height:20px;font-weight:500;border:1px solid rgba(255,255,255,.35);white-space:nowrap}
+.variant a,.variant span{display:inline-flex;align-items:center;min-height:40px;padding:0 12px}
+.variant span{background:var(--paper);color:var(--ink)}
+.variant a{text-underline-offset:.2em}
+.variant :focus-visible{outline-color:var(--paper)}

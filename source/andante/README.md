@@ -25,3 +25,8 @@ O CSS parte do mobile (layouts de 390px) e cresce com `min-width`:
 | xl | 1440px | largura máxima do conteúdo, só as margens crescem |
 
 Testar sempre em 320, 375, 390, 600, 820, 1100 e 1440px.
+
+## Revisão: duas versões
+`./preview.sh` gera `/andante` (página de comparação), `/andante/original` e `/andante/vitamina`.
+A Vitamina troca o `site.css` por uma cópia passada na régua do `sistema.py` (escala de tipo, de espaço e entrelinha em 4px).
+Depois da escolha, aplicar a versão escolhida no `site.css` e remover `sistema.py`, `comparar.py` e `review/`.
