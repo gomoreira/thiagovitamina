@@ -116,12 +116,19 @@ def whatsapp(viagem=None):
     msg = f"Oi! Quero saber da viagem {viagem}." if viagem else "Oi! Quero saber dos próximos grupos da Andante."
     return f"https://wa.me/{n}?text={urllib.parse.quote(msg)}"
 
+SAIDA = {"proxima": ("Próxima saída", "Reserve seu lugar"), "realizada": ("Já fomos", "Quero ir na próxima")}
+
 def card(v):
+    """Card no modelo da referência do Lucas: foto alta com etiqueta, data e título por cima."""
+    tag, cta = SAIDA[v.get("saida", "proxima")]
     acc = "".join(f'<details><summary>{t}</summary><p>{x}</p></details>' for t, x in v["destaques"])
-    return (f'<li class="card">{img(v["img"], "card__img", v["img_alt"], sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw", pos=v.get("img_pos",""))}'
-            f'<div class="card__body"><h3 class="card__title"><a href="{BASE}/viagens/{v["slug"]}/">{v["titulo"]}</a></h3>'
-            f'<p class="card__meta">{v["meta"]}</p><div class="acc">{acc}</div>'
-            f'<p class="card__cta"><a class="btn btn--solid" href="{whatsapp(v["titulo"])}" data-track="whatsapp" data-viagem="{v["slug"]}">Reserve seu lugar</a></p></div></li>')
+    return (f'<li class="card card--{v.get("saida", "proxima")}"><div class="card__cover">'
+            f'{img(v["img"], "card__img", v["img_alt"], sizes="(min-width:1100px) 33vw, (min-width:600px) 50vw, 100vw", pos=v.get("img_pos",""))}'
+            f'<p class="card__tag">{tag}</p>'
+            f'<div class="card__over"><p class="card__date">{v.get("datas", "")}</p>'
+            f'<h3 class="card__title"><a href="{BASE}/viagens/{v["slug"]}/">{v["titulo"]}</a></h3></div></div>'
+            f'<div class="card__body"><p class="card__meta">{v["meta"].replace(" · " + v.get("datas", "\0"), "")}</p><div class="acc">{acc}</div>'
+            f'<p class="card__cta"><a class="btn btn--solid" href="{whatsapp(v["titulo"])}" data-track="whatsapp" data-viagem="{v["slug"]}">{cta}</a></p></div></li>')
 
 viagens.sort(key=lambda v: v.get("ordem", 99))
 symbol = (SRC / "partials/symbol.svg").read_text().strip()

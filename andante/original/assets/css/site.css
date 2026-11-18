@@ -191,9 +191,18 @@ body.is-locked{overflow:hidden}
 .groups__lead{margin-top:0!important;font-size:24px;line-height:28px;max-width:28ch}
 .cards{display:grid;gap:var(--s10)}
 .card{background:var(--paper);display:flex;flex-direction:column}
-.card__img{width:100%;height:300px;object-fit:cover}
+.card__cover{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--ink);color:var(--paper)}
+.card__cover picture,.card__img{position:absolute;inset:0;width:100%;height:100%}
+.card__img{object-fit:cover;transition:transform .8s var(--ease)}
+.card__cover::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.45) 0,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.78) 100%)}
+.card__tag{position:absolute;z-index:1;top:16px;left:16px;padding:4px 10px;border:1px solid currentColor;font-size:var(--fs-small);font-weight:500;line-height:20px}
+.card__over{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:24px 20px;display:flex;flex-direction:column;gap:8px}
+.card__date{font-size:var(--fs-small);font-weight:500;line-height:20px}
+.card__cover :focus-visible{outline-color:var(--paper)}
+@media (hover:hover){.card:has(.card__title a:hover) .card__img{transform:scale(1.03)}}
+@media (prefers-reduced-motion:reduce){.card__img{transition:none}}
 .card__body{padding:var(--s6) var(--s5) 28px;display:flex;flex-direction:column;gap:18px;flex:1}
-.card__title{font-family:var(--serif);font-weight:400;font-size:var(--fs-title);line-height:1.06}
+.card__title{font-family:var(--serif);font-weight:400;font-size:var(--fs-title);line-height:1.06;text-wrap:balance}
 .card__title a{text-decoration:none}
 @media (hover:hover){.card__title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.12em}}
 .card__meta{font-size:var(--fs-small);font-weight:500;line-height:18px}
