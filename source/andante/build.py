@@ -99,15 +99,36 @@ def variant_bar(path):
             f'<span aria-current="true">{nome[VARIANT]}</span>'
             f'<a href="{root}/{other}{sub}">Ver {nome[other].lower().replace("versão ", "a ")}</a></nav>')
 
-def page(path, title, content, current="", description=site["descricao"]):
+import html as _html
+# endereço absoluto para canonical, Open Graph e dados estruturados
+HOST = ("https://" + site["dominio"].removeprefix("https://").strip("/")) if site.get("dominio") else os.environ.get("ANDANTE_HOST", "https://thiagovitamina.com")
+def absu(p): return HOST + BASE + p
+PAGES = []
+
+def seo(path, title, description, og_img, og_type, ld):
+    url = absu(f"/{path}/" if path else "/")
+    e = lambda x: _html.escape(x, quote=True)
+    tags = [f'<meta property="og:type" content="{og_type}">', f'<meta property="og:site_name" content="Andante">',
+            '<meta property="og:locale" content="pt_BR">', f'<meta property="og:title" content="{e(title)}">',
+            f'<meta property="og:description" content="{e(description)}">', f'<meta property="og:url" content="{url}">',
+            f'<meta property="og:image" content="{absu(og_img)}">', '<meta property="og:image:width" content="1200">',
+            '<meta property="og:image:height" content="630">', f'<meta property="og:image:alt" content="{e(title)}">',
+            '<meta name="twitter:card" content="summary_large_image">']
+    if not PREVIEW and site.get("dominio"): tags.insert(0, f'<link rel="canonical" href="{url}">')
+    if ld: tags.append('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>")
+    return "\n".join(tags)
+
+def page(path, title, content, current="", description=site["descricao"], og_img="/assets/og/inicio.jpg", og_type="website", ld=None):
     html = tpl
     for k, v in {"title": title, "description": description, "base": BASE, "content": content,
                  "robots": '<meta name="robots" content="noindex, nofollow">' if PREVIEW else "",
+                 "seo": seo(path, title, description, og_img, og_type, ld),
                  "header": header(current), "menu": menu(current), "footer": footer(),
                  "variant_css": "",
                  "variant_bar": variant_bar(path)}.items():
         html = html.replace("{{" + k + "}}", v)
     dest = OUT / path / "index.html"; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_text(html)
+    PAGES.append(path)
 
 import re, urllib.parse
 def whatsapp(viagem=None):
@@ -136,7 +157,13 @@ inicio = (SRC / "templates/inicio.html").read_text()
 inicio = re.sub(r"\{\{img:([^|}]+)\|([^|}]*)\|([^|}]*)(?:\|([^}]*))?\}\}",
                 lambda m: img(m[1], m[2], m[3], m[4] or "lazy", sizes="100vw" if m[1] == "hero" else "(min-width:820px) 42vw, 100vw"), inicio)
 inicio = inicio.replace("{{symbol}}", symbol).replace("{{cards}}", "".join(card(v) for v in viagens)).replace("{{whatsapp}}", whatsapp())
-page("", "Andante · Viagens bem vividas", inicio, "home")
+import og
+og.make(SRC / "img/hero.jpg", OUT / "assets/og/inicio.jpg", "O que interessa é o", "tempo vivido", "Viagens em pequenos grupos", focus=(0.5, 0.7))
+AGENCIA = {"@type": "TravelAgency", "name": "Andante", "description": site["descricao"], "url": absu("/"),
+           "logo": absu("/assets/icons/icon-512.png"), "image": absu("/assets/og/inicio.jpg"), "slogan": "Viagens bem vividas."}
+page("", "Andante · Viagens bem vividas", inicio, "home",
+     ld={"@context": "https://schema.org", **AGENCIA,
+         "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "TouristTrip", "name": v["titulo"], "url": absu(f"/viagens/{v['slug']}/")}} for v in viagens if v.get("pagina")]})
 def foto(name, cls, alt, sizes="100vw", pos=""):
     if name and name in IMGS: return img(name, cls, alt, sizes=sizes, pos=pos)
     return f'<div class="ph {cls}" role="img" aria-label="{alt}"><span aria-hidden="true">Foto provisória</span></div>'
@@ -203,5 +230,24 @@ for v in viagens:
         c = viagem(v)
     else:
         c = f'<section class="on-dark" style="min-height:70svh;display:flex;align-items:flex-end"><div class="wrap" style="padding-bottom:var(--s16)"><h1 class="serif" style="font-size:var(--fs-title);line-height:1.05">{v["titulo"]}</h1><p class="small" style="margin-top:var(--s4)">{v["resumo"]}</p></div></section>'
-    page(f"viagens/{v['slug']}", f"{v['titulo']} · Andante", c, description=v.get("descricao", site["descricao"]))
+    h = v["hero"]
+    og.make(SRC / f"img/{h['img']}.jpg", OUT / f"assets/og/{v['slug']}.jpg", h["titulo_serif"], h["titulo_caps"], h.get("meta", ""))
+    ld = {"@context": "https://schema.org", "@type": "TouristTrip", "name": v["titulo"],
+          "description": v.get("descricao", ""), "url": absu(f"/viagens/{v['slug']}/"),
+          "image": absu(f"/assets/og/{v['slug']}.jpg"), "inLanguage": "pt-BR",
+          "provider": {k: AGENCIA[k] for k in ("@type", "name", "url")}}
+    if v.get("preco_valor"):  # só entra quando o preço for real
+        ld["offers"] = {"@type": "Offer", "price": v["preco_valor"], "priceCurrency": v.get("moeda", "BRL"), "url": absu(f"/viagens/{v['slug']}/")}
+    page(f"viagens/{v['slug']}", f"{v['titulo']} · Andante", c, description=v.get("descricao", site["descricao"]),
+         og_img=f"/assets/og/{v['slug']}.jpg", ld=ld)
 print(f"{len(viagens)} viagens:", ", ".join(v["slug"] for v in viagens), "→", OUT)
+
+# buscadores: sitemap e robots só na produção (a prévia é noindex)
+if not PREVIEW:
+    if not site.get("dominio"):
+        print("aviso: sem domínio em site.json, sitemap e canonical ficaram de fora")
+    else:
+        (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"  <url><loc>{absu(f'/{p}/' if p else '/')}</loc></url>\n" for p in PAGES) + "</urlset>\n")
+        (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {absu('/sitemap.xml')}\n")
+
