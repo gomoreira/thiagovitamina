@@ -18,6 +18,7 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
 .seg button+button{border-left:1px solid rgba(241,228,211,.3)}
 .seg button[aria-pressed=true]{background:#f1e4d3;color:#0b0b0b}
 @media (max-width:640px){.seg{display:grid;grid-template-columns:1fr 1fr;width:100%;border:0;gap:6px}.seg button,.seg button+button{border:1px solid rgba(241,228,211,.3);text-align:left}}
+.dl{display:block;width:100%;max-width:880px;margin:0 0 28px;padding:16px 18px;border:1px solid #f1e4d3;color:#f1e4d3;text-decoration:none;font-size:15px}.dl:hover{background:#f1e4d3;color:#0b0b0b}
 .big{width:100%;max-width:880px;margin:0 0 36px;position:relative}.big img{width:100%;display:block;background:#000}.big::before,.big::after{content:"";position:absolute;top:0;width:1px;background:rgba(241,228,211,.35);height:calc(100% - 34px)}.big::before{left:33.333%}.big::after{left:66.666%}.big figcaption{font-size:13px;opacity:.55;margin-top:10px;font-stretch:100%}
 .wrap{display:flex;gap:40px;align-items:flex-start;justify-content:center;flex-wrap:wrap;width:100%;max-width:880px}
 .phone{width:390px;max-width:100%;background:#000;border:1px solid #262626;border-radius:36px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-stretch:normal;color:#f5f5f5}
@@ -52,14 +53,15 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
 </head>
 <body>
 <div class="pick">
- <div><h1>Para aprovar: qual mosaico vocês preferem?</h1><p>Os 3 primeiros posts do @tretapost, como vão aparecer no perfil.</p></div>
+ <div><h1>Versão aprovada: D · Corte nos Ts</h1><p>Os 3 primeiros posts do @tretapost, como vão aparecer no perfil.</p></div>
  <div class="seg" role="group" aria-label="Versão do mosaico">
-  <button type="button" data-v="a" aria-pressed="true">A · No meio</button>
+  <button type="button" data-v="a" aria-pressed="false">A · No meio</button>
   <button type="button" data-v="b" aria-pressed="false">B · Atravessando</button>
   <button type="button" data-v="c" aria-pressed="false">C · Onda sonora</button>
   <button type="button" data-v="d" aria-pressed="false">D · Corte nos Ts</button>
  </div>
 </div>
+<a class="dl" href="/tretapostinsta/download/TretaPost_mosaico_D.zip" download>Baixar arquivos da versão D (PSD, camadas em alpha, posts e foto de perfil · 20 MB)</a>
 <figure class="big"><img id="big" alt="Mosaico completo"><figcaption>O mosaico inteiro, antes do corte. As linhas mostram onde a imagem é dividida nos 3 posts.</figcaption></figure>
 <div class="wrap">
  <div class="phone" aria-label="Prévia do perfil">
@@ -93,7 +95,7 @@ function set(v){
 }
 btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.v)));
 document.querySelectorAll('.old').forEach(d=>d.style.backgroundImage=`url(/tretapostinsta/img/old-${d.dataset.o}.jpg)`);
-set(['#b','#c','#d'].includes(location.hash)?location.hash.slice(1):'a');
+set(['#a','#b','#c'].includes(location.hash)?location.hash.slice(1):'d');
 ['a','b','c','d'].forEach(v=>[1,2,3].forEach(n=>{new Image().src=`/tretapostinsta/img/${v}-${n}.jpg`}));
 </script>
 </body>
