@@ -78,7 +78,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   // Case and live-site videos that actually played.
   var played = {};
   document.addEventListener('play', function (ev) {
-    var v = ev.target, name = caseName(v) || (v.currentSrc || '').split('/').pop();
+    var v = ev.target, name = caseName(v) || (v.currentSrc || '').split('/').pop().split('?')[0];
     if (v.tagName === 'VIDEO' && !played[name]) { played[name] = 1; track('video_played', { project: name }); }
   }, true);
 
