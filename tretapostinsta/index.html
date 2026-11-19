@@ -17,6 +17,7 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
 .seg button{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-size:15px;padding:12px 18px;cursor:pointer}
 .seg button+button{border-left:1px solid rgba(241,228,211,.3)}
 .seg button[aria-pressed=true]{background:#f1e4d3;color:#0b0b0b}
+@media (max-width:640px){.seg{display:grid;grid-template-columns:1fr 1fr;width:100%;border:0;gap:6px}.seg button,.seg button+button{border:1px solid rgba(241,228,211,.3);text-align:left}}
 .big{width:100%;max-width:880px;margin:0 0 36px;position:relative}.big img{width:100%;display:block;background:#000}.big::before,.big::after{content:"";position:absolute;top:0;width:1px;background:rgba(241,228,211,.35);height:calc(100% - 34px)}.big::before{left:33.333%}.big::after{left:66.666%}.big figcaption{font-size:13px;opacity:.55;margin-top:10px;font-stretch:100%}
 .wrap{display:flex;gap:40px;align-items:flex-start;justify-content:center;flex-wrap:wrap;width:100%;max-width:880px}
 .phone{width:390px;max-width:100%;background:#000;border:1px solid #262626;border-radius:36px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-stretch:normal;color:#f5f5f5}
