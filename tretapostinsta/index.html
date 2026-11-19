@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>TretaPost · mosaico do Instagram</title>
 <style>
-@font-face{font-family:Archivo;src:url(archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:Archivo;src:url(/tretapostinsta/archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
 *{box-sizing:border-box}
 html,body{margin:0;background:#0b0b0b;color:#f1e4d3}
 body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:28px 16px 64px}
@@ -59,7 +59,7 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
 <div class="wrap">
  <div class="phone" aria-label="Prévia do perfil">
   <div class="top">tretapost <span>≡</span></div>
-  <div class="head"><div class="av" style="background-image:url(img/avatar.jpg)"></div>
+  <div class="head"><div class="av" style="background-image:url(/tretapostinsta/img/avatar.jpg)"></div>
    <div class="stats"><div><b>3</b>posts</div><div><b>—</b>seguidores</div><div><b>—</b>seguindo</div></div></div>
   <div class="bio"><b>TretaPost</b>Picture, sound &amp; pipeline. Post-production management.</div>
   <div class="btns"><div class="f">Seguir</div><div>Mensagem</div></div>
@@ -81,13 +81,13 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
 const btns=document.querySelectorAll('.seg button');
 function set(v){
  btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===v)));
- document.querySelectorAll('#grid [data-n]').forEach(d=>d.style.backgroundImage=`url(img/${v}-${d.dataset.n}.jpg)`);
- document.querySelectorAll('#posts img').forEach(i=>i.src=`img/${v}-${i.dataset.n}.jpg`);
+ document.querySelectorAll('#grid [data-n]').forEach(d=>d.style.backgroundImage=`url(/tretapostinsta/img/${v}-${d.dataset.n}.jpg)`);
+ document.querySelectorAll('#posts img').forEach(i=>i.src=`/tretapostinsta/img/${v}-${i.dataset.n}.jpg`);
  history.replaceState(null,'','#'+v);
 }
 btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.v)));
 set(location.hash==='#c'?'c':'a');
-['a','c'].forEach(v=>[1,2,3].forEach(n=>{new Image().src=`img/${v}-${n}.jpg`}));
+['a','c'].forEach(v=>[1,2,3].forEach(n=>{new Image().src=`/tretapostinsta/img/${v}-${n}.jpg`}));
 </script>
 </body>
 </html>
