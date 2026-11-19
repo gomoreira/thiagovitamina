@@ -717,3 +717,15 @@ a:focus-visible,button:focus-visible{outline-color:var(--plum)}
 .homeframe.stage .bw-scroll:focus-visible{outline-color:var(--link-dark)}
 .stage a,.stage a:visited{color:var(--link-dark)}
 @media (max-width:820px){.homeframe.stage{padding:var(--sp-4) var(--sp-3)}}
+
+/* Caio Rosa thumb: the window stays put; hover runs down the works list and the image on the right changes, as it does on the real site */
+.t.cro .panel .sc{position:relative}
+.media.thumb .t.cro .panel img{transform:none}
+.media.thumb .t.cro .panel img.f{position:absolute;inset:0 auto auto 0;opacity:0;transition:none}
+@keyframes cro-step{0%{opacity:0}4%,25%{opacity:1}29%,100%{opacity:0}}
+@media (hover:hover){.media.thumb .t.cro:hover .panel img.f{animation:cro-step 4.8s var(--ease) infinite}}
+.media.thumb .t.cro.is-on .panel img.f{animation:cro-step 4.8s var(--ease) infinite}
+.media.thumb .t.cro .panel img.f:nth-child(3){animation-delay:1.2s}
+.media.thumb .t.cro .panel img.f:nth-child(4){animation-delay:2.4s}
+.media.thumb .t.cro .panel img.f:nth-child(5){animation-delay:3.6s}
+@media (prefers-reduced-motion:reduce){.media.thumb .t.cro .panel img.f{animation:none!important}}
