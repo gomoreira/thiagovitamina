@@ -56,6 +56,7 @@ body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;min-height:100vh
   <button type="button" data-v="a" aria-pressed="true">A · No meio</button>
   <button type="button" data-v="b" aria-pressed="false">B · Atravessando</button>
   <button type="button" data-v="c" aria-pressed="false">C · Onda sonora</button>
+  <button type="button" data-v="d" aria-pressed="false">D · Corte nos Ts</button>
  </div>
 </div>
 <figure class="big"><img id="big" alt="Mosaico completo"><figcaption>O mosaico inteiro, antes do corte. As linhas mostram onde a imagem é dividida nos 3 posts.</figcaption></figure>
@@ -91,8 +92,8 @@ function set(v){
 }
 btns.forEach(b=>b.addEventListener('click',()=>set(b.dataset.v)));
 document.querySelectorAll('.old').forEach(d=>d.style.backgroundImage=`url(/tretapostinsta/img/old-${d.dataset.o}.jpg)`);
-set(['#b','#c'].includes(location.hash)?location.hash.slice(1):'a');
-['a','b','c'].forEach(v=>[1,2,3].forEach(n=>{new Image().src=`/tretapostinsta/img/${v}-${n}.jpg`}));
+set(['#b','#c','#d'].includes(location.hash)?location.hash.slice(1):'a');
+['a','b','c','d'].forEach(v=>[1,2,3].forEach(n=>{new Image().src=`/tretapostinsta/img/${v}-${n}.jpg`}));
 </script>
 </body>
 </html>
