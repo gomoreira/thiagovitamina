@@ -73,7 +73,7 @@ td+td,th+th{{width:96px}}
   <div class="wrap">
     <p>Andante · revisão de 18/11</p>
     <h1>Duas versões do site, <span class="serif"><i>para escolher juntos</i></span></h1>
-    <p class="lead">A versão original segue o mobile do Figma. A versão Vitamina é o mesmo site com um sistema de tipografia, espaçamento e grid aplicado em todas as telas. O conteúdo, as cores e as fotos são os mesmos nas duas.</p>
+    <p class="lead">A versão original é o Figma como foi desenhado: mesmas medidas, cores, botões, cabeçalho e rodapé, e no computador o mesmo desenho organizado na largura da tela. A versão Vitamina é o mesmo site com um sistema de tipografia, espaçamento e grid, e os ajustes de leitura e de toque. O conteúdo e as fotos são os mesmos nas duas.</p>
     <div class="open">
       <a class="btn btn--solid" href="/andante/original/">Abrir a versão original</a>
       <a class="btn" href="/andante/vitamina/">Abrir a versão Vitamina</a>
@@ -115,6 +115,13 @@ td+td,th+th{{width:96px}}
           <li>A altura passa de 44px para 52px no celular e 56px no computador.</li>
           <li>É o ponto em que a pessoa decide reservar, então ele precisa ser lido sem esforço.</li>
         </ul>
+        <h3 style="margin-top:48px">Leitura e toque</h3>
+        <ul>
+          <li>O vermelho dos botões fica um tom mais fechado (#e60000). No #f00000, o texto branco fica abaixo do contraste mínimo de leitura.</li>
+          <li>Botões e links com pelo menos 44px de área de toque. No desenho original os botões têm 38px.</li>
+          <li>No computador, o cabeçalho mostra as seções e o botão de reserva. O rodapé leva os links das viagens, o que ajuda na navegação e no Google.</li>
+          <li>Um bloco de contato pelo WhatsApp no fim da página.</li>
+        </ul>
         <h3 style="margin-top:48px">Espaçamento e grid</h3>
         <ul>
           <li>Todo espaço entre elementos sai de uma escala só: 4, 8, 16, 24, 32, 48, 64 e 104px.</li>
@@ -128,18 +135,15 @@ td+td,th+th{{width:96px}}
 <section aria-labelledby="t-ambas">
   <div class="wrap">
     <h2 id="t-ambas">O que já vale para as duas</h2>
-    <p>Isso não muda o desenho. É o mínimo para o site funcionar bem para todo mundo e aparecer no Google.</p>
+    <p>Isso não muda o desenho. É o que faz o site funcionar bem e aparecer no Google, nas duas versões.</p>
     <ul>
-      <li>O vermelho do botão ficou um tom mais fechado (#e60000) para o texto branco ter contraste suficiente. No #f00000 ele fica abaixo do mínimo de leitura.</li>
-      <li>Todo link e botão tem pelo menos 44px de área de toque.</li>
-      <li>Navegação completa pelo teclado, com o foco sempre visível, e menu que fecha com Esc.</li>
+      <li>Navegação completa pelo teclado e menu que fecha com Esc.</li>
       <li>Leitura correta por leitor de tela (VoiceOver), com descrição em todas as fotos.</li>
       <li>Fotos em formato leve e no tamanho certo para cada tela, para a página abrir rápido no 4G.</li>
-      <li>Testado em 320, 390, 820, 1100 e 1440px de largura, sem rolagem para os lados.</li>
+      <li>Sem rolagem para os lados em nenhuma largura de tela.</li>
       <li>Ícone do site na aba do navegador e na tela inicial do celular.</li>
-      <li>Prévia própria ao compartilhar no WhatsApp e nas redes: uma imagem para a página inicial e uma para cada viagem.</li>
-      <li>Preparado para o Google: título e descrição por página, mapa do site e dados estruturados da agência e de cada viagem. O preço só aparece quando estiver confirmado.</li>
-      <li>Nota 95 ou mais nas quatro categorias do Lighthouse (desempenho, acessibilidade, boas práticas e SEO), no celular e no computador.</li>
+      <li>Prévia própria ao compartilhar no WhatsApp e nas redes, e dados para o Google (título, descrição, mapa do site e dados estruturados).</li>
+      <li>Os cards dos grupos seguem a referência do site de museu nas duas versões.</li>
       <li>Em seguida: medição de visitas, na conta da própria Andante.</li>
     </ul>
   </div>

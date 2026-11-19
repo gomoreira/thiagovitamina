@@ -59,7 +59,7 @@ NAV = [("Home", home, "home"), ("Por que viajar", f"{home}#por-que-viajar", ""),
 def header(current):
     links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if k and k == current else ""}>{t}</a>' for t, h, k in NAV[1:])
     return f'''<header class="header" data-inert-when-menu><div class="wrap header__bar">
-<button class="header__menu" type="button" data-menu-open aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">{burger}</button>
+<button class="header__menu" type="button" data-menu-open aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">{burger_o if VARIANT == "original" else burger}</button>
 <a class="header__logo" href="{home}" aria-label="Andante, página inicial">{logo}</a>
 <nav class="header__nav" aria-label="Principal">{links}</nav>
 <a class="btn btn--solid header__cta" href="{home}#grupos">Reserve seu lugar</a>
@@ -76,7 +76,15 @@ def menu(current):
 <div class="menu__foot"><p class="tagline"><b>{site["tagline_b"]}</b> <i>{site["tagline_i"]}</i></p></div>
 </div></div>'''
 
+burger_o = '<svg aria-hidden="true" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M0 1h22M0 8h22M0 15h22"/></svg>'
+
 def footer():
+    if VARIANT == "original":  # rodapé do Figma: logo e assinatura
+        return f'''<footer class="o-footer" data-inert-when-menu>
+<a class="o-footer__logo" href="{home}" aria-label="Andante, página inicial">{logo}</a>
+<p class="o-footer__tag">{site["tagline_b"]} <i>{site["tagline_i"]}</i></p>
+</footer>'''
+
     trips = "".join(f'<a href="{BASE}/viagens/{v["slug"]}/">{v["titulo"]}</a>' for v in viagens)
     return f'''<footer class="footer" data-inert-when-menu><div class="wrap">
 <div class="footer__top"><a class="footer__logo" href="{home}" aria-label="Andante, página inicial">{logo}</a>
@@ -124,7 +132,8 @@ def page(path, title, content, current="", description=site["descricao"], og_img
                  "robots": '<meta name="robots" content="noindex, nofollow">' if PREVIEW else "",
                  "seo": seo(path, title, description, og_img, og_type, ld),
                  "header": header(current), "menu": menu(current), "footer": footer(),
-                 "variant_css": "",
+                 "variant_css": f'\n<link rel="stylesheet" href="{BASE}/assets/css/original.css">' if VARIANT == "original" else "",
+                 "body_class": f' class="v-{VARIANT}"' if VARIANT else "",
                  "variant_bar": variant_bar(path)}.items():
         html = html.replace("{{" + k + "}}", v)
     dest = OUT / path / "index.html"; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_text(html)
@@ -153,7 +162,7 @@ def card(v):
 
 viagens.sort(key=lambda v: v.get("ordem", 99))
 symbol = (SRC / "partials/symbol.svg").read_text().strip()
-inicio = (SRC / "templates/inicio.html").read_text()
+inicio = (SRC / ("templates/inicio-original.html" if VARIANT == "original" else "templates/inicio.html")).read_text()
 inicio = re.sub(r"\{\{img:([^|}]+)\|([^|}]*)\|([^|}]*)(?:\|([^}]*))?\}\}",
                 lambda m: img(m[1], m[2], m[3], m[4] or "lazy", sizes="100vw" if m[1] == "hero" else "(min-width:820px) 42vw, 100vw"), inicio)
 inicio = inicio.replace("{{symbol}}", symbol).replace("{{cards}}", "".join(card(v) for v in viagens)).replace("{{whatsapp}}", whatsapp())
