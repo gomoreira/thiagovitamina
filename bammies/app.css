@@ -94,3 +94,12 @@
   .bm *{transition:none !important;animation:none !important}
   .bm .bm-check path{stroke-dashoffset:0}
 }
+
+/* telas estreitas (celular dentro da moldura): miniatura menor pra caber preço e botão */
+.bm{container-type:size}
+@container (max-width:340px){
+  .bm-thumb{width:64px;height:64px}
+  .bm-thumb svg{transform:scale(.82)}
+  .bm-add{padding:0 12px}
+  .bm-qty{width:104px}
+}

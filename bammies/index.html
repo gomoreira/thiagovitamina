@@ -128,9 +128,22 @@ a:hover{text-decoration-thickness:2px}
 .chat small{font-size:var(--t-sm);color:var(--mute)}
 
 /* tour */
-.tour-grid{row-gap:var(--sp-5);align-items:start}
-.stage{grid-column:1 / span 6;position:sticky;top:calc(var(--sp-6) + var(--sp-3))}
-.panel{grid-column:8 / span 5;display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch;padding-top:var(--sp-5)}
+/* o tour cabe inteiro na tela e encaixa quando chega nele */
+:root{--hdr:57px}
+html{scroll-snap-type:y proximity}
+.tour{scroll-snap-align:start;scroll-margin-top:var(--hdr)}
+.tour-grid{row-gap:var(--sp-5);align-items:center}
+.stage{grid-column:1 / span 6}
+.panel{grid-column:8 / span 5;display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch}
+@media (min-width:821px){
+  .tour{height:calc(100vh - var(--hdr));height:calc(100svh - var(--hdr));padding-block:var(--sp-4)}
+  .tour-grid{height:100%}
+  .tour .stage-box{height:100%;justify-content:center;padding:var(--sp-4) var(--sp-5)}
+  .tour .screen{height:clamp(460px,calc(100svh - var(--hdr) - 2 * var(--sp-4) - 2 * var(--sp-4) - 24px),760px)}
+  .tour .panel{max-height:100%;overflow-y:auto;padding-right:var(--sp-2);scrollbar-width:thin}
+  .tour .panel .nav{position:sticky;bottom:0;background:var(--paper);padding-block:var(--sp-3) var(--sp-1);margin-top:auto}
+  @media (max-height:820px){.tour .panel{gap:var(--sp-3)} .tour .panel h3.title{font-size:var(--t-lg)} .tour .block p,.tour .block li{font-size:var(--t-base)}}
+}
 .mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px var(--paper),0 0 0 9999px rgba(11,10,13,.64);pointer-events:none;z-index:2;opacity:0;transition:left .35s var(--ease),top .35s var(--ease),width .35s var(--ease),height .35s var(--ease),opacity .25s}
 .mask.on{opacity:1}
 .progress{display:flex;gap:var(--sp-1)}
@@ -180,7 +193,7 @@ a:hover{text-decoration-thickness:2px}
   #hoje .phone{width:300px}
   #hoje .screen{height:560px}
   #proposta{padding-bottom:0}
-  .tour{height:100vh;height:100svh;background:var(--night);position:relative;overflow:hidden}
+  .tour{scroll-margin-top:0;height:100vh;height:100svh;background:var(--night);position:relative;overflow:hidden}
   .tour .wrap{padding:0;height:100%}
   .tour-grid{height:100%;gap:0;align-items:stretch}
   .stage{flex:1;min-height:0;position:relative;top:auto}

@@ -4,25 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#000000">
-<title>Bammies · versão vitaminada</title>
+<meta name="theme-color" content="#FFFFFF">
+<title>Bammies · versão vitaminada · Thiago Vitamina</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/funnel-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="/bammies/app.css">
 <style>
-html,body{margin:0;height:100%;background:#000}
-#root{position:fixed;inset:0;margin:0 auto;max-width:480px}
-@media (min-width:520px){ body{background:#1a1a1a} #root{box-shadow:0 0 0 1px #333} }
+@font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin.woff2) format('woff2')}
+@font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/funnel-sans-latin.woff2) format('woff2')}
+:root{--plum:#551A8B;--mute:#615C68;--rule:#E3E0E8;--strip:56px}
+html,body{margin:0;height:100%;background:#0B0A0D}
+.strip{position:fixed;top:0;left:0;right:0;height:calc(var(--strip) + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));background:#FFFFFF;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:10;font-family:"Funnel Sans","Helvetica Neue",Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--plum);text-decoration:underline;text-underline-offset:.2em;text-decoration-thickness:1px;font-family:"Funnel Display","Helvetica Neue",Arial,sans-serif;font-weight:600}
+.back:hover{text-decoration-thickness:2px}
+.back:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+.back svg{flex:none}
+.strip span{font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#root{position:fixed;left:0;right:0;bottom:0;top:calc(var(--strip) + env(safe-area-inset-top));margin:0 auto;max-width:480px}
+@media (min-width:520px){#root{box-shadow:0 0 0 1px #2E2B33}}
+.embedded .strip{display:none}
+.embedded #root{top:0}
 </style>
 </head>
 <body>
+<header class="strip">
+  <a class="back" href="/bammies/#vitaminada"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>Voltar pra leitura</a>
+  <span>Versão vitaminada · Bammies</span>
+</header>
 <main id="root" aria-label="Loja Bammies, versão vitaminada"></main>
 <script src="/bammies/app.js"></script>
 <script>
-  var embedded = window.self !== window.top;
-  BammiesApp(document.getElementById('root'), {backHref: embedded ? null : '/bammies/'});
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+  BammiesApp(document.getElementById('root'));
 </script>
 </body>
 </html>
