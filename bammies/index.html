@@ -79,7 +79,9 @@ a{color:inherit;text-underline-offset:.2em}
 .app::-webkit-scrollbar{display:none}
 .bar{background:#000;color:#fff;height:52px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;letter-spacing:.03em;position:sticky;top:0;z-index:3}
 .chips{display:flex;gap:8px;padding:12px 14px;background:#FBEAF4;position:sticky;top:52px;z-index:2}
-.chips a{min-height:36px;padding:0 16px;border-radius:999px;background:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;text-decoration:none}
+.chips{overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex-shrink:0;white-space:nowrap;min-height:36px;padding:0 16px;border-radius:999px;background:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;text-decoration:none}
 .chips a[aria-current="true"]{background:var(--ink);color:#fff}
 .sec{padding:10px 14px 8px;font-size:18px;font-weight:800}
 .list{display:flex;flex-direction:column;gap:10px;padding:0 14px}
@@ -102,20 +104,56 @@ a{color:inherit;text-underline-offset:.2em}
 .qty{height:44px;width:112px;border:2px solid var(--pink);border-radius:999px;display:flex;align-items:center;justify-content:space-between}
 .qty button{width:40px;height:40px;border:0;background:transparent;color:var(--pink);display:flex;align-items:center;justify-content:center;border-radius:999px}
 .qty output{font-weight:700;font-size:16px}
-.cart{position:absolute;left:12px;right:12px;bottom:14px;height:58px;background:var(--ink);color:#fff;border-radius:999px;display:flex;align-items:center;justify-content:space-between;padding:0 7px 0 20px;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:4;transition:transform .25s}
-.cart.empty{transform:translateY(90px)}
-.cart span{font-size:14px}
-.cart button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:700}
+.cart{position:absolute;left:12px;right:12px;bottom:12px;background:var(--ink);color:#fff;border-radius:24px;display:flex;flex-direction:column;gap:8px;padding:10px 8px 8px 18px;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:4;transition:transform .25s}
+.cart.empty{transform:translateY(160px)}
+.cart.bump{animation:bump .4s}
+@keyframes bump{35%{transform:scale(1.035)}}
+.cart .row2{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cart .row2 span{font-size:14px}
+.cart .row2 button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:700}
+.frete{display:flex;flex-direction:column;gap:6px;padding:2px 10px 0 0;font-size:12.5px;color:#EDE7F0}
+.frete b{color:#fff}
+.frete .track{height:6px;border-radius:9px;background:#3D363B;overflow:hidden}
+.frete .fill{height:100%;width:0;background:#7FE0A8;border-radius:9px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.app{padding-bottom:140px}
+.pop{animation:pop .32s}
+@keyframes pop{45%{transform:scale(.9)}}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--mark);color:var(--ink);white-space:nowrap}
+.name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .sheet-bg{position:absolute;inset:0;background:rgba(20,10,20,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
-.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 24px;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);z-index:6;display:flex;flex-direction:column;gap:12px}
-.sheet::before{content:"";width:40px;height:5px;border-radius:9px;background:#D9D2DC;align-self:center}
-.screen.sheet-open .sheet{transform:none}
-.screen.sheet-open .sheet-bg{opacity:1;pointer-events:auto}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;overflow-y:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 22px;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);z-index:6;display:flex;flex-direction:column;gap:12px}
+.sheet::before{content:"";width:40px;height:5px;border-radius:9px;background:#D9D2DC;align-self:center;flex-shrink:0}
+.screen.sheet-open #sheet,.screen.cart-open #cartSheet{transform:none}
+.screen.sheet-open .sheet-bg,.screen.cart-open .sheet-bg{opacity:1;pointer-events:auto}
 .sheet h4{margin:0;font-size:20px}
 .sheet dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
 .sheet dt{color:var(--muted)}
 .sheet dd{margin:0}
-.sheet .close{align-self:flex-end;border:0;background:#F2EEF1;width:44px;height:44px;border-radius:99px;position:absolute;top:12px;right:14px;display:flex;align-items:center;justify-content:center}
+.sheet .close{border:0;background:#F2EEF1;width:44px;height:44px;border-radius:99px;position:absolute;top:12px;right:14px;display:flex;align-items:center;justify-content:center}
+.lines{display:flex;flex-direction:column;gap:6px;font-size:14px;margin:0;padding:0;list-style:none}
+.lines li{display:flex;justify-content:space-between;gap:10px}
+.lines .tot{border-top:1px solid var(--line);padding-top:8px;font-weight:700}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.pay legend{font-size:13px;font-weight:600}
+.field input{height:46px;border:1.5px solid #CFC6D2;border-radius:12px;padding:0 14px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
+.field input:focus{outline:2px solid var(--ink);outline-offset:1px}
+.field output{font-size:13px;color:var(--ok);font-weight:600;min-height:18px}
+.pay{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pay label{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border:1.5px solid #E2DAE5;border-radius:12px;font-size:14px}
+.pay label:has(input:checked){border-color:var(--pink);background:#FFF5FB}
+.pay input{accent-color:var(--pink);width:18px;height:18px}
+.pay small{margin-left:auto;font-size:12px;color:var(--ok);font-weight:600}
+.done-screen{position:absolute;inset:0;background:linear-gradient(180deg,#FCE4F3,#FBEAF4);z-index:6;display:none;align-items:center;justify-content:center;padding:20px}
+.screen.done-open .done-screen{display:flex}
+.done-card{background:#fff;border-radius:24px;padding:26px 22px 20px;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:0 10px 30px rgba(60,20,50,.12)}
+.done-card h4{margin:0;font-size:24px}
+.done-card p{font-size:14px;color:var(--muted);max-width:28ch}
+.check{width:64px;height:64px;border-radius:99px;background:#E4F7EC;display:flex;align-items:center;justify-content:center}
+.check path{stroke-dasharray:30;stroke-dashoffset:30}
+.screen.done-open .check path{animation:draw .5s .15s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done-card .lines{width:100%;text-align:left;background:#FAF7F9;border-radius:14px;padding:12px 14px}
+.done-card .add{width:100%;justify-content:center}
 
 /* destaque do passo */
 .mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px #fff,0 0 0 9999px rgba(10,6,10,.62);pointer-events:none;z-index:7;opacity:0;transition:left .35s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),opacity .25s}
@@ -148,6 +186,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
   .stage{flex:1;min-height:0;position:relative;gap:0}
   .toggle{position:absolute;top:8px;right:8px;z-index:11;padding:3px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
   .toggle button{min-height:36px;padding:0 12px;font-size:13px}
+  .toggle{transition:opacity .2s}
+  .stage.overlay .toggle{opacity:0;pointer-events:none}
   .phone{width:100%;height:100%;padding:0;border-radius:0;box-shadow:none;background:transparent}
   .screen{height:100%;border-radius:0}
   .bar{justify-content:flex-start;padding-left:16px}
@@ -169,7 +209,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
 @media (max-width:420px){
   .evidence img{width:150px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.check path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -206,26 +246,32 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
         <div class="screen" id="screen">
           <div class="app" id="app">
             <div class="bar">BAMMIES</div>
-            <nav class="chips spot" data-spot="2" aria-label="Categorias">
+            <nav class="chips" aria-label="Categorias">
               <a href="#sec-choc" aria-current="true">Chocolates</a>
               <a href="#sec-bam">Bammies</a>
+              <a href="#sec-bam">Pra presentear</a>
             </nav>
-
-            <div class="sec spot" data-keep="2" id="sec-choc">Chocolates</div>
+            <div class="sec" id="sec-choc">Chocolates</div>
             <div class="list" id="listChoc"></div>
-
-            <div class="sec spot" data-keep="2" id="sec-bam">Bammies</div>
+            <div class="sec" id="sec-bam">Bammies</div>
             <div class="list" id="listBam"></div>
           </div>
 
-          <div class="cart spot" data-spot="6" id="cart" aria-live="polite">
-            <span id="cartText"></span>
-            <button type="button">ver carrinho</button>
+          <div class="cart" id="cart">
+            <div class="frete" id="frete" aria-live="polite">
+              <span id="freteText"></span>
+              <div class="track" aria-hidden="true"><div class="fill" id="freteFill"></div></div>
+            </div>
+            <div class="row2">
+              <span id="cartText" aria-live="polite"></span>
+              <button type="button" id="openCart">ver carrinho</button>
+            </div>
           </div>
 
           <div class="sheet-bg" id="sheetBg"></div>
+
           <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-            <button type="button" class="close" id="sheetClose" aria-label="Fechar detalhes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+            <button type="button" class="close" data-close aria-label="Fechar detalhes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
             <h4 id="sheetTitle">Barra Albino</h4>
             <dl>
               <dt>Chocolate</dt><dd>[tipo e % de cacau]</dd>
@@ -235,6 +281,34 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
               <dt>Validade</dt><dd>[prazo]</dd>
             </dl>
             <button type="button" class="add" id="sheetAdd" style="justify-content:center">adicionar ao carrinho</button>
+          </div>
+
+          <div class="sheet" id="cartSheet" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+            <button type="button" class="close" data-close aria-label="Fechar carrinho"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+            <h4 id="cartTitle">Seu pedido</h4>
+            <ul class="lines" id="cartLines"></ul>
+            <div class="field">
+              <label for="cep">CEP de entrega</label>
+              <input id="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9">
+              <output id="cepOut" for="cep"></output>
+            </div>
+            <fieldset class="pay">
+              <legend>Pagamento</legend>
+              <label><input type="radio" name="pay" checked> Pix <small>aprova na hora</small></label>
+              <label><input type="radio" name="pay"> Cartão de crédito</label>
+            </fieldset>
+            <button type="button" class="add" id="finish" style="justify-content:center;min-height:52px;font-size:15px">finalizar pedido</button>
+            <p style="font-size:12px;color:var(--muted);text-align:center">sem cadastro e sem senha</p>
+          </div>
+
+          <div class="done-screen" id="done">
+            <div class="done-card" id="doneCard" role="status">
+              <div class="check"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17663F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+              <h4>Pedido recebido!</h4>
+              <p>Pix aprovado. A gente te avisa pelo WhatsApp quando sair pra entrega.</p>
+              <ul class="lines" id="doneLines"></ul>
+              <button type="button" class="add" id="backShop">voltar pra loja</button>
+            </div>
           </div>
 
           <div class="mask" id="mask" aria-hidden="true"></div>
@@ -266,101 +340,177 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
   var choc = '<svg width="58" height="58" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-40 32 32)"><rect x="18" y="4" width="28" height="30" rx="3" fill="#8B5A3C" stroke="#111" stroke-width="3"/><path d="M32 4v30M18 19h28" stroke="#111" stroke-width="3"/><rect x="16" y="28" width="32" height="32" rx="3" fill="WRAP" stroke="#111" stroke-width="3"/><path d="M32 51c-6-4-9-7-9-10a4 4 0 0 1 9-2 4 4 0 0 1 9 2c0 3-3 6-9 10z" fill="#E84D5B" stroke="#111" stroke-width="2"/></g></svg>';
   var bear = function(w){ return '<svg width="'+w+'" height="'+Math.round(w*1.29)+'" viewBox="0 0 84 108" aria-hidden="true"><g fill="#E7A9DE" stroke="#111" stroke-width="5"><circle cx="20" cy="14" r="10"/><circle cx="64" cy="14" r="10"/><ellipse cx="42" cy="30" rx="26" ry="22"/><ellipse cx="42" cy="72" rx="28" ry="30"/><circle cx="16" cy="64" r="10"/><circle cx="68" cy="64" r="10"/><circle cx="22" cy="96" r="11"/><circle cx="62" cy="96" r="11"/></g><circle cx="33" cy="24" r="3.5" fill="#111"/><circle cx="51" cy="24" r="3.5" fill="#111"/></svg>'; };
 
+  var FRETE_GRATIS = 150; // valor de exemplo
   var products = [
     {id:'albino', list:'listChoc', name:'Barra Albino', desc:'chocolate, recheio e peso em uma linha', price:70, note:'apenas envio', bg:'#FCE4F3', img:choc.replace('WRAP','#FFFFFF')},
-    {id:'envy', list:'listChoc', name:'Barra Envy', desc:'chocolate, recheio e peso em uma linha', price:75, note:'apenas envio', bg:'#E3F0FC', img:choc.replace('WRAP','#5DADEC')},
+    {id:'envy', list:'listChoc', name:'Barra Envy', desc:'chocolate, recheio e peso em uma linha', price:75, note:'apenas envio', bg:'#E3F0FC', img:choc.replace('WRAP','#5DADEC'), top:true},
     {id:'bg', list:'listBam', name:'Bammies G', desc:'peso ou unidades e sabores', price:null, note:'pronta entrega', ok:true, bg:'#FCE4F3', img:bear(52), size:'G'},
     {id:'bp', list:'listBam', name:'Bammies P', desc:'peso ou unidades e sabores', price:null, note:'pronta entrega', ok:true, bg:'#FCE4F3', img:bear(36), size:'P'}
   ];
   var qty = {albino:0, envy:1, bg:0, bp:0};
   var plus = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
   var minus = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>';
+  var star = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.5 1.4 6.6L12 17.2l-5.9 3.3 1.4-6.6-5-4.5 6.6-.7z"/></svg>';
   var brl = function(v){ return v==null ? 'R$ 00,00' : 'R$ ' + v.toFixed(2).replace('.',','); };
+  var $ = function(id){ return document.getElementById(id); };
+
+  var screen = $('screen'), app = $('app'), mask = $('mask'), cart = $('cart');
 
   function action(p){
     var q = qty[p.id];
-    if(!q) return '<button type="button" class="add spot" data-spot="3" data-keep="2" data-add="'+p.id+'">'+plus+'adicionar <span class="sr">'+p.name+'</span></button>';
-    return '<div class="qty spot" data-spot="4" data-keep="2"><button type="button" data-dec="'+p.id+'" aria-label="Diminuir quantidade de '+p.name+'">'+minus+'</button><output aria-label="Quantidade de '+p.name+'">'+q+'</output><button type="button" data-inc="'+p.id+'" aria-label="Aumentar quantidade de '+p.name+'">'+plus+'</button></div>';
+    if(!q) return '<button type="button" class="add" data-add="'+p.id+'">'+plus+'adicionar <span class="sr">'+p.name+'</span></button>';
+    return '<div class="qty"><button type="button" data-dec="'+p.id+'" aria-label="Diminuir quantidade de '+p.name+'">'+minus+'</button><output aria-label="Quantidade de '+p.name+'">'+q+'</output><button type="button" data-inc="'+p.id+'" aria-label="Aumentar quantidade de '+p.name+'">'+plus+'</button></div>';
   }
-  function render(){
-    ['listChoc','listBam'].forEach(function(l){ document.getElementById(l).innerHTML=''; });
+  function totals(){
+    var n=0, t=0;
+    products.forEach(function(p){ n+=qty[p.id]; t+=(p.price||0)*qty[p.id]; });
+    return {n:n, t:t};
+  }
+  function lines(){
+    var h='';
+    products.forEach(function(p){ if(qty[p.id]) h+='<li><span>'+qty[p.id]+'× '+p.name+'</span><span>'+brl(p.price==null?null:p.price*qty[p.id])+'</span></li>'; });
+    var T = totals();
+    h += '<li><span>Frete</span><span>'+(T.t>=FRETE_GRATIS?'grátis':'pelo CEP')+'</span></li>';
+    h += '<li class="tot"><span>Total</span><span>'+brl(T.t)+'</span></li>';
+    return h;
+  }
+  function render(changed){
+    ['listChoc','listBam'].forEach(function(l){ $(l).innerHTML=''; });
     products.forEach(function(p){
       var el = document.createElement('article');
       el.className = 'item' + (qty[p.id] ? ' in-cart' : '');
+      el.dataset.id = p.id;
       el.innerHTML =
-        '<div class="thumb spot" data-keep="2" style="background:'+p.bg+'">'+p.img+(p.size?'<span class="size">'+p.size+'</span>':'')+'</div>'+
-        '<div class="info"><h3 class="name spot" data-keep="2" style="margin:0">'+p.name+'</h3>'+
-        '<p class="desc spot" data-spot="1" data-keep="2"><em>'+p.desc+'</em></p>'+
-        '<button type="button" class="more spot" data-spot="5" data-keep="2" data-more="'+p.id+'">mais detalhes</button>'+
-        '<div class="row"><div class="price spot" data-keep="2"><b>'+brl(p.price)+'</b><small class="'+(p.ok?'ok':'')+'">'+p.note+'</small></div>'+action(p)+'</div></div>';
-      document.getElementById(p.list).appendChild(el);
+        '<div class="thumb" style="background:'+p.bg+'">'+p.img+(p.size?'<span class="size">'+p.size+'</span>':'')+'</div>'+
+        '<div class="info"><div class="name-row"><h3 class="name" style="margin:0">'+p.name+'</h3>'+(p.top?'<span class="badge">'+star+'mais pedido</span>':'')+'</div>'+
+        '<p class="desc"><em>'+p.desc+'</em></p>'+
+        '<button type="button" class="more" data-more="'+p.id+'">mais detalhes</button>'+
+        '<div class="row"><div class="price"><b>'+brl(p.price)+'</b><small class="'+(p.ok?'ok':'')+'">'+p.note+'</small></div>'+action(p)+'</div></div>';
+      $(p.list).appendChild(el);
     });
-    var n=0, t=0;
-    products.forEach(function(p){ n+=qty[p.id]; t+=(p.price||0)*qty[p.id]; });
-    document.getElementById('cartText').innerHTML = '<b>'+n+(n===1?' item':' itens')+'</b> · '+brl(t);
-    document.getElementById('cart').classList.toggle('empty', n===0);
+    var T = totals();
+    $('cartText').innerHTML = '<b>'+T.n+(T.n===1?' item':' itens')+'</b> · '+brl(T.t);
+    var falta = Math.max(0, FRETE_GRATIS - T.t);
+    $('freteText').innerHTML = falta>0 ? 'faltam <b>'+brl(falta)+'</b> pro frete grátis' : '<b>você ganhou frete grátis</b>';
+    $('freteFill').style.width = Math.min(100, T.t/FRETE_GRATIS*100) + '%';
+    cart.classList.toggle('empty', T.n===0);
+    $('cartLines').innerHTML = lines();
+    $('doneLines').innerHTML = lines();
+    updateCep();
+    if(changed){
+      cart.classList.remove('bump'); void cart.offsetWidth; cart.classList.add('bump');
+      var ctl = screen.querySelector('.item[data-id="'+changed+'"] .qty, .item[data-id="'+changed+'"] .add');
+      if(ctl){ ctl.classList.add('pop'); }
+    }
     applySpot();
   }
 
-  var screen = document.getElementById('screen');
-  var current = null;
-  function openSheet(id, auto){
-    var p = products.filter(function(x){return x.id===id;})[0];
-    current = p;
-    document.getElementById('sheetTitle').textContent = p.name;
-    screen.classList.add('sheet-open');
-    if(!auto) document.getElementById('sheetClose').focus({preventScroll:true});
-    if(typeof applySpot==='function') applySpot();
+  function updateCep(){
+    var v = $('cep').value.replace(/\D/g,'');
+    var out = $('cepOut');
+    if(v.length<8){ out.textContent=''; return; }
+    out.textContent = (totals().t>=FRETE_GRATIS ? 'frete grátis' : 'frete [valor]') + ' · chega em [prazo]';
   }
-  function closeSheet(){ screen.classList.remove('sheet-open'); if(typeof applySpot==='function') applySpot(); }
+  $('cep').addEventListener('input', function(e){
+    var d = e.target.value.replace(/\D/g,'').slice(0,8);
+    e.target.value = d.length>5 ? d.slice(0,5)+'-'+d.slice(5) : d;
+    updateCep();
+  });
+
+  var current = null;
+  function closeAll(){ screen.classList.remove('sheet-open','cart-open','done-open'); applySpot(); }
+  function openSheet(id, auto){
+    closeAll();
+    current = products.filter(function(x){return x.id===id;})[0];
+    $('sheetTitle').textContent = current.name;
+    screen.classList.add('sheet-open');
+    if(!auto) $('sheet').querySelector('.close').focus({preventScroll:true});
+    applySpot();
+  }
+  function openCart(auto){
+    closeAll();
+    screen.classList.add('cart-open');
+    if(!auto) $('cartSheet').querySelector('.close').focus({preventScroll:true});
+    applySpot();
+  }
+  function openDone(){
+    closeAll();
+    screen.classList.add('done-open');
+    applySpot();
+  }
 
   screen.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
-    if(b.dataset.add){ qty[b.dataset.add]=1; render(); }
-    else if(b.dataset.inc){ qty[b.dataset.inc]++; render(); }
-    else if(b.dataset.dec){ qty[b.dataset.dec]=Math.max(0,qty[b.dataset.dec]-1); render(); }
+    if(b.dataset.add){ qty[b.dataset.add]=1; render(b.dataset.add); }
+    else if(b.dataset.inc){ qty[b.dataset.inc]++; render(b.dataset.inc); }
+    else if(b.dataset.dec){ qty[b.dataset.dec]=Math.max(0,qty[b.dataset.dec]-1); render(b.dataset.dec); }
     else if(b.dataset.more){ openSheet(b.dataset.more); }
+    else if(b.hasAttribute('data-close')){ closeAll(); }
+    else if(b.id==='openCart'){ openCart(); }
+    else if(b.id==='finish'){ openDone(); }
+    else if(b.id==='backShop'){ closeAll(); }
+    else if(b.id==='sheetAdd'){ if(current){ qty[current.id]=(qty[current.id]||0)+1; } closeAll(); render(current && current.id); }
   });
-  document.getElementById('sheetBg').addEventListener('click', closeSheet);
-  document.getElementById('sheetClose').addEventListener('click', closeSheet);
-  document.getElementById('sheetAdd').addEventListener('click', function(){ if(current){ qty[current.id]=(qty[current.id]||0)+1; } closeSheet(); render(); });
-  screen.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSheet(); });
+  $('sheetBg').addEventListener('click', closeAll);
+  screen.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
+  screen.addEventListener('animationend', function(e){ e.target.classList.remove('pop'); if(e.target===cart) cart.classList.remove('bump'); });
 
   // passos
+  var B = 'o básico', D = 'os detalhes que deixam tudo fluido';
   var steps = [
-    {t:'A diferença aparece sem clicar', spot:1,
+    {part:B, t:'A diferença aparece sem clicar', sel:'.desc',
      what:'Cada produto ganha uma linha curta com o que o diferencia: chocolate, recheio, peso. A linha tracejada é onde entra o texto real.',
      why:'"Qual a diferença?" é a primeira pergunta de quem está escolhendo. Se a resposta está atrás de um botão, a pessoa pergunta no WhatsApp ou desiste.',
      laws:['Reconhecer em vez de lembrar · Nielsen','Não me faça pensar · Krug']},
-    {t:'Lista e categorias, como num app de delivery', spot:2,
-     what:'Um produto por linha, separado por categoria, com atalhos no topo pra pular de Chocolates pra Bammies.',
-     why:'Na lista dá pra comparar de cima pra baixo sem ziguezague, e sobra espaço pra descrição. É o formato que o cliente já usa todo dia no iFood e no Rappi.',
-     laws:['Lei de Jakob','Consistência e padrões · Nielsen']},
-    {t:'Uma ação principal, uma cor', spot:3,
+    {part:B, t:'Lista e categorias, como num app de delivery', sel:['.chips','#listChoc'],
+     what:'Um produto por linha, separado por categoria, com atalhos no topo. E uma categoria nova, "Pra presentear", pensada no motivo da compra, não só no tipo de produto.',
+     why:'Na lista dá pra comparar de cima pra baixo, e o formato é o que o cliente já usa todo dia no iFood. Ninguém compra bala gummy por ser bala: compra pra presentear, pra uma festa, por vontade. A vitrine pode falar essa língua.',
+     laws:['Lei de Jakob','Consistência e padrões · Nielsen','Jobs to be Done']},
+    {part:B, t:'Uma ação principal, uma cor', sel:'.add', clearAlbino:true,
      what:'Só o "adicionar" é rosa. Saem o amarelo do preço e o turquesa do "ver descrição", que competiam com ele.',
      why:'Hoje o botão mais chamativo da tela é o de ler descrição, não o de comprar. Quando tudo grita, nada se destaca, e escolher fica mais lento.',
-     laws:['Hierarquia visual','Lei de Hick']},
-    {t:'O contador só aparece depois do primeiro toque', spot:4, tip:'Experimenta: toca em "adicionar" na Barra Albino.',
+     laws:['Hierarquia visual · Refactoring UI','Lei de Hick']},
+    {part:B, t:'O contador só aparece depois do primeiro toque', sel:'.qty', needEnvy:true, tip:'Experimenta: toca em "adicionar" na Barra Albino.',
      what:'O card começa com um botão. Depois do toque ele vira – 1 +, e o card fica marcado em rosa.',
      why:'Um "0" com dois botões soltos não diz o que fazer. Começar com uma ação clara e mostrar o que já foi escolhido evita erro e dá segurança.',
-     laws:['Visibilidade do estado do sistema · Nielsen','Design minimalista · Nielsen']},
-    {t:'Os detalhes abrem por cima, sem sair da página', spot:5, sheet:'albino', tip:'Dá pra fechar tocando fora ou no X.',
+     laws:['Visibilidade do estado do sistema · Nielsen','Sinalizadores · Don Norman']},
+    {part:B, t:'Os detalhes abrem por cima, sem sair da página', sel:'#sheet', open:'product', tip:'Dá pra fechar tocando fora ou no X.',
      what:'"Mais detalhes" vira um link discreto que abre uma gaveta com tudo: ingredientes, peso, validade e alergênicos, e com o botão de comprar ali dentro.',
      why:'Quem quer saber mais encontra, quem não quer não é atrapalhado. E alergênicos à vista é cuidado com o cliente, não só estética.',
      laws:['Revelação progressiva','Controle e liberdade do usuário · Nielsen']},
-    {t:'O carrinho fica sempre à vista', spot:6,
+    {part:B, t:'O carrinho fica sempre à vista', sel:'#cart', needEnvy:true,
      what:'Uma barra fixa embaixo mostra quantos itens e quanto deu, com o próximo passo a um toque.',
      why:'A pessoa sabe o que já escolheu sem rolar a página de volta, e o caminho até finalizar fica óbvio. Menos abandono no meio.',
      laws:['Visibilidade do estado do sistema · Nielsen','Lei de Fitts']},
-    {t:'Acessível pra todo mundo', spot:0,
-     list:['Contraste de texto que passa no WCAG, inclusive nos textos pequenos','Áreas de toque de pelo menos 44 px, pra ninguém errar o botão','Nomes sem caixa alta, que são mais fáceis de ler','Botões com nome pra leitor de tela, tipo "aumentar quantidade de Barra Envy"','Preço e status em texto, não só em cor'],
+    {part:D, t:'Frete grátis como meta', sel:'#frete', needEnvy:true, tip:'Toca no + da Barra Envy e vê a barra andar.',
+     what:'O carrinho mostra quanto falta pro frete grátis, com uma barrinha que vai enchendo a cada item.',
+     why:'Quando a pessoa vê que está perto de uma meta, ela acelera pra chegar lá. É um empurrão honesto pra aumentar o pedido, e ainda tira a surpresa do frete no final. Os R$ 150 são só um exemplo.',
+     laws:['Efeito goal-gradient · Laws of UX','Visibilidade do estado do sistema · Nielsen']},
+    {part:D, t:'Cada toque responde na hora', sel:'.add', clearAlbino:true, tip:'Toca em "adicionar" e repara no botão e no carrinho.',
+     what:'O botão afunda de leve, o carrinho dá um pulinho e o total atualiza no mesmo instante.',
+     why:'Abaixo de 0,4 segundo a resposta parece imediata, e a pessoa sente que está no controle. Sem retorno, ela toca de novo e duplica o item sem querer.',
+     laws:['Limiar de Doherty · Laws of UX','Feedback · Don Norman']},
+    {part:D, t:'Um atalho pra quem está indeciso', sel:'.badge',
+     what:'Um selo amarelo de "mais pedido" no produto que mais sai.',
+     why:'O que é diferente se destaca e vira atalho pra decisão. E saber que outras pessoas escolhem aquilo dá segurança. O selo vai no campeão de vendas de verdade.',
+     laws:['Efeito Von Restorff · Laws of UX','Prova social']},
+    {part:D, t:'Fechar o pedido sem cadastro', sel:'#cartSheet', open:'cart', needEnvy:true, tip:'Digita qualquer CEP pra ver o frete aparecer sozinho.',
+     what:'O carrinho abre por cima com o resumo. O CEP calcula o frete sozinho, o Pix já vem marcado e não precisa criar conta nem senha.',
+     why:'Ter que criar conta é um dos maiores motivos de abandono no checkout. Cada campo a menos é menos gente desistindo, e o trabalho de calcular fica com o sistema, não com a cliente.',
+     laws:['Lei de Tesler · Laws of UX','Pesquisa de checkout · Baymard Institute']},
+    {part:D, t:'Um final que dá vontade de voltar', sel:'#doneCard', open:'done', needEnvy:true,
+     what:'A confirmação fala como gente: pedido recebido, Pix aprovado, aviso pelo WhatsApp e o resumo do que foi comprado.',
+     why:'A gente lembra de uma experiência pelo momento mais forte e pelo final. Terminar com clareza e carinho é o que faz a pessoa comprar de novo e indicar pra alguém.',
+     laws:['Regra do pico-fim · Laws of UX']},
+    {part:D, t:'Acessível pra todo mundo',
+     list:['Contraste de texto que passa no WCAG, inclusive nos textos pequenos','Áreas de toque de pelo menos 44 px, pra ninguém errar o botão','Nomes sem caixa alta, que são mais fáceis de ler','Botões com nome pra leitor de tela, tipo "aumentar quantidade de Barra Envy"','Preço, frete e status em texto, não só em cor','Animações que somem pra quem pede menos movimento no celular'],
      why:'Acessibilidade não é extra: quem enxerga pouco, usa o celular com uma mão ou está no sol também compra.',
-     laws:['WCAG 2.2']},
-    {t:'E daqui pra frente?', spot:0, end:true}
+     laws:['WCAG 2.2','Mismatch · Kat Holmes']},
+    {t:'E daqui pra frente?', end:true}
   ];
 
   var i = 0;
-  var prog = document.getElementById('progress');
+  var prog = $('progress');
   steps.forEach(function(s,k){
     var b=document.createElement('button'); b.type='button';
     b.setAttribute('aria-label','Ir para o passo '+(k+1)+': '+s.t);
@@ -368,15 +518,9 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
     prog.appendChild(b);
   });
 
-  var app = document.getElementById('app');
-  var mask = document.getElementById('mask');
   function targets(){
-    var s = steps[i];
-    if(!s.spot) return [];
-    if(s.spot===5 && screen.classList.contains('sheet-open')) return [document.getElementById('sheet')];
-    if(s.spot===2) return [screen.querySelector('.chips'), document.getElementById('listChoc')];
-    var el = screen.querySelector('[data-spot="'+s.spot+'"]');
-    return el ? [el] : [];
+    var s = steps[i]; if(!s || !s.sel) return [];
+    return [].concat(s.sel).map(function(q){ return screen.querySelector(q); }).filter(Boolean);
   }
   function place(){
     var t = targets();
@@ -386,8 +530,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
     t.forEach(function(el){ var q=el.getBoundingClientRect(); l=Math.min(l,q.left); tp=Math.min(tp,q.top); r=Math.max(r,q.right); b=Math.max(b,q.bottom); });
     l=Math.max(l-sr.left-pad,4); tp=Math.max(tp-sr.top-pad,4);
     r=Math.min(r-sr.left+pad,sr.width-4); b=Math.min(b-sr.top+pad,sr.height-4);
-    mask.style.left=l+'px'; mask.style.top=tp+'px'; mask.style.width=(r-l)+'px'; mask.style.height=(b-tp)+'px';
-    mask.style.borderRadius = steps[i].spot===5 && screen.classList.contains('sheet-open') ? '24px 24px 30px 30px' : '16px';
+    mask.style.left=l+'px'; mask.style.top=tp+'px'; mask.style.width=Math.max(0,r-l)+'px'; mask.style.height=Math.max(0,b-tp)+'px';
+    mask.style.borderRadius = t[0].classList.contains('sheet') ? '24px 24px 30px 30px' : (t[0].id==='doneCard' ? '28px' : '16px');
     mask.classList.add('on');
   }
   function reveal(){
@@ -398,22 +542,25 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
       app.scrollTo({top: Math.max(0, top)});
     }
   }
+  var stage = document.querySelector('.stage');
   function applySpot(){
+    stage.classList.toggle('overlay', /sheet-open|cart-open|done-open/.test(screen.className));
     place();
     clearTimeout(applySpot.t); applySpot.t = setTimeout(place, 360);
   }
   app.addEventListener('scroll', function(){ requestAnimationFrame(place); }, {passive:true});
   window.addEventListener('resize', function(){ requestAnimationFrame(place); });
+
   function go(k){
     i = Math.max(0, Math.min(steps.length-1, k));
     var s = steps[i];
     setOld(false);
-    document.getElementById('stepNo').textContent = 'passo '+(i+1)+' de '+steps.length;
-    document.getElementById('stepTitle').textContent = s.t;
+    $('stepNo').textContent = 'passo '+(i+1)+' de '+steps.length + (s.part ? ' · '+s.part : '');
+    $('stepTitle').textContent = s.t;
     var h='';
     if(s.end){
       h += '<div class="block"><p>Essa é uma tela só. Com o mesmo olhar dá pra repensar a loja inteira: da vitrine até o pagamento, com foco em comprar sem atrito.</p></div>';
-      h += '<div class="block"><h3>Pra montar a proposta, eu preciso de</h3><ol><li>O link da loja ou acesso pra eu navegar</li><li>A plataforma onde ela é montada</li><li>Se tiver, dados de acesso e de quantos pedidos fecham</li><li>As informações reais de cada produto</li></ol></div>';
+      h += '<div class="block"><h3>Pra montar a proposta, eu preciso de</h3><ol><li>O link da loja ou acesso pra eu navegar</li><li>A plataforma onde ela é montada</li><li>Como o pedido termina hoje: WhatsApp, Pix, outro jeito</li><li>Se tiver, pedidos por mês, valor médio e de onde vêm os clientes</li><li>As informações reais e fotos de cada produto</li></ol></div>';
       h += '<div class="block"><h3>E um teste simples</h3><p>Contar quantas perguntas tipo "qual a diferença?" chegam por semana hoje, e comparar depois da mudança.</p></div>';
       h += '<a class="cta" href="https://wa.me/5511956299380?text='+encodeURIComponent('oi thiago, vi a leitura da loja bammies')+'">conversar no whatsapp</a>';
     } else {
@@ -425,44 +572,48 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
       h += '<div class="block"><h3>por quê</h3><p>'+s.why+'</p></div>';
       h += '<div class="law">'+s.laws.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div></div></details>';
     }
-    document.getElementById('stepBody').innerHTML = h;
+    $('stepBody').innerHTML = h;
     document.querySelector('.panel').scrollTop = 0;
     prog.querySelectorAll('button').forEach(function(b,k){
       if(k===i) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');
       b.classList.toggle('done', k<i);
     });
-    document.getElementById('prev').disabled = i===0;
-    document.getElementById('next').textContent = i===steps.length-1 ? 'ver de novo' : 'próximo';
-    if((s.spot===4 || s.spot===6) && !qty.envy){ qty.envy = 1; render(); }
-    if(s.spot===3 && qty.albino){ qty.albino = 0; render(); }
-    if(s.sheet) openSheet(s.sheet, true); else closeSheet();
-    if(s.spot===2 || s.spot===5) app.scrollTo({top:0}); else reveal();
+    $('prev').disabled = i===0;
+    $('next').textContent = i===steps.length-1 ? 'ver de novo' : 'próximo';
+    if(s.needEnvy && !qty.envy) qty.envy = 1;
+    if(s.clearAlbino && qty.albino) qty.albino = 0;
+    render();
+    if(s.open==='product') openSheet('albino', true);
+    else if(s.open==='cart') openCart(true);
+    else if(s.open==='done') openDone();
+    else closeAll();
+    if(!s.open){ if(s.sel==='.chips' || [].concat(s.sel||[])[0]==='.chips') app.scrollTo({top:0}); else reveal(); }
     applySpot();
   }
-  document.getElementById('prev').addEventListener('click', function(){ go(i-1); });
-  document.getElementById('next').addEventListener('click', function(){
+  $('prev').addEventListener('click', function(){ go(i-1); });
+  $('next').addEventListener('click', function(){
     go(i===steps.length-1 ? 0 : i+1);
-    if(window.innerWidth<900){ var y = document.getElementById('tour').getBoundingClientRect().top + window.scrollY; if(Math.abs(window.scrollY - y) > 40) window.scrollTo({top:y, behavior:'smooth'}); }
+    if(window.innerWidth<900){ var y = $('tour').getBoundingClientRect().top + window.scrollY; if(Math.abs(window.scrollY - y) > 40) window.scrollTo({top:y, behavior:'smooth'}); }
   });
 
-  var phone = document.getElementById('phone');
+  var phone = $('phone');
   function setOld(on){
     phone.classList.toggle('show-old', on);
     mask.style.visibility = on ? 'hidden' : '';
-    document.getElementById('btnOld').setAttribute('aria-pressed', on);
-    document.getElementById('btnNew').setAttribute('aria-pressed', !on);
+    $('btnOld').setAttribute('aria-pressed', on);
+    $('btnNew').setAttribute('aria-pressed', !on);
   }
-  document.getElementById('btnOld').addEventListener('click', function(){ setOld(true); });
-  document.getElementById('btnNew').addEventListener('click', function(){ setOld(false); });
+  $('btnOld').addEventListener('click', function(){ setOld(true); });
+  $('btnNew').addEventListener('click', function(){ setOld(false); });
 
   document.addEventListener('keydown', function(e){
     if(e.target.closest && e.target.closest('input,textarea,#screen')) return;
-    var r = document.getElementById('tour').getBoundingClientRect();
+    var r = $('tour').getBoundingClientRect();
     if(r.bottom < 0 || r.top > window.innerHeight) return;
     if(e.key==='ArrowRight'){ go(i+1); } else if(e.key==='ArrowLeft'){ go(i-1); }
   });
 
-  render(); go(0);
+  go(0);
 })();
 </script>
 </body>
