@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>Bammies · versão vitaminada</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/bammies/app.css">
+<style>
+html,body{margin:0;height:100%;background:#000}
+#root{position:fixed;inset:0;margin:0 auto;max-width:480px}
+@media (min-width:520px){ body{background:#1a1a1a} #root{box-shadow:0 0 0 1px #333} }
+</style>
+</head>
+<body>
+<main id="root" aria-label="Loja Bammies, versão vitaminada"></main>
+<script src="/bammies/app.js"></script>
+<script>
+  var embedded = window.self !== window.top;
+  BammiesApp(document.getElementById('root'), {backHref: embedded ? null : '/bammies/'});
+</script>
+</body>
+</html>

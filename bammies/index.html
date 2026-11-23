@@ -4,515 +4,361 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Bammies · uma leitura de UX da loja</title>
+<title>Bammies · leitura de UX por Thiago Vitamina</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="/bammies/app.css">
 <style>
 *,*::before,*::after{box-sizing:border-box}
-:root{
-  --ink:#141414; --muted:#5A5560; --line:#E6E0E4; --bg:#FAF7F8;
-  --pink:#B8288F; --pink-soft:#FCE4F3; --mark:#FFD60A; --ok:#17663F;
-}
-html{-webkit-text-size-adjust:100%}
+:root{--ink:#141414;--muted:#5A5560;--line:#E6E0E4;--bg:#FAF7F8;--pink:#B8288F;--mark:#FFD60A}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
-h1,h2,h3,p,ul,ol,figure{margin:0}
+h1,h2,h3,p,ul,ol{margin:0}
 button{font:inherit;color:inherit;cursor:pointer}
 a{color:inherit;text-underline-offset:.2em}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
 .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
-/* ---------- capa ---------- */
-.intro{background:var(--ink);color:#fff;padding:40px 0 56px}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C9C3CC}
-.intro h1{font-size:44px;line-height:1.02;font-weight:700;margin-top:16px;letter-spacing:-.02em}
-.intro h1 i{font-size:1.12em}
-.intro .lead{font-size:18px;line-height:1.5;color:#E7E2E9;max-width:46ch;margin-top:20px}
-.intro-grid{display:grid;gap:40px;align-items:center}
-.evidence{display:flex;gap:16px;align-items:flex-start}
-.evidence img{width:200px;height:auto;border-radius:16px;display:block;box-shadow:0 12px 32px rgba(0,0,0,.4)}
-.chat{display:flex;flex-direction:column;gap:8px;padding-top:12px;flex:1;min-width:0}
-.chat p{font-size:15px;padding:10px 14px;border-radius:16px;max-width:230px;color:var(--ink)}
-.chat .in{background:#F1F0F0;border-bottom-left-radius:4px;align-self:flex-start}
+/* capa */
+.intro{background:var(--ink);color:#fff;padding:44px 0 52px}
+.intro .eyebrow{color:#C9C3CC}
+.intro h1{font-size:44px;line-height:1.02;font-weight:700;letter-spacing:-.02em;margin-top:16px}
+.intro h1 .serif{display:block;font-size:1.04em;letter-spacing:-.01em;margin-top:4px}
+.intro .lead{font-size:18px;color:#E7E2E9;max-width:44ch;margin-top:20px}
+.parts{display:grid;gap:10px;margin-top:32px;padding:0;list-style:none}
+.parts a{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:18px;background:#232123;text-decoration:none;min-height:64px;transition:background .2s}
+.parts a:hover{background:#2E2B2E}
+.parts .n{width:36px;height:36px;flex-shrink:0;border-radius:99px;background:#fff;color:var(--ink);font-weight:800;display:flex;align-items:center;justify-content:center}
+.parts b{display:block;font-size:16px}
+.parts span{font-size:14px;color:#C9C3CC}
+
+/* seções */
+.part{padding:64px 0}
+.part + .part{border-top:1px solid var(--line)}
+.part-head{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;max-width:640px}
+.part-head h2{font-size:34px;line-height:1.08;letter-spacing:-.015em}
+.part-head p{font-size:17px;color:var(--muted)}
+.cols{display:grid;gap:32px;align-items:start}
+.copy{display:flex;flex-direction:column;gap:18px;max-width:520px}
+.copy p{font-size:17px}
+.copy h3{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.copy ol{padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:17px}
+
+/* celular (moldura) */
+.phone{width:360px;max-width:100%;margin:0 auto;border-radius:44px;background:#0E0E0E;padding:10px;box-shadow:0 30px 60px rgba(40,10,30,.18)}
+.screen{position:relative;height:720px;border-radius:34px;overflow:hidden;overflow:clip;background:#FBEAF4;isolation:isolate}
+.screen > .bm{position:absolute;inset:0;z-index:0}
+.old-scroll{position:absolute;inset:0;overflow-y:auto;background:#FBEAF4;scrollbar-width:thin}
+.old-scroll img{width:100%;display:block}
+.old-scroll .gap{height:12px}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* conversa */
+.chat{display:flex;flex-direction:column;gap:8px}
+.chat p{font-size:15px;padding:10px 14px;border-radius:16px;max-width:260px}
+.chat .in{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
 .chat .out{background:#DCF8C6;border-bottom-right-radius:4px;align-self:flex-end}
-.chat small{font-size:12px;color:#B5AEB9;margin-top:4px}
-.start{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;margin-top:28px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-weight:700;font-size:16px;text-decoration:none}
+.chat .her{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start;font-weight:600}
+.chat small{font-size:12px;color:var(--muted)}
+.callout{background:var(--ink);color:#fff;border-radius:20px;padding:22px 22px}
+.callout p{font-size:19px;line-height:1.4}
+.callout .serif{font-size:1.15em}
+.issues{display:flex;flex-direction:column;gap:10px;padding:0;list-style:none}
+.issues li{display:flex;gap:12px;font-size:16px;align-items:flex-start}
+.issues li::before{content:"";width:8px;height:8px;border-radius:99px;background:#E84D5B;margin-top:9px;flex-shrink:0}
 
-/* ---------- tour ---------- */
-.tour{padding:48px 0 72px}
+/* tour */
 .tour-grid{display:grid;gap:32px;align-items:start}
-.panel{display:flex;flex-direction:column;gap:20px}
+.stage{position:relative}
+.mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px #fff,0 0 0 9999px rgba(10,6,10,.62);pointer-events:none;z-index:2;opacity:0;transition:left .35s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),opacity .25s}
+.mask.on{opacity:1}
+.panel{display:flex;flex-direction:column;gap:18px}
 .progress{display:flex;gap:6px}
 .progress button{flex:1;height:28px;border:0;background:transparent;padding:0;display:flex;align-items:center}
 .progress button::before{content:"";display:block;width:100%;height:6px;border-radius:99px;background:var(--line);transition:background .2s}
 .progress button[aria-current="step"]::before{background:var(--ink)}
-.progress button.done::before{background:#9C95A0}
-.stepno{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.04em}
-.panel h2{font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.015em}
+.progress button.is-done::before{background:#9C95A0}
+.stepno{font-size:13px;font-weight:600;color:var(--muted)}
+.panel h3.title{font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.015em}
 .block{display:flex;flex-direction:column;gap:6px}
-.block h3{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.block p, .block li{font-size:17px;line-height:1.5}
-.block ul{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.block h4{margin:0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.block p,.block li{font-size:17px}
+.block ul,.block ol{padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .law{display:flex;flex-wrap:wrap;gap:8px}
 .law span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line)}
 .try{font-size:15px;background:#FFF6C9;border-radius:12px;padding:12px 14px}
-.nav{display:flex;gap:12px;margin-top:8px}
+.why{display:flex;flex-direction:column;gap:12px}
+.why summary{display:none}
+.nav{display:flex;gap:12px;margin-top:6px}
 .nav button{min-height:52px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px}
 .prev{background:transparent;border:1.5px solid var(--ink)}
 .next{background:var(--ink);color:#fff;border:1.5px solid var(--ink);flex:1}
 .prev[disabled]{opacity:.35;cursor:default}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;text-decoration:none;align-self:flex-start}
+.btn.pink{background:var(--pink);color:#fff}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{border:1.5px solid var(--ink)}
 
-/* ---------- celular ---------- */
-.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
-.toggle{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px}
-.toggle button{border:0;background:transparent;min-height:40px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted)}
-.toggle button[aria-pressed="true"]{background:var(--ink);color:#fff}
-.phone{width:360px;max-width:100%;border-radius:44px;background:#0E0E0E;padding:10px;box-shadow:0 30px 60px rgba(40,10,30,.18)}
-.screen{position:relative;height:720px;border-radius:34px;overflow:hidden;background:#FBEAF4}
-.screen .old{position:absolute;inset:0;background:#FBEAF4;display:none;overflow:auto}
-.screen .old img{width:100%;display:block}
-.phone.show-old .old{display:block}
-.app{height:100%;overflow-y:auto;padding-bottom:96px;scrollbar-width:none}
-.app::-webkit-scrollbar{display:none}
-.bar{background:#000;color:#fff;height:52px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;letter-spacing:.03em;position:sticky;top:0;z-index:3}
-.chips{display:flex;gap:8px;padding:12px 14px;background:#FBEAF4;position:sticky;top:52px;z-index:2}
-.chips{overflow-x:auto;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chips a{flex-shrink:0;white-space:nowrap;min-height:36px;padding:0 16px;border-radius:999px;background:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;text-decoration:none}
-.chips a[aria-current="true"]{background:var(--ink);color:#fff}
-.sec{padding:10px 14px 8px;font-size:18px;font-weight:800}
-.list{display:flex;flex-direction:column;gap:10px;padding:0 14px}
-.item{background:#fff;border-radius:18px;padding:12px;display:flex;gap:12px;box-shadow:0 1px 2px rgba(60,20,50,.06),0 6px 16px rgba(60,20,50,.05);transition:box-shadow .2s}
-.item.in-cart{box-shadow:0 0 0 2px var(--pink),0 6px 16px rgba(60,20,50,.06)}
-.thumb{position:relative;width:84px;height:84px;flex-shrink:0;border-radius:14px;display:flex;align-items:center;justify-content:center}
-.thumb .size{position:absolute;top:6px;left:6px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
-.info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.name{font-size:16px;font-weight:700}
-.desc{font-size:13px;line-height:1.35;color:var(--muted)}
-.desc em{font-style:normal;border-bottom:1.5px dashed #C5BDC9}
-.more{align-self:flex-start;font-size:13px;font-weight:500;text-decoration:underline;background:none;border:0;padding:4px 0;min-height:32px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
-.price{display:flex;flex-direction:column;line-height:1.2}
-.price b{font-size:17px;font-weight:800;white-space:nowrap}
-.price small{white-space:nowrap}
-.price small{font-size:11px;color:var(--muted)}
-.price small.ok{color:var(--ok);font-weight:600}
-.add{min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--pink);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
-.qty{height:44px;width:112px;border:2px solid var(--pink);border-radius:999px;display:flex;align-items:center;justify-content:space-between}
-.qty button{width:40px;height:40px;border:0;background:transparent;color:var(--pink);display:flex;align-items:center;justify-content:center;border-radius:999px}
-.qty output{font-weight:700;font-size:16px}
-.cart{position:absolute;left:12px;right:12px;bottom:12px;background:var(--ink);color:#fff;border-radius:24px;display:flex;flex-direction:column;gap:8px;padding:10px 8px 8px 18px;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:4;transition:transform .25s}
-.cart.empty{transform:translateY(160px)}
-.cart.bump{animation:bump .4s}
-@keyframes bump{35%{transform:scale(1.035)}}
-.cart .row2{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.cart .row2 span{font-size:14px}
-.cart .row2 button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:700}
-.frete{display:flex;flex-direction:column;gap:6px;padding:2px 10px 0 0;font-size:12.5px;color:#EDE7F0}
-.frete b{color:#fff}
-.frete .track{height:6px;border-radius:9px;background:#3D363B;overflow:hidden}
-.frete .fill{height:100%;width:0;background:#7FE0A8;border-radius:9px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
-.app{padding-bottom:140px}
-.pop{animation:pop .32s}
-@keyframes pop{45%{transform:scale(.9)}}
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--mark);color:var(--ink);white-space:nowrap}
-.name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.sheet-bg{position:absolute;inset:0;background:rgba(20,10,20,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
-.sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;overflow-y:auto;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 22px;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);z-index:6;display:flex;flex-direction:column;gap:12px}
-.sheet::before{content:"";width:40px;height:5px;border-radius:9px;background:#D9D2DC;align-self:center;flex-shrink:0}
-.screen.sheet-open #sheet,.screen.cart-open #cartSheet{transform:none}
-.screen.sheet-open .sheet-bg,.screen.cart-open .sheet-bg{opacity:1;pointer-events:auto}
-.sheet h4{margin:0;font-size:20px}
-.sheet dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
-.sheet dt{color:var(--muted)}
-.sheet dd{margin:0}
-.sheet .close{border:0;background:#F2EEF1;width:44px;height:44px;border-radius:99px;position:absolute;top:12px;right:14px;display:flex;align-items:center;justify-content:center}
-.lines{display:flex;flex-direction:column;gap:6px;font-size:14px;margin:0;padding:0;list-style:none}
-.lines li{display:flex;justify-content:space-between;gap:10px}
-.lines .tot{border-top:1px solid var(--line);padding-top:8px;font-weight:700}
-.field{display:flex;flex-direction:column;gap:6px}
-.field label,.pay legend{font-size:13px;font-weight:600}
-.field input{height:46px;border:1.5px solid #CFC6D2;border-radius:12px;padding:0 14px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
-.field input:focus{outline:2px solid var(--ink);outline-offset:1px}
-.field output{font-size:13px;color:var(--ok);font-weight:600;min-height:18px}
-.pay{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.pay label{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border:1.5px solid #E2DAE5;border-radius:12px;font-size:14px}
-.pay label:has(input:checked){border-color:var(--pink);background:#FFF5FB}
-.pay input{accent-color:var(--pink);width:18px;height:18px}
-.pay small{margin-left:auto;font-size:12px;color:var(--ok);font-weight:600}
-.done-screen{position:absolute;inset:0;background:linear-gradient(180deg,#FCE4F3,#FBEAF4);z-index:6;display:none;align-items:center;justify-content:center;padding:20px}
-.screen.done-open .done-screen{display:flex}
-.done-card{background:#fff;border-radius:24px;padding:26px 22px 20px;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:0 10px 30px rgba(60,20,50,.12)}
-.done-card h4{margin:0;font-size:24px}
-.done-card p{font-size:14px;color:var(--muted);max-width:28ch}
-.check{width:64px;height:64px;border-radius:99px;background:#E4F7EC;display:flex;align-items:center;justify-content:center}
-.check path{stroke-dasharray:30;stroke-dashoffset:30}
-.screen.done-open .check path{animation:draw .5s .15s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.done-card .lines{width:100%;text-align:left;background:#FAF7F9;border-radius:14px;padding:12px 14px}
-.done-card .add{width:100%;justify-content:center}
+/* vitaminada */
+.qr{display:flex;gap:18px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px}
+.qr img{width:132px;height:132px;flex-shrink:0}
+.qr p{font-size:15px}
+.only-mobile{display:none}
 
-/* destaque do passo */
-.mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px #fff,0 0 0 9999px rgba(10,6,10,.62);pointer-events:none;z-index:7;opacity:0;transition:left .35s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),opacity .25s}
-.mask.on{opacity:1}
-.screen .old{z-index:9}
-
-/* ---------- final ---------- */
-.end{display:flex;flex-direction:column;gap:14px}
-.end ol{padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:17px}
-.cta{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--pink);color:#fff;font-weight:700;text-decoration:none;align-self:flex-start}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color:var(--muted)}
 
 @media (min-width:900px){
   .wrap{padding:0 40px}
-  .intro{padding:72px 0 88px}
-  .intro h1{font-size:72px}
-  .intro-grid{grid-template-columns:1.1fr 1fr;gap:64px}
-  .evidence img{width:240px}
-  .tour{padding:80px 0 104px}
+  .intro{padding:72px 0 80px}
+  .intro h1{font-size:76px}
+  .intro .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:end}
+  .parts{margin-top:0}
+  .part{padding:96px 0}
+  .part-head h2{font-size:44px}
+  .cols{grid-template-columns:400px 1fr;gap:72px}
   .tour-grid{grid-template-columns:400px 1fr;gap:72px}
   .stage{position:sticky;top:24px}
-  .panel{order:2;padding-top:56px;max-width:520px}
-  .panel h2{font-size:42px}
+  .panel{padding-top:48px;max-width:520px}
+  .panel h3.title{font-size:42px}
 }
-/* celular: a tela vira o próprio app, e o passo a passo fica num cartão embaixo */
+
+/* celular: o tour vira tela cheia, com o passo a passo num cartão embaixo */
 @media (max-width:899px){
-  .tour{padding:0;height:100vh;height:100svh;position:relative;overflow:hidden;background:#000}
+  .only-desktop{display:none}
+  .only-mobile{display:flex}
+  .part{padding:48px 0}
+  .part-head h2{font-size:30px}
+  #hoje .phone{width:300px}
+  #hoje .screen{height:540px}
+  #proposta{padding-bottom:0}
+  .tour{height:100vh;height:100svh;background:#000;position:relative;overflow:hidden}
   .tour .wrap{padding:0;height:100%}
-  .tour-grid{display:flex;flex-direction:column;height:100%;gap:0}
-  .stage{flex:1;min-height:0;position:relative;gap:0}
-  .toggle{position:absolute;top:8px;right:8px;z-index:11;padding:3px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-  .toggle button{min-height:36px;padding:0 12px;font-size:13px}
-  .toggle{transition:opacity .2s}
-  .stage.overlay .toggle{opacity:0;pointer-events:none}
-  .phone{width:100%;height:100%;padding:0;border-radius:0;box-shadow:none;background:transparent}
-  .screen{height:100%;border-radius:0}
-  .bar{justify-content:flex-start;padding-left:16px}
-  .panel{flex:none;max-height:52svh;overflow-y:auto;background:#fff;border-radius:22px 22px 0 0;padding:6px 20px 0;gap:10px;box-shadow:0 -8px 24px rgba(0,0,0,.18);z-index:12;position:relative;-webkit-overflow-scrolling:touch}
-  .panel h2{font-size:22px}
+  .tour-grid{display:flex;flex-direction:column;align-items:stretch;height:100%;gap:0}
+  .stage{flex:1;min-height:0}
+  .tour .phone{width:100%;height:100%;padding:0;border-radius:0;box-shadow:none;background:transparent}
+  .tour .screen{height:100%;border-radius:0}
+  .panel{flex:none;max-height:52svh;overflow-y:auto;background:#fff;border-radius:22px 22px 0 0;padding:4px 20px 0;gap:10px;box-shadow:0 -8px 24px rgba(0,0,0,.18);position:relative;z-index:3;overscroll-behavior:contain}
+  .panel h3.title{font-size:22px}
   .stepno{font-size:12px}
   .block p,.block li{font-size:15px}
   .try{font-size:14px;padding:10px 12px}
-  .nav{position:sticky;bottom:0;margin:4px -20px 0;padding:10px 20px calc(12px + env(safe-area-inset-bottom));background:#fff;z-index:10}
+  .why{border-top:1px solid var(--line);padding-top:6px;display:block}
+  .why summary{display:flex;cursor:pointer;font-size:14px;font-weight:700;min-height:40px;align-items:center;list-style:none}
+  .why summary::-webkit-details-marker{display:none}
+  .why summary::after{content:"+";font-size:18px;font-weight:500;margin-left:auto}
+  .why[open] summary::after{content:"–"}
+  .why > div{display:flex;flex-direction:column;gap:12px;padding:4px 0}
+  .nav{position:sticky;bottom:0;margin:4px -20px 0;padding:10px 20px calc(12px + env(safe-area-inset-bottom));background:#fff;z-index:2}
   .nav button{min-height:48px}
 }
-.why{border-top:1px solid var(--line);padding-top:10px}
-.why summary{cursor:pointer;font-size:14px;font-weight:700;min-height:36px;display:flex;align-items:center;gap:6px;list-style:none}
-.why summary::-webkit-details-marker{display:none}
-.why summary::after{content:"+";font-size:18px;font-weight:500;margin-left:auto}
-.why[open] summary::after{content:"–"}
-.why > div{display:flex;flex-direction:column;gap:12px;padding:6px 0 4px}
-@media (min-width:900px){ .why{border:0;padding:0} .why summary{display:none} }
-@media (max-width:420px){
-  .evidence img{width:150px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.check path{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
 </style>
 </head>
 <body>
 
 <header class="intro">
-  <div class="wrap intro-grid">
+  <div class="wrap">
     <div>
-      <p class="kicker">Bammies · leitura de UX · por Thiago Vitamina</p>
-      <h1>O povo lê, sim. <span class="serif"><i>Só não acha.</i></span></h1>
-      <p class="lead">A pergunta "qual a diferença das barras?" é uma pista: a informação existe, mas não está onde o olho procura. Aqui vai, passo a passo, o que eu mudaria na loja pra comprar ficar mais fácil, com menos coisa pra pensar.</p>
-      <a class="start" href="#tour">ver as melhorias <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <p class="eyebrow">Bammies · leitura de UX · Thiago Vitamina</p>
+      <h1>O problema nunca é o cliente. <span class="serif"><i>É o que a gente mostra pra ele.</i></span></h1>
+      <p class="lead">Quando alguém pergunta “qual a diferença das barras?”, a resposta existe. Só não tá onde o olho procura. Isso se resolve na tela, e eu separei em três partes:</p>
     </div>
-    <div class="evidence">
-      <img src="/bammies/atual.webp" width="770" height="1076" alt="Tela atual da categoria Chocolates: cards da Barra Albino e da Barra Envy com preço, botão Ver descrição e botões de mais e menos">
-      <div class="chat" aria-label="Conversa no WhatsApp">
-        <p class="in">qual a diferença das barras?</p>
-        <p class="out">clica no botão ver descrição</p>
-        <p class="in">ah boa, não tinha reparado</p>
-        <small>conversa real com uma cliente</small>
-      </div>
-    </div>
+    <ol class="parts">
+      <li><a href="#hoje"><span class="n">1</span><div><b>Como é hoje</b><span>o que trava a compra</span></div></a></li>
+      <li><a href="#proposta"><span class="n">2</span><div><b>A proposta</b><span>13 melhorias, uma por vez</span></div></a></li>
+      <li><a href="#vitaminada"><span class="n">3</span><div><b>Versão vitaminada</b><span>a loja nova, pra navegar livre</span></div></a></li>
+    </ol>
   </div>
 </header>
 
-<main id="tour" class="tour">
-  <div class="wrap tour-grid">
+<main>
 
-    <div class="stage">
-      <div class="toggle" role="group" aria-label="Comparar versões">
-        <button type="button" id="btnOld" aria-pressed="false">como é hoje</button>
-        <button type="button" id="btnNew" aria-pressed="true">proposta</button>
+  <!-- 1 -->
+  <section class="part" id="hoje" aria-labelledby="h-hoje">
+    <div class="wrap">
+      <div class="part-head">
+        <p class="eyebrow">parte 1</p>
+        <h2 id="h-hoje">Como é hoje</h2>
       </div>
-      <div class="phone" id="phone">
-        <div class="screen" id="screen">
-          <div class="app" id="app">
-            <div class="bar">BAMMIES</div>
-            <nav class="chips" aria-label="Categorias">
-              <a href="#sec-choc" aria-current="true">Chocolates</a>
-              <a href="#sec-bam">Bammies</a>
-              <a href="#sec-bam">Pra presentear</a>
-            </nav>
-            <div class="sec" id="sec-choc">Chocolates</div>
-            <div class="list" id="listChoc"></div>
-            <div class="sec" id="sec-bam">Bammies</div>
-            <div class="list" id="listBam"></div>
-          </div>
-
-          <div class="cart" id="cart">
-            <div class="frete" id="frete" aria-live="polite">
-              <span id="freteText"></span>
-              <div class="track" aria-hidden="true"><div class="fill" id="freteFill"></div></div>
-            </div>
-            <div class="row2">
-              <span id="cartText" aria-live="polite"></span>
-              <button type="button" id="openCart">ver carrinho</button>
+      <div class="cols">
+        <div class="phone">
+          <div class="screen">
+            <div class="old-scroll" tabindex="0" aria-label="Telas atuais da loja">
+              <img src="/bammies/atual.webp" width="770" height="1076" alt="Categoria Chocolates hoje: Barra Albino e Barra Envy, cada uma com preço em faixa amarela, botão turquesa Ver descrição, um zero e botões de menos e mais">
+              <div class="gap"></div>
+              <img src="/bammies/atual-bammies.webp" width="1027" height="1170" alt="Categoria Bammies hoje: Bammies G e Bammies P com a mesma imagem de urso, botão Ver descrição e botões de menos e mais">
             </div>
           </div>
-
-          <div class="sheet-bg" id="sheetBg"></div>
-
-          <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-            <button type="button" class="close" data-close aria-label="Fechar detalhes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-            <h4 id="sheetTitle">Barra Albino</h4>
-            <dl>
-              <dt>Chocolate</dt><dd>[tipo e % de cacau]</dd>
-              <dt>Recheio</dt><dd>[sabor do recheio]</dd>
-              <dt>Peso</dt><dd>[gramas]</dd>
-              <dt>Alergênicos</dt><dd>[leite, glúten, castanhas…]</dd>
-              <dt>Validade</dt><dd>[prazo]</dd>
-            </dl>
-            <button type="button" class="add" id="sheetAdd" style="justify-content:center">adicionar ao carrinho</button>
+        </div>
+        <div class="copy">
+          <div class="chat" aria-label="Conversa no WhatsApp com uma cliente">
+            <p class="in">qual a diferença das barras?</p>
+            <p class="out">clica no botão ver descrição</p>
+            <p class="in">ah boa, não tinha reparado</p>
+            <small>conversa real com uma cliente</small>
           </div>
-
-          <div class="sheet" id="cartSheet" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-            <button type="button" class="close" data-close aria-label="Fechar carrinho"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-            <h4 id="cartTitle">Seu pedido</h4>
-            <ul class="lines" id="cartLines"></ul>
-            <div class="field">
-              <label for="cep">CEP de entrega</label>
-              <input id="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9">
-              <output id="cepOut" for="cep"></output>
-            </div>
-            <fieldset class="pay">
-              <legend>Pagamento</legend>
-              <label><input type="radio" name="pay" checked> Pix <small>aprova na hora</small></label>
-              <label><input type="radio" name="pay"> Cartão de crédito</label>
-            </fieldset>
-            <button type="button" class="add" id="finish" style="justify-content:center;min-height:52px;font-size:15px">finalizar pedido</button>
-            <p style="font-size:12px;color:var(--muted);text-align:center">sem cadastro e sem senha</p>
+          <p>Repara no botão que mais chama atenção na tela: “Ver descrição”. Turquesa, grandão. Mesmo assim ela não achou o que queria.</p>
+          <div class="callout">
+            <p>Não é que ela seja desatenta. A dúvida era simples e a resposta tava atrás de um clique. <span class="serif"><i>Quando o cliente erra, quase sempre é a tela que tá pedindo esforço demais.</i></span></p>
           </div>
-
-          <div class="done-screen" id="done">
-            <div class="done-card" id="doneCard" role="status">
-              <div class="check"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17663F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-              <h4>Pedido recebido!</h4>
-              <p>Pix aprovado. A gente te avisa pelo WhatsApp quando sair pra entrega.</p>
-              <ul class="lines" id="doneLines"></ul>
-              <button type="button" class="add" id="backShop">voltar pra loja</button>
-            </div>
-          </div>
-
-          <div class="mask" id="mask" aria-hidden="true"></div>
-          <div class="old" aria-hidden="true"><img src="/bammies/atual.webp" alt=""></div>
+          <h3>O que trava hoje</h3>
+          <ul class="issues">
+            <li>A diferença entre os produtos não aparece no card.</li>
+            <li>Amarelo, turquesa e rosa disputando o olho ao mesmo tempo.</li>
+            <li>Um “0” com dois botões soltos, sem dizer o que fazer.</li>
+            <li>Bammies G e P com a mesma imagem.</li>
+          </ul>
+          <a class="btn dark" href="#proposta">ver a proposta</a>
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="panel" aria-live="polite" aria-labelledby="stepTitle">
-      <div class="progress" id="progress" aria-label="Passos"></div>
-      <p class="stepno" id="stepNo"></p>
-      <h2 id="stepTitle"></h2>
-      <div id="stepBody" class="end"></div>
-      <div class="nav">
-        <button type="button" class="prev" id="prev">voltar</button>
-        <button type="button" class="next" id="next">próximo</button>
+  <!-- 2 -->
+  <section class="part" id="proposta" aria-labelledby="h-prop">
+    <div class="wrap">
+      <div class="part-head">
+        <p class="eyebrow">parte 2</p>
+        <h2 id="h-prop">A proposta, passo a passo</h2>
+        <p>Cada passo acende uma parte da tela e explica o que mudou e por quê. Dá pra tocar no app durante o tour.</p>
       </div>
-    </section>
+    </div>
+    <div class="tour">
+      <div class="wrap tour-grid">
+        <div class="stage">
+          <div class="phone">
+            <div class="screen" id="tourScreen">
+              <div id="tourApp"></div>
+              <div class="mask" id="mask" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+        <section class="panel" id="panel" aria-live="polite" aria-labelledby="stepTitle">
+          <div class="progress" id="progress" aria-label="Passos"></div>
+          <p class="stepno" id="stepNo"></p>
+          <h3 class="title" id="stepTitle"></h3>
+          <div id="stepBody" class="why-wrap"></div>
+          <div class="nav">
+            <button type="button" class="prev" id="prev">voltar</button>
+            <button type="button" class="next" id="next">próximo</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- 3 -->
+  <section class="part" id="vitaminada" aria-labelledby="h-vit">
+    <div class="wrap">
+      <div class="part-head">
+        <p class="eyebrow">parte 3</p>
+        <h2 id="h-vit">Versão vitaminada</h2>
+        <p>Agora sem roteiro. A loja inteira funcionando do jeito que o cliente usaria: escolhe, abre detalhe, vai até o fim do pedido.</p>
+      </div>
+      <div class="cols">
+        <div class="phone only-desktop">
+          <div class="screen">
+            <iframe src="/bammies/app/" title="Loja Bammies, versão vitaminada" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="qr only-desktop">
+            <img src="/bammies/qr.svg" alt="QR code que abre a versão vitaminada no celular">
+            <p><b>Abre no celular.</b> É lá que o cliente compra, então é lá que dá pra sentir a diferença. Aponta a câmera pro código.</p>
+          </div>
+          <a class="btn pink only-mobile" href="/bammies/app/">abrir a versão vitaminada</a>
+          <p class="only-mobile" style="font-size:14px;color:var(--muted)">Abre em tela cheia, como um app de verdade. Pra voltar, é só tocar na seta.</p>
+
+          <h3>E daqui pra frente?</h3>
+          <p>Isso aqui é uma tela. Com o mesmo olhar dá pra passar pela loja inteira, da vitrine até o pagamento. Pra montar a proposta, eu preciso de:</p>
+          <ol>
+            <li>Link da loja ou acesso pra eu navegar</li>
+            <li>Plataforma onde ela é montada</li>
+            <li>Como o pedido termina hoje: WhatsApp, Pix, outro jeito</li>
+            <li>Se tiver, pedidos por mês, valor médio e de onde vêm os clientes</li>
+            <li>Informação e foto real de cada produto</li>
+          </ol>
+          <p>E um teste simples: contar quantas perguntas tipo “qual a diferença?” chegam por semana hoje, e comparar depois da mudança. Aí ninguém precisa acreditar em mim, o número fala.</p>
+          <a class="btn pink" href="https://wa.me/5511956299380?text=oi%20thiago%2C%20vi%20a%20leitura%20da%20bammies">bora conversar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
   <div class="wrap">Thiago Vitamina · designer de produto · <a href="https://thiagovitamina.com">thiagovitamina.com</a></div>
 </footer>
 
+<script src="/bammies/app.js"></script>
 <script>
 (function(){
-  var choc = '<svg width="58" height="58" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-40 32 32)"><rect x="18" y="4" width="28" height="30" rx="3" fill="#8B5A3C" stroke="#111" stroke-width="3"/><path d="M32 4v30M18 19h28" stroke="#111" stroke-width="3"/><rect x="16" y="28" width="32" height="32" rx="3" fill="WRAP" stroke="#111" stroke-width="3"/><path d="M32 51c-6-4-9-7-9-10a4 4 0 0 1 9-2 4 4 0 0 1 9 2c0 3-3 6-9 10z" fill="#E84D5B" stroke="#111" stroke-width="2"/></g></svg>';
-  var bear = function(w){ return '<svg width="'+w+'" height="'+Math.round(w*1.29)+'" viewBox="0 0 84 108" aria-hidden="true"><g fill="#E7A9DE" stroke="#111" stroke-width="5"><circle cx="20" cy="14" r="10"/><circle cx="64" cy="14" r="10"/><ellipse cx="42" cy="30" rx="26" ry="22"/><ellipse cx="42" cy="72" rx="28" ry="30"/><circle cx="16" cy="64" r="10"/><circle cx="68" cy="64" r="10"/><circle cx="22" cy="96" r="11"/><circle cx="62" cy="96" r="11"/></g><circle cx="33" cy="24" r="3.5" fill="#111"/><circle cx="51" cy="24" r="3.5" fill="#111"/></svg>'; };
-
-  var FRETE_GRATIS = 150; // valor de exemplo
-  var products = [
-    {id:'albino', list:'listChoc', name:'Barra Albino', desc:'chocolate, recheio e peso em uma linha', price:70, note:'apenas envio', bg:'#FCE4F3', img:choc.replace('WRAP','#FFFFFF')},
-    {id:'envy', list:'listChoc', name:'Barra Envy', desc:'chocolate, recheio e peso em uma linha', price:75, note:'apenas envio', bg:'#E3F0FC', img:choc.replace('WRAP','#5DADEC'), top:true},
-    {id:'bg', list:'listBam', name:'Bammies G', desc:'peso ou unidades e sabores', price:null, note:'pronta entrega', ok:true, bg:'#FCE4F3', img:bear(52), size:'G'},
-    {id:'bp', list:'listBam', name:'Bammies P', desc:'peso ou unidades e sabores', price:null, note:'pronta entrega', ok:true, bg:'#FCE4F3', img:bear(36), size:'P'}
-  ];
-  var qty = {albino:0, envy:1, bg:0, bp:0};
-  var plus = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
-  var minus = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>';
-  var star = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.5 1.4 6.6L12 17.2l-5.9 3.3 1.4-6.6-5-4.5 6.6-.7z"/></svg>';
-  var brl = function(v){ return v==null ? 'R$ 00,00' : 'R$ ' + v.toFixed(2).replace('.',','); };
   var $ = function(id){ return document.getElementById(id); };
+  var screen = $('tourScreen'), mask = $('mask');
+  var bm = BammiesApp($('tourApp'));
+  var app = bm.app, qty = bm.qty;
 
-  var screen = $('screen'), app = $('app'), mask = $('mask'), cart = $('cart');
-
-  function action(p){
-    var q = qty[p.id];
-    if(!q) return '<button type="button" class="add" data-add="'+p.id+'">'+plus+'adicionar <span class="sr">'+p.name+'</span></button>';
-    return '<div class="qty"><button type="button" data-dec="'+p.id+'" aria-label="Diminuir quantidade de '+p.name+'">'+minus+'</button><output aria-label="Quantidade de '+p.name+'">'+q+'</output><button type="button" data-inc="'+p.id+'" aria-label="Aumentar quantidade de '+p.name+'">'+plus+'</button></div>';
-  }
-  function totals(){
-    var n=0, t=0;
-    products.forEach(function(p){ n+=qty[p.id]; t+=(p.price||0)*qty[p.id]; });
-    return {n:n, t:t};
-  }
-  function lines(){
-    var h='';
-    products.forEach(function(p){ if(qty[p.id]) h+='<li><span>'+qty[p.id]+'× '+p.name+'</span><span>'+brl(p.price==null?null:p.price*qty[p.id])+'</span></li>'; });
-    var T = totals();
-    h += '<li><span>Frete</span><span>'+(T.t>=FRETE_GRATIS?'grátis':'pelo CEP')+'</span></li>';
-    h += '<li class="tot"><span>Total</span><span>'+brl(T.t)+'</span></li>';
-    return h;
-  }
-  function render(changed){
-    ['listChoc','listBam'].forEach(function(l){ $(l).innerHTML=''; });
-    products.forEach(function(p){
-      var el = document.createElement('article');
-      el.className = 'item' + (qty[p.id] ? ' in-cart' : '');
-      el.dataset.id = p.id;
-      el.innerHTML =
-        '<div class="thumb" style="background:'+p.bg+'">'+p.img+(p.size?'<span class="size">'+p.size+'</span>':'')+'</div>'+
-        '<div class="info"><div class="name-row"><h3 class="name" style="margin:0">'+p.name+'</h3>'+(p.top?'<span class="badge">'+star+'mais pedido</span>':'')+'</div>'+
-        '<p class="desc"><em>'+p.desc+'</em></p>'+
-        '<button type="button" class="more" data-more="'+p.id+'">mais detalhes</button>'+
-        '<div class="row"><div class="price"><b>'+brl(p.price)+'</b><small class="'+(p.ok?'ok':'')+'">'+p.note+'</small></div>'+action(p)+'</div></div>';
-      $(p.list).appendChild(el);
-    });
-    var T = totals();
-    $('cartText').innerHTML = '<b>'+T.n+(T.n===1?' item':' itens')+'</b> · '+brl(T.t);
-    var falta = Math.max(0, FRETE_GRATIS - T.t);
-    $('freteText').innerHTML = falta>0 ? 'faltam <b>'+brl(falta)+'</b> pro frete grátis' : '<b>você ganhou frete grátis</b>';
-    $('freteFill').style.width = Math.min(100, T.t/FRETE_GRATIS*100) + '%';
-    cart.classList.toggle('empty', T.n===0);
-    $('cartLines').innerHTML = lines();
-    $('doneLines').innerHTML = lines();
-    updateCep();
-    if(changed){
-      cart.classList.remove('bump'); void cart.offsetWidth; cart.classList.add('bump');
-      var ctl = screen.querySelector('.item[data-id="'+changed+'"] .qty, .item[data-id="'+changed+'"] .add');
-      if(ctl){ ctl.classList.add('pop'); }
-    }
-    applySpot();
-  }
-
-  function updateCep(){
-    var v = $('cep').value.replace(/\D/g,'');
-    var out = $('cepOut');
-    if(v.length<8){ out.textContent=''; return; }
-    out.textContent = (totals().t>=FRETE_GRATIS ? 'frete grátis' : 'frete [valor]') + ' · chega em [prazo]';
-  }
-  $('cep').addEventListener('input', function(e){
-    var d = e.target.value.replace(/\D/g,'').slice(0,8);
-    e.target.value = d.length>5 ? d.slice(0,5)+'-'+d.slice(5) : d;
-    updateCep();
-  });
-
-  var current = null;
-  function closeAll(){ screen.classList.remove('sheet-open','cart-open','done-open'); applySpot(); }
-  function openSheet(id, auto){
-    closeAll();
-    current = products.filter(function(x){return x.id===id;})[0];
-    $('sheetTitle').textContent = current.name;
-    screen.classList.add('sheet-open');
-    if(!auto) $('sheet').querySelector('.close').focus({preventScroll:true});
-    applySpot();
-  }
-  function openCart(auto){
-    closeAll();
-    screen.classList.add('cart-open');
-    if(!auto) $('cartSheet').querySelector('.close').focus({preventScroll:true});
-    applySpot();
-  }
-  function openDone(){
-    closeAll();
-    screen.classList.add('done-open');
-    applySpot();
-  }
-
-  screen.addEventListener('click', function(e){
-    var b = e.target.closest('button'); if(!b) return;
-    if(b.dataset.add){ qty[b.dataset.add]=1; render(b.dataset.add); }
-    else if(b.dataset.inc){ qty[b.dataset.inc]++; render(b.dataset.inc); }
-    else if(b.dataset.dec){ qty[b.dataset.dec]=Math.max(0,qty[b.dataset.dec]-1); render(b.dataset.dec); }
-    else if(b.dataset.more){ openSheet(b.dataset.more); }
-    else if(b.hasAttribute('data-close')){ closeAll(); }
-    else if(b.id==='openCart'){ openCart(); }
-    else if(b.id==='finish'){ openDone(); }
-    else if(b.id==='backShop'){ closeAll(); }
-    else if(b.id==='sheetAdd'){ if(current){ qty[current.id]=(qty[current.id]||0)+1; } closeAll(); render(current && current.id); }
-  });
-  $('sheetBg').addEventListener('click', closeAll);
-  screen.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
-  screen.addEventListener('animationend', function(e){ e.target.classList.remove('pop'); if(e.target===cart) cart.classList.remove('bump'); });
-
-  // passos
-  var B = 'o básico', D = 'os detalhes que deixam tudo fluido';
+  var B = 'o básico', D = 'os detalhes';
   var steps = [
-    {part:B, t:'A diferença aparece sem clicar', sel:'.desc',
-     what:'Cada produto ganha uma linha curta com o que o diferencia: chocolate, recheio, peso. A linha tracejada é onde entra o texto real.',
-     why:'"Qual a diferença?" é a primeira pergunta de quem está escolhendo. Se a resposta está atrás de um botão, a pessoa pergunta no WhatsApp ou desiste.',
+    {part:B, t:'A diferença tem que estar na cara', sel:'.bm-desc',
+     what:'Cada produto ganha uma linha dizendo o que ele tem de diferente: chocolate, recheio, peso. A linha tracejada é onde entra o texto de verdade.',
+     why:'Se a primeira dúvida de quem compra é “qual a diferença?”, a resposta tem que estar ali, sem clique. Escondeu atrás de um botão, a pessoa pergunta no WhatsApp. Ou desiste e nem pergunta.',
      laws:['Reconhecer em vez de lembrar · Nielsen','Não me faça pensar · Krug']},
-    {part:B, t:'Lista e categorias, como num app de delivery', sel:['.chips','#listChoc'],
-     what:'Um produto por linha, separado por categoria, com atalhos no topo. E uma categoria nova, "Pra presentear", pensada no motivo da compra, não só no tipo de produto.',
-     why:'Na lista dá pra comparar de cima pra baixo, e o formato é o que o cliente já usa todo dia no iFood. Ninguém compra bala gummy por ser bala: compra pra presentear, pra uma festa, por vontade. A vitrine pode falar essa língua.',
+    {part:B, t:'Lista, igual app de delivery', sel:['.bm-chips','[data-list="choc"]'], top:true,
+     what:'Um produto por linha, separado por categoria, com atalho no topo. E entrou uma categoria nova: “Pra presentear”.',
+     why:'Lista se compara de cima pra baixo, sem ficar pulando de um lado pro outro. É o formato que todo mundo já usa no iFood, ninguém precisa aprender nada. E ninguém compra bala gummy só porque é bala: compra pra dar pra alguém, pra festa, por vontade.',
      laws:['Lei de Jakob','Consistência e padrões · Nielsen','Jobs to be Done']},
-    {part:B, t:'Uma ação principal, uma cor', sel:'.add', clearAlbino:true,
-     what:'Só o "adicionar" é rosa. Saem o amarelo do preço e o turquesa do "ver descrição", que competiam com ele.',
-     why:'Hoje o botão mais chamativo da tela é o de ler descrição, não o de comprar. Quando tudo grita, nada se destaca, e escolher fica mais lento.',
+    {part:B, t:'Um botão importante, uma cor', sel:'.bm-item .bm-add', clearAlbino:true,
+     what:'Só o “adicionar” é rosa. O amarelo do preço e o turquesa do “ver descrição” saíram.',
+     why:'Hoje o botão que mais chama atenção é o de ler descrição, não o de comprar. Quando tudo grita ao mesmo tempo, o olho não sabe pra onde ir.',
      laws:['Hierarquia visual · Refactoring UI','Lei de Hick']},
-    {part:B, t:'O contador só aparece depois do primeiro toque', sel:'.qty', needEnvy:true, tip:'Experimenta: toca em "adicionar" na Barra Albino.',
-     what:'O card começa com um botão. Depois do toque ele vira – 1 +, e o card fica marcado em rosa.',
-     why:'Um "0" com dois botões soltos não diz o que fazer. Começar com uma ação clara e mostrar o que já foi escolhido evita erro e dá segurança.',
+    {part:B, t:'O contador só aparece quando precisa', sel:'.bm-item .bm-qty', needEnvy:true, tip:'Testa: toca em “adicionar” na Barra Albino.',
+     what:'O card começa com um botão só. Tocou, vira – 1 +, e o card fica marcado.',
+     why:'Um “0” com dois botões soltos embaixo não explica nada. Começar com uma ação clara e mostrar o que já tá escolhido evita erro.',
      laws:['Visibilidade do estado do sistema · Nielsen','Sinalizadores · Don Norman']},
-    {part:B, t:'Os detalhes abrem por cima, sem sair da página', sel:'#sheet', open:'product', tip:'Dá pra fechar tocando fora ou no X.',
-     what:'"Mais detalhes" vira um link discreto que abre uma gaveta com tudo: ingredientes, peso, validade e alergênicos, e com o botão de comprar ali dentro.',
-     why:'Quem quer saber mais encontra, quem não quer não é atrapalhado. E alergênicos à vista é cuidado com o cliente, não só estética.',
-     laws:['Revelação progressiva','Controle e liberdade do usuário · Nielsen']},
-    {part:B, t:'O carrinho fica sempre à vista', sel:'#cart', needEnvy:true,
-     what:'Uma barra fixa embaixo mostra quantos itens e quanto deu, com o próximo passo a um toque.',
-     why:'A pessoa sabe o que já escolheu sem rolar a página de volta, e o caminho até finalizar fica óbvio. Menos abandono no meio.',
+    {part:B, t:'Detalhe completo sem sair da página', sel:'.bm-product', open:'product', tip:'Fecha tocando fora ou no X.',
+     what:'“Mais detalhes” abre uma gaveta com tudo: ingredientes, peso, validade, alergênicos. E dá pra comprar dali mesmo.',
+     why:'Quem quer saber tudo acha. Quem não quer não é atrapalhado. E alergênico à vista é cuidado com o cliente.',
+     laws:['Revelação progressiva','Controle e liberdade · Nielsen']},
+    {part:B, t:'Carrinho sempre à vista', sel:'.bm-cart', needEnvy:true,
+     what:'Uma barra fixa embaixo mostra quantos itens e quanto deu.',
+     why:'A pessoa sabe o que já pegou sem rolar a página de volta, e o próximo passo fica sempre a um toque.',
      laws:['Visibilidade do estado do sistema · Nielsen','Lei de Fitts']},
-    {part:D, t:'Frete grátis como meta', sel:'#frete', needEnvy:true, tip:'Toca no + da Barra Envy e vê a barra andar.',
-     what:'O carrinho mostra quanto falta pro frete grátis, com uma barrinha que vai enchendo a cada item.',
-     why:'Quando a pessoa vê que está perto de uma meta, ela acelera pra chegar lá. É um empurrão honesto pra aumentar o pedido, e ainda tira a surpresa do frete no final. Os R$ 150 são só um exemplo.',
-     laws:['Efeito goal-gradient · Laws of UX','Visibilidade do estado do sistema · Nielsen']},
-    {part:D, t:'Cada toque responde na hora', sel:'.add', clearAlbino:true, tip:'Toca em "adicionar" e repara no botão e no carrinho.',
-     what:'O botão afunda de leve, o carrinho dá um pulinho e o total atualiza no mesmo instante.',
-     why:'Abaixo de 0,4 segundo a resposta parece imediata, e a pessoa sente que está no controle. Sem retorno, ela toca de novo e duplica o item sem querer.',
+    {part:D, t:'Frete grátis vira meta', sel:'.bm-frete', needEnvy:true, tip:'Toca no + da Barra Envy e olha a barra andar.',
+     what:'O carrinho mostra quanto falta pro frete grátis, com uma barrinha que enche a cada item. Os R$ 150 são exemplo.',
+     why:'Quando a gente vê que tá perto de chegar, acelera. É um empurrão honesto pra aumentar o pedido, e ainda acaba com a surpresa do frete no final.',
+     laws:['Efeito goal-gradient · Laws of UX']},
+    {part:D, t:'Todo toque responde na hora', sel:'.bm-item .bm-add', clearAlbino:true, tip:'Toca em “adicionar” e repara no botão e no carrinho.',
+     what:'O botão afunda, o carrinho dá um pulinho e o total muda na hora.',
+     why:'Se a tela não reage, a pessoa toca de novo e o item vai duplicado. Resposta em menos de meio segundo passa sensação de controle.',
      laws:['Limiar de Doherty · Laws of UX','Feedback · Don Norman']},
-    {part:D, t:'Um atalho pra quem está indeciso', sel:'.badge',
-     what:'Um selo amarelo de "mais pedido" no produto que mais sai.',
-     why:'O que é diferente se destaca e vira atalho pra decisão. E saber que outras pessoas escolhem aquilo dá segurança. O selo vai no campeão de vendas de verdade.',
+    {part:D, t:'Um atalho pra quem tá na dúvida', sel:'.bm-badge',
+     what:'Um selo de “mais pedido” no produto que mais sai.',
+     why:'O que é diferente salta aos olhos e vira atalho pra decidir. E saber que muita gente escolhe aquele dá segurança. O selo vai no campeão de vendas de verdade.',
      laws:['Efeito Von Restorff · Laws of UX','Prova social']},
-    {part:D, t:'Fechar o pedido sem cadastro', sel:'#cartSheet', open:'cart', needEnvy:true, tip:'Digita qualquer CEP pra ver o frete aparecer sozinho.',
-     what:'O carrinho abre por cima com o resumo. O CEP calcula o frete sozinho, o Pix já vem marcado e não precisa criar conta nem senha.',
-     why:'Ter que criar conta é um dos maiores motivos de abandono no checkout. Cada campo a menos é menos gente desistindo, e o trabalho de calcular fica com o sistema, não com a cliente.',
-     laws:['Lei de Tesler · Laws of UX','Pesquisa de checkout · Baymard Institute']},
-    {part:D, t:'Um final que dá vontade de voltar', sel:'#doneCard', open:'done', needEnvy:true,
-     what:'A confirmação fala como gente: pedido recebido, Pix aprovado, aviso pelo WhatsApp e o resumo do que foi comprado.',
-     why:'A gente lembra de uma experiência pelo momento mais forte e pelo final. Terminar com clareza e carinho é o que faz a pessoa comprar de novo e indicar pra alguém.',
+    {part:D, t:'Fechar o pedido sem criar conta', sel:'.bm-checkout', open:'cart', needEnvy:true, tip:'Digita qualquer CEP e vê o frete aparecer.',
+     what:'O carrinho abre com o resumo, o CEP calcula o frete sozinho e o Pix já vem marcado. Sem cadastro, sem senha.',
+     why:'Obrigar a criar conta é um dos motivos que mais fazem gente largar o carrinho. Cada campo a menos é menos gente desistindo. Quem faz a conta é o sistema, não a cliente.',
+     laws:['Lei de Tesler · Laws of UX','Pesquisa de checkout · Baymard']},
+    {part:D, t:'Terminar bem pra pessoa voltar', sel:'.bm-done-card', open:'done', needEnvy:true,
+     what:'A confirmação fala como gente: pedido recebido, Pix aprovado, aviso pelo WhatsApp e o resumo do que comprou.',
+     why:'A gente lembra de uma experiência pelo melhor momento e pelo final. Fechar com clareza e carinho é o que faz comprar de novo e indicar.',
      laws:['Regra do pico-fim · Laws of UX']},
     {part:D, t:'Acessível pra todo mundo',
-     list:['Contraste de texto que passa no WCAG, inclusive nos textos pequenos','Áreas de toque de pelo menos 44 px, pra ninguém errar o botão','Nomes sem caixa alta, que são mais fáceis de ler','Botões com nome pra leitor de tela, tipo "aumentar quantidade de Barra Envy"','Preço, frete e status em texto, não só em cor','Animações que somem pra quem pede menos movimento no celular'],
-     why:'Acessibilidade não é extra: quem enxerga pouco, usa o celular com uma mão ou está no sol também compra.',
+     list:['Contraste de texto que passa no WCAG, até nos textos pequenos','Área de toque de 44 px no mínimo, pra ninguém errar o botão','Nome sem caixa alta, que é mais fácil de ler','Botões com nome pra leitor de tela, tipo “aumentar quantidade de Barra Envy”','Preço, frete e status escritos, não só indicados por cor','Animação some pra quem pede menos movimento no celular'],
+     why:'Quem enxerga pouco, usa o celular com uma mão só ou tá no sol também compra.',
      laws:['WCAG 2.2','Mismatch · Kat Holmes']},
-    {t:'E daqui pra frente?', end:true}
+    {t:'Agora navega você', end:true}
   ];
 
-  var i = 0;
-  var prog = $('progress');
+  var i = 0, prog = $('progress');
   steps.forEach(function(s,k){
-    var b=document.createElement('button'); b.type='button';
+    var b = document.createElement('button'); b.type = 'button';
     b.setAttribute('aria-label','Ir para o passo '+(k+1)+': '+s.t);
     b.addEventListener('click', function(){ go(k); });
     prog.appendChild(b);
@@ -525,94 +371,70 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:14px;color
   function place(){
     var t = targets();
     if(!t.length){ mask.classList.remove('on'); return; }
-    var sr = screen.getBoundingClientRect(), pad = 6;
-    var l=1e9,tp=1e9,r=-1e9,b=-1e9;
-    t.forEach(function(el){ var q=el.getBoundingClientRect(); l=Math.min(l,q.left); tp=Math.min(tp,q.top); r=Math.max(r,q.right); b=Math.max(b,q.bottom); });
-    l=Math.max(l-sr.left-pad,4); tp=Math.max(tp-sr.top-pad,4);
-    r=Math.min(r-sr.left+pad,sr.width-4); b=Math.min(b-sr.top+pad,sr.height-4);
-    mask.style.left=l+'px'; mask.style.top=tp+'px'; mask.style.width=Math.max(0,r-l)+'px'; mask.style.height=Math.max(0,b-tp)+'px';
-    mask.style.borderRadius = t[0].classList.contains('sheet') ? '24px 24px 30px 30px' : (t[0].id==='doneCard' ? '28px' : '16px');
+    var sr = screen.getBoundingClientRect(), pad = 6, l=1e9, tp=1e9, r=-1e9, b=-1e9;
+    t.forEach(function(el){ var q = el.getBoundingClientRect(); l=Math.min(l,q.left); tp=Math.min(tp,q.top); r=Math.max(r,q.right); b=Math.max(b,q.bottom); });
+    l = Math.max(l-sr.left-pad, 4); tp = Math.max(tp-sr.top-pad, 4);
+    r = Math.min(r-sr.left+pad, sr.width-4); b = Math.min(b-sr.top+pad, sr.height-4);
+    mask.style.left = l+'px'; mask.style.top = tp+'px';
+    mask.style.width = Math.max(0, r-l)+'px'; mask.style.height = Math.max(0, b-tp)+'px';
+    mask.style.borderRadius = t[0].classList.contains('bm-sheet') ? '24px 24px 30px 30px' : (t[0].classList.contains('bm-done-card') ? '28px' : '16px');
     mask.classList.add('on');
   }
+  var timer;
+  function applySpot(){ place(); clearTimeout(timer); timer = setTimeout(place, 360); }
   function reveal(){
     var t = targets()[0];
-    if(t && app.contains(t)){
-      var ar = app.getBoundingClientRect(), q = t.getBoundingClientRect();
-      var top = app.scrollTop + (q.top - ar.top) - Math.max(110, (ar.height - q.height) / 2);
-      app.scrollTo({top: Math.max(0, top)});
-    }
+    if(!t || !app.contains(t)) return;
+    var ar = app.getBoundingClientRect(), q = t.getBoundingClientRect();
+    app.scrollTop = Math.max(0, app.scrollTop + (q.top - ar.top) - Math.max(110, (ar.height - q.height) / 2));
   }
-  var stage = document.querySelector('.stage');
-  function applySpot(){
-    stage.classList.toggle('overlay', /sheet-open|cart-open|done-open/.test(screen.className));
-    place();
-    clearTimeout(applySpot.t); applySpot.t = setTimeout(place, 360);
-  }
+  bm.onChange = applySpot;
   app.addEventListener('scroll', function(){ requestAnimationFrame(place); }, {passive:true});
   window.addEventListener('resize', function(){ requestAnimationFrame(place); });
 
   function go(k){
     i = Math.max(0, Math.min(steps.length-1, k));
-    var s = steps[i];
-    setOld(false);
+    var s = steps[i], wide = window.innerWidth >= 900, h = '';
     $('stepNo').textContent = 'passo '+(i+1)+' de '+steps.length + (s.part ? ' · '+s.part : '');
     $('stepTitle').textContent = s.t;
-    var h='';
     if(s.end){
-      h += '<div class="block"><p>Essa é uma tela só. Com o mesmo olhar dá pra repensar a loja inteira: da vitrine até o pagamento, com foco em comprar sem atrito.</p></div>';
-      h += '<div class="block"><h3>Pra montar a proposta, eu preciso de</h3><ol><li>O link da loja ou acesso pra eu navegar</li><li>A plataforma onde ela é montada</li><li>Como o pedido termina hoje: WhatsApp, Pix, outro jeito</li><li>Se tiver, pedidos por mês, valor médio e de onde vêm os clientes</li><li>As informações reais e fotos de cada produto</li></ol></div>';
-      h += '<div class="block"><h3>E um teste simples</h3><p>Contar quantas perguntas tipo "qual a diferença?" chegam por semana hoje, e comparar depois da mudança.</p></div>';
-      h += '<a class="cta" href="https://wa.me/5511956299380?text='+encodeURIComponent('oi thiago, vi a leitura da loja bammies')+'">conversar no whatsapp</a>';
+      h += '<div class="block"><p>Esse foi o tour. A loja completa, sem roteiro, tá na parte 3.</p></div>';
+      h += '<a class="btn pink" href="#vitaminada" style="margin-top:6px">ir pra versão vitaminada</a>';
     } else {
       if(s.tip) h += '<p class="try">'+s.tip+'</p>';
-      if(s.what) h += '<div class="block"><h3>o que mudou</h3><p>'+s.what+'</p></div>';
-      if(s.list) h += '<div class="block"><h3>o que mudou</h3><ul>'+s.list.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
-      var wide = window.innerWidth >= 900;
+      if(s.what) h += '<div class="block"><h4>o que mudou</h4><p>'+s.what+'</p></div>';
+      if(s.list) h += '<div class="block"><h4>o que mudou</h4><ul>'+s.list.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul></div>';
       h += '<details class="why"'+(wide?' open':'')+'><summary>por que isso importa</summary><div>';
-      h += '<div class="block"><h3>por quê</h3><p>'+s.why+'</p></div>';
-      h += '<div class="law">'+s.laws.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div></div></details>';
+      h += '<div class="block"><h4>por quê</h4><p>'+s.why+'</p></div>';
+      h += '<div class="law">'+s.laws.map(function(x){ return '<span>'+x+'</span>'; }).join('')+'</div></div></details>';
     }
     $('stepBody').innerHTML = h;
-    document.querySelector('.panel').scrollTop = 0;
+    $('panel').scrollTop = 0;
     prog.querySelectorAll('button').forEach(function(b,k){
       if(k===i) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');
-      b.classList.toggle('done', k<i);
+      b.classList.toggle('is-done', k<i);
     });
     $('prev').disabled = i===0;
     $('next').textContent = i===steps.length-1 ? 'ver de novo' : 'próximo';
+
     if(s.needEnvy && !qty.envy) qty.envy = 1;
     if(s.clearAlbino && qty.albino) qty.albino = 0;
-    render();
-    if(s.open==='product') openSheet('albino', true);
-    else if(s.open==='cart') openCart(true);
-    else if(s.open==='done') openDone();
-    else closeAll();
-    if(!s.open){ if(s.sel==='.chips' || [].concat(s.sel||[])[0]==='.chips') app.scrollTo({top:0}); else reveal(); }
+    bm.render();
+    if(s.open==='product') bm.openSheet('albino', true);
+    else if(s.open==='cart') bm.openCart(true);
+    else if(s.open==='done') bm.openDone();
+    else bm.closeAll();
+    if(!s.open){ if(s.top) app.scrollTop = 0; else reveal(); }
     applySpot();
   }
   $('prev').addEventListener('click', function(){ go(i-1); });
-  $('next').addEventListener('click', function(){
-    go(i===steps.length-1 ? 0 : i+1);
-    if(window.innerWidth<900){ var y = $('tour').getBoundingClientRect().top + window.scrollY; if(Math.abs(window.scrollY - y) > 40) window.scrollTo({top:y, behavior:'smooth'}); }
-  });
-
-  var phone = $('phone');
-  function setOld(on){
-    phone.classList.toggle('show-old', on);
-    mask.style.visibility = on ? 'hidden' : '';
-    $('btnOld').setAttribute('aria-pressed', on);
-    $('btnNew').setAttribute('aria-pressed', !on);
-  }
-  $('btnOld').addEventListener('click', function(){ setOld(true); });
-  $('btnNew').addEventListener('click', function(){ setOld(false); });
-
+  $('next').addEventListener('click', function(){ go(i===steps.length-1 ? 0 : i+1); });
   document.addEventListener('keydown', function(e){
-    if(e.target.closest && e.target.closest('input,textarea,#screen')) return;
-    var r = $('tour').getBoundingClientRect();
+    if(e.target.closest && e.target.closest('input,textarea,.bm')) return;
+    var r = screen.getBoundingClientRect();
     if(r.bottom < 0 || r.top > window.innerHeight) return;
-    if(e.key==='ArrowRight'){ go(i+1); } else if(e.key==='ArrowLeft'){ go(i-1); }
+    if(e.key==='ArrowRight') go(i+1); else if(e.key==='ArrowLeft') go(i-1);
   });
-
   go(0);
 })();
 </script>
