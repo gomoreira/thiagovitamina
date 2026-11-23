@@ -94,8 +94,14 @@ a:hover{text-decoration-thickness:2px}
 .head h2{grid-column:1 / span 3;font-family:var(--display);font-weight:600;font-size:var(--t-base);line-height:1.3}
 .head p{grid-column:4 / span 7;font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:34ch;text-wrap:pretty}
 .cols{row-gap:var(--sp-5);align-items:start}
-.cols > .phone-col{grid-column:1 / span 5}
-.cols > .copy{grid-column:7 / span 6}
+.cols > .phone-col{grid-column:1 / span 6}
+.cols > .copy{grid-column:8 / span 5}
+/* palco: a pintura do case escurecida, com o celular em glass no centro (igual aos cases do site) */
+.stage-box{position:relative;isolation:isolate;overflow:hidden;background:var(--night);display:flex;flex-direction:column;align-items:center;padding:var(--sp-6) var(--sp-5)}
+.stage-box::before{content:"";position:absolute;inset:0;z-index:-2;background:url(/bammies/fundo.webp) center/cover no-repeat}
+.stage-box::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--night);opacity:.72;pointer-events:none}
+.stage-box .hint{color:var(--mute-dark);margin-top:var(--sp-3)}
+.stage-box :focus-visible{outline-color:var(--link-dark)}
 .copy{display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch}
 .copy p{font-size:var(--t-md);line-height:1.45;text-wrap:pretty}
 .copy h3{font-family:var(--display);font-weight:600;font-size:var(--t-base);margin-top:var(--sp-3)}
@@ -106,8 +112,8 @@ a:hover{text-decoration-thickness:2px}
 .issues li span{color:var(--mute);font-size:var(--t-sm)}
 
 /* celular */
-.phone{width:360px;max-width:100%;border-radius:44px;background:var(--ink);padding:10px}
-.screen{position:relative;height:720px;border-radius:34px;overflow:hidden;overflow:clip;background:var(--night);isolation:isolate}
+.phone{width:336px;max-width:100%;border-radius:44px;padding:12px;background:rgba(242,239,234,.16);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);box-shadow:0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.22),0 0 0 2px rgba(0,0,0,.4),0 28px 56px -14px rgba(0,0,0,.5)}
+.screen{position:relative;height:700px;border-radius:32px;overflow:hidden;overflow:clip;background:var(--night);isolation:isolate}
 .screen > .bm{position:absolute;inset:0;z-index:0}
 .old-scroll{position:absolute;inset:0;overflow-y:auto;background:#FBEAF4}
 .old-scroll img{width:100%;height:auto;display:block}
@@ -123,8 +129,8 @@ a:hover{text-decoration-thickness:2px}
 
 /* tour */
 .tour-grid{row-gap:var(--sp-5);align-items:start}
-.stage{grid-column:1 / span 5;position:sticky;top:calc(var(--sp-6) + var(--sp-3))}
-.panel{grid-column:7 / span 6;display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch;padding-top:var(--sp-5)}
+.stage{grid-column:1 / span 6;position:sticky;top:calc(var(--sp-6) + var(--sp-3))}
+.panel{grid-column:8 / span 5;display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch;padding-top:var(--sp-5)}
 .mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px var(--paper),0 0 0 9999px rgba(11,10,13,.64);pointer-events:none;z-index:2;opacity:0;transition:left .35s var(--ease),top .35s var(--ease),width .35s var(--ease),height .35s var(--ease),opacity .25s}
 .mask.on{opacity:1}
 .progress{display:flex;gap:var(--sp-1)}
@@ -170,14 +176,17 @@ a:hover{text-decoration-thickness:2px}
   .head{margin-bottom:var(--sp-5)}
   .only-desktop{display:none}
   .only-mobile{display:flex}
-  #hoje .phone{width:300px;margin-inline:auto}
+  .stage-box{padding:var(--sp-5) var(--sp-3)}
+  #hoje .phone{width:300px}
   #hoje .screen{height:560px}
   #proposta{padding-bottom:0}
   .tour{height:100vh;height:100svh;background:var(--night);position:relative;overflow:hidden}
   .tour .wrap{padding:0;height:100%}
   .tour-grid{height:100%;gap:0;align-items:stretch}
   .stage{flex:1;min-height:0;position:relative;top:auto}
-  .tour .phone{width:100%;height:100%;padding:0;border-radius:0;background:transparent}
+  .tour .stage-box{height:100%;padding:0;background:var(--night)}
+  .tour .stage-box::before,.tour .stage-box::after{display:none}
+  .tour .phone{width:100%;height:100%;padding:0;border-radius:0;background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
   .tour .screen{height:100%;border-radius:0}
   .panel{flex:none;max-width:none;max-height:52svh;overflow-y:auto;background:var(--paper);padding:var(--sp-2) var(--sp-3) 0;gap:var(--sp-3);border-top:1px solid var(--rule);position:relative;z-index:3;overscroll-behavior:contain}
   .panel h3.title{font-size:var(--t-lg)}
@@ -225,7 +234,7 @@ a:hover{text-decoration-thickness:2px}
         <p>O botão mais visível da tela é “Ver descrição”. Mesmo assim, a cliente não achou o que queria.</p>
       </div>
       <div class="cols grid">
-        <div class="phone-col">
+        <div class="phone-col stage-box">
           <div class="phone">
             <div class="screen">
               <div class="old-scroll" tabindex="0" aria-label="Telas atuais da loja, role pra ver as duas">
@@ -268,7 +277,7 @@ a:hover{text-decoration-thickness:2px}
     </div>
     <div class="tour">
       <div class="wrap tour-grid grid">
-        <div class="stage">
+        <div class="stage stage-box">
           <div class="phone">
             <div class="screen" id="tourScreen">
               <div id="tourApp"></div>
@@ -298,7 +307,7 @@ a:hover{text-decoration-thickness:2px}
         <p>Agora sem roteiro. A loja inteira funcionando do jeito que o cliente usaria, do primeiro toque até o pedido feito.</p>
       </div>
       <div class="cols grid">
-        <div class="phone-col only-desktop">
+        <div class="phone-col stage-box only-desktop">
           <div class="phone">
             <div class="screen">
               <iframe src="/bammies/app/" title="Loja Bammies, versão vitaminada" loading="lazy"></iframe>
