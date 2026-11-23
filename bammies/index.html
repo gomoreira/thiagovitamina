@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/bammies/app.css">
+<link rel="stylesheet" href="/bammies/app.css?v=6">
 <style>
 @font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -358,7 +358,7 @@ html{scroll-snap-type:y proximity}
   <div class="wrap"><span>© 2026 Thiago Vitamina · proposta feita pra Bammies, não pode ser reproduzida sem autorização</span><a class="open" href="/">thiagovitamina.com <span class="arw" aria-hidden="true"></span></a></div>
 </footer>
 
-<script src="/bammies/app.js"></script>
+<script src="/bammies/app.js?v=6"></script>
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
@@ -507,6 +507,6 @@ html{scroll-snap-type:y proximity}
   document.addEventListener('pointerover', function(e){ var b = e.target.closest && e.target.closest('.btn-ink'); if(!b) return; var r = b.getBoundingClientRect(); b.style.setProperty('--x',(e.clientX-r.left)+'px'); b.style.setProperty('--y',(e.clientY-r.top)+'px'); b.style.setProperty('--k', Math.ceil(Math.hypot(r.width,r.height)/6)+1); });
 })();
 </script>
-<script src="/bammies/guard.js"></script>
+<script src="/bammies/guard.js?v=6"></script>
 </body>
 </html>

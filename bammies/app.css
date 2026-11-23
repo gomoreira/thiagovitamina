@@ -95,11 +95,14 @@
   .bm .bm-check path{stroke-dashoffset:0}
 }
 
-/* telas estreitas (celular dentro da moldura): miniatura menor pra caber preço e botão */
+/* telas estreitas (celular dentro da moldura): miniatura menor e a linha de preço quebra antes de estourar */
 .bm{container-type:size}
-@container (max-width:340px){
+.bm-row{flex-wrap:wrap;row-gap:8px}
+.bm-row > :last-child{margin-left:auto}
+@container (max-width:380px){
+  .bm-item{gap:10px;padding:10px}
   .bm-thumb{width:64px;height:64px}
-  .bm-thumb svg{transform:scale(.82)}
-  .bm-add{padding:0 12px}
-  .bm-qty{width:104px}
+  .bm-thumb svg{transform:scale(.8)}
+  .bm-add{padding:0 12px;font-size:13px}
+  .bm-qty{width:100px}
 }

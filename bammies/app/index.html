@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/bammies/app.css">
+<link rel="stylesheet" href="/bammies/app.css?v=6">
 <style>
 @font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin.woff2) format('woff2')}
 @font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/funnel-sans-latin.woff2) format('woff2')}
@@ -27,6 +27,7 @@ html,body{margin:0;height:100%;background:#0B0A0D}
 .strip span{font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #root{position:fixed;left:0;right:0;bottom:0;top:calc(var(--strip) + env(safe-area-inset-top));margin:0 auto;max-width:480px}
 @media (min-width:520px){#root{box-shadow:0 0 0 1px #2E2B33}}
+@media (max-width:360px){.strip span{display:none}}
 .embedded .strip{display:none}
 .embedded #root{top:0}
 </style>
@@ -37,11 +38,11 @@ html,body{margin:0;height:100%;background:#0B0A0D}
   <span>Versão vitaminada · Bammies</span>
 </header>
 <main id="root" aria-label="Loja Bammies, versão vitaminada"></main>
-<script src="/bammies/app.js"></script>
+<script src="/bammies/app.js?v=6"></script>
 <script>
   if (window.self !== window.top) document.documentElement.classList.add('embedded');
   BammiesApp(document.getElementById('root'));
 </script>
-<script src="/bammies/guard.js"></script>
+<script src="/bammies/guard.js?v=6"></script>
 </body>
 </html>
