@@ -355,7 +355,7 @@ html{scroll-snap-type:y proximity}
 </main>
 
 <footer class="foot-simple">
-  <div class="wrap"><span>Thiago Vitamina · product designer em São Paulo</span><a class="open" href="/">thiagovitamina.com <span class="arw" aria-hidden="true"></span></a></div>
+  <div class="wrap"><span>© 2026 Thiago Vitamina · proposta feita pra Bammies, não pode ser reproduzida sem autorização</span><a class="open" href="/">thiagovitamina.com <span class="arw" aria-hidden="true"></span></a></div>
 </footer>
 
 <script src="/bammies/app.js"></script>
@@ -507,5 +507,6 @@ html{scroll-snap-type:y proximity}
   document.addEventListener('pointerover', function(e){ var b = e.target.closest && e.target.closest('.btn-ink'); if(!b) return; var r = b.getBoundingClientRect(); b.style.setProperty('--x',(e.clientX-r.left)+'px'); b.style.setProperty('--y',(e.clientY-r.top)+'px'); b.style.setProperty('--k', Math.ceil(Math.hypot(r.width,r.height)/6)+1); });
 })();
 </script>
+<script src="/bammies/guard.js"></script>
 </body>
 </html>
