@@ -48,7 +48,6 @@ a{color:var(--plum);text-underline-offset:.2em;text-decoration-thickness:1px}
 a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:2px solid var(--plum);outline-offset:3px}
 ::selection{background:rgba(85,26,139,.24)}
-.night ::selection{background:rgba(201,166,242,.38)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{padding-left:var(--gut);padding-right:var(--gutR);max-width:calc(var(--max) + var(--gut) + var(--gutR));margin:0 auto}
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
@@ -72,27 +71,25 @@ a:hover{text-decoration-thickness:2px}
 .btn-ink[disabled]{opacity:.35;cursor:default}
 
 /* topo */
-.top{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);padding-block:var(--sp-3);border-bottom:1px solid var(--rule)}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);border-bottom:1px solid rgba(0,0,0,.06)}
+.top-in{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2) var(--sp-4);flex-wrap:wrap;padding-block:var(--sp-3)}
 .top .name,.top .name:visited{font-family:var(--display);font-weight:600;color:var(--ink);text-decoration:none}
-.top .name:hover{text-decoration:underline}
-.top p{color:var(--mute);font-size:var(--t-sm)}
+.top nav{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+.top nav a,.top nav a:visited{color:var(--ink);text-decoration:none;display:inline-flex;gap:var(--sp-2);align-items:baseline;min-height:24px}
+.top nav a span{font-size:var(--t-sm);color:var(--mute)}
+.top nav a[aria-current="true"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em}
+@media (hover:hover){.top .name:hover,.top nav a:hover{color:var(--plum);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em}}
 
 /* abertura */
-.opening{padding-block:var(--sp-7) var(--sp-6)}
-.opening h1{grid-column:1 / span 10;font-family:var(--display);font-weight:600;font-size:var(--t-2xl);line-height:.95;letter-spacing:-.035em;text-wrap:balance}
+.opening{padding-block:var(--sp-6) var(--sp-5);row-gap:var(--sp-4);align-items:end}
+.opening h1{grid-column:1 / span 8;font-family:var(--display);font-weight:600;font-size:var(--t-2xl);line-height:.95;letter-spacing:-.035em;text-wrap:balance}
 .opening h1 span{display:block;font-weight:400;color:var(--mute)}
-.opening .lead{grid-column:1 / span 6;margin-top:var(--sp-5);font-size:var(--t-md);line-height:1.4;max-width:44ch;text-wrap:pretty}
-.parts{grid-column:1 / -1;margin-top:var(--sp-6);padding:0;list-style:none;border-top:1px solid var(--ink)}
-.parts li{border-bottom:1px solid var(--rule)}
-.parts a{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:baseline;padding-block:var(--sp-4);text-decoration:none;color:var(--ink)}
-.parts .n{grid-column:1 / span 1;font-size:var(--t-sm);color:var(--mute)}
-.parts b{grid-column:2 / span 5;font-family:var(--display);font-weight:600;font-size:var(--t-lg);letter-spacing:-.015em;line-height:1.1}
-.parts span.d{grid-column:7 / span 5;color:var(--mute)}
-.parts .arw{grid-column:12;justify-self:end;color:var(--plum);width:var(--sp-3);height:var(--sp-3);transform:rotate(90deg)}
-@media (hover:hover){.parts a:hover b{color:var(--plum);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.16em}}
+.opening .lead{grid-column:9 / span 4;font-size:var(--t-md);line-height:1.4;max-width:44ch;text-wrap:pretty}
 
 /* seções */
-.part{padding-block:var(--section)}
+.part{padding-block:var(--sp-5) var(--section)}
+.part + .part{padding-top:var(--section)}
+.part{scroll-margin-top:var(--sp-6)}
 .head{border-top:1px solid var(--ink);padding-top:var(--sp-3);margin-bottom:var(--sp-6);row-gap:var(--sp-3)}
 .head h2{grid-column:1 / span 3;font-family:var(--display);font-weight:600;font-size:var(--t-base);line-height:1.3}
 .head p{grid-column:4 / span 7;font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:34ch;text-wrap:pretty}
@@ -116,7 +113,7 @@ a:hover{text-decoration-thickness:2px}
 .old-scroll img{width:100%;height:auto;display:block}
 .old-scroll .gap{height:var(--sp-3)}
 .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.hint{font-size:var(--t-sm);color:var(--mute);margin-top:var(--sp-3)}
+.hint,.copy .hint{font-size:var(--t-sm);color:var(--mute);margin-top:var(--sp-3)}
 
 /* conversa */
 .chat{display:flex;flex-direction:column;gap:var(--sp-2);padding:var(--sp-4);background:var(--well)}
@@ -126,7 +123,7 @@ a:hover{text-decoration-thickness:2px}
 
 /* tour */
 .tour-grid{row-gap:var(--sp-5);align-items:start}
-.stage{grid-column:1 / span 5;position:sticky;top:var(--sp-4)}
+.stage{grid-column:1 / span 5;position:sticky;top:calc(var(--sp-6) + var(--sp-3))}
 .panel{grid-column:7 / span 6;display:flex;flex-direction:column;gap:var(--sp-4);max-width:52ch;padding-top:var(--sp-5)}
 .mask{position:absolute;left:0;top:0;width:0;height:0;border-radius:16px;box-shadow:0 0 0 2px var(--paper),0 0 0 9999px rgba(11,10,13,.64);pointer-events:none;z-index:2;opacity:0;transition:left .35s var(--ease),top .35s var(--ease),width .35s var(--ease),height .35s var(--ease),opacity .25s}
 .mask.on{opacity:1}
@@ -147,11 +144,12 @@ a:hover{text-decoration-thickness:2px}
 .why{display:flex;flex-direction:column;gap:var(--sp-4)}
 .why > div{display:flex;flex-direction:column;gap:var(--sp-3)}
 .why summary{display:none}
-.nav{display:flex;gap:var(--sp-3)}
-.nav button{min-height:52px;padding:0 var(--sp-4);font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1;border:1.5px solid var(--plum)}
-.prev{background:transparent;color:var(--plum)}
-.next{background:var(--plum);color:var(--paper);flex:1}
-.prev[disabled]{opacity:.35;cursor:default}
+.nav{display:flex;gap:var(--sp-4);align-items:center}
+.nav .next{flex:1;justify-content:space-between}
+.nav .next .arw{transform:rotate(45deg)}
+@media (hover:hover){.nav .next:hover .arw{transform:rotate(45deg) translate(3px,-3px)}}
+.prev{background:none;border:0;padding:var(--sp-2) 0;font-size:var(--t-base);color:var(--plum);text-decoration:underline;text-underline-offset:.2em}
+.prev[disabled]{opacity:.35;cursor:default;text-decoration:none}
 
 /* vitaminada */
 .qr{display:grid;grid-template-columns:132px 1fr;gap:var(--sp-4);align-items:center;padding:var(--sp-4);border:1px solid var(--rule)}
@@ -159,26 +157,16 @@ a:hover{text-decoration-thickness:2px}
 .qr p{font-size:var(--t-base)}
 .only-mobile{display:none}
 
-/* contato */
-.night{background:var(--night);color:var(--on-dark);padding-block:var(--section) var(--sp-5)}
-.night h2{font-family:var(--display);font-weight:600;font-size:var(--t-xl);line-height:1;letter-spacing:-.025em;max-width:18ch;text-wrap:balance}
-.night p{font-size:var(--t-md);line-height:1.45;color:var(--on-dark);max-width:44ch;margin-top:var(--sp-4)}
-.night a{color:var(--link-dark)}
-.night .btn-ink,.night .btn-ink:visited{border-color:var(--link-dark);color:var(--link-dark);margin-top:var(--sp-5)}
-.night .btn-ink::before{background:var(--link-dark)}
-@media (hover:hover){.night .btn-ink:hover{color:var(--night)}}
-@media (hover:none){.night .btn-ink,.night .btn-ink:visited{background:var(--link-dark);color:var(--night)}}
-.night :focus-visible{outline-color:var(--link-dark)}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-2) var(--sp-4);margin-top:var(--sp-7);font-size:var(--t-sm);color:var(--mute-dark)}
+/* rodapé */
+.foot-simple{border-top:1px solid var(--rule);padding-block:var(--sp-5)}
+.foot-simple .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-2) var(--sp-4);font-size:var(--t-sm);color:var(--mute)}
+.foot-simple .open{font-size:var(--t-sm)}
 
 @media (max-width:820px){
   .grid{display:flex;flex-direction:column}
-  .opening{padding-block:var(--sp-6) var(--sp-5)}
-  .opening .lead{margin-top:var(--sp-4)}
-  .parts{margin-top:var(--sp-5)}
-  .parts a{display:flex;gap:var(--sp-3);align-items:center;flex-wrap:wrap}
-  .parts b{flex:1}
-  .parts span.d{order:3;flex-basis:100%;padding-left:calc(var(--sp-3) + 1ch)}
+  .opening{padding-block:var(--sp-5) var(--sp-4)}
+  .top{position:relative}
+  .top nav{gap:var(--sp-3);font-size:var(--t-sm)}
   .head{margin-bottom:var(--sp-5)}
   .only-desktop{display:none}
   .only-mobile{display:flex}
@@ -202,7 +190,7 @@ a:hover{text-decoration-thickness:2px}
   .why[open] summary i{transform:rotate(45deg)}
   .why > div{padding-bottom:var(--sp-3)}
   .nav{position:sticky;bottom:0;margin:0 calc(-1 * var(--sp-3));padding:var(--sp-2) var(--sp-3) calc(var(--sp-3) + env(safe-area-inset-bottom));background:var(--paper);z-index:2}
-  .nav button{min-height:48px;font-size:var(--t-base)}
+  .nav .next{font-size:var(--t-base);padding:var(--sp-3)}
   .qr{display:none}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important;animation:none !important}}
@@ -211,21 +199,22 @@ a:hover{text-decoration-thickness:2px}
 <body>
 <a class="skip" href="#main">Pular pro conteúdo</a>
 
-<header class="wrap top">
-  <a class="name" href="/">Thiago Vitamina</a>
-  <p>Leitura de UX pra Bammies</p>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="name" href="/">Thiago Vitamina</a>
+    <nav aria-label="Partes da leitura">
+      <a href="#hoje"><span>1</span>Como é hoje</a>
+      <a href="#proposta"><span>2</span>A proposta</a>
+      <a href="#vitaminada"><span>3</span>Versão vitaminada</a>
+    </nav>
+  </div>
 </header>
 
 <main id="main">
 
   <section class="wrap opening grid" aria-labelledby="h-top">
     <h1 id="h-top">O problema nunca é o cliente. <span>É o que a gente mostra pra ele.</span></h1>
-    <p class="lead">Quando alguém pergunta “qual a diferença das barras?”, a resposta existe. Só não tá onde o olho procura. Isso se resolve na tela, e eu separei em três partes.</p>
-    <ol class="parts">
-      <li><a href="#hoje"><span class="n">1</span><b>Como é hoje</b><span class="d">O que trava a compra</span><span class="arw" aria-hidden="true"></span></a></li>
-      <li><a href="#proposta"><span class="n">2</span><b>A proposta</b><span class="d">13 melhorias, uma por vez</span><span class="arw" aria-hidden="true"></span></a></li>
-      <li><a href="#vitaminada"><span class="n">3</span><b>Versão vitaminada</b><span class="d">A loja nova, pra navegar livre</span><span class="arw" aria-hidden="true"></span></a></li>
-    </ol>
+    <p class="lead">Quando alguém pergunta “qual a diferença das barras?”, a resposta existe. Só não tá onde o olho procura. Isso se resolve na tela, e eu separei em três partes, ali em cima.</p>
   </section>
 
   <!-- 1 -->
@@ -263,7 +252,7 @@ a:hover{text-decoration-thickness:2px}
             <li><span>3</span>Um “0” com dois botões soltos, sem dizer o que fazer.</li>
             <li><span>4</span>Bammies G e P com a mesma imagem.</li>
           </ul>
-          <a class="open" href="#proposta">Ver a proposta <span class="arw" aria-hidden="true"></span></a>
+          <a class="btn-ink" href="#proposta"><span>Ver a proposta</span><span class="arw" aria-hidden="true"></span></a>
         </div>
       </div>
     </div>
@@ -293,8 +282,8 @@ a:hover{text-decoration-thickness:2px}
           <h3 class="title" id="stepTitle"></h3>
           <div id="stepBody" class="why-wrap"></div>
           <div class="nav">
-            <button type="button" class="prev" id="prev">Voltar</button>
-            <button type="button" class="next" id="next">Próximo</button>
+            <button type="button" class="btn-ink next" id="next"><span id="nextLabel">Próximo</span><span class="arw" aria-hidden="true"></span></button>
+            <button type="button" class="open prev" id="prev">Voltar</button>
           </div>
         </section>
       </div>
@@ -323,8 +312,19 @@ a:hover{text-decoration-thickness:2px}
           </div>
           <a class="btn-ink only-mobile" href="/bammies/app/"><span>Abrir a versão vitaminada</span><span class="arw" aria-hidden="true"></span></a>
           <p class="only-mobile" style="font-size:var(--t-base);color:var(--mute)">Abre em tela cheia, como um app. Pra voltar, é só tocar na seta.</p>
-          <h3>Os textos entre colchetes</h3>
-          <p>Descrição, preço dos Bammies, frete e prazo estão como exemplo. Com as informações reais, a versão vitaminada fica pronta pra testar com cliente.</p>
+          <p class="hint">Descrição, preço dos Bammies, frete e prazo estão como exemplo, entre colchetes.</p>
+
+          <h3>E daqui pra frente?</h3>
+          <p>Isso aqui é uma tela. Com o mesmo olhar dá pra passar pela loja inteira, da vitrine até o pagamento. Pra montar a proposta, eu preciso de:</p>
+          <ol>
+            <li>Link da loja ou acesso pra eu navegar</li>
+            <li>Plataforma onde ela é montada</li>
+            <li>Como o pedido termina hoje: WhatsApp, Pix, outro jeito</li>
+            <li>Se tiver, pedidos por mês, valor médio e de onde vêm os clientes</li>
+            <li>Informação e foto real de cada produto</li>
+          </ol>
+          <p>E um teste simples: contar quantas perguntas tipo “qual a diferença?” chegam por semana hoje e comparar depois da mudança. Aí ninguém precisa acreditar em mim, o número fala.</p>
+          <a class="btn-ink" href="https://wa.me/5511956299380?text=oi%20thiago%2C%20vi%20a%20leitura%20da%20bammies" target="_blank" rel="noopener"><span>Conversar no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
         </div>
       </div>
     </div>
@@ -332,14 +332,8 @@ a:hover{text-decoration-thickness:2px}
 
 </main>
 
-<footer class="night" aria-labelledby="h-next">
-  <div class="wrap">
-    <h2 id="h-next">Isso aqui é uma tela. Dá pra fazer o mesmo com a loja inteira.</h2>
-    <p>Da vitrine até o pagamento. Pra montar a proposta, eu preciso do link ou acesso da loja, da plataforma onde ela é feita, de como o pedido termina hoje e, se tiver, de pedidos por mês e valor médio.</p>
-    <p>E um teste simples: contar quantas perguntas tipo “qual a diferença?” chegam por semana hoje e comparar depois da mudança. Aí o número fala por si.</p>
-    <a class="btn-ink" href="https://wa.me/5511956299380?text=oi%20thiago%2C%20vi%20a%20leitura%20da%20bammies" target="_blank" rel="noopener"><span>Conversar no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
-    <div class="foot"><span>Thiago Vitamina · product designer em São Paulo</span><a href="/">thiagovitamina.com</a></div>
-  </div>
+<footer class="foot-simple">
+  <div class="wrap"><span>Thiago Vitamina · product designer em São Paulo</span><a class="open" href="/">thiagovitamina.com <span class="arw" aria-hidden="true"></span></a></div>
 </footer>
 
 <script src="/bammies/app.js"></script>
@@ -462,7 +456,7 @@ a:hover{text-decoration-thickness:2px}
       b.classList.toggle('is-done', k<i);
     });
     $('prev').disabled = i===0;
-    $('next').textContent = i===steps.length-1 ? 'Ver de novo' : 'Próximo';
+    $('nextLabel').textContent = i===steps.length-1 ? 'Ver de novo' : 'Próximo';
 
     if(s.needEnvy && !qty.envy) qty.envy = 1;
     if(s.clearAlbino && qty.albino) qty.albino = 0;
@@ -482,6 +476,11 @@ a:hover{text-decoration-thickness:2px}
     if(r.bottom < 0 || r.top > window.innerHeight) return;
     if(e.key==='ArrowRight') go(i+1); else if(e.key==='ArrowLeft') go(i-1);
   });
+  var navLinks = document.querySelectorAll('.top nav a');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ navLinks.forEach(function(a){ a.setAttribute('aria-current', a.getAttribute('href')==='#'+e.target.id); }); } }); }, {rootMargin:'-45% 0px -50% 0px'});
+    ['hoje','proposta','vitaminada'].forEach(function(id){ io.observe($(id)); });
+  }
   go(0);
   document.addEventListener('pointerover', function(e){ var b = e.target.closest && e.target.closest('.btn-ink'); if(!b) return; var r = b.getBoundingClientRect(); b.style.setProperty('--x',(e.clientX-r.left)+'px'); b.style.setProperty('--y',(e.clientY-r.top)+'px'); b.style.setProperty('--k', Math.ceil(Math.hypot(r.width,r.height)/6)+1); });
 })();
