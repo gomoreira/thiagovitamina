@@ -106,11 +106,24 @@ a:hover{text-decoration-thickness:2px}
 .shot{display:block;border:1px solid var(--rule);overflow:hidden;aspect-ratio:1440/1100;background:var(--night)}
 .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
 
+/* ícones: máscara SVG, um traço só, do tamanho do texto */
+.ico{display:inline-block;width:1em;height:1em;flex:none;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.ico--tipo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.5%2013%203.75%207.75%206%2013M2.4%2011h2.7M8%2013l3-9.25%203%209.25M9.1%209.75h3.8%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--botao{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%204.75h12.5v6.5H1.75zM5%208h6%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--ritmo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M2%202.75h12M2%2013.25h12M8%205.25v5.5M6.25%207%208%205.25%209.75%207M6.25%209%208%2010.75%209.75%209%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--topo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%202.75h12.5v10.5H1.75zM1.75%205.75h12.5M8.5%204.25h4%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--rodape{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%202.75h12.5v10.5H1.75zM1.75%2010.25h12.5M4%2011.75h2.5M8.5%2011.75h2.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--contato{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M2%203h12v7.5H7.25L4%2013.25V10.5H2z%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--todos{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.25%204.25h13.5v7.5H1.25zM3.5%206.75h1M6%206.75h1M8.5%206.75h1M11%206.75h1.5M4.5%209.25h7%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--rapido{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M9.25%201.5%203.5%209h4.25L6.75%2014.5%2012.5%207H8.25z%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--achar{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M6.75%203.5h-4v9.75H12.5v-4M9.5%202.75h3.75V6.5M13%203%207.5%208.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+
 /* o que muda */
 .change{row-gap:var(--sp-4);align-items:start;padding-block:var(--sp-5);border-top:1px solid var(--rule)}
 .change:first-of-type{border-top:0;padding-top:0}
 .change__text{grid-column:1 / span 4;display:flex;flex-direction:column;gap:var(--sp-3);max-width:40ch}
-.change__text .num{font-size:var(--t-sm);color:var(--mute)}
+.change__text .num{display:flex;align-items:center;gap:var(--sp-3);font-size:var(--t-sm);color:var(--mute)}
+.change__text .num .ico{font-size:var(--t-lg);color:var(--ink)}
 .change__text h3{font-family:var(--display);font-weight:600;font-size:var(--t-lg);line-height:1.15;letter-spacing:-.012em;text-wrap:balance}
 .change__text p{font-size:var(--t-md);line-height:1.45;text-wrap:pretty}
 .change__pair{grid-column:5 / span 8;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);align-items:start}
@@ -122,7 +135,8 @@ a:hover{text-decoration-thickness:2px}
 /* nas duas */
 .groups{row-gap:var(--sp-5);align-items:start}
 .group{grid-column:span 4;display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--ink);padding-top:var(--sp-3)}
-.group h3{font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1.2}
+.group h3{display:flex;flex-direction:column;gap:var(--sp-3);font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1.2}
+.group h3 .ico{font-size:var(--t-lg)}
 .group ul{padding-left:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-2)}
 .group li{text-wrap:pretty}
 .share{margin-top:var(--sp-2);max-width:340px;background:#E7F6E3;border-radius:12px;padding:6px;font-size:var(--t-sm);line-height:1.35}
@@ -229,37 +243,37 @@ a:hover{text-decoration-thickness:2px}
         <p>Seis mudanças. Em cada uma, o mesmo pedaço do site nas duas versões.</p>
       </div>
       <article class="change grid">
-          <div class="change__text"><span class="num">1</span><h3>Títulos que crescem com a tela</h3><p>No computador, os títulos ganham tamanho e o texto fica mais confortável de ler. No celular, tudo continua do tamanho certo.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--tipo" aria-hidden="true"></span>1</span><h3>Títulos que crescem com a tela</h3><p>No computador, os títulos ganham tamanho e o texto fica mais confortável de ler. No celular, tudo continua do tamanho certo.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><img src="/andante/review/c-tipo-a.webp" alt="Títulos que crescem com a tela, versão A" loading="lazy" decoding="async"></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-tipo-b.webp" alt="Títulos que crescem com a tela, versão B" loading="lazy" decoding="async"></figure>
           </div>
         </article><article class="change grid">
-          <div class="change__text"><span class="num">2</span><h3>Botões mais fáceis de ler e de tocar</h3><p>O botão é onde a pessoa decide reservar. Na B ele é maior, com a letra do tamanho do texto, e num vermelho um pouco mais fechado, que deixa o branco legível pra todo mundo.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--botao" aria-hidden="true"></span>2</span><h3>Botões mais fáceis de ler e de tocar</h3><p>O botão é onde a pessoa decide reservar. Na B ele é maior, com a letra do tamanho do texto, e num vermelho um pouco mais fechado, que deixa o branco legível pra todo mundo.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><img src="/andante/review/c-botao-a.webp" alt="Botões mais fáceis de ler e de tocar, versão A" loading="lazy" decoding="async"></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-botao-b.webp" alt="Botões mais fáceis de ler e de tocar, versão B" loading="lazy" decoding="async"></figure>
           </div>
         </article><article class="change grid">
-          <div class="change__text"><span class="num">3</span><h3>Mais respiro entre os blocos</h3><p>Os espaços seguem uma régua só. A página fica com o mesmo ritmo do começo ao fim, e cada página nova já nasce no mesmo padrão.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--ritmo" aria-hidden="true"></span>3</span><h3>Mais respiro entre os blocos</h3><p>Os espaços seguem uma régua só. A página fica com o mesmo ritmo do começo ao fim, e cada página nova já nasce no mesmo padrão.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><img src="/andante/review/c-ritmo-a.webp" alt="Mais respiro entre os blocos, versão A" loading="lazy" decoding="async"></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-ritmo-b.webp" alt="Mais respiro entre os blocos, versão B" loading="lazy" decoding="async"></figure>
           </div>
         </article><article class="change grid">
-          <div class="change__text"><span class="num">4</span><h3>Menu sempre à vista no computador</h3><p>Na B, as seções e o botão de reserva ficam no topo da tela, sem precisar abrir o menu.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--topo" aria-hidden="true"></span>4</span><h3>Menu sempre à vista no computador</h3><p>Na B, as seções e o botão de reserva ficam no topo da tela, sem precisar abrir o menu.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><img src="/andante/review/c-topo-a.webp" alt="Menu sempre à vista no computador, versão A" loading="lazy" decoding="async"></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-topo-b.webp" alt="Menu sempre à vista no computador, versão B" loading="lazy" decoding="async"></figure>
           </div>
         </article><article class="change grid">
-          <div class="change__text"><span class="num">5</span><h3>Rodapé que leva às viagens</h3><p>Quem chega no fim da página encontra as viagens ali mesmo. E esses links ajudam o Google a achar cada viagem.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--rodape" aria-hidden="true"></span>5</span><h3>Rodapé que leva às viagens</h3><p>Quem chega no fim da página encontra as viagens ali mesmo. E esses links ajudam o Google a achar cada viagem.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><img src="/andante/review/c-rodape-a.webp" alt="Rodapé que leva às viagens, versão A" loading="lazy" decoding="async"></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-rodape-b.webp" alt="Rodapé que leva às viagens, versão B" loading="lazy" decoding="async"></figure>
           </div>
         </article><article class="change grid">
-          <div class="change__text"><span class="num">6</span><h3>Um convite pra conversar</h3><p>No fim da B tem um bloco pra falar com vocês pelo WhatsApp. Na A, o contato fica só nos botões dos grupos.</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--contato" aria-hidden="true"></span>6</span><h3>Um convite pra conversar</h3><p>No fim da B tem um bloco pra falar com vocês pelo WhatsApp. Na A, o contato fica só nos botões dos grupos.</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption><div class="none">A versão A não tem esse bloco.</div></figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-contato-b.webp" alt="Um convite pra conversar, versão B" loading="lazy" decoding="async"></figure>
@@ -267,7 +281,7 @@ a:hover{text-decoration-thickness:2px}
         </article>
       <h3 class="sub">E o que já vem nas duas</h3>
       <div class="groups grid">
-        <div class="group"><h3>Todo mundo consegue usar</h3><ul><li>Dá pra navegar só pelo teclado.</li><li>Quem usa leitor de tela ouve a página na ordem certa, com a descrição de cada foto.</li></ul></div><div class="group"><h3>Abre rápido em qualquer tela</h3><ul><li>As fotos vêm leves e no tamanho de cada tela, pra abrir bem no 4G.</li><li>Nada escapa pros lados, do celular pequeno ao computador.</li></ul></div><div class="group"><h3>Fácil de achar e de compartilhar</h3><ul><li>Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.</li><li>O Google recebe o nome, a descrição e os dados de cada viagem.</li><li>O site tem ícone próprio na aba do navegador e no celular.</li></ul><div class="share"><img src="/andante/vitamina/assets/og/inicio.jpg" width="1200" height="630" alt="Imagem de prévia da Andante: foto do lago com o logo e o título O que interessa é o tempo vivido" loading="lazy"><div><b>Andante · Viagens bem vividas</b><small>Viagens em pequenos grupos</small></div></div></div>
+        <div class="group"><h3><span class="ico ico--todos" aria-hidden="true"></span>Todo mundo consegue usar</h3><ul><li>Dá pra navegar só pelo teclado.</li><li>Quem usa leitor de tela ouve a página na ordem certa, com a descrição de cada foto.</li></ul></div><div class="group"><h3><span class="ico ico--rapido" aria-hidden="true"></span>Abre rápido em qualquer tela</h3><ul><li>As fotos vêm leves e no tamanho de cada tela, pra abrir bem no 4G.</li><li>Nada escapa pros lados, do celular pequeno ao computador.</li></ul></div><div class="group"><h3><span class="ico ico--achar" aria-hidden="true"></span>Fácil de achar e de compartilhar</h3><ul><li>Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.</li><li>O Google recebe o nome, a descrição e os dados de cada viagem.</li><li>O site tem ícone próprio na aba do navegador e no celular.</li></ul><div class="share"><img src="/andante/vitamina/assets/og/inicio.jpg" width="1200" height="630" alt="Imagem de prévia da Andante: foto do lago com o logo e o título O que interessa é o tempo vivido" loading="lazy"><div><b>Andante · Viagens bem vividas</b><small>Viagens em pequenos grupos</small></div></div></div>
       </div>
     </div>
   </section>

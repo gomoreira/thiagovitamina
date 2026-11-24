@@ -28,6 +28,26 @@ def shot(v, letra, nome):
           <a class="shot" href="/andante/{v}/" target="_blank" rel="noopener" aria-label="Abrir a versão {letra} no computador"><img src="/andante/review/{v}-1440.webp" width="1440" height="2000" alt="Início do site da Andante na versão {letra}, numa tela de computador" loading="lazy" decoding="async"></a>
         </figure>'''
 
+
+ICONS = {
+  "tipo":    "M1.5 13 3.75 7.75 6 13M2.4 11h2.7M8 13l3-9.25 3 9.25M9.1 9.75h3.8",
+  "botao":   "M1.75 4.75h12.5v6.5H1.75zM5 8h6",
+  "ritmo":   "M2 2.75h12M2 13.25h12M8 5.25v5.5M6.25 7 8 5.25 9.75 7M6.25 9 8 10.75 9.75 9",
+  "topo":    "M1.75 2.75h12.5v10.5H1.75zM1.75 5.75h12.5M8.5 4.25h4",
+  "rodape":  "M1.75 2.75h12.5v10.5H1.75zM1.75 10.25h12.5M4 11.75h2.5M8.5 11.75h2.5",
+  "contato": "M2 3h12v7.5H7.25L4 13.25V10.5H2z",
+  "todos":   "M1.25 4.25h13.5v7.5H1.25zM3.5 6.75h1M6 6.75h1M8.5 6.75h1M11 6.75h1.5M4.5 9.25h7",
+  "rapido":  "M9.25 1.5 3.5 9h4.25L6.75 14.5 12.5 7H8.25z",
+  "achar":   "M6.75 3.5h-4v9.75H12.5v-4M9.5 2.75h3.75V6.5M13 3 7.5 8.5",
+}
+def ico_css():
+    import urllib.parse
+    out = []
+    for k, d in ICONS.items():
+        svg = f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='{d}' fill='none' stroke='#000' stroke-width='1.5' stroke-linecap='square'/></svg>"
+        out.append(f'.ico--{k}{{--i:url("data:image/svg+xml,{urllib.parse.quote(svg)}")}}')
+    return "\n".join(out)
+
 MUDA = [
   ("tipo", "Títulos que crescem com a tela",
    "No computador, os títulos ganham tamanho e o texto fica mais confortável de ler. No celular, tudo continua do tamanho certo."),
@@ -44,9 +64,9 @@ MUDA = [
 ]
 
 AMBAS = [
-  ("Todo mundo consegue usar", ["Dá pra navegar só pelo teclado.", "Quem usa leitor de tela ouve a página na ordem certa, com a descrição de cada foto."]),
-  ("Abre rápido em qualquer tela", ["As fotos vêm leves e no tamanho de cada tela, pra abrir bem no 4G.", "Nada escapa pros lados, do celular pequeno ao computador."]),
-  ("Fácil de achar e de compartilhar", ["Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.", "O Google recebe o nome, a descrição e os dados de cada viagem.", "O site tem ícone próprio na aba do navegador e no celular."]),
+  ("todos", "Todo mundo consegue usar", ["Dá pra navegar só pelo teclado.", "Quem usa leitor de tela ouve a página na ordem certa, com a descrição de cada foto."]),
+  ("rapido", "Abre rápido em qualquer tela", ["As fotos vêm leves e no tamanho de cada tela, pra abrir bem no 4G.", "Nada escapa pros lados, do celular pequeno ao computador."]),
+  ("achar", "Fácil de achar e de compartilhar", ["Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.", "O Google recebe o nome, a descrição e os dados de cada viagem.", "O site tem ícone próprio na aba do navegador e no celular."]),
 ]
 
 PASSOS = [
@@ -62,7 +82,7 @@ def muda(i, key, titulo, texto):
     a = (f'<img src="/andante/review/c-{key}-a.webp" alt="{titulo}, versão A" loading="lazy" decoding="async">'
          if key != "contato" else '<div class="none">A versão A não tem esse bloco.</div>')
     return f'''<article class="change grid">
-          <div class="change__text"><span class="num">{i}</span><h3>{titulo}</h3><p>{texto}</p></div>
+          <div class="change__text"><span class="num"><span class="ico ico--{key}" aria-hidden="true"></span>{i}</span><h3>{titulo}</h3><p>{texto}</p></div>
           <div class="change__pair">
             <figure><figcaption>Versão A</figcaption>{a}</figure>
             <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-{key}-b.webp" alt="{titulo}, versão B" loading="lazy" decoding="async"></figure>
@@ -177,11 +197,16 @@ a:hover{{text-decoration-thickness:2px}}
 .shot{{display:block;border:1px solid var(--rule);overflow:hidden;aspect-ratio:1440/1100;background:var(--night)}}
 .shot img{{width:100%;height:100%;object-fit:cover;object-position:top}}
 
+/* ícones: máscara SVG, um traço só, do tamanho do texto */
+.ico{{display:inline-block;width:1em;height:1em;flex:none;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}}
+{ico_css()}
+
 /* o que muda */
 .change{{row-gap:var(--sp-4);align-items:start;padding-block:var(--sp-5);border-top:1px solid var(--rule)}}
 .change:first-of-type{{border-top:0;padding-top:0}}
 .change__text{{grid-column:1 / span 4;display:flex;flex-direction:column;gap:var(--sp-3);max-width:40ch}}
-.change__text .num{{font-size:var(--t-sm);color:var(--mute)}}
+.change__text .num{{display:flex;align-items:center;gap:var(--sp-3);font-size:var(--t-sm);color:var(--mute)}}
+.change__text .num .ico{{font-size:var(--t-lg);color:var(--ink)}}
 .change__text h3{{font-family:var(--display);font-weight:600;font-size:var(--t-lg);line-height:1.15;letter-spacing:-.012em;text-wrap:balance}}
 .change__text p{{font-size:var(--t-md);line-height:1.45;text-wrap:pretty}}
 .change__pair{{grid-column:5 / span 8;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);align-items:start}}
@@ -193,7 +218,8 @@ a:hover{{text-decoration-thickness:2px}}
 /* nas duas */
 .groups{{row-gap:var(--sp-5);align-items:start}}
 .group{{grid-column:span 4;display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--ink);padding-top:var(--sp-3)}}
-.group h3{{font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1.2}}
+.group h3{{display:flex;flex-direction:column;gap:var(--sp-3);font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1.2}}
+.group h3 .ico{{font-size:var(--t-lg)}}
 .group ul{{padding-left:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-2)}}
 .group li{{text-wrap:pretty}}
 .share{{margin-top:var(--sp-2);max-width:340px;background:#E7F6E3;border-radius:12px;padding:6px;font-size:var(--t-sm);line-height:1.35}}
@@ -282,7 +308,7 @@ a:hover{{text-decoration-thickness:2px}}
       {"".join(muda(i, *m) for i, m in enumerate(MUDA, 1))}
       <h3 class="sub">E o que já vem nas duas</h3>
       <div class="groups grid">
-        {"".join(f'<div class="group"><h3>{t}</h3><ul>{"".join(f"<li>{x}</li>" for x in itens)}</ul>' + ('<div class="share"><img src="/andante/vitamina/assets/og/inicio.jpg" width="1200" height="630" alt="Imagem de prévia da Andante: foto do lago com o logo e o título O que interessa é o tempo vivido" loading="lazy"><div><b>Andante · Viagens bem vividas</b><small>Viagens em pequenos grupos</small></div></div>' if i == 2 else "") + "</div>" for i, (t, itens) in enumerate(AMBAS))}
+        {"".join(f'<div class="group"><h3><span class="ico ico--{k}" aria-hidden="true"></span>{t}</h3><ul>{"".join(f"<li>{x}</li>" for x in itens)}</ul>' + ('<div class="share"><img src="/andante/vitamina/assets/og/inicio.jpg" width="1200" height="630" alt="Imagem de prévia da Andante: foto do lago com o logo e o título O que interessa é o tempo vivido" loading="lazy"><div><b>Andante · Viagens bem vividas</b><small>Viagens em pequenos grupos</small></div></div>' if i == 2 else "") + "</div>" for i, (k, t, itens) in enumerate(AMBAS))}
       </div>
     </div>
   </section>
