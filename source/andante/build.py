@@ -102,10 +102,12 @@ def variant_bar(path):
     root = BASE.rsplit("/", 1)[0]
     sub = f"/{path}" if path else "/"
     other = "vitamina" if VARIANT == "original" else "original"
-    nome = {"original": "Versão original", "vitamina": "Versão Vitamina"}
+    nome = {"original": "Versão A", "vitamina": "Versão B"}
+    # some dentro dos celulares da página de comparação (iframe)
     return (f'<nav class="variant" aria-label="Versões para revisão"><a href="{root}/">Comparar</a>'
             f'<span aria-current="true">{nome[VARIANT]}</span>'
-            f'<a href="{root}/{other}{sub}">Ver {nome[other].lower().replace("versão ", "a ")}</a></nav>')
+            f'<a href="{root}/{other}{sub}">Ver a {nome[other].lower()}</a></nav>'
+            '<script>if(window.top!==window.self)document.querySelector(".variant").remove()</script>')
 
 import html as _html
 # endereço absoluto para canonical, Open Graph e dados estruturados
