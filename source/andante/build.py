@@ -91,11 +91,22 @@ def footer():
 <nav class="footer__nav" aria-label="Rodapé">
 <div class="footer__col"><h2>Viagens</h2><a href="{home}#grupos">Grupos</a>{trips}</div>
 <div class="footer__col"><h2>Andante</h2><a href="{home}">Home</a><a href="{home}#por-que-viajar">Por que viajar</a><a href="{home}#quem-somos">Quem somos</a><a href="{home}#contato">Faça parte</a></div>
-<div class="footer__col"><h2>Ajuda</h2><a href="{home}#contato">Contato</a></div>
+<div class="footer__col"><h2>Fale com a gente</h2><a href="{whatsapp()}" data-track="whatsapp" data-viagem="rodape">WhatsApp {contato_txt()[1]}</a><a href="tel:+{re.sub(r"\D","",site.get("telefone",""))}">Telefone {contato_txt()[0]}</a></div>
 </nav></div>
 <p class="footer__tag tagline"><b>{site["tagline_b"]}</b> <i>{site["tagline_i"]}</i></p>
 <p class="footer__copy">© Andante</p>
 </div></footer>'''
+
+WA_ICO = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.4 18.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.5c0 3.2 2.7 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z" fill="currentColor"/></svg>'
+
+def contato_txt():
+    return site.get("telefone") or "[TELEFONE]", site.get("whatsapp") or "[WHATSAPP]"
+
+WA_JS = '''<script>(()=>{const f=document.querySelector('.wa-float');if(!f||!('IntersectionObserver' in window))return;const seen=new Set();const io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?seen.add(e.target):seen.delete(e.target));f.classList.toggle('is-away',seen.size>0)});document.querySelectorAll('#contato,.res-ctas,.footer').forEach(el=>io.observe(el))})()</script>'''
+
+def wa_float():
+    if VARIANT == "original": return ""
+    return f'<aside aria-label="Contato rápido"><a class="wa-float" href="{whatsapp()}" data-track="whatsapp" data-viagem="flutuante" aria-label="Falar com a Andante no WhatsApp">{WA_ICO}<span>WhatsApp</span></a></aside>' + WA_JS
 
 def variant_bar(path):
     if not VARIANT: return ""
@@ -136,7 +147,7 @@ def page(path, title, content, current="", description=site["descricao"], og_img
                  "header": header(current), "menu": menu(current), "footer": footer(),
                  "variant_css": f'\n<link rel="stylesheet" href="{BASE}/assets/css/original.css">' if VARIANT == "original" else "",
                  "body_class": f' class="v-{VARIANT}"' if VARIANT else "",
-                 "variant_bar": variant_bar(path)}.items():
+                 "variant_bar": wa_float() + variant_bar(path)}.items():
         html = html.replace("{{" + k + "}}", v)
     dest = OUT / path / "index.html"; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_text(html)
     PAGES.append(path)

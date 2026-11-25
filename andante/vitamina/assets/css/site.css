@@ -342,23 +342,37 @@ body.is-locked{overflow:hidden}
 /* tokens do sistema */
 :root{
   --fs-small:14px; --fs-body:16px; --fs-lead:20px;
-  --fs-h3:24px; --fs-h2:32px; --fs-title:40px; --fs-display:40px; --fs-hero:52px;
+  --fs-h3:24px; --fs-h2:32px; --fs-title:40px; --fs-display:40px; --fs-hero:40px;
   --s3:16px; --s5:24px; --s10:48px; --s24:104px;
   --edge:20px; --gutter:16px; --btn-h:52px;
 }
 @media (min-width:600px){ :root{ --edge:32px } }
-@media (min-width:820px){ :root{ --edge:40px; --gutter:24px; --fs-lead:20px; --fs-h2:40px; --fs-title:48px; --fs-display:48px; --fs-hero:64px } }
-@media (min-width:1100px){ :root{ --edge:48px; --fs-body:18px; --fs-lead:22px; --fs-h3:28px; --fs-h2:48px; --fs-title:64px; --fs-display:64px; --fs-hero:88px; --btn-h:56px } }
+@media (min-width:820px){ :root{ --edge:40px; --gutter:24px; --fs-lead:20px; --fs-h2:40px; --fs-title:48px; --fs-display:48px; --fs-hero:48px } }
+@media (min-width:1100px){ :root{ --edge:48px; --fs-body:18px; --fs-lead:22px; --fs-h3:28px; --fs-h2:48px; --fs-title:64px; --fs-display:64px; --fs-hero:64px; --btn-h:56px } }
 @media (min-width:1440px){ :root{ --edge:64px } }
 
 /* ajustes de desenho */
+/* botão cheio num vermelho mais fechado: pedido do cliente (25/11). Branco sobre ele: 7,9:1 */
+:root{--red-fill:#9e1f17}
+/* WhatsApp sempre à mão */
+.wa-float{position:fixed;z-index:40;right:var(--s4);bottom:calc(var(--s4) + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);background:var(--ink);color:var(--paper);border:1px solid var(--red);font-size:var(--fs-body);font-weight:500;text-decoration:none}
+@media (hover:hover){.wa-float:hover{background:var(--red-fill);border-color:var(--red-fill)}}
+.v-vitamina:has(.variant) .wa-float{bottom:80px}
+body:has(.menu.is-open) .wa-float{display:none}
+.wa-float{transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.wa-float.is-away{opacity:0;transform:translateY(8px);pointer-events:none}
+/* no celular vira um círculo só com o ícone, para não cobrir o texto */
+@media (max-width:819px){.wa-float{width:56px;min-height:56px;padding:0;justify-content:center;border-radius:50%}.wa-float span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.wa-float svg{width:24px;height:24px}}
+@media (prefers-reduced-motion:reduce){.wa-float{transition:none}}
 /* botões: chamada para ação no tamanho do texto, não da legenda */
 .btn{min-height:var(--btn-h);min-width:200px;padding:0 var(--s8);font-size:var(--fs-body);line-height:24px}
 .header__cta{min-height:48px;min-width:0;font-size:16px}
 .more{font-size:var(--fs-body);line-height:24px}
 /* títulos seguem a escala, sem tamanho próprio */
 .quote__text{font-size:var(--fs-h2);line-height:1.1}
-.hero__title{line-height:.98}
+.hero__title{line-height:.98;text-wrap:wrap}
+.t-line{display:block;white-space:nowrap}
+@media (max-width:359px){.hero__title{font-size:32px}}
 .groups__lead,.trip-lead,.trip-intro__quote{font-size:var(--fs-h3);line-height:1.2}
 .why__title,.card__title,.choice h3{line-height:1.05}
 .tile h3{font-size:var(--fs-h3);line-height:1.15}
