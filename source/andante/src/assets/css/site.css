@@ -419,3 +419,4 @@ body.is-locked{overflow:hidden}
 .variant span{background:var(--paper);color:var(--ink)}
 .variant a{text-underline-offset:.2em}
 .variant :focus-visible{outline-color:var(--paper)}
+@media (max-width:380px){.variant{gap:0;bottom:12px}.variant a,.variant span{padding:0 8px}}
