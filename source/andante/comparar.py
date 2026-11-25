@@ -1,4 +1,4 @@
-"""Página de apresentação em /andante: versão A e versão B lado a lado,
+"""Página de apresentação em /andante: versão original e versão Vitamina lado a lado,
 no design system do thiagovitamina.com (o mesmo padrão da página da Bammies)."""
 import sys, pathlib, shutil, urllib.parse
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
@@ -52,15 +52,15 @@ MUDA = [
   ("tipo", "Títulos que crescem com a tela",
    "No computador, os títulos ganham tamanho e o texto fica mais confortável de ler. No celular, tudo continua do tamanho certo."),
   ("botao", "Botões mais fáceis de ler e de tocar",
-   "O botão é onde a pessoa decide reservar. Na B ele é maior, com a letra do tamanho do texto, e num vermelho um pouco mais fechado, que deixa o branco legível pra todo mundo."),
+   "O botão é onde a pessoa decide reservar. Na Vitamina ele é maior, com a letra do tamanho do texto, e num vermelho um pouco mais fechado, que deixa o branco legível pra todo mundo."),
   ("ritmo", "Mais respiro entre os blocos",
    "Os espaços seguem uma régua só. A página fica com o mesmo ritmo do começo ao fim, e cada página nova já nasce no mesmo padrão."),
   ("topo", "Menu sempre à vista no computador",
-   "Na B, as seções e o botão de reserva ficam no topo da tela, sem precisar abrir o menu."),
+   "Na Vitamina, as seções e o botão de reserva ficam no topo da tela, sem precisar abrir o menu."),
   ("rodape", "Rodapé que leva às viagens",
    "Quem chega no fim da página encontra as viagens ali mesmo. E esses links ajudam o Google a achar cada viagem."),
   ("contato", "Um convite pra conversar",
-   "No fim da B tem um bloco pra falar com vocês pelo WhatsApp. Na A, o contato fica só nos botões dos grupos."),
+   "No fim da Vitamina tem um bloco pra falar com vocês pelo WhatsApp. Na original, o contato fica só nos botões dos grupos."),
 ]
 
 AMBAS = [
@@ -70,7 +70,7 @@ AMBAS = [
 ]
 
 PASSOS = [
-  ("Agora", "Você escolhe a A ou a B, ou me diz o que pegaria de cada uma."),
+  ("Agora", "Você escolhe a original ou a Vitamina, ou me diz o que pegaria de cada uma."),
   ("Esta semana", "Chega o conteúdo do País Basco, da home e do quem somos."),
   ("Em seguida", "Peru e Gaga e Piemonte, quando estiverem prontos."),
   ("Até 2/12", "Ajustes da revisão."),
@@ -79,13 +79,13 @@ PASSOS = [
 ]
 
 def muda(i, key, titulo, texto):
-    a = (f'<img src="/andante/review/c-{key}-a.webp" alt="{titulo}, versão A" loading="lazy" decoding="async">'
-         if key != "contato" else '<div class="none">A versão A não tem esse bloco.</div>')
+    a = (f'<img src="/andante/review/c-{key}-a.webp" alt="{titulo}, versão original" loading="lazy" decoding="async">'
+         if key != "contato" else '<div class="none">A versão original não tem esse bloco.</div>')
     return f'''<article class="change grid">
           <div class="change__text"><span class="num"><span class="ico ico--{key}" aria-hidden="true"></span>{i}</span><h3>{titulo}</h3><p>{texto}</p></div>
           <div class="change__pair">
-            <figure><figcaption>Versão A</figcaption>{a}</figure>
-            <figure><figcaption>Versão B</figcaption><img src="/andante/review/c-{key}-b.webp" alt="{titulo}, versão B" loading="lazy" decoding="async"></figure>
+            <figure><figcaption>Versão original</figcaption>{a}</figure>
+            <figure><figcaption>Versão Vitamina</figcaption><img src="/andante/review/c-{key}-b.webp" alt="{titulo}, versão Vitamina" loading="lazy" decoding="async"></figure>
           </div>
         </article>'''
 
@@ -96,9 +96,9 @@ html = f"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FFFFFF">
-<title>Andante · versões A e B · Thiago Vitamina</title>
+<title>Andante · versão original e versão Vitamina · Thiago Vitamina</title>
 <meta name="description" content="O site da Andante em duas versões lado a lado, para escolher juntos.">
-<meta property="og:title" content="Andante · versões A e B">
+<meta property="og:title" content="Andante · versão original e versão Vitamina">
 <meta property="og:description" content="O site da Andante em duas versões lado a lado, para escolher juntos.">
 <meta property="og:image" content="https://thiagovitamina.com/andante/original/assets/og/inicio.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,7 @@ a:hover{{text-decoration-thickness:2px}}
 
   <section class="wrap opening grid" aria-labelledby="h-top">
     <h1 id="h-top">Andante, em duas versões. <span>O mesmo site, pra escolher juntos.</span></h1>
-    <p class="lead">A versão A é o desenho do Lucas, do jeito que ele fez. A B é a mesma página com um sistema de tipografia, espaçamento e grid, e ajustes de leitura e de toque. O conteúdo e as fotos são os mesmos nas duas.</p>
+    <p class="lead">A versão original é o desenho do Lucas, do jeito que ele fez. A Vitamina é a mesma página com um sistema de tipografia, espaçamento e grid, e ajustes de leitura e de toque. O conteúdo e as fotos são os mesmos nas duas.</p>
   </section>
 
   <section class="part" id="lado" aria-labelledby="h-lado">
@@ -288,13 +288,13 @@ a:hover{{text-decoration-thickness:2px}}
         <p>As duas funcionam de verdade. Dá pra rolar, abrir o menu e entrar nas viagens dentro de cada celular.</p>
       </div>
       <div class="pair">
-        {phone("original", "A", "o desenho original")}
-        {phone("vitamina", "B", "com o sistema e os ajustes")}
+        {phone("original", "original", "o desenho do Lucas")}
+        {phone("vitamina", "Vitamina", "com o sistema e os ajustes")}
       </div>
       <h3 class="sub">No computador</h3>
       <div class="pair">
-        {shot("original", "A", "o desenho original")}
-        {shot("vitamina", "B", "com o sistema e os ajustes")}
+        {shot("original", "original", "o desenho do Lucas")}
+        {shot("vitamina", "Vitamina", "com o sistema e os ajustes")}
       </div>
     </div>
   </section>
@@ -302,7 +302,7 @@ a:hover{{text-decoration-thickness:2px}}
   <section class="part" id="muda" aria-labelledby="h-muda">
     <div class="wrap">
       <div class="head grid">
-        <h2 id="h-muda">2 · O que muda na B</h2>
+        <h2 id="h-muda">2 · O que muda na Vitamina</h2>
         <p>Seis mudanças. Em cada uma, o mesmo pedaço do site nas duas versões.</p>
       </div>
       {"".join(muda(i, *m) for i, m in enumerate(MUDA, 1))}
