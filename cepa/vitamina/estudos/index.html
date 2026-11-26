@@ -273,15 +273,15 @@ footer .wrap{display:grid;gap:48px}
 (() => {
   const API = "https://clinicaltrials.gov/api/v2/studies";
   const STATUS = "RECRUITING|NOT_YET_RECRUITING|ENROLLING_BY_INVITATION";
-  const FIELDS = "NCTId,BriefTitle,OverallStatus,Phase,InterventionName,Condition,LocationCountry,LocationCity,LocationState,LocationFacility,LeadSponsorName,LastUpdatePostDate";
+  const FIELDS = "NCTId,BriefTitle,OverallStatus,Phase,InterventionName,InterventionOtherName,Condition,LocationCountry,LocationCity,LocationState,LocationFacility,LeadSponsorName,LastUpdatePostDate";
   const consultas = [
     {"query.intr": 'psilocybin OR MDMA OR LSD OR "lysergic acid diethylamide" OR DMT OR "5-MeO-DMT" OR ayahuasca OR ibogaine OR noribogaine OR mescaline OR psychedelic'},
     {"query.intr": "ketamine OR esketamine", "query.cond": 'depression OR depressive OR PTSD OR "post-traumatic" OR anxiety OR "substance use" OR alcohol OR "opioid use" OR suicid OR bipolar OR obsessive'}
   ];
   const SUBS = [
-    ["psilocibina", /psilocyb|psilocin|psilo/i, "Psilocibina"],
+    ["psilocibina", /psilocyb|psilocin|psilo|cyb003|comp360/i, "Psilocibina"],
     ["mdma", /mdma|methylenedioxymethamphetamine|midomafetamine/i, "MDMA"],
-    ["lsd", /\blsd\b|lysergic/i, "LSD"],
+    ["lsd", /\blsd\b|lysergic|mm120|dt120/i, "LSD"],
     ["dmt", /\bdmt\b|5-meo|dimethyltryptamine|ayahuasca/i, "DMT e ayahuasca"],
     ["ibogaina", /ibogain|noribogain/i, "Ibogaína"],
     ["cetamina", /ketamin/i, "Cetamina"],
@@ -317,7 +317,7 @@ footer .wrap{display:grid;gap:48px}
 
   function prepara(s) {
     const p = s.protocolSection || {};
-    const ints = (p.armsInterventionsModule?.interventions || []).map(i => i.name).join(" ");
+    const ints = (p.armsInterventionsModule?.interventions || []).map(i => [i.name].concat(i.otherNames || []).join(" ")).join(" ");
     const titulo = p.identificationModule?.briefTitle || "";
     const conds = p.conditionsModule?.conditions || [];
     const locs = (p.contactsLocationsModule?.locations || []).filter(l => PAIS[l.country]);
@@ -328,7 +328,7 @@ footer .wrap{display:grid;gap:48px}
       status: p.statusModule?.overallStatus,
       data: p.statusModule?.lastUpdatePostDateStruct?.date || "",
       fase: fases.filter(f => f !== "Não se aplica").join(" e ") || "",
-      subs: subs.length ? subs : [SUBS[6]],
+      subs,
       patro: p.sponsorCollaboratorsModule?.leadSponsor?.name || "",
       paises: [...new Set(locs.map(l => l.country))],
       texto: tira(locs.map(l => [l.facility, l.city, l.state].join(" ")).join(" ") + " " + (p.sponsorCollaboratorsModule?.leadSponsor?.name || ""))
@@ -383,16 +383,16 @@ footer .wrap{display:grid;gap:48px}
   async function carrega() {
     try {
       let cache = null;
-      try { cache = JSON.parse(sessionStorage.getItem("cepa-estudos") || "null"); } catch (e) {}
+      try { cache = JSON.parse(sessionStorage.getItem("cepa-estudos-2") || "null"); } catch (e) {}
       let brutos;
       if (cache && Date.now() - cache.t < 3600e3) brutos = cache.d;
       else {
         const res = await Promise.all(consultas.map(busca));
         const vistos = new Set(); brutos = [];
         res.flat().forEach(s => { const id = s.protocolSection?.identificationModule?.nctId; if (id && !vistos.has(id)) { vistos.add(id); brutos.push(s); } });
-        try { sessionStorage.setItem("cepa-estudos", JSON.stringify({t: Date.now(), d: brutos})); } catch (e) {}
+        try { sessionStorage.setItem("cepa-estudos-2", JSON.stringify({t: Date.now(), d: brutos})); } catch (e) {}
       }
-      estudos = brutos.map(prepara).filter(e => e.paises.length)
+      estudos = brutos.map(prepara).filter(e => e.paises.length && e.subs.length)
         .sort((a, b) => (b.paises.includes("Brazil") - a.paises.includes("Brazil")) || (a.status === "RECRUITING" ? -1 : 0) - (b.status === "RECRUITING" ? -1 : 0) || b.data.localeCompare(a.data));
       $("quando").textContent = ", então está sempre atualizada";
       desenha();
