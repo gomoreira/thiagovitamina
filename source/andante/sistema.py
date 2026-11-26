@@ -63,7 +63,7 @@ MANUAL = """
 body:has(.menu.is-open) .wa-float{display:none}
 .wa-float.is-away{opacity:0;transform:translateY(8px);pointer-events:none}
 /* no celular vira um círculo só com o ícone, para não cobrir o texto */
-@media (max-width:819px){.wa-float{width:64px;min-height:64px;padding:0;justify-content:center;border-radius:50%}.wa-float span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.wa-float svg{width:40px;height:40px}}
+@media (max-width:819px){.wa-float{width:64px;min-height:64px;padding:0;justify-content:center}.wa-float span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.wa-float svg{width:40px;height:40px}}
 @media (prefers-reduced-motion:reduce){.wa-float{transition:none}}
 /* botões: chamada para ação no tamanho do texto, não da legenda */
 .btn{min-height:var(--btn-h);min-width:200px;padding:0 var(--s8);font-size:var(--fs-body);line-height:24px}
