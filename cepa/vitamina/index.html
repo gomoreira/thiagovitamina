@@ -224,12 +224,13 @@ html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-
 /* C: o key visual do Figma, a palavra cepa sobre os cogumelos */
 .hero-c .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:88px;padding-bottom:32px}
 .kv{position:relative;width:min(100%,760px,86svh);display:grid;place-items:center;margin-bottom:8px}
-.kv-foto{grid-area:1/1;width:min(35svh,360px);height:auto;aspect-ratio:1;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.kv-foto{grid-area:1/1;width:min(29svh,340px);height:auto;aspect-ratio:1;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
 .kv-palavra{grid-area:1/1;width:100%;height:auto;position:relative;z-index:1}
 .hero-c h1{font-size:clamp(26px,min(2.6vw,4.4svh),38px);max-width:26ch;margin:4px auto 12px}
 .hero-c .lead{margin:0 auto 22px;max-width:52ch;font-size:clamp(16px,min(1.4vw,2.3svh),19px)}
 .hero-c .acoes{justify-content:center;margin-bottom:0}
-@media (max-height:760px) and (min-width:861px){.hero-c .wrap{padding-top:80px;padding-bottom:12px}.hero-c .lead{margin-bottom:16px}}
+@media (max-height:820px){.hero-c .wrap{padding-top:84px;padding-bottom:12px}.hero-c .kv-foto{width:min(56vw,22svh,300px)}.hero-c h1{font-size:clamp(24px,3.6svh,32px);margin:2px auto 8px}.hero-c .lead{margin-bottom:14px;font-size:16px}.hero-c .acoes .btn{min-height:44px;padding:10px 20px}.hero-c .chip-estudos{font-size:14px}}
+@media (max-height:700px){.hero-c .kv-foto{width:min(50vw,18svh,240px)}.hero-c .lead{font-size:15px;line-height:1.45}}
 /* D: a A em versão clara, com os cogumelos recortados */
 .hero-d{background:var(--off);color:var(--preto)}
 .hero-d .eyebrow{color:var(--roxo)}
@@ -254,11 +255,31 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 .seletor a[aria-current]{background:var(--off);color:var(--preto)}
 @media (max-width:860px){
   .hero-b .wrap{padding-top:120px}
-  .kv-foto{width:min(56vw,28svh,260px)}
+  .kv-foto{width:min(56vw,22svh,240px)}
   .hero-c .wrap{padding-top:88px}
   .hero-c .acoes .btn{min-height:46px;padding:12px 20px}
 }
 @media (prefers-reduced-motion:reduce){.hero-b .hero-fundo{display:none}.hero-b{background:url(/cepa/vitamina/img/gradiente.jpg) center/cover}}
+
+/* Estudos clínicos em destaque (pedido da Raquel) */
+.chip-estudos{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-bottom:28px;padding:9px 16px 9px 12px;border-radius:999px;font-size:15px;font-weight:400;text-decoration:none;background:rgba(245,245,242,.1);border:1px solid rgba(245,245,242,.28);color:var(--off);transition:background .25s var(--ease),border-color .25s var(--ease)}
+.chip-estudos:hover{background:rgba(245,245,242,.18);border-color:rgba(245,245,242,.6)}
+.chip-estudos svg{width:13px;height:13px;flex:none}
+.chip-estudos .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 4px rgba(37,186,162,.25);flex:none}
+.hero-c .chip-estudos{align-self:center;margin-bottom:0;padding-block:7px}
+.hero-d .chip-estudos{background:var(--branco);border-color:var(--linha);color:var(--preto)}
+.hero-d .chip-estudos:hover{border-color:var(--preto)}
+.estudos-home{background:var(--roxo);color:var(--off)}
+.estudos-home .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:end}
+.estudos-home .eyebrow{color:#E6DDF0;margin-bottom:20px}
+.estudos-home h2{font-size:clamp(36px,4.4vw,60px);margin-bottom:24px;max-width:16ch}
+.estudos-home p{font-size:clamp(18px,1.6vw,21px);max-width:50ch;margin-bottom:32px;color:#F1ECF6}
+.estudos-home .btn svg{width:14px;height:14px}
+.estudos-subs{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.estudos-subs li{font-family:var(--serif);font-size:clamp(20px,1.8vw,26px);padding:6px 16px;border:1px solid rgba(245,245,242,.45);border-radius:999px}
+.estudos-ponte{font-size:17px!important;line-height:1.5;border-top:1px solid rgba(245,245,242,.35);padding-top:20px;margin-bottom:0!important}
+.estudos-ponte strong{font-weight:500;color:var(--off)}
+@media (max-width:860px){.so-desk{display:none}.estudos-home .wrap{grid-template-columns:1fr;gap:32px}.chip-estudos{font-size:14px;margin-bottom:20px}}
 </style>
 <script>
   (function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
@@ -279,7 +300,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#cuidado">Como cuidamos</a></li>
       <li><a href="#equipe">Equipe</a></li>
-      <li><a href="/cepa/vitamina/estudos">Estudos</a></li>
+      <li><a href="/cepa/vitamina/estudos">Estudos clínicos</a></li>
       <li><a href="#contato">Contato</a></li>
       <li><a class="btn btn-luz" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar conversa</a></li>
     </ul>
@@ -290,6 +311,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-a" aria-labelledby="h-hero">
     <div class="wrap">
       <div>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -311,6 +333,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
     <video class="hero-fundo" autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
     <div class="wrap">
       <img class="simb-grande" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
       <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
       <h1 id="h-hero-b">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
       <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -323,6 +346,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 
   <section class="hero hero-c" aria-labelledby="h-hero-c">
     <div class="wrap">
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
       <div class="kv">
         <img class="kv-foto" src="/cepa/vitamina/img/cogumelos.jpg" alt="" width="1080" height="1080">
         <img class="kv-palavra" src="/cepa/vitamina/img/cepa-branco.svg" alt="CEPA" width="1240" height="273">
@@ -339,6 +363,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-d" aria-labelledby="h-hero-d">
     <div class="wrap">
       <div>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero-d">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -402,6 +427,23 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
         <p>Podemos ajudar você a buscar um tratamento adequado entre os procedimentos legalizados e acompanhar suas vivências na terapia.</p>
       </div>
       <img class="surge" src="/cepa/vitamina/img/cogumelos-pb-720.jpg" alt="" width="720" height="720" loading="lazy">
+    </div>
+  </section>
+
+  <section class="estudos-home" id="estudos" aria-labelledby="h-estudos">
+    <div class="wrap">
+      <div class="surge">
+        <p class="eyebrow">Estudos clínicos</p>
+        <h2 id="h-estudos">Quer participar de uma pesquisa com psicodélicos?</h2>
+        <p>Reunimos os estudos que estão recrutando agora no Brasil e nos EUA, com psilocibina, MDMA, ayahuasca, cetamina e outras substâncias. Dá pra filtrar por cidade, substância ou condição.</p>
+        <a class="btn btn-luz" href="/cepa/vitamina/estudos">Ver os estudos abertos <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+      </div>
+      <div class="estudos-lado surge">
+        <ul class="estudos-subs" aria-label="Substâncias pesquisadas">
+          <li>Psilocibina</li><li>MDMA</li><li>Ayahuasca e DMT</li><li>LSD</li><li>Cetamina</li><li>Ibogaína</li>
+        </ul>
+        <p class="estudos-ponte"><strong>Vai participar de um estudo?</strong> A gente acompanha você na preparação e na integração da experiência, antes e depois da pesquisa.</p>
+      </div>
     </div>
   </section>
 
