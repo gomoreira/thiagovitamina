@@ -52,14 +52,15 @@ MANUAL = """
 /* botão cheio num vermelho mais fechado: pedido do cliente (25/11). Branco sobre ele: 7,9:1 */
 :root{--red-fill:#9e1f17}
 /* WhatsApp sempre à mão */
-.wa-float{position:fixed;z-index:40;right:var(--s4);bottom:calc(var(--s4) + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);background:var(--ink);color:var(--paper);border:1px solid var(--red);font-size:var(--fs-body);font-weight:500;text-decoration:none}
+.wa-float{position:fixed;z-index:40;right:max(var(--edge),env(safe-area-inset-right));bottom:calc(var(--edge) + env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);background:var(--ink);color:var(--paper);border:1px solid var(--red);font-size:var(--fs-body);font-weight:500;text-decoration:none}
 @media (hover:hover){.wa-float:hover{background:var(--red-fill);border-color:var(--red-fill)}}
-.v-vitamina:has(.variant) .wa-float{bottom:80px}
+.wa-float{min-height:56px}.wa-float svg{width:36px;height:36px}
+.v-vitamina:has(.variant:not(.is-hidden)) .wa-float{bottom:84px}
+.wa-float{transition:opacity .25s var(--ease),transform .25s var(--ease),bottom .3s var(--ease)}
 body:has(.menu.is-open) .wa-float{display:none}
-.wa-float{transition:opacity .25s var(--ease),transform .25s var(--ease)}
 .wa-float.is-away{opacity:0;transform:translateY(8px);pointer-events:none}
 /* no celular vira um círculo só com o ícone, para não cobrir o texto */
-@media (max-width:819px){.wa-float{width:56px;min-height:56px;padding:0;justify-content:center;border-radius:50%}.wa-float span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.wa-float svg{width:24px;height:24px}}
+@media (max-width:819px){.wa-float{width:64px;min-height:64px;padding:0;justify-content:center;border-radius:50%}.wa-float span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.wa-float svg{width:40px;height:40px}}
 @media (prefers-reduced-motion:reduce){.wa-float{transition:none}}
 /* botões: chamada para ação no tamanho do texto, não da legenda */
 .btn{min-height:var(--btn-h);min-width:200px;padding:0 var(--s8);font-size:var(--fs-body);line-height:24px}

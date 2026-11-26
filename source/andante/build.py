@@ -118,7 +118,8 @@ def variant_bar(path):
     return (f'<nav class="variant" aria-label="Versões para revisão"><a href="{root}/">Comparar</a>'
             f'<span aria-current="true">{nome[VARIANT]}</span>'
             f'<a href="{root}/{other}{sub}">Ver a {nome[other].split()[1]}</a></nav>'
-            '<script>if(window.top!==window.self)document.querySelector(".variant").remove()</script>')
+            '<script>(()=>{const v=document.querySelector(".variant");if(window.top!==window.self){v.remove();return}'
+            'let y=scrollY;addEventListener("scroll",()=>{const n=scrollY;v.classList.toggle("is-hidden",n>80&&n>y);y=n},{passive:true})})()</script>')
 
 import html as _html
 # endereço absoluto para canonical, Open Graph e dados estruturados

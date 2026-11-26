@@ -420,6 +420,9 @@ body.is-locked{overflow:hidden}
 .variant span{background:var(--paper);color:var(--ink)}
 .variant a{text-underline-offset:.2em}
 .variant :focus-visible{outline-color:var(--paper)}
+.variant{transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.variant.is-hidden{transform:translate(-50%,calc(100% + 24px));opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.variant{transition:none}}
 @media (max-width:380px){.variant{gap:0;bottom:12px}.variant a,.variant span{padding:0 8px}}
 
 .carousel__count{display:none}
