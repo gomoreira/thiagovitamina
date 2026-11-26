@@ -354,6 +354,8 @@ body.is-locked{overflow:hidden}
 @media (min-width:1440px){ :root{ --edge:64px } }
 
 /* ajustes de desenho */
+/* botão cheio em fundo escuro: contorno vermelho da marca (4,7:1 contra o preto) para o botão não se perder no fundo (WCAG 1.4.11 pede 3:1) */
+.on-dark .btn--solid,.band--black .btn--solid,.band--forest .btn--solid,.band--earth .btn--solid,.menu .btn--solid{border-color:var(--red)}
 /* Páginas de viagem no celular (pedido do cliente, 26/11): hotéis e bikes em carrossel; "para quem é" como lista */
 @media (max-width:819px){
   ul.carousel{display:flex;gap:var(--s2);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);margin-inline:calc(-1 * var(--edge));padding-inline:var(--edge);scrollbar-width:none;overscroll-behavior-x:contain}
