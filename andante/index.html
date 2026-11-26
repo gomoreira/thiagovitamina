@@ -120,6 +120,7 @@ a:hover{text-decoration-thickness:2px}
 .ico--cor{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M8%201.75a6.25%206.25%200%201%200%200%2012.5V1.75zM8%201.75a6.25%206.25%200%200%201%200%2012.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
 .ico--lista{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M5.5%203.75h9M5.5%208h9M5.5%2012.25h9M1.75%203.75h1.5M1.75%208h1.5M1.75%2012.25h1.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
 .ico--carrossel{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M4.25%203.25h7.5v9.5h-7.5zM1.5%204.75v6.5M14.5%204.75v6.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--aviso{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M8%201.75%2014.75%2013.75H1.25zM8%206v3.75M8%2011.25v1%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
 
 /* o que muda */
 .change{row-gap:var(--sp-4);align-items:start;padding-block:var(--sp-5);border-top:1px solid var(--rule)}
@@ -175,6 +176,18 @@ a:hover{text-decoration-thickness:2px}
 .timeline li:first-child{border-top-color:var(--ink)}
 .timeline b{font-family:var(--display);font-weight:600;font-size:var(--t-md)}
 .timeline span{text-wrap:pretty}
+/* o que falta: um toque de laranja de aviso, pedido do Thiago (exceção à regra de cor única, só nesta página) */
+.timeline li.is-pending{border-top-color:#FF7A1A}
+.timeline li:first-child.is-pending{border-top-color:#FF7A1A}
+.need{margin-top:var(--sp-2);background:#FFEBDB;padding:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-2)}
+.need__tag{display:inline-flex;align-self:flex-start;align-items:center;gap:var(--sp-1);background:#FF7A1A;color:var(--ink);font-size:var(--t-sm);font-weight:600;line-height:1;padding:6px 8px}
+.need__tag .ico{font-size:14px}
+.need ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:var(--sp-2);font-size:var(--t-sm);line-height:1.4}
+.need li{border:0!important;padding:0!important;display:block!important}
+/* todas as caixas com o mesmo tamanho e começando na mesma altura */
+@media (min-width:821px){.timeline{grid-template-rows:auto auto 1fr}.timeline>li{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}.timeline>li>.need{margin-top:var(--sp-2);height:100%}}
+@media (min-width:821px) and (max-width:1100px){.timeline{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--sp-5)}}
+.need ul{overflow-wrap:anywhere}
 .ask{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--rule)}
 .ask p{font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:30ch}
 
@@ -195,7 +208,7 @@ a:hover{text-decoration-thickness:2px}
   .screen{height:600px}
   .change__pair{grid-template-columns:1fr;gap:var(--sp-4)}
   .timeline{grid-template-columns:1fr}
-  .timeline li{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)}
+  .timeline li{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)} .timeline .need{grid-column:2}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
 </style>
@@ -381,7 +394,7 @@ a:hover{text-decoration-thickness:2px}
         <p>Até o site no ar. O que estiver entre colchetes é provisório e entra quando o conteúdo chegar.</p>
       </div>
       <ol class="timeline">
-        <li><b>Agora</b><span>Você confere os ajustes desta rodada e me passa o WhatsApp e o telefone da Andante.</span></li><li><b>Esta semana</b><span>Chega o conteúdo do País Basco, da home e do quem somos.</span></li><li><b>Em seguida</b><span>Peru e Gaga e Piemonte, quando estiverem prontos.</span></li><li><b>Até 2/12</b><span>Ajustes da revisão.</span></li><li><b>3/12</b><span>Domínio e site na Hostinger de vocês.</span></li><li><b>4/12</b><span>Site no ar.</span></li>
+        <li class=is-pending><b>Agora</b><span>Você confere os ajustes desta rodada.</span><div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Acesso à Hostinger, hoje (26/11), pelo compartilhamento de conta para designdasilva@gmail.com</li></ul></div></li><li class=is-pending><b>Esta semana</b><span>Textos e fotos do País Basco: recebidos, obrigado.</span><div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>WhatsApp e telefone da Andante, para os botões de reserva e o rodapé</li></ul></div></li><li class=is-pending><b>Em seguida</b><span>Peru e Gaga e Piemonte.</span><div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Datas, vagas, preço, hotéis e nomes de quem conduz (o que está entre colchetes)</li></ul></div></li><li class=is-pending><b>Até 2/12</b><span>Ajustes da revisão.</span><div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Fotos em alta do País Basco e fotos sem marca d’água para a home e as capas</li><li>Valor do suplemento de quarto individual do País Basco</li></ul></div></li><li class=is-pending><b>3/12</b><span>Domínio e site na Hostinger de vocês.</span><div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Apontar o domínio para a Hostinger, ou me dizer onde ele está registrado</li></ul></div></li><li><b>4/12</b><span>Site no ar.</span></li>
       </ol>
       <div class="ask">
         <p>Olhou as duas? Me conta qual prefere.</p>

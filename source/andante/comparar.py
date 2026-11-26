@@ -42,6 +42,7 @@ ICONS = {
   "cor":     "M8 1.75a6.25 6.25 0 1 0 0 12.5V1.75zM8 1.75a6.25 6.25 0 0 1 0 12.5",
   "lista":   "M5.5 3.75h9M5.5 8h9M5.5 12.25h9M1.75 3.75h1.5M1.75 8h1.5M1.75 12.25h1.5",
   "carrossel": "M4.25 3.25h7.5v9.5h-7.5zM1.5 4.75v6.5M14.5 4.75v6.5",
+  "aviso":   "M8 1.75 14.75 13.75H1.25zM8 6v3.75M8 11.25v1",
 }
 def ico_css():
     import urllib.parse
@@ -72,13 +73,13 @@ AMBAS = [
   ("achar", "Fácil de achar e de compartilhar", ["Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.", "O Google recebe o nome, a descrição e os dados de cada viagem.", "O site tem ícone próprio na aba do navegador e no celular."]),
 ]
 
-PASSOS = [
-  ("Agora", "Você confere os ajustes desta rodada e me passa o WhatsApp e o telefone da Andante."),
-  ("Esta semana", "Chega o conteúdo do País Basco, da home e do quem somos."),
-  ("Em seguida", "Peru e Gaga e Piemonte, quando estiverem prontos."),
-  ("Até 2/12", "Ajustes da revisão."),
-  ("3/12", "Domínio e site na Hostinger de vocês."),
-  ("4/12", "Site no ar."),
+PASSOS = [  # (quando, o que acontece, o que falta de vocês)
+  ("Agora", "Você confere os ajustes desta rodada.", ["Acesso à Hostinger, hoje (26/11), pelo compartilhamento de conta para designdasilva@gmail.com"]),
+  ("Esta semana", "Textos e fotos do País Basco: recebidos, obrigado.", ["WhatsApp e telefone da Andante, para os botões de reserva e o rodapé"]),
+  ("Em seguida", "Peru e Gaga e Piemonte.", ["Datas, vagas, preço, hotéis e nomes de quem conduz (o que está entre colchetes)"]),
+  ("Até 2/12", "Ajustes da revisão.", ["Fotos em alta do País Basco e fotos sem marca d\u2019água para a home e as capas", "Valor do suplemento de quarto individual do País Basco"]),
+  ("3/12", "Domínio e site na Hostinger de vocês.", ["Apontar o domínio para a Hostinger, ou me dizer onde ele está registrado"]),
+  ("4/12", "Site no ar.", []),
 ]
 
 AJUSTES = [
@@ -318,6 +319,18 @@ a:hover{{text-decoration-thickness:2px}}
 .timeline li:first-child{{border-top-color:var(--ink)}}
 .timeline b{{font-family:var(--display);font-weight:600;font-size:var(--t-md)}}
 .timeline span{{text-wrap:pretty}}
+/* o que falta: um toque de laranja de aviso, pedido do Thiago (exceção à regra de cor única, só nesta página) */
+.timeline li.is-pending{{border-top-color:#FF7A1A}}
+.timeline li:first-child.is-pending{{border-top-color:#FF7A1A}}
+.need{{margin-top:var(--sp-2);background:#FFEBDB;padding:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-2)}}
+.need__tag{{display:inline-flex;align-self:flex-start;align-items:center;gap:var(--sp-1);background:#FF7A1A;color:var(--ink);font-size:var(--t-sm);font-weight:600;line-height:1;padding:6px 8px}}
+.need__tag .ico{{font-size:14px}}
+.need ul{{list-style:none;padding:0;display:flex;flex-direction:column;gap:var(--sp-2);font-size:var(--t-sm);line-height:1.4}}
+.need li{{border:0!important;padding:0!important;display:block!important}}
+/* todas as caixas com o mesmo tamanho e começando na mesma altura */
+@media (min-width:821px){{.timeline{{grid-template-rows:auto auto 1fr}}.timeline>li{{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}}.timeline>li>.need{{margin-top:var(--sp-2);height:100%}}}}
+@media (min-width:821px) and (max-width:1100px){{.timeline{{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--sp-5)}}}}
+.need ul{{overflow-wrap:anywhere}}
 .ask{{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--rule)}}
 .ask p{{font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:30ch}}
 
@@ -338,7 +351,7 @@ a:hover{{text-decoration-thickness:2px}}
   .screen{{height:600px}}
   .change__pair{{grid-template-columns:1fr;gap:var(--sp-4)}}
   .timeline{{grid-template-columns:1fr}}
-  .timeline li{{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)}}
+  .timeline li{{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)}} .timeline .need{{grid-column:2}}
 }}
 @media (prefers-reduced-motion:reduce){{html{{scroll-behavior:auto}}*{{transition:none !important}}}}
 </style>
@@ -414,7 +427,7 @@ a:hover{{text-decoration-thickness:2px}}
         <p>Até o site no ar. O que estiver entre colchetes é provisório e entra quando o conteúdo chegar.</p>
       </div>
       <ol class="timeline">
-        {"".join(f"<li><b>{d}</b><span>{t}</span></li>" for d, t in PASSOS)}
+        {"".join(f'<li{" class=is-pending" if f else ""}><b>{d}</b><span>{t}</span>' + (f'<div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>' if f else "") + "</li>" for d, t, f in PASSOS)}
       </ol>
       <div class="ask">
         <p>Olhou as duas? Me conta qual prefere.</p>
