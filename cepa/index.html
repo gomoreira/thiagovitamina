@@ -188,6 +188,14 @@ a:hover{text-decoration-thickness:2px}
 @media (min-width:821px){.timeline{grid-template-rows:auto auto 1fr}.timeline>li{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}.timeline>li>.need{margin-top:var(--sp-2);height:100%}}
 @media (min-width:821px) and (max-width:1100px){.timeline{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--sp-5)}}
 .need ul{overflow-wrap:anywhere}
+.plano{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--sp-5) var(--gap);align-items:start;border-top:2px solid var(--ink);padding-top:var(--sp-5)}
+.plano__preco{display:flex;flex-direction:column;gap:var(--sp-1)}
+.plano__preco b{font-family:var(--display);font-weight:600;font-size:var(--t-2xl);letter-spacing:-.03em;line-height:1}
+.plano__lista{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:var(--sp-2)}
+.plano__acoes{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4)}
+.plano__nota{grid-column:2;margin:0;color:var(--mute);font-size:var(--t-sm)}
+.plano__acoes .open{align-self:center}
+@media (max-width:820px){.plano{grid-template-columns:1fr}.plano__acoes,.plano__nota{grid-column:auto}}
 .ask{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--rule)}
 .ask p{font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:30ch}
 
@@ -518,6 +526,28 @@ a:hover{text-decoration-thickness:2px}
       <div class="ask">
         <p>Olhou as duas versões? Me conta qual faz mais sentido pro CEPA.</p>
         <a class="btn-ink" href="https://wa.me/5511956299380?text=thiago%2C%20vi%20as%20vers%C3%B5es%20do%20cepa.%20" target="_blank" rel="noopener"><span>Responder no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="mensalidade" aria-labelledby="h-mens">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-mens">7 · Mensalidade</h2>
+        <p>Hospedagem, manutenção e pequenos ajustes do site, pagos direto no cartão.</p>
+      </div>
+      <div class="plano">
+        <div class="plano__preco"><b>R$ 50</b><span>por mês</span></div>
+        <ul class="plano__lista">
+          <li>Você paga hoje, e esse pagamento cobre dezembro.</li>
+          <li>Depois, a cobrança cai todo dia 1, a partir de 1º de janeiro.</li>
+          <li>Dá pra trocar o cartão, ver os recibos ou cancelar quando quiser.</li>
+        </ul>
+        <div class="plano__acoes">
+          <a class="btn-ink" href="https://buy.stripe.com/fZu8wIgah0qlarNappds400" rel="noopener"><span>Assinar com cartão</span><span class="arw" aria-hidden="true"></span></a>
+          <a class="open" href="https://billing.stripe.com/p/login/fZu8wIgah0qlarNappds400" target="_blank" rel="noopener">Gerenciar assinatura <span class="arw" aria-hidden="true"></span></a>
+        </div>
+        <p class="plano__nota">O pagamento é feito numa página segura do Stripe. Na fatura do cartão aparece VITAMINA INTERATIVA.</p>
       </div>
     </div>
   </section>
