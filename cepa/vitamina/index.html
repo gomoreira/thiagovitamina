@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>CEPA · Centro de Estudos de Psicodelia Aplicada</title>
+<meta name="description" content="Psicoterapia para quem vive experiências psicodélicas: preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CEPA · Centro de Estudos de Psicodelia Aplicada">
+<meta property="og:description" content="Psicoterapia para quem vive experiências psicodélicas: preparação, integração e redução de danos.">
+<meta property="og:image" content="https://thiagovitamina.com/cepa/vitamina/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/cepa/vitamina/favicon.png">
+<link rel="apple-touch-icon" href="/cepa/vitamina/favicon.png">
+<link rel="preload" href="/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/cepa/vitamina/fonts/funnel-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/cepa/vitamina/img/cogumelos-720.jpg" as="image">
+<style>
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Bodoni Moda";font-style:italic;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-wght-italic.woff2) format("woff2")}
+@font-face{font-family:"Funnel Display";font-style:normal;font-weight:300 800;font-display:swap;src:url(/cepa/vitamina/fonts/funnel-display-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Funnel Display";font-style:normal;font-weight:300 800;font-display:swap;src:url(/cepa/vitamina/fonts/funnel-display-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* Paleta e tipografia do Figma do CEPA */
+:root{
+  --preto:#1C1C1C; --noite:#000; --off:#F5F5F2; --branco:#fff;
+  --azul:#4D62AD; --rosa:#D81B61; --roxo:#78459B; --verde:#25BAA2;
+  --cinza:#5A5A5A; --linha:#E2E0DA; --cinza-escuro:#B9B6AE;
+  --serif:"Bodoni Moda","Bodoni 72",Didot,"Times New Roman",serif;
+  --sans:"Funnel Display","Helvetica Neue",Arial,sans-serif;
+  --max:1240px; --gut:clamp(20px,5vw,64px); --sec:clamp(72px,10vw,136px);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-weight:300;font-size:18px;line-height:1.55;background:var(--off);color:var(--preto);-webkit-font-smoothing:antialiased}
+img,video,iframe{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--branco);color:var(--preto);padding:10px 16px;font-weight:500;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.eyebrow{font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08;text-wrap:balance}
+p{text-wrap:pretty}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;font:500 17px/1 var(--sans);text-decoration:none;transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-luz{background:var(--off);color:var(--preto)}
+.btn-luz:hover{background:var(--branco);transform:translateY(-1px)}
+.btn-escuro{background:var(--preto);color:var(--off)}
+.btn-escuro:hover{background:#000;transform:translateY(-1px)}
+.btn-linha{border:1px solid currentColor}
+.btn-linha:hover{background:rgba(245,245,242,.1)}
+
+/* Topo */
+.topo{position:fixed;inset:0 0 auto;z-index:20;color:var(--off);transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none}
+.marca .simb{width:40px;height:auto}
+.marca .palavra{height:26px;width:auto}
+.marca .palavra-preta{display:none}
+.menu{display:flex;align-items:center;gap:32px;list-style:none}
+.menu a{font-size:16px;font-weight:400;text-decoration:none;opacity:.86;transition:opacity .2s}
+.menu a:hover{opacity:1}
+.menu .btn{opacity:1;min-height:44px;padding:10px 20px;font-size:15px}
+.topo.solido{background:rgba(245,245,242,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--preto);box-shadow:0 1px 0 var(--linha)}
+.topo.solido .palavra-branca{display:none}.topo.solido .palavra-preta{display:block}
+.topo.solido .menu .btn{background:var(--preto);color:var(--off)}
+.abrir{display:none;width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer;position:relative}
+.abrir span{position:absolute;left:10px;right:10px;height:1.5px;background:currentColor;transition:transform .3s var(--ease),top .3s var(--ease)}
+.abrir span:first-child{top:17px}.abrir span:last-child{top:26px}
+
+/* Abertura */
+.hero{position:relative;min-height:100svh;padding:0;background:var(--noite);color:var(--off);display:flex;align-items:center;overflow:hidden}
+.hero .wrap{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center;padding-top:112px;padding-bottom:48px}
+.hero .eyebrow{color:var(--cinza-escuro);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.hero .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.hero h1{font-size:clamp(38px,4vw,58px);margin-bottom:22px;max-width:15ch}
+.hero h1 em{font-style:italic}
+.hero .lead{font-size:clamp(18px,1.5vw,20px);max-width:38ch;color:#DCDAD4;margin-bottom:32px}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
+.contato-rapido{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:16px;color:#DCDAD4;border-top:1px solid rgba(245,245,242,.18);padding-top:24px;list-style:none}
+.contato-rapido a{text-decoration:none;border-bottom:1px solid rgba(245,245,242,.35);padding-bottom:2px}
+.contato-rapido a:hover{border-color:var(--off);color:var(--off)}
+.contato-rapido span{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-escuro);margin-bottom:4px}
+.visual{position:relative;justify-self:end;width:min(100%,620px);aspect-ratio:1}
+.visual img{width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);animation:flutua 9s ease-in-out infinite}
+.visual::after{content:"";position:absolute;inset:18%;z-index:-1;background:radial-gradient(closest-side,rgba(77,98,173,.45),rgba(216,27,97,.18) 60%,transparent);filter:blur(30px)}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* Seções */
+section{padding:var(--sec) 0}
+.titulo{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px;margin-bottom:56px}
+.titulo h2{font-size:clamp(36px,4.4vw,60px)}
+.titulo .eyebrow{color:var(--roxo);padding-top:12px}
+
+/* Sobre */
+.sobre-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
+.citacao{font-family:var(--serif);font-size:clamp(30px,3.4vw,46px);line-height:1.12;font-style:italic}
+.texto p{font-size:clamp(18px,1.5vw,21px);margin-bottom:22px;max-width:60ch}
+.texto p:first-child{font-size:clamp(21px,1.9vw,26px);line-height:1.45;font-weight:300}
+.video{margin-top:var(--sec);position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#000 url(/cepa/vitamina/img/gradiente.jpg) center/cover}
+.video button{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45));color:var(--off);cursor:pointer;display:flex;align-items:flex-end;justify-content:space-between;padding:clamp(20px,3vw,40px);text-align:left;font:inherit}
+.video .play{width:clamp(64px,7vw,88px);height:clamp(64px,7vw,88px);border-radius:50%;background:var(--off);display:grid;place-items:center;transition:transform .3s var(--ease)}
+.video button:hover .play{transform:scale(1.06)}
+.video .play svg{width:28%;margin-left:6%;fill:var(--preto)}
+.video strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,40px);display:block;line-height:1.1}
+.video small{font-size:15px;opacity:.85}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Cuidado */
+.cuidado{background:var(--branco)}
+.servicos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none}
+.servicos li{border-radius:24px;padding:32px 28px 30px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.servicos .n{font-family:var(--serif);font-size:20px;font-style:italic}
+.servicos h3{font-size:clamp(26px,2.4vw,34px);margin-bottom:12px}
+.servicos p{font-size:17px;line-height:1.5}
+.s1{background:var(--verde);color:var(--preto)}
+.s2{background:var(--rosa);color:var(--branco)}
+.s3{background:var(--azul);color:var(--branco)}
+.fecho{margin-top:48px;font-family:var(--serif);font-size:clamp(24px,2.4vw,32px);max-width:28ch;line-height:1.2}
+
+/* Aviso */
+.aviso{background:var(--noite);color:var(--off);position:relative;overflow:hidden}
+.aviso .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center}
+.aviso .eyebrow{color:var(--rosa);filter:brightness(1.35);margin-bottom:24px;display:flex;gap:10px;align-items:center}
+.aviso .eyebrow svg{width:22px;height:22px}
+.aviso h2{font-size:clamp(32px,3.8vw,52px);margin-bottom:28px}
+.aviso p{color:#CFCCC5;margin-bottom:18px;max-width:58ch}
+.aviso p strong{color:var(--off);font-weight:500}
+.aviso img{width:100%;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent);opacity:.9}
+
+/* Equipe */
+.equipe .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px;list-style:none}
+.pessoa img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;margin-bottom:18px;background:var(--linha);filter:grayscale(.15)}
+.pessoa h3{font-size:24px;line-height:1.15;margin-bottom:6px}
+.pessoa .reg{font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--roxo);margin-bottom:8px}
+.pessoa .cargo{font-size:16px;line-height:1.45;color:var(--cinza)}
+
+/* Contato */
+.contato{position:relative;color:var(--off);background:var(--preto) url(/cepa/vitamina/img/gradiente.jpg) center/cover;overflow:hidden}
+.contato::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,28,.82),rgba(28,28,28,.35))}
+.contato .wrap{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
+.contato h2{font-size:clamp(44px,6vw,84px);margin-bottom:24px}
+.contato p{font-size:clamp(18px,1.6vw,21px);max-width:40ch;margin-bottom:36px}
+.canais{list-style:none;display:grid;gap:0;border-top:1px solid rgba(245,245,242,.35)}
+.canais a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid rgba(245,245,242,.35);text-decoration:none;font-size:clamp(18px,1.6vw,22px);transition:padding .25s var(--ease)}
+.canais a:hover{padding-left:8px}
+.canais span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:2px}
+.canais svg{width:22px;height:22px;flex:none}
+
+/* Rodapé */
+footer{background:var(--noite);color:var(--cinza-escuro);padding:72px 0 40px;font-size:15px}
+footer .wrap{display:grid;gap:48px}
+.rod-topo{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+.rod-marca img{height:48px;width:auto;margin-bottom:16px}
+.rod-marca p{font-family:var(--serif);font-size:20px;color:var(--off);line-height:1.25}
+.rod-links{display:flex;gap:56px;flex-wrap:wrap;list-style:none}
+.rod-links strong{display:block;color:var(--off);font-weight:500;margin-bottom:10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.rod-links a{display:block;text-decoration:none;padding:4px 0}
+.rod-links a:hover{color:var(--off)}
+.palavra-grande{width:100%;height:auto;opacity:.12}
+.rod-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #2a2a2a;padding-top:24px;font-size:14px}
+.rod-base a{text-decoration:none}.rod-base a:hover{color:var(--off)}
+
+/* WhatsApp fixo */
+.zap{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:15;width:60px;height:60px;border-radius:50%;background:var(--preto);color:var(--off);display:grid;place-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);transition:opacity .3s,transform .3s var(--ease);text-decoration:none}
+.zap svg{width:28px;height:28px}
+.zap.escondido{opacity:0;transform:translateY(12px);pointer-events:none}
+
+/* Entrada suave */
+.surge{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.surge.visto{opacity:1;transform:none}
+
+/* Tablet e celular */
+@media (max-width:1024px){
+  .equipe .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .servicos{grid-template-columns:1fr}
+  .servicos li{min-height:0}
+}
+@media (max-width:860px){
+  .abrir{display:block}
+  .menu{position:fixed;inset:80px 0 auto;flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px rgba(0,0,0,.08);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s var(--ease)}
+  .menu a{font-family:var(--serif);font-size:32px;opacity:1;display:block;padding:6px 0}
+  .menu .btn{font-family:var(--sans);font-size:17px;margin-top:16px;background:var(--preto);color:var(--off)}
+  .topo.aberto{background:var(--off);color:var(--preto)}
+  .topo.aberto .palavra-branca{display:none}.topo.aberto .palavra-preta{display:block}
+  .topo.aberto .menu{opacity:1;visibility:visible;transform:none}
+  .topo.aberto .abrir span:first-child{top:21px;transform:rotate(45deg)}
+  .topo.aberto .abrir span:last-child{top:21px;transform:rotate(-45deg)}
+  .hero .wrap{grid-template-columns:1fr;padding-top:104px;gap:8px}
+  .visual{order:-1;justify-self:start;width:min(52vw,220px);margin:-8px 0 4px -12px}
+  .titulo,.sobre-grid,.aviso .wrap,.contato .wrap{grid-template-columns:1fr;gap:20px}
+  .titulo{margin-bottom:36px}
+  .aviso img{justify-self:center;max-width:300px;order:-1}
+  .equipe .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 16px}
+  .pessoa h3{font-size:20px}
+  .pessoa .cargo{font-size:15px}
+  .contato-rapido{gap:16px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .visual img{animation:none}
+  .surge{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a class="marca" href="#conteudo" aria-label="CEPA, início">
+      <img class="simb" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
+      <img class="palavra palavra-branca" src="/cepa/vitamina/img/cepa-branco.svg" alt="" width="118" height="26">
+      <img class="palavra palavra-preta" src="/cepa/vitamina/img/cepa-preto.svg" alt="" width="118" height="26">
+    </a>
+    <button class="abrir" id="abrir" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#cuidado">Como cuidamos</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a class="btn btn-luz" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar conversa</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
+        <h1 id="h-hero">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
+        <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
+        <div class="acoes">
+          <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">
+            <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
+            Agendar pelo WhatsApp
+          </a>
+          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
+        </div>
+        <ul class="contato-rapido" aria-label="Contato">
+          <li><span>Telefone</span><a href="tel:+5511920005742">+55 11 92000-5742</a></li>
+          <li><span>E-mail</span><a href="mailto:raquel@cepaintegra.com.br">raquel@cepaintegra.com.br</a></li>
+          <li><span>Instagram</span><a href="https://www.instagram.com/cepa.integra/" target="_blank" rel="noopener">@cepa.integra</a></li>
+        </ul>
+      </div>
+      <div class="visual">
+        <img src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" aria-labelledby="h-sobre">
+    <div class="wrap">
+      <div class="titulo surge">
+        <p class="eyebrow">Sobre o CEPA</p>
+        <h2 id="h-sobre">Sua terapia acolhe sua psicodelia?</h2>
+      </div>
+      <div class="sobre-grid">
+        <p class="citacao surge">Um cuidado em saúde mental feito por quem conhece a experiência psicodélica por dentro.</p>
+        <div class="texto surge">
+          <p>Quem vive experiências psicodélicas e procura atendimento em saúde mental costuma ter dificuldade em encontrar profissionais preparados para acolher, assegurar e integrar essas vivências.</p>
+          <p>Sejam psiconautas em busca espiritual e de autoconhecimento, frequentadores de festas rave ou pacientes em tratamentos alternativos, muita gente encontra obstáculos para acomodar experiências tão singulares e transformadoras.</p>
+          <p>Em consultas médicas ou psicoterapêuticas, muitos enfrentam preconceito ou falta de informação sobre o que essas substâncias representam: na segurança e na saúde, mas também na relevância e no potencial transformador.</p>
+          <p>Percebendo essa demanda nos consultórios e na própria vivência, psicólogos e psiquiatras idealizaram o CEPA. São profissionais com formação de excelência, experiência clínica consolidada e repertório pessoal no tema dos psicodélicos.</p>
+        </div>
+      </div>
+      <div class="video surge" id="video">
+        <button type="button" id="play" aria-label="Assistir ao vídeo de apresentação do CEPA">
+          <span><strong>Conheça o CEPA</strong><small>Vídeo de apresentação</small></span>
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18l16-9z"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cuidado" id="cuidado" aria-labelledby="h-cuidado">
+    <div class="wrap">
+      <div class="titulo surge">
+        <p class="eyebrow">Como cuidamos</p>
+        <h2 id="h-cuidado">Três frentes de cuidado, antes, durante e depois da experiência</h2>
+      </div>
+      <ul class="servicos">
+        <li class="s1 surge"><span class="n">01</span><div><h3>Preparação</h3><p>Preparação para usos autônomos, com informação e escuta antes da experiência.</p></div></li>
+        <li class="s2 surge"><span class="n">02</span><div><h3>Integração</h3><p>Integração de experiências psicodélicas em psicoterapia contínua ou em sessões breves.</p></div></li>
+        <li class="s3 surge"><span class="n">03</span><div><h3>Redução de danos</h3><p>Redução de danos e psicoeducação sobre psicodélicos, sem julgamento.</p></div></li>
+      </ul>
+      <p class="fecho surge">O cuidado com um profissional especializado pode fazer a diferença na sua jornada.</p>
+    </div>
+  </section>
+
+  <section class="aviso" id="aviso" aria-labelledby="h-aviso">
+    <div class="wrap">
+      <div class="surge">
+        <p class="eyebrow"><svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 11c1.1 0 2.2.7 3.1 2.1l11.8 19.8c1.7 2.8.4 5.1-2.9 5.1H12c-3.3 0-4.6-2.3-2.9-5.1L20.9 13.1c.9-1.4 2-2.1 3.1-2.1Zm0-4c-2.6 0-5 1.5-6.5 4L5.7 30.8c-1.6 2.6-1.8 5.4-.5 7.7C6.5 40.7 8.9 42 12 42h24c3 0 5.5-1.3 6.8-3.5 1.3-2.3 1.1-5.1-.5-7.7L30.5 11.1C29 8.5 26.6 7 24 7Zm0 27.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2ZM27 20a3 3 0 1 0-5.8 1.1L24 28l2.8-6.9c.1-.3.2-.7.2-1.1Z"/></svg>Aviso importante</p>
+        <h2 id="h-aviso">Não realizamos sessões com aplicação de substâncias psicodélicas</h2>
+        <p>A terapia assistida por psicodélicos ainda não é regulamentada no Brasil e no mundo. Por isso, os profissionais do CEPA não estão autorizados a oferecer atendimento clínico com aplicação dessas substâncias.</p>
+        <p>Hoje, no Brasil, têm autorização legal a <strong>cetamina</strong> e a <strong>ibogaína</strong>, em ambiente que atende às exigências legais e sanitárias, e a <strong>ayahuasca</strong>, em contexto religioso.</p>
+        <p>Podemos ajudar você a buscar um tratamento adequado entre os procedimentos legalizados e acompanhar suas vivências na terapia.</p>
+      </div>
+      <img class="surge" src="/cepa/vitamina/img/cogumelos-pb-720.jpg" alt="" width="720" height="720" loading="lazy">
+    </div>
+  </section>
+
+  <section class="equipe" id="equipe" aria-labelledby="h-equipe">
+    <div class="wrap">
+      <div class="titulo surge">
+        <p class="eyebrow">Equipe</p>
+        <h2 id="h-equipe">Conheça nossos terapeutas</h2>
+      </div>
+      <ul class="grid" id="grade"></ul>
+    </div>
+  </section>
+
+  <section class="contato" id="contato" aria-labelledby="h-contato">
+    <div class="wrap">
+      <div class="surge">
+        <p class="eyebrow">Contato</p>
+        <h2 id="h-contato">Vamos conversar?</h2>
+        <p>Conte um pouco do que você procura. A gente responde e indica o profissional mais adequado para você.</p>
+        <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+      </div>
+      <ul class="canais surge">
+        <li><a href="tel:+5511920005742"><div><span>Telefone e WhatsApp</span>+55 11 92000-5742</div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a></li>
+        <li><a href="mailto:raquel@cepaintegra.com.br"><div><span>E-mail</span>raquel@cepaintegra.com.br</div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a></li>
+        <li><a href="https://www.instagram.com/cepa.integra/" target="_blank" rel="noopener"><div><span>Instagram</span>@cepa.integra</div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="rod-topo">
+      <div class="rod-marca">
+        <img src="/cepa/vitamina/img/cepa-icone.png" alt="CEPA" width="160" height="150">
+        <p>Centro de Estudos<br>de Psicodelia Aplicada</p>
+      </div>
+      <ul class="rod-links">
+        <li><strong>Site</strong><a href="#sobre">Sobre</a><a href="#cuidado">Como cuidamos</a><a href="#aviso">Aviso importante</a><a href="#equipe">Equipe</a></li>
+        <li><strong>Contato</strong><a href="https://wa.me/5511920005742" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:raquel@cepaintegra.com.br">E-mail</a><a href="https://www.instagram.com/cepa.integra/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <img class="palavra-grande" src="/cepa/vitamina/img/cepa-branco.svg" alt="" width="1240" height="273" loading="lazy">
+    <div class="rod-base">
+      <p>© 2026 CEPA. Este site não substitui atendimento médico ou psicológico.</p>
+      <a href="https://thiagovitamina.com" target="_blank" rel="noopener">Design: Vitamina</a>
+    </div>
+  </div>
+</footer>
+
+<a class="zap" id="zap" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener" aria-label="Falar com o CEPA no WhatsApp">
+  <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
+</a>
+
+<script>
+  // Equipe: edite esta lista para adicionar, remover ou reordenar terapeutas.
+  const equipe = [
+    ["Raquel Ramos Vieira","CRP 06/106309","Psicoterapeuta e idealizadora do CEPA","rklix0kQJHl6OMo7ySedqqMneCo"],
+    ["Silvia Golin Tajara","CRP 06/89244","Psicoterapeuta","Lfq0uXxl0KqiJzvnaz29fut0uuk"],
+    ["Carolina Strong Miranda","CRP 06/131776","Psicóloga junguiana","rOqu6tZzbNhP89XnGEtsqzyH4"],
+    ["Thayna Luiza de Araújo Dias","CRP 04/58942","Psicóloga existencial, redutora de danos e idealizadora do Psi sem Tabu","GJJOy7HvG2P6uNg32vccM5vBGPU"],
+    ["Guilherme Queiroz Copeti","CRP 08/16653","Psicólogo e neuropsicólogo","QwXFDQLpKddoSqPEmnWrqW9u2Y"],
+    ["Flávia Nunes","CRP 03/02707","Psicoterapeuta integral, docente e idealizadora do Humanize, espaço integral","cYzn4k5t0n1FDw3ulUoQnfC2jl4"],
+    ["Clodine Janny Teixeira","CRP 06/86334","Psicóloga integrativa transpessoal, doutora em Desenvolvimento Humano e especialista em psicoterapia assistida por psicodélicos","wPFa9BIvjfBJ2FCXqsXke56clU"],
+    ["Leandro Savoy Duarte","CRM 116.065 · RQE 32169","Psiquiatra e psicoterapeuta, pesquisador em adictologia clínica e idealizador do podcast Papo de Substância","zlkf9pDpKyRfLEq8D07gGsDTYo"],
+    ["Alessandra F. Chohfi","CRP 06/57130","Psicóloga clínica especialista em TCC e psicoterapia assistida por psicodélicos","jAN0OXX37bHWeMoKmfoGA9oSLM"],
+    ["Mariana Forti Perroni","CRP 06/165562","Psicóloga clínica com escuta fundamentada na psicanálise","Y1BLVjzVAHt2LScc1P1dCw3SI0g"],
+    ["Maíra Clara Rodrigues","CRP 08/16613","Psicóloga clínica especialista em reprocessamento de traumas (EMDR) e psicoterapia assistida por psicodélicos","kam9UdpkCJWGtN0sYo54iuxZC4"],
+    ["Cauê Carniel-Fernandes","CRP 06/220046","Antropólogo e psicólogo junguiano","hr4qvTpjctKyxTEdNX6ng36tgw"],
+    ["Lislie Abram Gomes","CRM 52.98735-2 · RQE 41623","Psiquiatra especialista em cannabis medicinal e neurodiversidade","GtZcKT97tdV0YayK9NVEU0esCqc"],
+    ["Victoria Sami","[registro a confirmar]","Professora de yoga, pesquisadora de psicodélicos e estudante de Psicologia","7UUoLlWNrMACtvcJHTGLWPcF4"]
+  ];
+  document.getElementById("grade").innerHTML = equipe.map(([nome, reg, cargo, foto]) =>
+    `<li class="pessoa surge"><img src="/cepa/vitamina/img/${foto}.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy"><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
+
+  // Topo: fica sólido depois da abertura
+  const topo = document.getElementById("topo"), hero = document.querySelector(".hero");
+  const zap = document.getElementById("zap");
+  new IntersectionObserver(([e]) => topo.classList.toggle("solido", !e.isIntersecting), {rootMargin: "-80px 0px 0px 0px"}).observe(hero);
+
+  // WhatsApp fixo some quando outro botão de WhatsApp está à vista
+  const vis = new Set();
+  const zo = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? vis.add(e.target) : vis.delete(e.target)); zap.classList.toggle("escondido", vis.size > 0); });
+  document.querySelectorAll("[data-zap]").forEach(el => zo.observe(el));
+
+  // Menu no celular
+  const abrir = document.getElementById("abrir");
+  const fechar = () => { topo.classList.remove("aberto"); abrir.setAttribute("aria-expanded","false"); abrir.setAttribute("aria-label","Abrir menu"); };
+  abrir.addEventListener("click", () => { const a = topo.classList.toggle("aberto"); abrir.setAttribute("aria-expanded", a); abrir.setAttribute("aria-label", a ? "Fechar menu" : "Abrir menu"); });
+  document.querySelectorAll("#menu a").forEach(a => a.addEventListener("click", fechar));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") fechar(); });
+
+  // Vídeo carrega só quando a pessoa pede
+  document.getElementById("play").addEventListener("click", () => {
+    document.getElementById("video").innerHTML = '<iframe src="https://player.vimeo.com/video/1126026583?autoplay=1&dnt=1" title="Vídeo de apresentação do CEPA" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+  });
+
+  // Entrada suave
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visto"); so.unobserve(e.target); } }), {threshold: .12});
+  document.querySelectorAll(".surge").forEach(el => so.observe(el));
+</script>
+</body>
+</html>
