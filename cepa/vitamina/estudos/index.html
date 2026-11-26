@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5F5F2">
+<title>Estudos clínicos com psicodélicos · CEPA</title>
+<meta name="description" content="Estudos clínicos com psicodélicos que estão recrutando no Brasil e nos Estados Unidos, com dados públicos do ClinicalTrials.gov.">
+<meta property="og:title" content="Estudos clínicos com psicodélicos · CEPA">
+<meta property="og:description" content="Estudos que estão recrutando no Brasil e nos Estados Unidos, com dados públicos do ClinicalTrials.gov.">
+<meta property="og:image" content="https://thiagovitamina.com/cepa/vitamina/img/og.jpg">
+<link rel="icon" type="image/png" href="/cepa/vitamina/favicon.png">
+<link rel="preload" href="/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/cepa/vitamina/fonts/funnel-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://clinicaltrials.gov" crossorigin>
+<style>
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Bodoni Moda";font-style:italic;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-wght-italic.woff2) format("woff2")}
+@font-face{font-family:"Funnel Display";font-style:normal;font-weight:300 800;font-display:swap;src:url(/cepa/vitamina/fonts/funnel-display-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Funnel Display";font-style:normal;font-weight:300 800;font-display:swap;src:url(/cepa/vitamina/fonts/funnel-display-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* Paleta e tipografia do Figma do CEPA */
+:root{
+  --preto:#1C1C1C; --noite:#000; --off:#F5F5F2; --branco:#fff;
+  --azul:#4D62AD; --rosa:#D81B61; --roxo:#78459B; --verde:#25BAA2;
+  --cinza:#5A5A5A; --linha:#E2E0DA; --cinza-escuro:#B9B6AE;
+  --serif:"Bodoni Moda","Bodoni 72",Didot,"Times New Roman",serif;
+  --sans:"Funnel Display","Helvetica Neue",Arial,sans-serif;
+  --max:1240px; --gut:clamp(20px,5vw,64px); --sec:clamp(72px,10vw,136px);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-weight:300;font-size:18px;line-height:1.55;background:var(--off);color:var(--preto);-webkit-font-smoothing:antialiased}
+img,video,iframe{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--branco);color:var(--preto);padding:10px 16px;font-weight:500;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.eyebrow{font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08;text-wrap:balance}
+p{text-wrap:pretty}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;font:500 17px/1 var(--sans);text-decoration:none;transition:background .25s var(--ease),color .25s var(--ease)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-luz{background:var(--off);color:var(--preto)}
+.btn-luz:hover{background:var(--branco)}
+.btn-escuro{background:var(--preto);color:var(--off)}
+.btn-escuro:hover{background:#000}
+.btn-linha{border:1px solid currentColor}
+.btn-linha:hover{background:rgba(245,245,242,.1)}
+
+/* Topo */
+.topo{position:fixed;inset:0 0 auto;z-index:20;color:var(--off);transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none}
+.marca .simb{width:40px;height:auto}
+.marca .palavra{height:26px;width:auto}
+.marca .palavra-preta{display:none}
+.menu{display:flex;align-items:center;gap:32px;list-style:none}
+.menu a{font-size:16px;font-weight:400;text-decoration:none;opacity:.86;transition:opacity .2s}
+.menu a:hover{opacity:1}
+.menu .btn{opacity:1;min-height:44px;padding:10px 20px;font-size:15px}
+.topo.solido{background:rgba(245,245,242,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--preto);box-shadow:0 1px 0 var(--linha)}
+.topo.solido .palavra-branca{display:none}.topo.solido .palavra-preta{display:block}
+.topo.solido .menu .btn{background:var(--preto);color:var(--off)}
+.abrir{display:none;width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer;position:relative}
+.abrir span{position:absolute;left:10px;right:10px;height:1.5px;background:currentColor;transition:transform .3s var(--ease),top .3s var(--ease)}
+.abrir span:first-child{top:17px}.abrir span:last-child{top:26px}
+
+/* Rodapé */
+footer{background:var(--noite);color:var(--cinza-escuro);padding:72px 0 40px;font-size:15px}
+footer .wrap{display:grid;gap:48px}
+.rod-topo{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+.rod-marca img{height:48px;width:auto;margin-bottom:16px}
+.rod-marca p{font-family:var(--serif);font-size:20px;color:var(--off);line-height:1.25}
+.rod-links{display:flex;gap:56px;flex-wrap:wrap;list-style:none}
+.rod-links strong{display:block;color:var(--off);font-weight:500;margin-bottom:10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.rod-links a{display:block;text-decoration:none;padding:4px 0}
+.rod-links a:hover{color:var(--off)}
+.palavra-grande{width:100%;height:auto;opacity:.12}
+.rod-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #2a2a2a;padding-top:24px;font-size:14px}
+.rod-base a{text-decoration:none}.rod-base a:hover{color:var(--off)}
+
+
+.menu a[aria-current]{opacity:1;text-decoration:underline;text-underline-offset:6px}
+.abrir{display:none}
+@media (max-width:860px){
+  .abrir{display:block}
+  .menu{position:fixed;inset:80px 0 auto;flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px rgba(0,0,0,.08);opacity:0;visibility:hidden;transition:.25s var(--ease)}
+  .menu a{font-family:var(--serif);font-size:32px;display:block;padding:6px 0}
+  .menu .btn{font-family:var(--sans);font-size:17px;margin-top:16px}
+  .topo.aberto .menu{opacity:1;visibility:visible}
+  .topo.aberto .abrir span:first-child{top:21px;transform:rotate(45deg)}
+  .topo.aberto .abrir span:last-child{top:21px;transform:rotate(-45deg)}
+}
+
+/* Página de estudos */
+.cab{padding:clamp(128px,14vw,176px) 0 clamp(40px,5vw,64px)}
+.cab .eyebrow{color:var(--roxo);margin-bottom:20px}
+.cab h1{font-size:clamp(40px,5.4vw,76px);max-width:16ch;margin-bottom:24px}
+.cab .lead{font-size:clamp(18px,1.6vw,21px);max-width:58ch;color:var(--cinza)}
+.alerta{margin-top:36px;display:flex;gap:16px;align-items:flex-start;background:var(--preto);color:var(--off);border-radius:20px;padding:22px 24px;max-width:860px}
+.alerta svg{flex:none;width:26px;height:26px;margin-top:2px}
+.alerta p{font-size:17px;line-height:1.5}
+.alerta strong{font-weight:500}
+.filtros{position:sticky;top:80px;z-index:5;background:rgba(245,245,242,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-block:1px solid var(--linha);padding:16px 0}
+.filtros .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) 220px 240px;gap:12px 20px;align-items:center}
+.grupo{display:flex;gap:6px;flex-wrap:wrap;border:0}
+.grupo legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.chip span{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid #CFCCC4;font-size:15px;font-weight:400;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.chip input:checked+span{background:var(--preto);color:var(--off);border-color:var(--preto)}
+.chip input:focus-visible+span{outline:2px solid var(--rosa);outline-offset:2px}
+.chip:hover span{border-color:var(--preto)}
+.campo{display:flex;flex-direction:column;gap:4px}
+.campo label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza)}
+.campo select,.campo input{font:400 16px/1.2 var(--sans);color:var(--preto);background:var(--branco);border:1px solid #CFCCC4;border-radius:12px;padding:10px 12px;min-height:44px;width:100%}
+.campo select:focus-visible,.campo input:focus-visible{outline:2px solid var(--rosa);outline-offset:1px}
+.substancias{grid-column:1 / -1}
+.resumo{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:32px 0 20px}
+.resumo p{font-size:17px;color:var(--cinza)}
+.resumo strong{font-family:var(--serif);font-weight:400;font-size:28px;color:var(--preto)}
+.limpar{background:none;border:0;font:inherit;font-size:15px;color:var(--roxo);text-decoration:underline;cursor:pointer;padding:8px 0}
+.lista{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding-bottom:var(--sec)}
+.estudo{background:var(--branco);border-radius:20px;padding:26px 26px 24px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--linha)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:13px;font-weight:500;padding:5px 10px;border-radius:999px;background:var(--off);line-height:1.2}
+.tag.st-rec{background:#DFF4EF;color:#11594C}
+.tag.st-breve{background:#E7E6F5;color:#3D3480}
+.tag.st-conv{background:#F3E6EC;color:#7A1E45}
+.tag.br{background:var(--preto);color:var(--off)}
+.estudo h2{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.22;letter-spacing:0}
+.estudo h2 small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cinza);margin-top:8px;font-weight:400}
+.dados{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px;line-height:1.45}
+.dados dt{color:var(--cinza)}
+.dados dd{color:var(--preto)}
+.estudo .ver{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;text-decoration:none;border-bottom:1px solid currentColor;padding:6px 0 2px}
+.estudo .ver svg{width:14px;height:14px}
+.estudo .ver:hover{color:var(--roxo)}
+.vazio,.carregando,.erro{grid-column:1/-1;padding:48px 0;font-size:18px;color:var(--cinza)}
+.carregando::before{content:"";display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid var(--roxo);border-right-color:transparent;margin-right:12px;vertical-align:-1px;animation:gira 1s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.fonte{border-top:1px solid var(--linha);padding:40px 0 var(--sec);font-size:15px;color:var(--cinza);display:grid;gap:10px;max-width:760px}
+.fonte a{color:var(--preto)}
+.mais{grid-column:1/-1;justify-self:center}
+@media (max-width:1024px){.filtros .wrap{grid-template-columns:1fr 1fr}.grupo.pais{grid-column:1/-1}}
+@media (max-width:860px){
+  .filtros{position:static}
+  .filtros .wrap{grid-template-columns:1fr}
+  .substancias{overflow-x:auto;flex-wrap:nowrap;margin:0 calc(var(--gut)*-1);padding:2px var(--gut)}
+  .lista{grid-template-columns:1fr}
+  .estudo{padding:22px 20px}
+}
+@media (prefers-reduced-motion:reduce){.carregando::before{animation:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#lista">Pular para a lista de estudos</a>
+<header class="topo solido" id="topo">
+  <div class="wrap">
+    <a class="marca" href="/cepa/vitamina" aria-label="CEPA, início">
+      <img class="simb" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
+      <img class="palavra palavra-branca" src="/cepa/vitamina/img/cepa-branco.svg" alt="" width="118" height="26">
+      <img class="palavra palavra-preta" src="/cepa/vitamina/img/cepa-preto.svg" alt="" width="118" height="26">
+    </a>
+    <button class="abrir" id="abrir" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="/cepa/vitamina#sobre">Sobre</a></li>
+      <li><a href="/cepa/vitamina#cuidado">Como cuidamos</a></li>
+      <li><a href="/cepa/vitamina#equipe">Equipe</a></li>
+      <li><a href="/cepa/vitamina/estudos" aria-current="page">Estudos</a></li>
+      <li><a href="/cepa/vitamina#contato">Contato</a></li>
+      <li><a class="btn btn-luz" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar conversa</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="cab" aria-labelledby="h-estudos">
+    <div class="wrap">
+      <p class="eyebrow">Estudos clínicos</p>
+      <h1 id="h-estudos">Estudos com psicodélicos abertos no Brasil e nos EUA</h1>
+      <p class="lead">Pesquisas que estão recrutando participantes com psilocibina, MDMA, LSD, ayahuasca, ibogaína, cetamina e outras substâncias. Filtre por país, substância, condição ou pela cidade e instituição.</p>
+      <div class="alerta" role="note">
+        <svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 11c1.1 0 2.2.7 3.1 2.1l11.8 19.8c1.7 2.8.4 5.1-2.9 5.1H12c-3.3 0-4.6-2.3-2.9-5.1L20.9 13.1c.9-1.4 2-2.1 3.1-2.1Zm0-4c-2.6 0-5 1.5-6.5 4L5.7 30.8c-1.6 2.6-1.8 5.4-.5 7.7C6.5 40.7 8.9 42 12 42h24c3 0 5.5-1.3 6.8-3.5 1.3-2.3 1.1-5.1-.5-7.7L30.5 11.1C29 8.5 26.6 7 24 7Zm0 27.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2ZM27 20a3 3 0 1 0-5.8 1.1L24 28l2.8-6.9c.1-.3.2-.7.2-1.1Z"/></svg>
+        <p><strong>O CEPA não faz inscrição nem indica estudos.</strong> Esta lista reúne informações públicas. Cada estudo tem seus próprios critérios, e a inscrição é feita direto com a equipe da pesquisa. Converse com seu terapeuta ou médico antes de se candidatar.</p>
+      </div>
+    </div>
+  </section>
+
+  <form class="filtros" id="filtros" aria-label="Filtrar estudos" onsubmit="return false">
+    <div class="wrap">
+      <fieldset class="grupo pais">
+        <legend>País</legend>
+        <label class="chip"><input type="radio" name="pais" value="todos" checked><span>Brasil e EUA</span></label>
+        <label class="chip"><input type="radio" name="pais" value="Brazil"><span>Brasil</span></label>
+        <label class="chip"><input type="radio" name="pais" value="United States"><span>EUA</span></label>
+      </fieldset>
+      <span></span>
+      <div class="campo">
+        <label for="cond">Condição</label>
+        <select id="cond">
+          <option value="">Todas</option>
+          <option value="depressao">Depressão</option>
+          <option value="tept">Estresse pós-traumático (TEPT)</option>
+          <option value="ansiedade">Ansiedade</option>
+          <option value="substancias">Uso de álcool e outras substâncias</option>
+          <option value="dor">Dor crônica e enxaqueca</option>
+          <option value="alimentar">Transtornos alimentares</option>
+          <option value="toc">TOC</option>
+          <option value="saudaveis">Voluntários saudáveis</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="busca">Cidade ou instituição</label>
+        <input id="busca" type="search" placeholder="Ex.: São Paulo, Johns Hopkins" autocomplete="off">
+      </div>
+      <fieldset class="grupo substancias">
+        <legend>Substância</legend>
+        <label class="chip"><input type="radio" name="sub" value="" checked><span>Todas</span></label>
+        <label class="chip"><input type="radio" name="sub" value="psilocibina"><span>Psilocibina</span></label>
+        <label class="chip"><input type="radio" name="sub" value="mdma"><span>MDMA</span></label>
+        <label class="chip"><input type="radio" name="sub" value="lsd"><span>LSD</span></label>
+        <label class="chip"><input type="radio" name="sub" value="dmt"><span>DMT e ayahuasca</span></label>
+        <label class="chip"><input type="radio" name="sub" value="ibogaina"><span>Ibogaína</span></label>
+        <label class="chip"><input type="radio" name="sub" value="cetamina"><span>Cetamina</span></label>
+        <label class="chip"><input type="radio" name="sub" value="outras"><span>Outras</span></label>
+      </fieldset>
+    </div>
+  </form>
+
+  <section class="wrap" aria-labelledby="h-res">
+    <div class="resumo">
+      <p id="h-res" aria-live="polite"><strong id="total">…</strong> <span id="totaltxt">estudos</span></p>
+      <button type="button" class="limpar" id="limpar" hidden>Limpar filtros</button>
+    </div>
+    <ul class="lista" id="lista"><li class="carregando">Buscando os estudos no ClinicalTrials.gov…</li></ul>
+    <div class="fonte">
+      <p>Fonte: <a href="https://clinicaltrials.gov" target="_blank" rel="noopener">ClinicalTrials.gov</a>, o registro público de estudos clínicos da Biblioteca Nacional de Medicina dos EUA. A lista é buscada direto de lá sempre que a página abre<span id="quando"></span>.</p>
+      <p>Os títulos e as condições aparecem como estão no registro, em inglês. Alguns estudos brasileiros são registrados só no <a href="https://ensaiosclinicos.gov.br" target="_blank" rel="noopener">ReBEC</a>, o registro brasileiro, e podem não aparecer aqui.</p>
+      <p>Aparecem estudos que estão recrutando, que vão começar em breve ou que recrutam por convite. Estudos com cetamina aparecem só quando são sobre saúde mental.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="rod-topo">
+      <div class="rod-marca">
+        <img src="/cepa/vitamina/img/cepa-icone.png" alt="CEPA" width="160" height="150">
+        <p>Centro de Estudos<br>de Psicodelia Aplicada</p>
+      </div>
+      <ul class="rod-links">
+        <li><strong>Site</strong><a href="/cepa/vitamina#sobre">Sobre</a><a href="/cepa/vitamina#cuidado">Como cuidamos</a><a href="/cepa/vitamina#aviso">Aviso importante</a><a href="/cepa/vitamina#equipe">Equipe</a><a href="/cepa/vitamina/estudos">Estudos clínicos</a></li>
+        <li><strong>Contato</strong><a href="https://wa.me/5511920005742" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:raquel@cepaintegra.com.br">E-mail</a><a href="https://www.instagram.com/cepa.integra/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <img class="palavra-grande" src="/cepa/vitamina/img/cepa-branco.svg" alt="" width="1240" height="273" loading="lazy">
+    <div class="rod-base">
+      <p>© 2026 CEPA. Este site não substitui atendimento médico ou psicológico.</p>
+      <a href="https://thiagovitamina.com" target="_blank" rel="noopener">Design: Vitamina</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const API = "https://clinicaltrials.gov/api/v2/studies";
+  const STATUS = "RECRUITING|NOT_YET_RECRUITING|ENROLLING_BY_INVITATION";
+  const FIELDS = "NCTId,BriefTitle,OverallStatus,Phase,InterventionName,Condition,LocationCountry,LocationCity,LocationState,LocationFacility,LeadSponsorName,LastUpdatePostDate";
+  const consultas = [
+    {"query.intr": 'psilocybin OR MDMA OR LSD OR "lysergic acid diethylamide" OR DMT OR "5-MeO-DMT" OR ayahuasca OR ibogaine OR noribogaine OR mescaline OR psychedelic'},
+    {"query.intr": "ketamine OR esketamine", "query.cond": 'depression OR depressive OR PTSD OR "post-traumatic" OR anxiety OR "substance use" OR alcohol OR "opioid use" OR suicid OR bipolar OR obsessive'}
+  ];
+  const SUBS = [
+    ["psilocibina", /psilocyb|psilocin|psilo/i, "Psilocibina"],
+    ["mdma", /mdma|methylenedioxymethamphetamine|midomafetamine/i, "MDMA"],
+    ["lsd", /\blsd\b|lysergic/i, "LSD"],
+    ["dmt", /\bdmt\b|5-meo|dimethyltryptamine|ayahuasca/i, "DMT e ayahuasca"],
+    ["ibogaina", /ibogain|noribogain/i, "Ibogaína"],
+    ["cetamina", /ketamin/i, "Cetamina"],
+    ["outras", /mescalin|psychedelic|2c-b|salvinorin/i, "Outras"]
+  ];
+  const CONDS = {
+    depressao: /depress|mood/i, tept: /ptsd|post-?traumatic|trauma/i, ansiedade: /anxiety|distress/i,
+    substancias: /alcohol|substance|opioid|cocaine|methamphetamine|smoking|tobacco|nicotine|addiction|use disorder|gambling/i,
+    dor: /pain|migraine|headache|fibromyalgia/i, alimentar: /anorexia|bulimia|eating|binge/i, toc: /obsessive|ocd/i, saudaveis: /healthy/i
+  };
+  const STXT = {RECRUITING:["Recrutando","st-rec"], NOT_YET_RECRUITING:["Começa em breve","st-breve"], ENROLLING_BY_INVITATION:["Por convite","st-conv"]};
+  const FASE = {EARLY_PHASE1:"Fase 1 inicial", PHASE1:"Fase 1", PHASE2:"Fase 2", PHASE3:"Fase 3", PHASE4:"Fase 4", NA:"Não se aplica"};
+  const PAIS = {"Brazil":"Brasil","United States":"EUA"};
+  const $ = id => document.getElementById(id);
+  const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const tira = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  let estudos = [], mostrar = 30;
+
+  async function busca(params) {
+    let tok = "", out = [];
+    for (let i = 0; i < 6; i++) {
+      const q = new URLSearchParams({...params, "query.locn": "United States OR Brazil", "filter.overallStatus": STATUS, pageSize: "200", fields: FIELDS});
+      if (tok) q.set("pageToken", tok);
+      const r = await fetch(API + "?" + q);
+      if (!r.ok) throw new Error(r.status);
+      const j = await r.json();
+      out = out.concat(j.studies || []);
+      if (!j.nextPageToken) break;
+      tok = j.nextPageToken;
+    }
+    return out;
+  }
+
+  function prepara(s) {
+    const p = s.protocolSection || {};
+    const ints = (p.armsInterventionsModule?.interventions || []).map(i => i.name).join(" ");
+    const titulo = p.identificationModule?.briefTitle || "";
+    const conds = p.conditionsModule?.conditions || [];
+    const locs = (p.contactsLocationsModule?.locations || []).filter(l => PAIS[l.country]);
+    const subs = SUBS.filter(([, re]) => re.test(ints + " " + titulo));
+    const fases = (p.designModule?.phases || []).map(f => FASE[f] || f);
+    return {
+      id: p.identificationModule?.nctId, titulo, conds, locs,
+      status: p.statusModule?.overallStatus,
+      data: p.statusModule?.lastUpdatePostDateStruct?.date || "",
+      fase: fases.filter(f => f !== "Não se aplica").join(" e ") || "",
+      subs: subs.length ? subs : [SUBS[6]],
+      patro: p.sponsorCollaboratorsModule?.leadSponsor?.name || "",
+      paises: [...new Set(locs.map(l => l.country))],
+      texto: tira(locs.map(l => [l.facility, l.city, l.state].join(" ")).join(" ") + " " + (p.sponsorCollaboratorsModule?.leadSponsor?.name || ""))
+    };
+  }
+
+  function filtra() {
+    const pais = document.querySelector("input[name=pais]:checked").value;
+    const sub = document.querySelector("input[name=sub]:checked").value;
+    const cond = $("cond").value, busca = tira($("busca").value.trim());
+    const ok = estudos.filter(e =>
+      (pais === "todos" || e.paises.includes(pais)) &&
+      (!sub || e.subs.some(s => s[0] === sub)) &&
+      (!cond || CONDS[cond].test(e.conds.join(" ") + " " + e.titulo)) &&
+      (!busca || e.texto.includes(busca)));
+    $("limpar").hidden = pais === "todos" && !sub && !cond && !busca;
+    return {ok, pais};
+  }
+
+  function locais(e, pais) {
+    const ls = e.locs.filter(l => pais === "todos" || l.country === pais);
+    const br = ls.filter(l => l.country === "Brazil"), resto = ls.filter(l => l.country !== "Brazil");
+    const ord = br.concat(resto);
+    const fmt = l => esc([l.facility, [l.city, l.country === "Brazil" ? "" : l.state].filter(Boolean).join(", ")].filter(Boolean).join(" · "));
+    const prim = ord.slice(0, 2).map(fmt).join("<br>");
+    return ord.length > 2 ? prim + `<br><span style="color:var(--cinza)">e mais ${ord.length - 2} ${ord.length - 2 === 1 ? "local" : "locais"}</span>` : prim;
+  }
+
+  function desenha() {
+    const {ok, pais} = filtra();
+    $("total").textContent = ok.length;
+    $("totaltxt").textContent = ok.length === 1 ? "estudo aberto" : "estudos abertos";
+    if (!ok.length) { $("lista").innerHTML = '<li class="vazio">Nenhum estudo com esses filtros agora. Tente outra substância ou outro país.</li>'; return; }
+    const arw = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg>';
+    $("lista").innerHTML = ok.slice(0, mostrar).map(e => {
+      const [st, cls] = STXT[e.status] || [e.status, ""];
+      const tags = `<span class="tag ${cls}">${st}</span>` + (e.paises.includes("Brazil") ? '<span class="tag br">No Brasil</span>' : "") + e.subs.map(s => `<span class="tag">${s[2]}</span>`).join("");
+      return `<li class="estudo">
+        <div class="tags">${tags}</div>
+        <h2>${esc(e.titulo)}<small>${esc(e.id)}${e.fase ? " · " + e.fase : ""}</small></h2>
+        <dl class="dados">
+          <dt>Condição</dt><dd>${esc(e.conds.slice(0, 3).join(", ")) || "—"}</dd>
+          <dt>Onde</dt><dd>${locais(e, pais) || "—"}</dd>
+          ${e.patro ? `<dt>Quem conduz</dt><dd>${esc(e.patro)}</dd>` : ""}
+        </dl>
+        <a class="ver" href="https://clinicaltrials.gov/study/${encodeURIComponent(e.id)}" target="_blank" rel="noopener">Ver o estudo e os contatos ${arw}<span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">(abre o ClinicalTrials.gov em outra aba)</span></a>
+      </li>`;
+    }).join("") + (ok.length > mostrar ? `<li class="mais"><button type="button" class="btn btn-escuro" id="mais">Mostrar mais ${Math.min(30, ok.length - mostrar)} estudos</button></li>` : "");
+    const m = $("mais"); if (m) m.addEventListener("click", () => { mostrar += 30; desenha(); });
+  }
+
+  async function carrega() {
+    try {
+      let cache = null;
+      try { cache = JSON.parse(sessionStorage.getItem("cepa-estudos") || "null"); } catch (e) {}
+      let brutos;
+      if (cache && Date.now() - cache.t < 3600e3) brutos = cache.d;
+      else {
+        const res = await Promise.all(consultas.map(busca));
+        const vistos = new Set(); brutos = [];
+        res.flat().forEach(s => { const id = s.protocolSection?.identificationModule?.nctId; if (id && !vistos.has(id)) { vistos.add(id); brutos.push(s); } });
+        try { sessionStorage.setItem("cepa-estudos", JSON.stringify({t: Date.now(), d: brutos})); } catch (e) {}
+      }
+      estudos = brutos.map(prepara).filter(e => e.paises.length)
+        .sort((a, b) => (b.paises.includes("Brazil") - a.paises.includes("Brazil")) || (a.status === "RECRUITING" ? -1 : 0) - (b.status === "RECRUITING" ? -1 : 0) || b.data.localeCompare(a.data));
+      $("quando").textContent = ", então está sempre atualizada";
+      desenha();
+    } catch (err) {
+      $("total").textContent = "";
+      $("totaltxt").textContent = "";
+      $("lista").innerHTML = '<li class="erro">Não conseguimos carregar os estudos agora. Tente de novo em alguns minutos ou veja direto no <a href="https://clinicaltrials.gov/search?term=psychedelic" target="_blank" rel="noopener">ClinicalTrials.gov</a>.</li>';
+    }
+  }
+
+  document.getElementById("filtros").addEventListener("input", () => { mostrar = 30; desenha(); });
+  $("limpar").addEventListener("click", () => { document.getElementById("filtros").reset(); mostrar = 30; desenha(); });
+
+  const topo = $("topo"), abrir = $("abrir");
+  abrir.addEventListener("click", () => { const a = topo.classList.toggle("aberto"); abrir.setAttribute("aria-expanded", a); abrir.setAttribute("aria-label", a ? "Fechar menu" : "Abrir menu"); });
+  carrega();
+})();
+</script>
+</body>
+</html>
