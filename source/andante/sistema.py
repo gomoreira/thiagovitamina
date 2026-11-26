@@ -27,6 +27,23 @@ TOKENS = """
 """
 
 MANUAL = """
+/* Páginas de viagem no celular (pedido do cliente, 26/11): hotéis e bikes em carrossel; "para quem é" como lista */
+@media (max-width:819px){
+  ul.carousel{display:flex;gap:var(--s2);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);margin-inline:calc(-1 * var(--edge));padding-inline:var(--edge);scrollbar-width:none;overscroll-behavior-x:contain}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel>li{flex:0 0 82%;scroll-snap-align:start}
+  .carousel:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+  .carousel__count{display:flex;justify-content:space-between;align-items:center;margin-top:var(--s4)}
+  .carousel__dots{display:flex;gap:var(--s1)}
+  .carousel__dots i{display:block;width:8px;height:2px;background:currentColor;opacity:.35;transition:width .25s var(--ease),opacity .25s var(--ease)}
+  .carousel__dots i.is-on{width:24px;opacity:1}
+}
+.tiles--perfis{gap:0;border-top:1px solid currentColor}
+.tiles--perfis .tile{background:none;min-height:0;padding:var(--s6) 0;gap:var(--s2);border-bottom:1px solid currentColor;display:grid;grid-template-columns:40px 1fr;column-gap:var(--s4)}
+.tiles--perfis .tile>*{grid-column:2}.tiles--perfis .tile>.small{grid-column:1;grid-row:1 / span 2;padding-top:8px}
+.tiles--perfis .tile>p{margin-top:0}
+@media (min-width:820px){.tiles--perfis{grid-template-columns:repeat(2,1fr);column-gap:var(--s6);border-top:0}.tiles--perfis .tile{border-top:1px solid currentColor;border-bottom:0}}
+@media (prefers-reduced-motion:reduce){.carousel{scroll-behavior:auto}.carousel__dots i{transition:none}}
 /* País Basco: paleta mais leve, a partir do teste do cliente (26/11). Contraste conferido: texto preto 8,3:1 e 10,7:1; branco 13,5:1 e 7,5:1 */
 .paleta-clara{--sky:#8ea8ab;--olive:#d0b776;--lilac:#d0b776;--forest:#29302f;--earth:#82442a}
 .paleta-clara .day-stay{color:#e6b48c}

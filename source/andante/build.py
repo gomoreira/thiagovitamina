@@ -198,6 +198,10 @@ def ul(items, cls="list"):
 
 LEG = {"bike": '<path d="M0,3 L26,3" stroke="#f00000" stroke-width="3"/>', "van": '<path d="M0,3 L26,3" stroke="#f00000" stroke-width="1.6" stroke-dasharray="4 4"/>', "opcao": '<path d="M0,3 L26,3" stroke="#000" stroke-width="1" stroke-dasharray="2 3"/>'}
 
+def count(n):
+    dots = "".join("<i></i>" for _ in range(n))
+    return f'<div class="carousel__count small" aria-hidden="true"><span class="carousel__dots">{dots}</span><span><b>1</b> / {n} · arraste para ver mais</span></div>'
+
 def viagem(v):
     h, wa, out = v["hero"], whatsapp(v["titulo"]), []
     out.append(f'''<section class="hero hero--trip on-dark" aria-labelledby="t-titulo">{img(h["img"], "hero__img", h["alt"], "eager", sizes="100vw")}
@@ -221,7 +225,7 @@ def viagem(v):
     if pq:
       perfis = "".join(f'<li class="tile"><span class="small">{i+1:02d}</span><h3 class="serif">{t}</h3><p>{x}</p></li>' for i, (t, x) in enumerate(pq["perfis"]))
       out.append(f'''<section class="band band--sky trip-sec" id="para-quem" aria-labelledby="s-quem"><div class="wrap">{head("Para quem é", "Para quem é<br>esta viagem", "s-quem")}
-<p class="serif it trip-lead">{pq["lead"]}</p><ul class="tiles" role="list">{perfis}</ul></div></section>''')
+<p class="serif it trip-lead">{pq["lead"]}</p><ul class="tiles tiles--perfis" role="list">{perfis}</ul></div></section>''')
     esc = "".join(f'<li class="choice"><h3 class="serif">{t}</h3><p>{x}</p></li>' for t, x in v["escolhas"])
     out.append(f'''<section class="band band--olive trip-sec" aria-labelledby="s-esc"><div class="wrap">{head("O que define esta viagem", "Nossas escolhas", "s-esc")}<ul class="choices" role="list">{esc}</ul></div></section>''')
     mapa = (SRC / f"data/mapas/{v['mapa']}.svg").read_text().strip() if v.get("mapa") else ""
@@ -234,11 +238,11 @@ def viagem(v):
 <div class="acc acc--big"><details><summary>Inclui</summary>{ul(v["inclui"], "lines")}</details><details><summary>Não inclui</summary>{ul(v["nao_inclui"], "lines")}</details></div></div></section>''')
     if v.get("bikes"):
         b = v["bikes"]; bk = "".join(f'<li class="tile tile--media">{foto(it[4] if len(it) > 4 else None, "tile__img", it[3], sizes="(min-width:820px) 40vw, 80vw")}<div><span class="small">{it[0]}</span><h3 class="serif">{it[1]}</h3><p>{it[2]}</p></div></li>' for it in b["itens"])
-        out.append(f'''<section class="band band--white trip-sec" id="bicicletas" aria-labelledby="s-bike"><div class="wrap">{head("Bicicletas", "Sua bike na viagem", "s-bike")}<p class="trip-text">{b["texto"]}</p><ul class="tiles tiles--2" role="list">{bk}</ul></div></section>''')
+        out.append(f'''<section class="band band--white trip-sec" id="bicicletas" aria-labelledby="s-bike"><div class="wrap">{head("Bicicletas", "Sua bike na viagem", "s-bike")}<p class="trip-text">{b["texto"]}</p><ul class="tiles tiles--2 carousel" role="list" aria-label="Bicicletas" tabindex="0">{bk}</ul>{count(len(b["itens"]))}</div></section>''')
     an = "".join(f'<li class="host">{foto(it[4] if len(it) > 4 else None, "host__img", it[3], sizes="(min-width:820px) 40vw, 100vw")}<h3 class="serif">{it[0]}</h3><p class="small">{it[1]}</p><p>{it[2]}</p></li>' for it in v["anfitrioes"])
     out.append(f'''<section class="band band--lilac trip-sec" id="anfitrioes" aria-labelledby="s-anf"><div class="wrap">{head("Quem conduz", "Anfitriões", "s-anf")}<ul class="hosts" role="list">{an}</ul></div></section>''')
     ht = "".join(f'<li class="tile tile--media">{foto(it[4] if len(it) > 4 else None, "tile__img tile__img--short", it[3], sizes="(min-width:820px) 33vw, 80vw")}<div><h3 class="serif">{it[0]}</h3><p class="small">{it[1]}</p><p>{it[2]}</p></div></li>' for it in v["hoteis"])
-    out.append(f'''<section class="band band--sky trip-sec" aria-labelledby="s-hot"><div class="wrap">{head("Hospedagem", "Onde ficamos", "s-hot")}<ul class="tiles tiles--hotels" role="list">{ht}</ul>{f'<p class="small hotel-note">{v["hoteis_nota"]}</p>' if v.get("hoteis_nota") else ""}</div></section>''')
+    out.append(f'''<section class="band band--sky trip-sec" aria-labelledby="s-hot"><div class="wrap">{head("Hospedagem", "Onde ficamos", "s-hot")}<ul class="tiles tiles--hotels carousel" role="list" aria-label="Hotéis" tabindex="0">{ht}</ul>{count(len(v["hoteis"]))}{f'<p class="small hotel-note">{v["hoteis_nota"]}</p>' if v.get("hoteis_nota") else ""}</div></section>''')
     fq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in v["faq"])
     out.append(f'''<section class="band band--earth trip-sec" aria-labelledby="s-faq"><div class="wrap">{head("Perguntas frequentes", "Antes de reservar", "s-faq")}<div class="acc acc--light acc--faq">{fq}</div></div></section>''')
     r = v["reserva"]
