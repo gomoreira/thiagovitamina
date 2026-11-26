@@ -6,9 +6,11 @@ var consent = null;
 try { consent = localStorage.getItem(CONSENT_KEY); } catch (e) {}
 
 // Until someone says yes, nothing is stored in the browser and nothing is recorded.
+// Events go through /ingest on this domain (rewrite in vercel.json), so ad blockers don't drop them.
 posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
-  api_host: 'https://us.i.posthog.com',
+  api_host: '/ingest',
   ui_host: 'https://us.posthog.com',
+  capture_exceptions: true,
   person_profiles: 'identified_only',
   persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory',
   disable_session_recording: consent !== 'yes',
@@ -25,6 +27,27 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   // Tester links: thiagovitamina.com/?ref=name tags every event of that visit.
   var ref = new URLSearchParams(location.search).get('ref');
   if (ref) { try { posthog.register({ ref: ref }); } catch (e) {} }
+
+  // Names for autocapture and heatmaps: data-attr turns "a button in a div" into "read-case-mir".
+  var slug = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+  function nameElements() {
+    var set = function (el, v) { if (el && v && !el.hasAttribute('data-attr')) el.setAttribute('data-attr', v); };
+    [].forEach.call(document.querySelectorAll('a.btn-ink[href]'), function (a) {
+      set(a, 'read-case-' + slug(a.getAttribute('href').replace(/\.html.*$/, '')));
+    });
+    set(document.getElementById('copy'), 'copy-email');
+    [].forEach.call(document.querySelectorAll('a[href]'), function (a) {
+      var h = a.getAttribute('href');
+      if (/linkedin\.com/.test(h)) set(a, 'contact-linkedin');
+      else if (/instagram\.com/.test(h)) set(a, 'contact-instagram');
+      else if (/^mailto:/.test(h)) set(a, 'contact-email');
+      else if (/cv\.pdf$/.test(h)) set(a, 'download-cv');
+      else if (/^https?:/.test(h) && h.indexOf(location.host) < 0) { try { set(a, 'live-' + slug(new URL(h).hostname.replace(/^www\./, ''))); } catch (e) {} }
+      else if (/^#/.test(h) && a.closest('header, nav')) set(a, 'nav-' + slug(h.slice(1)));
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', nameElements);
 
   // Funnel steps: which sections were seen.
   var seen = {};
@@ -71,7 +94,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
     if (/cv\.pdf$/.test(href)) return track('cv_downloaded');
     if (/instagram\.com/.test(href)) return track('contact_clicked', { channel: 'instagram' });
     if (/^mailto:/.test(href)) return track('contact_clicked', { channel: 'email' });
-    if (el.classList.contains('btn-ink') && /(trade-in|mir|sc4a|criaaa)/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
+    if (el.classList.contains('btn-ink') && /^[\w-]+\.html/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
     if (/^https?:/.test(href) && href.indexOf(location.host) < 0) return track('external_site_opened', { url: href, project: caseName(el) });
   }, true);
 
