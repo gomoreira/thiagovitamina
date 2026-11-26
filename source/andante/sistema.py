@@ -27,6 +27,9 @@ TOKENS = """
 """
 
 MANUAL = """
+/* faixa preta da abertura, só no desktop (Lucas, 25/11): frase mais delicada e respiro maior antes da próxima faixa */
+@media (min-width:820px){.intro{padding-bottom:var(--s24)}.intro__text{font-size:20px;line-height:28px}}
+@media (min-width:1100px){.intro{padding-top:var(--s24)}}
 /* botão cheio em fundo escuro: contorno vermelho da marca (4,7:1 contra o preto) para o botão não se perder no fundo (WCAG 1.4.11 pede 3:1) */
 .on-dark .btn--solid,.band--black .btn--solid,.band--forest .btn--solid,.band--earth .btn--solid,.menu .btn--solid{border-color:var(--red)}
 /* Páginas de viagem no celular (pedido do cliente, 26/11): hotéis e bikes em carrossel; "para quem é" como lista */

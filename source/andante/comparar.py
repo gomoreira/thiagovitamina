@@ -98,8 +98,11 @@ AJUSTES = [
    "Aqui o carrossel faz sentido: são fotos, na ordem da viagem, e a página fica bem mais curta no celular. O próximo card aparece na borda e o contador mostra quantos faltam. As fotos provisórias deram lugar às fotos que você mandou.",
    "Funciona também pelo teclado. No computador, os cards voltam a ficar lado a lado."),
   ("tipo", "hero", "Uma frase só no título", "Conversa com o Lucas",
-   "\u201cO que interessa é o / TEMPO VIVIDO\u201d volta a ser uma frase só, como no desenho do Lucas, e o título ficou cerca de 20% menor, mais delicado.",
-   "A quebra agora é definida em cada tamanho de tela, e \u201cTEMPO VIVIDO\u201d nunca se separa."),
+   "O título volta à quebra do desenho do Lucas, \u201cO que interessa / é o TEMPO / VIVIDO\u201d, em que a serifada e a caixa alta dividem a mesma linha. E ficou cerca de 20% menor, mais delicado.",
+   "A quebra é escrita à mão para cada tamanho de tela, então o título não se desmonta em blocos soltos."),
+  ("ritmo", "faixa", "Respiro na abertura", "Conversa com o Lucas",
+   "No computador, a faixa preta logo depois da foto ganhou espaço em cima e embaixo, e a frase voltou a um tamanho mais delicado. É a entrada do site, e agora ela respira antes da próxima faixa.",
+   "No celular, a faixa já seguia o desenho do Lucas e ficou como estava."),
 ]
 
 CONTRASTE = [
