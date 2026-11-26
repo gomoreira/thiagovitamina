@@ -48,12 +48,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-hei
 p{text-wrap:pretty}
 
 /* Botões */
-.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;font:500 17px/1 var(--sans);text-decoration:none;transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;font:500 17px/1 var(--sans);text-decoration:none;transition:background .25s var(--ease),color .25s var(--ease)}
 .btn svg{width:20px;height:20px;flex:none}
 .btn-luz{background:var(--off);color:var(--preto)}
-.btn-luz:hover{background:var(--branco);transform:translateY(-1px)}
+.btn-luz:hover{background:var(--branco)}
 .btn-escuro{background:var(--preto);color:var(--off)}
-.btn-escuro:hover{background:#000;transform:translateY(-1px)}
+.btn-escuro:hover{background:#000}
 .btn-linha{border:1px solid currentColor}
 .btn-linha:hover{background:rgba(245,245,242,.1)}
 
@@ -89,7 +89,7 @@ p{text-wrap:pretty}
 .contato-rapido a:hover{border-color:var(--off);color:var(--off)}
 .contato-rapido span{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-escuro);margin-bottom:4px}
 .visual{position:relative;justify-self:end;width:min(100%,620px);aspect-ratio:1}
-.visual img{width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);animation:flutua 9s ease-in-out infinite}
+.visual img{width:100%;height:100%;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);animation:flutua 9s ease-in-out infinite}
 .visual::after{content:"";position:absolute;inset:18%;z-index:-1;background:radial-gradient(closest-side,rgba(77,98,173,.45),rgba(216,27,97,.18) 60%,transparent);filter:blur(30px)}
 @keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
@@ -133,7 +133,7 @@ section{padding:var(--sec) 0}
 .aviso h2{font-size:clamp(32px,3.8vw,52px);margin-bottom:28px}
 .aviso p{color:#CFCCC5;margin-bottom:18px;max-width:58ch}
 .aviso p strong{color:var(--off);font-weight:500}
-.aviso img{width:100%;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent);opacity:.9}
+.aviso img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent);opacity:.9}
 
 /* Equipe */
 .equipe .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px;list-style:none}
@@ -150,7 +150,7 @@ section{padding:var(--sec) 0}
 .contato p{font-size:clamp(18px,1.6vw,21px);max-width:40ch;margin-bottom:36px}
 .canais{list-style:none;display:grid;gap:0;border-top:1px solid rgba(245,245,242,.35)}
 .canais a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid rgba(245,245,242,.35);text-decoration:none;font-size:clamp(18px,1.6vw,22px);transition:padding .25s var(--ease)}
-.canais a:hover{padding-left:8px}
+.canais a:hover{border-bottom-color:var(--off)}
 .canais span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:2px}
 .canais svg{width:22px;height:22px;flex:none}
 
@@ -208,7 +208,64 @@ footer .wrap{display:grid;gap:48px}
   .visual img{animation:none}
   .surge{opacity:1;transform:none;transition:none}
 }
+
+/* Opções de abertura: A (padrão), B, C e D. Troque com ?abertura=b na URL */
+.hero{display:none}
+html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c,html[data-hero=d] .hero-d{display:flex}
+/* B: gradiente da marca, como o cartão de visita */
+.hero-b .hero-fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-b::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.05) 40%,rgba(0,0,0,.45))}
+.hero-b .wrap{display:block;z-index:2;padding-top:112px;padding-bottom:56px}
+.hero-b .simb-grande{width:clamp(64px,6vw,96px);height:auto;filter:brightness(0) invert(1);margin-bottom:28px}
+.hero-b .eyebrow{color:var(--off);opacity:.9}
+.hero-b h1{max-width:16ch;font-size:clamp(38px,4.4vw,64px)}
+.hero-b .lead{color:var(--off)}
+.hero-b .btn-linha:hover{background:rgba(245,245,242,.16)}
+/* C: o key visual do Figma, a palavra cepa sobre os cogumelos */
+.hero-c .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:96px;padding-bottom:56px}
+.kv{position:relative;width:min(100%,760px);display:grid;place-items:center;margin-bottom:8px}
+.kv-foto{grid-area:1/1;width:min(44vh,380px);height:auto;aspect-ratio:1;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.kv-palavra{grid-area:1/1;width:100%;height:auto;position:relative;z-index:1}
+.hero-c h1{font-size:clamp(28px,2.6vw,38px);max-width:24ch;margin:0 auto 12px}
+.hero-c .lead{margin:0 auto 24px;max-width:46ch}
+.hero-c .acoes{justify-content:center;margin-bottom:0}
+/* D: editorial claro, texto no off-white e o gradiente ao lado */
+.hero-d{background:var(--off);color:var(--preto);display:none;align-items:stretch}
+html[data-hero=d] .hero-d{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.d-texto{display:flex;flex-direction:column;justify-content:center;padding:120px clamp(24px,5vw,72px) 64px max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)))}
+.d-texto .eyebrow{color:var(--roxo);margin-bottom:22px}
+.d-texto h1{font-size:clamp(40px,4.4vw,66px);margin-bottom:22px;max-width:14ch}
+.d-texto .lead{color:var(--cinza);font-size:clamp(18px,1.5vw,20px);max-width:38ch;margin-bottom:32px}
+.d-texto .btn-linha:hover{background:rgba(28,28,28,.06)}
+.d-midia{position:relative;overflow:hidden;min-height:100%}
+.d-midia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.d-simb{position:absolute;left:50%;top:50%;width:clamp(120px,14vw,200px);height:auto;transform:translate(-50%,-50%);filter:brightness(0) invert(1)}
+html[data-hero=d] .topo:not(.solido){color:var(--preto)}
+html[data-hero=d] .topo:not(.solido) .palavra-branca{display:none}
+html[data-hero=d] .topo:not(.solido) .palavra-preta{display:block}
+html[data-hero=d] .topo:not(.solido) .menu .btn{background:var(--preto);color:var(--off)}
+/* seletor de abertura, só aparece com ?abertura= na URL */
+.seletor{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:30;display:none;gap:4px;padding:6px;border-radius:999px;background:rgba(28,28,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 14px/1 var(--sans);color:var(--off)}
+html[data-seletor] .seletor{display:flex}
+.seletor span{padding:10px 8px 10px 12px;opacity:.7}
+.seletor a{display:grid;place-items:center;min-width:40px;height:36px;border-radius:999px;text-decoration:none}
+.seletor a[aria-current]{background:var(--off);color:var(--preto)}
+@media (max-width:860px){
+  .hero-b .wrap{padding-top:120px}
+  html[data-hero=d] .hero-d{grid-template-columns:1fr}
+  .d-midia{order:-1;min-height:42svh}
+  .d-texto{padding:40px var(--gut) 56px}
+  html[data-hero=d] .topo:not(.solido):not(.aberto){color:var(--off)}
+  html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-branca{display:block}
+  html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-preta{display:none}
+  .kv-foto{width:min(64vw,300px)}
+  .hero-c .wrap{padding-top:112px}
+}
+@media (prefers-reduced-motion:reduce){.hero-b .hero-fundo,.d-midia video{display:none}.hero-b{background:url(/cepa/vitamina/img/gradiente.jpg) center/cover}.d-midia{background:url(/cepa/vitamina/img/gradiente.jpg) center/cover}}
 </style>
+<script>
+  (function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
+</script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -232,7 +289,7 @@ footer .wrap{display:grid;gap:48px}
 </header>
 
 <main id="conteudo">
-  <section class="hero" aria-labelledby="h-hero">
+  <section class="hero hero-a" aria-labelledby="h-hero">
     <div class="wrap">
       <div>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
@@ -245,15 +302,55 @@ footer .wrap{display:grid;gap:48px}
           </a>
           <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
         </div>
-        <ul class="contato-rapido" aria-label="Contato">
-          <li><span>Telefone</span><a href="tel:+5511920005742">+55 11 92000-5742</a></li>
-          <li><span>E-mail</span><a href="mailto:raquel@cepaintegra.com.br">raquel@cepaintegra.com.br</a></li>
-          <li><span>Instagram</span><a href="https://www.instagram.com/cepa.integra/" target="_blank" rel="noopener">@cepa.integra</a></li>
-        </ul>
       </div>
       <div class="visual">
         <img src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" fetchpriority="high">
       </div>
+    </div>
+  </section>
+
+  <section class="hero hero-b" aria-labelledby="h-hero-b">
+    <video class="hero-fundo" autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
+    <div class="wrap">
+      <img class="simb-grande" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
+      <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
+      <h1 id="h-hero-b">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
+      <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
+      <div class="acoes">
+          <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar pelo WhatsApp</a>
+          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
+        </div>
+    </div>
+  </section>
+
+  <section class="hero hero-c" aria-labelledby="h-hero-c">
+    <div class="wrap">
+      <div class="kv">
+        <img class="kv-foto" src="/cepa/vitamina/img/cogumelos.jpg" alt="" width="1080" height="1080">
+        <img class="kv-palavra" src="/cepa/vitamina/img/cepa-branco.svg" alt="CEPA" width="1240" height="273">
+      </div>
+      <h1 id="h-hero-c">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
+      <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
+      <div class="acoes">
+          <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar pelo WhatsApp</a>
+          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
+        </div>
+    </div>
+  </section>
+
+  <section class="hero hero-d" aria-labelledby="h-hero-d">
+    <div class="d-texto">
+      <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
+      <h1 id="h-hero-d">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
+      <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
+      <div class="acoes">
+          <a class="btn btn-escuro" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar pelo WhatsApp</a>
+          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
+      </div>
+    </div>
+    <div class="d-midia">
+      <video autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
+      <img src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150" class="d-simb">
     </div>
   </section>
 
@@ -325,7 +422,7 @@ footer .wrap{display:grid;gap:48px}
         <p class="eyebrow">Contato</p>
         <h2 id="h-contato">Vamos conversar?</h2>
         <p>Conte um pouco do que você procura. A gente responde e indica o profissional mais adequado para você.</p>
-        <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+        <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar pelo WhatsApp</a>
       </div>
       <ul class="canais surge">
         <li><a href="tel:+5511920005742"><div><span>Telefone e WhatsApp</span>+55 11 92000-5742</div><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a></li>
@@ -360,6 +457,8 @@ footer .wrap{display:grid;gap:48px}
   <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
 </a>
 
+<nav class="seletor" aria-label="Opções de abertura"><span>Abertura</span><a href="?abertura=a">A</a><a href="?abertura=b">B</a><a href="?abertura=c">C</a><a href="?abertura=d">D</a></nav>
+
 <script>
   // Equipe: edite esta lista para adicionar, remover ou reordenar terapeutas.
   const equipe = [
@@ -382,7 +481,9 @@ footer .wrap{display:grid;gap:48px}
     `<li class="pessoa surge"><img src="/cepa/vitamina/img/${foto}.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy"><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
 
   // Topo: fica sólido depois da abertura
-  const topo = document.getElementById("topo"), hero = document.querySelector(".hero");
+  const topo = document.getElementById("topo"), heroAtual = document.documentElement.dataset.hero || "a", hero = document.querySelector(".hero-" + heroAtual);
+  document.querySelectorAll(".seletor a").forEach(a => { if (a.textContent.toLowerCase() === heroAtual) a.setAttribute("aria-current","true"); });
+  document.querySelectorAll(".hero:not(.hero-" + heroAtual + ") video").forEach(v => v.remove());
   const zap = document.getElementById("zap");
   new IntersectionObserver(([e]) => topo.classList.toggle("solido", !e.isIntersecting), {rootMargin: "-80px 0px 0px 0px"}).observe(hero);
 
