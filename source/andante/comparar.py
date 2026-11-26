@@ -10,7 +10,7 @@ for f in (HERE / "review").glob("*.webp"): shutil.copy(f, ROOT / "review" / f.na
 sistema.CHANGES.clear(); sistema.build((HERE / "src/assets/css/site.css").read_text())
 n = len(sistema.CHANGES)
 
-WHATS = "https://wa.me/5511956299380?text=" + urllib.parse.quote("thiago, vi as duas versões da andante. prefiro a versão ")
+WHATS = "https://wa.me/5511956299380?text=" + urllib.parse.quote("thiago, vi os ajustes da andante. ")
 
 def phone(v, letra, nome):
     return f'''<figure class="version">
@@ -88,7 +88,7 @@ AJUSTES = [
    "Texto branco sobre o vermelho antigo: 4,8:1, perto do mínimo. Sobre o novo: 7,9:1, o nível mais alto da norma de acessibilidade. Mais calmo e mais fácil de ler."),
   ("contato", "fale", "WhatsApp sempre à mão", "Pedido do Tiago",
    "Um botão fixo no canto da tela abre a conversa de qualquer ponto do site. Ele sai de cena quando já tem outro botão de WhatsApp à vista, pra não repetir. O rodapé ganhou WhatsApp e telefone.",
-   "O botão tem 56px, acima dos 44px recomendados para o toque, e quem usa leitor de tela ouve \u201cFalar com a Andante no WhatsApp\u201d."),
+   "No celular, o botão tem 64px, acima dos 44px recomendados para o toque, e quem usa leitor de tela ouve \u201cFalar com a Andante no WhatsApp\u201d."),
   ("cor", "roteiro", "Cores mais leves no País Basco", "Pedido do Tiago",
    "Entrou a paleta que você testou: azul acinzentado, areia, grafite e ferrugem. Dois tons foram afinados para o texto continuar fácil de ler, e a tabela logo abaixo mostra o porquê.",
    ""),
@@ -430,7 +430,7 @@ a:hover{{text-decoration-thickness:2px}}
         {"".join(f'<li{" class=is-pending" if f else ""}><b>{d}</b><span>{t}</span>' + (f'<div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>' if f else "") + "</li>" for d, t, f in PASSOS)}
       </ol>
       <div class="ask">
-        <p>Olhou as duas? Me conta qual prefere.</p>
+        <p>Conferiu os ajustes? Me conta o que achou.</p>
         <a class="btn-ink" href="{WHATS}" target="_blank" rel="noopener"><span>Responder no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
       </div>
     </div>
