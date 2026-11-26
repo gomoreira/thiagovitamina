@@ -43,11 +43,13 @@
   "conduz": [
     [
       "Camille Etchegaray",
-      "Guia de gravel credenciada"
+      "Guia de gravel credenciada",
+      "pb-conduz-1"
     ],
     [
       "Julien Lacoste",
-      "Gerente de destino"
+      "Gerente de destino",
+      "pb-conduz-2"
     ]
   ],
   "visao": [
@@ -86,15 +88,15 @@
       "Ciclista de gravel numa trilha de terra entre pinheiros, numa encosta de montanha ao sol"
     ],
     [
-      null,
+      "pb-galeria-2",
       "Ciclista sentada junto a uma placa de Baigorry e Bidarray, com a bicicleta de gravel na relva"
     ],
     [
-      null,
+      "pb-galeria-3",
       "Ciclista de gravel em movimento, mãos no guidão, com a vegetação borrada pela velocidade"
     ],
     [
-      null,
+      "pb-galeria-4",
       "Pátio de pedra clara em Margaux, com mesas ao ar livre, vasos e bicicletas"
     ]
   ],
@@ -247,13 +249,15 @@
         "Gravel",
         "Origine Graxx GTO",
         "Leve e ágil, feita para longas distâncias e terrenos mais duros.",
-        "Bicicleta gravel Origine Graxx vermelha, de perfil"
+        "Bicicleta gravel Origine Graxx vermelha, de perfil",
+        "pb-bike-1"
       ],
       [
         "Gravel elétrica",
         "Origine Help",
         "Assistência elétrica nas subidas e para acompanhar o grupo. Anda bem também sem ela.",
-        "Bicicleta gravel elétrica Origine Help verde, de perfil"
+        "Bicicleta gravel elétrica Origine Help verde, de perfil",
+        "pb-bike-2"
       ]
     ]
   },
@@ -262,13 +266,15 @@
       "Camille Etchegaray",
       "Guia de gravel credenciada",
       "Nasceu em Bayonne e pedala entre o Médoc e La Rhune há dez anos. Conhece cada atalho das Landes.",
-      "Ciclista sorridente de boné e camisa de ciclismo verde, contra o céu claro"
+      "Ciclista sorridente de boné e camisa de ciclismo verde, contra o céu claro",
+      "pb-host-1"
     ],
     [
       "Julien Lacoste",
       "Gerente de destino",
       "Cresceu em Margaux e cuida de toda a logística: hotéis, transfers, bagagens e bicicletas.",
-      "Três amigos sorrindo numa mesa de madeira à sombra das árvores, com o mar ao fundo"
+      "Três amigos sorrindo numa mesa de madeira à sombra das árvores, com o mar ao fundo",
+      "pb-host-2"
     ]
   ],
   "hoteis": [
@@ -276,31 +282,36 @@
       "La Bastide de Margaux",
       "Margaux · 1 noite",
       "No coração do Médoc, a três minutos de bicicleta do château da degustação. Jantar com chef particular na primeira noite.",
-      "Pátio de pedra clara em Margaux, com mesas ao ar livre, vasos e bicicletas"
+      "Pátio de pedra clara em Margaux, com mesas ao ar livre, vasos e bicicletas",
+      "pb-hotel-1"
     ],
     [
       "Hôtel du Golf La Baignoire",
       "Lacanau Océan · 2 noites",
       "Junto ao campo de golfe de Lacanau, entre a floresta de pinheiros e o oceano, com sauna depois do pedal.",
-      "Recepção do hotel com janelas de vidro do chão ao teto voltadas para os pinheiros"
+      "Recepção do hotel com janelas de vidro do chão ao teto voltadas para os pinheiros",
+      "pb-hotel-2"
     ],
     [
       "Hôtel de la Plage",
       "Contis · 1 noite",
       "Em Contis, um dos segredos mais bem guardados das Landes, entre a floresta e o farol.",
-      "Fachada do Hôtel de la Plage em Contis, de madeira e telhado vermelho, com as dunas e o mar ao fundo"
+      "Fachada do Hôtel de la Plage em Contis, de madeira e telhado vermelho, com as dunas e o mar ao fundo",
+      "pb-hotel-3"
     ],
     [
       "Hôtel 70 Hectares",
       "Hossegor · 1 noite",
       "Perto do campo de golfe de Hossegor, a 13 minutos de bicicleta da praia, com ioga, spa e massagem.",
-      "Piscina entre pinheiros com espreguiçadeiras e guarda-sóis verdes"
+      "Piscina entre pinheiros com espreguiçadeiras e guarda-sóis verdes",
+      "pb-hotel-4"
     ],
     [
       "Indarra",
       "País Basco · 2 noites",
       "No País Basco, com spa, piscina e cantos de leitura para o dia livre.",
-      "Foto do hotel Indarra"
+      "Foto do hotel Indarra",
+      "pb-hotel-5"
     ]
   ],
   "faq": [
@@ -324,5 +335,6 @@
   "reserva": {
     "linha": "5 a 12 de setembro de 2027 · 8 dias · € 5.575 por pessoa",
     "nota": "Em quarto duplo, parte terrestre. 4 vagas restantes neste grupo."
-  }
+  },
+  "paleta": "clara"
 }

@@ -27,6 +27,9 @@ TOKENS = """
 """
 
 MANUAL = """
+/* País Basco: paleta mais leve, a partir do teste do cliente (26/11). Contraste conferido: texto preto 8,3:1 e 10,7:1; branco 13,5:1 e 7,5:1 */
+.paleta-clara{--sky:#8ea8ab;--olive:#d0b776;--lilac:#d0b776;--forest:#29302f;--earth:#82442a}
+.paleta-clara .day-stay{color:#e6b48c}
 /* botão cheio num vermelho mais fechado: pedido do cliente (25/11). Branco sobre ele: 7,9:1 */
 :root{--red-fill:#9e1f17}
 /* WhatsApp sempre à mão */

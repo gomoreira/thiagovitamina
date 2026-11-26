@@ -252,6 +252,7 @@ body.is-locked{overflow:hidden}
 .hosts-mini ul{display:flex;flex-direction:column;gap:16px;padding:0;list-style:none}
 .hosts-mini li{display:flex;align-items:center;gap:16px}
 .hosts-mini li>span:last-child{display:flex;flex-direction:column}
+.avatar img,img.avatar{width:56px;height:56px;object-fit:cover;display:block}
 .avatar{flex:0 0 56px;width:56px;height:56px;display:grid;place-items:center;background:#333;font-family:var(--serif);font-size:24px}
 .person{font-size:20px;line-height:24px}
 .prose p+p{margin-top:var(--s5)}
@@ -298,7 +299,7 @@ body.is-locked{overflow:hidden}
 .trip-text{max-width:42ch;margin-bottom:var(--s8)!important}
 .hosts{display:grid;gap:var(--s8);padding:0;list-style:none}
 .host{display:flex;flex-direction:column;gap:4px}
-.host__img{width:100%;height:260px;object-fit:cover;margin-bottom:8px}
+.host__img{object-position:50% 25%;width:100%;height:260px;object-fit:cover;margin-bottom:8px}
 .host h3{font-weight:400;font-size:32px;line-height:36px}
 .host p:last-child{margin-top:8px;max-width:330px}
 .acc--faq summary{font-size:24px;line-height:28px}
@@ -352,6 +353,9 @@ body.is-locked{overflow:hidden}
 @media (min-width:1440px){ :root{ --edge:64px } }
 
 /* ajustes de desenho */
+/* País Basco: paleta mais leve, a partir do teste do cliente (26/11). Contraste conferido: texto preto 8,3:1 e 10,7:1; branco 13,5:1 e 7,5:1 */
+.paleta-clara{--sky:#8ea8ab;--olive:#d0b776;--lilac:#d0b776;--forest:#29302f;--earth:#82442a}
+.paleta-clara .day-stay{color:#e6b48c}
 /* botão cheio num vermelho mais fechado: pedido do cliente (25/11). Branco sobre ele: 7,9:1 */
 :root{--red-fill:#9e1f17}
 /* WhatsApp sempre à mão */
