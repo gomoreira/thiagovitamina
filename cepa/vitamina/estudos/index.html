@@ -108,10 +108,10 @@ footer .wrap{display:grid;gap:48px}
 .alerta svg{flex:none;width:26px;height:26px;margin-top:2px}
 .alerta p{font-size:17px;line-height:1.5}
 .alerta strong{font-weight:500}
-.filtros{position:sticky;top:80px;z-index:5;background:rgba(245,245,242,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-block:1px solid var(--linha);padding:16px 0}
-.filtros .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) 220px 240px;gap:12px 20px;align-items:center}
-.grupo{display:flex;gap:6px;flex-wrap:wrap;border:0}
-.grupo legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.filtros{background:var(--off);border-block:1px solid var(--linha);padding:16px 0}
+.filtros .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) 220px 240px;gap:16px 20px;align-items:end}
+.grupo{display:flex;gap:6px;flex-wrap:wrap;border:0;min-width:0;margin:0;padding:0}
+.grupo legend{float:left;width:100%;margin-bottom:4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza)}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
 .chip span{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid #CFCCC4;font-size:15px;font-weight:400;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
@@ -158,7 +158,7 @@ footer .wrap{display:grid;gap:48px}
 @media (max-width:860px){
   .filtros{position:static}
   .filtros .wrap{grid-template-columns:1fr}
-  .substancias{overflow-x:auto;flex-wrap:nowrap;margin:0 calc(var(--gut)*-1);padding:2px var(--gut)}
+  .chip span{min-height:38px;padding:7px 14px;font-size:14px}
   .lista{grid-template-columns:1fr}
   .estudo{padding:22px 20px}
 }
@@ -224,7 +224,7 @@ footer .wrap{display:grid;gap:48px}
       </div>
       <div class="campo">
         <label for="busca">Cidade ou instituição</label>
-        <input id="busca" type="search" placeholder="Ex.: São Paulo, Johns Hopkins" autocomplete="off">
+        <input id="busca" type="search" placeholder="Ex.: São Paulo" autocomplete="off">
       </div>
       <fieldset class="grupo substancias">
         <legend>Substância</legend>
@@ -304,6 +304,8 @@ footer .wrap{display:grid;gap:48px}
     substancias: /alcohol|substance|opioid|cocaine|methamphetamine|smoking|tobacco|nicotine|addiction|use disorder|gambling/i,
     dor: /pain|migraine|headache|fibromyalgia/i, alimentar: /anorexia|bulimia|eating|binge/i, toc: /obsessive|ocd/i, saudaveis: /healthy/i
   };
+  // cetamina também é anestésico: só entra quando o estudo é sobre saúde mental
+  const MENTAL = /depress|mood|ptsd|post-?traumatic|trauma|anxiety|distress|alcohol|substance|opioid|cocaine|methamphetamine|smoking|tobacco|nicotine|addiction|use disorder|suicid|bipolar|obsessive|ocd|schizo|psychos|eating|anorexia|bulimia|binge|gambling|burnout|grief|mental/i;
   const STXT = {RECRUITING:["Recrutando","st-rec"], NOT_YET_RECRUITING:["Começa em breve","st-breve"], ENROLLING_BY_INVITATION:["Por convite","st-conv"]};
   const FASE = {EARLY_PHASE1:"Fase 1 inicial", PHASE1:"Fase 1", PHASE2:"Fase 2", PHASE3:"Fase 3", PHASE4:"Fase 4", NA:"Não se aplica"};
   const PAIS = {"Brazil":"Brasil","United States":"EUA"};
@@ -333,7 +335,9 @@ footer .wrap{display:grid;gap:48px}
     const titulo = p.identificationModule?.briefTitle || "";
     const conds = p.conditionsModule?.conditions || [];
     const locs = (p.contactsLocationsModule?.locations || []).filter(l => PAIS[l.country]);
-    const subs = SUBS.filter(([, re]) => re.test(ints + " " + titulo));
+    // a psilocibina aparece como "4-phosphoryloxy-N,N-dimethyltryptamine": não é DMT
+    const base = (ints + " " + titulo).replace(/4-(phosphoryloxy|hydroxy)[\s,-]*n[\s,-]*n[\s,-]*dimethyltryptamine/gi, "psilocybin");
+    const subs = SUBS.filter(([k, re]) => re.test(k === "outras" ? ints : base));
     const fases = (p.designModule?.phases || []).map(f => FASE[f] || f);
     return {
       id: p.identificationModule?.nctId, titulo, conds, locs,
@@ -364,7 +368,7 @@ footer .wrap{display:grid;gap:48px}
     const ls = e.locs.filter(l => pais === "todos" || l.country === pais);
     const br = ls.filter(l => l.country === "Brazil"), resto = ls.filter(l => l.country !== "Brazil");
     const ord = br.concat(resto);
-    const fmt = l => esc([l.facility, [l.city, l.country === "Brazil" ? "" : l.state].filter(Boolean).join(", ")].filter(Boolean).join(" · "));
+    const fmt = l => esc([(l.facility || "").length > 3 ? l.facility : "", [l.city, l.country === "Brazil" ? "" : l.state].filter(Boolean).join(", ")].filter(Boolean).join(" · "));
     const prim = ord.slice(0, 2).map(fmt).join("<br>");
     return ord.length > 2 ? prim + `<br><span style="color:var(--cinza)">e mais ${ord.length - 2} ${ord.length - 2 === 1 ? "local" : "locais"}</span>` : prim;
   }
@@ -395,16 +399,16 @@ footer .wrap{display:grid;gap:48px}
   async function carrega() {
     try {
       let cache = null;
-      try { cache = JSON.parse(sessionStorage.getItem("cepa-estudos-2") || "null"); } catch (e) {}
+      try { cache = JSON.parse(sessionStorage.getItem("cepa-estudos-3") || "null"); } catch (e) {}
       let brutos;
       if (cache && Date.now() - cache.t < 3600e3) brutos = cache.d;
       else {
         const res = await Promise.all(consultas.map(busca));
         const vistos = new Set(); brutos = [];
         res.flat().forEach(s => { const id = s.protocolSection?.identificationModule?.nctId; if (id && !vistos.has(id)) { vistos.add(id); brutos.push(s); } });
-        try { sessionStorage.setItem("cepa-estudos-2", JSON.stringify({t: Date.now(), d: brutos})); } catch (e) {}
+        try { sessionStorage.setItem("cepa-estudos-3", JSON.stringify({t: Date.now(), d: brutos})); } catch (e) {}
       }
-      estudos = brutos.map(prepara).filter(e => e.paises.length && e.subs.length)
+      estudos = brutos.map(prepara).filter(e => e.paises.length && e.subs.length && (e.subs.some(x => x[0] !== "cetamina") || MENTAL.test(e.conds.join(" ") + " " + e.titulo)))
         .sort((a, b) => (b.paises.includes("Brazil") - a.paises.includes("Brazil")) || (a.status === "RECRUITING" ? -1 : 0) - (b.status === "RECRUITING" ? -1 : 0) || b.data.localeCompare(a.data));
       $("quando").textContent = ", então está sempre atualizada";
       desenha();
