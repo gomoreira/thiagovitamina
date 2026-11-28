@@ -5,12 +5,23 @@ var CONSENT_KEY = 'tv-consent';
 var consent = null;
 try { consent = localStorage.getItem(CONSENT_KEY); } catch (e) {}
 
+// Owner switch: ?ref=thiago-optout stops tracking in this browser for good, ?ref=thiago-optin turns it back on.
+var OWNER = new URLSearchParams(location.search).get('ref');
+var ownerOut = OWNER === 'thiago-optout';
+try {
+  if (ownerOut) localStorage.setItem('tv-owner', 'out');
+  if (OWNER === 'thiago-optin') localStorage.removeItem('tv-owner');
+} catch (e) {}
+var isOwner = false;
+try { isOwner = localStorage.getItem('tv-owner') === 'out'; } catch (e) {}
+
 // Until someone says yes, nothing is stored in the browser and nothing is recorded.
 // Events go through /ingest on this domain (rewrite in vercel.json), so ad blockers don't drop them.
 posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   api_host: '/ingest',
   ui_host: 'https://us.posthog.com',
   capture_exceptions: true,
+  opt_out_capturing_by_default: isOwner,
   person_profiles: 'identified_only',
   persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory',
   disable_session_recording: consent !== 'yes',
@@ -19,6 +30,10 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   enable_heatmaps: true,
   session_recording: { maskAllInputs: true }
 });
+try {
+  if (isOwner) posthog.opt_out_capturing();
+  if (OWNER === 'thiago-optin') posthog.opt_in_capturing();
+} catch (e) {}
 
 (function () {
   var page = location.pathname.replace(/\/$/, '') || '/';
@@ -26,7 +41,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
 
   // Tester links: thiagovitamina.com/?ref=name tags every event of that visit.
   var ref = new URLSearchParams(location.search).get('ref');
-  if (ref) { try { posthog.register({ ref: ref }); } catch (e) {} }
+  if (ref && !/^thiago-opt(out|in)$/.test(ref)) { try { posthog.register({ ref: ref }); } catch (e) {} }
 
   // Names for autocapture and heatmaps: data-attr turns "a button in a div" into "read-case-mir".
   var slug = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
@@ -106,7 +121,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
   }, true);
 
   // Cookie note: the site's ink drop asks once, after the visitor has scrolled past the hero.
-  if (consent) return;
+  if (consent || isOwner) return;
   var note = document.createElement('div');
   note.className = 'cnote';
   note.setAttribute('role', 'region');
