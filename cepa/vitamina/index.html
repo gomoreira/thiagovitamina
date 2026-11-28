@@ -213,9 +213,9 @@ footer .wrap{display:grid;gap:48px}
   .surge{opacity:1;transform:none;transition:none}
 }
 
-/* Opções de abertura: A (padrão), B, C e D. Troque com ?abertura=b na URL */
+/* Opções de abertura: A (padrão), B e C. Troque com ?abertura=b na URL */
 .hero{display:none}
-html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c,html[data-hero=d] .hero-d{display:flex}
+html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c{display:flex}
 /* B: gradiente da marca, como o cartão de visita */
 .hero-b .hero-fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-b .liquido{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s var(--luxo,ease)}
@@ -237,22 +237,8 @@ html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-
 .hero-c .acoes{justify-content:center;margin-bottom:0}
 @media (max-height:820px){.hero-c .wrap{padding-top:84px;padding-bottom:12px}.hero-c .kv-foto{width:min(56vw,22svh,300px)}.hero-c h1{font-size:clamp(24px,3.6svh,32px);margin:2px auto 8px}.hero-c .lead{margin-bottom:14px;font-size:16px}.hero-c .acoes .btn{min-height:44px;padding:10px 20px}.hero-c .chip-estudos{font-size:14px}}
 @media (max-height:700px){.hero-c .kv-foto{width:min(50vw,18svh,240px)}.hero-c .lead{font-size:15px;line-height:1.45}}
-/* D: a A em versão clara, com os cogumelos recortados */
-.hero-d{background:var(--off);color:var(--preto)}
-.hero-d .eyebrow{color:var(--roxo)}
-.hero-d .lead{color:var(--cinza)}
-.hero-d .visual img{-webkit-mask-image:none;mask-image:none}
-.hero-d .visual::after{background:radial-gradient(closest-side,color-mix(in srgb,var(--roxo) 22%,transparent),color-mix(in srgb,var(--rosa) 10%,transparent) 60%,transparent)}
-
-html[data-hero=d] .topo:not(.solido):not(.aberto){color:var(--preto)}
-html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-branca{display:none}
-html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-preta{display:block}
-html[data-hero=d] .topo:not(.solido) .menu .btn{background:var(--preto);color:var(--off)}
-/* ritmo de cor na D: com a abertura clara, o Sobre vira escuro */
-html[data-hero=d] #sobre{background:var(--preto);color:var(--off)}
-html[data-hero=d] #sobre .eyebrow{color:var(--lilas-300)}
-html[data-hero=d] #sobre .texto p{color:var(--cinza-claro)}
-html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
+/* D: a A em versão clara{background:var(--off);color:var(--preto)}
+/* ritmo de cor na D: com a abertura clara{background:var(--preto);color:var(--off)}
 /* A: a cor dos cogumelos se intensifica e gira devagar onde o cursor passa */
 .lanterna{--x:50%;--y:46%;--r:40%;--h:0deg;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);animation:flutua 9s ease-in-out infinite}
 .lanterna img{position:absolute;inset:0;-webkit-mask-image:none;mask-image:none;animation:none}
@@ -279,8 +265,6 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 .chip-estudos svg{width:13px;height:13px;flex:none}
 .chip-estudos .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 4px color-mix(in srgb,var(--verde) 25%,transparent);flex:none}
 .hero-c .chip-estudos{align-self:center;margin-bottom:0;padding-block:7px}
-.hero-d .chip-estudos{background:var(--branco);border-color:var(--linha);color:var(--preto)}
-.hero-d .chip-estudos:hover{border-color:var(--preto)}
 .estudos-home{background:var(--roxo);color:var(--off)}
 .estudos-home .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:start}
 .estudos-home .eyebrow{color:var(--lilas-100);margin-bottom:24px}
@@ -316,13 +300,11 @@ h1 em::after{content:"";position:absolute;left:.04em;right:.08em;bottom:.04em;he
 .js .linhas.ver .l>span{opacity:1;filter:none;transform:none}
 .js .titulo.surge,.js .surge:has(>h2.linhas){transform:none}
 .btn-linha:focus-visible{background:var(--off);color:var(--preto)}
-.hero-d .btn-linha:focus-visible{background:var(--preto);color:var(--off)}
 @media (hover:hover) and (pointer:fine){
   .btn:hover .rotulo>span{transform:translateY(-100%)}
   .btn-luz:hover{background:var(--lilas-300)}
-  .btn-escuro:hover,.topo.solido .menu .btn:hover,html[data-hero=d] .topo:not(.solido) .menu .btn:hover{background:var(--roxo)}
+  .btn-escuro:hover,.topo.solido .menu .btn:hover{background:var(--roxo)}
   .btn-linha:hover{background:var(--off);color:var(--preto);border-color:var(--off)}
-  .hero-d .btn-linha:hover{background:var(--preto);color:var(--off);border-color:var(--preto)}
   .menu a:not(.btn):hover{background-size:100% 1px;background-position:left bottom;opacity:1}
   .pessoa:hover img{transform:scale(1.03)}
   .video button:hover .play::after{transform:scale(1);opacity:1}
@@ -341,7 +323,7 @@ h1 em::after{content:"";position:absolute;left:.04em;right:.08em;bottom:.04em;he
 footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
 </style>
 <script>
-  document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
+  document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abc]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
 </script>
 </head>
 <body>
@@ -422,23 +404,6 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
     </div>
   </section>
 
-  <section class="hero hero-d" aria-labelledby="h-hero-d">
-    <div class="wrap">
-      <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg class="seta seta-dir" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
-        <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
-        <h1 id="h-hero-d">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
-        <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
-        <div class="acoes">
-          <a class="btn btn-escuro" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar pelo WhatsApp</a>
-          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
-        </div>
-      </div>
-      <div class="visual">
-        <img src="/cepa/vitamina/img/cogumelos-recorte-720.webp" srcset="/cepa/vitamina/img/cogumelos-recorte-720.webp 720w, /cepa/vitamina/img/cogumelos-recorte.webp 1080w" sizes="(max-width:860px) 52vw, 46vw" alt="" width="720" height="720">
-      </div>
-    </div>
-  </section>
 
   <section id="sobre" aria-labelledby="h-sobre">
     <div class="wrap">
@@ -560,7 +525,7 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
   <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
 </a>
 
-<nav class="seletor" aria-label="Opções de abertura"><span>Abertura</span><a href="?abertura=a">A</a><a href="?abertura=b">B</a><a href="?abertura=c">C</a><a href="?abertura=d">D</a></nav>
+<nav class="seletor" aria-label="Opções de abertura"><span>Abertura</span><a href="?abertura=a">A</a><a href="?abertura=b">B</a><a href="?abertura=c">C</a></nav>
 
 <script>
   // Equipe: edite esta lista para adicionar, remover ou reordenar terapeutas.
