@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="/cepa/vitamina/favicon.png">
 <link rel="preload" href="/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/cepa/vitamina/fonts/funnel-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/cepa/vitamina/img/cogumelos-720.jpg" as="image">
+<link rel="preload" as="image" href="/cepa/vitamina/img/cogumelos-720.jpg" imagesrcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" imagesizes="(max-width:860px) 78vw, 46vw" fetchpriority="high">
 <style>
 @font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400 900;font-display:swap;src:url(/cepa/vitamina/fonts/bodoni-moda-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -139,7 +139,7 @@ section{padding:var(--sec) 0}
 
 /* Equipe */
 .equipe .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px;list-style:none}
-.pessoa img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;margin-bottom:18px;background:var(--linha);filter:grayscale(.15)}
+.pessoa img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;margin-bottom:18px;background:var(--linha);}
 .pessoa h3{font-size:24px;line-height:1.15;margin-bottom:6px;text-wrap:pretty;min-height:2.3em}
 .pessoa .reg{font-variant-numeric:tabular-nums lining-nums;font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--roxo);margin-bottom:8px}
 .pessoa .cargo{font-size:16px;line-height:1.45;color:var(--cinza)}
@@ -213,11 +213,13 @@ footer .wrap{display:grid;gap:48px}
   .surge{opacity:1;transform:none;transition:none}
 }
 
-/* Opções de abertura: A (padrão), B, C, D e E. Troque com ?abertura=b na URL */
+/* Opções de abertura: A (padrão), B, C e D. Troque com ?abertura=b na URL */
 .hero{display:none}
-html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c,html[data-hero=d] .hero-d,html[data-hero=e] .hero-e{display:flex}
+html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c,html[data-hero=d] .hero-d{display:flex}
 /* B: gradiente da marca, como o cartão de visita */
 .hero-b .hero-fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-b .liquido{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s var(--luxo,ease)}
+.hero-b.gl .liquido{opacity:1}
 .hero-b::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,color-mix(in srgb,var(--noite) 15%,transparent),color-mix(in srgb,var(--noite) 5%,transparent) 40%,color-mix(in srgb,var(--noite) 45%,transparent))}
 .hero-b .wrap{display:block;z-index:2;padding-top:112px;padding-bottom:56px}
 .hero-b .simb-grande{width:clamp(64px,6vw,96px);height:auto;filter:brightness(0) invert(1);margin-bottom:28px}
@@ -251,13 +253,12 @@ html[data-hero=d] #sobre{background:var(--preto);color:var(--off)}
 html[data-hero=d] #sobre .eyebrow{color:var(--lilas-300)}
 html[data-hero=d] #sobre .texto p{color:var(--cinza-claro)}
 html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
-/* E: os cogumelos em preto e branco, e a cor aparece onde o cursor passa, como uma lanterna */
-.lanterna{--x:50%;--y:46%;--r:40%;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);animation:flutua 9s ease-in-out infinite}
+/* A: a cor dos cogumelos se intensifica e gira devagar onde o cursor passa */
+.lanterna{--x:50%;--y:46%;--r:40%;--h:0deg;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent);animation:flutua 9s ease-in-out infinite}
 .lanterna img{position:absolute;inset:0;-webkit-mask-image:none;mask-image:none;animation:none}
-.lanterna .pb{opacity:.92}
-.lanterna .cor{--m:radial-gradient(var(--r) var(--r) at var(--x) var(--y),var(--noite) 0%,color-mix(in srgb,var(--noite) 70%,transparent) 30%,color-mix(in srgb,var(--noite) 25%,transparent) 65%,transparent 100%);-webkit-mask-image:var(--m);mask-image:var(--m);transform:translate(var(--dx,0px),var(--dy,0px))}
+.lanterna .lente{--m:radial-gradient(var(--r) var(--r) at var(--x) var(--y),var(--noite) 0%,color-mix(in srgb,var(--noite) 70%,transparent) 30%,color-mix(in srgb,var(--noite) 25%,transparent) 65%,transparent 100%);-webkit-mask-image:var(--m);mask-image:var(--m);filter:saturate(1.55) hue-rotate(var(--h)) brightness(1.06)}
 .lanterna::after{display:none}
-@media (prefers-reduced-motion:reduce){.lanterna{animation:none}.lanterna .cor{-webkit-mask-image:none;mask-image:none;transform:none}.lanterna::after{display:none}}
+@media (prefers-reduced-motion:reduce){.lanterna{animation:none}.lanterna .lente{display:none}}
 /* seletor de abertura: aparece sempre na prévia. Tirar antes de ir pro domínio do CEPA */
 .seletor{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:30;display:none;gap:4px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--preto) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 14px/1 var(--sans);color:var(--off)}
 .seletor{display:flex}
@@ -340,7 +341,7 @@ h1 em::after{content:"";position:absolute;left:.04em;right:.08em;bottom:.04em;he
 footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
 </style>
 <script>
-  document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcde]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
+  document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
 </script>
 </head>
 <body>
@@ -381,36 +382,17 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
           <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
         </div>
       </div>
-      <div class="visual">
-        <img src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" fetchpriority="high">
+      <div class="visual lanterna">
+        <img class="base" src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" fetchpriority="high">
+        <img class="lente" src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" loading="lazy" aria-hidden="true">
       </div>
     </div>
   </section>
 
-  <section class="hero hero-e" aria-labelledby="h-hero-e">
-    <div class="wrap">
-      <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg class="seta seta-dir" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
-        <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
-        <h1 id="h-hero-e">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
-        <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
-        <div class="acoes">
-          <a class="btn btn-luz" data-zap href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">
-            <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
-            Agendar pelo WhatsApp
-          </a>
-          <a class="btn btn-linha" href="#equipe">Conhecer a equipe</a>
-        </div>
-      </div>
-      <div class="visual lanterna" aria-hidden="true">
-        <img class="pb" src="/cepa/vitamina/img/cogumelos-pb-720.jpg" alt="" width="720" height="720" loading="lazy">
-        <img class="cor" src="/cepa/vitamina/img/cogumelos-720.jpg" srcset="/cepa/vitamina/img/cogumelos-720.jpg 720w, /cepa/vitamina/img/cogumelos.jpg 1080w" sizes="(max-width:860px) 78vw, 46vw" alt="" width="720" height="720" loading="lazy">
-      </div>
-    </div>
-  </section>
 
   <section class="hero hero-b" aria-labelledby="h-hero-b">
     <video class="hero-fundo" autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
+    <canvas class="liquido" aria-hidden="true"></canvas>
     <div class="wrap">
       <img class="simb-grande" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
       <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg class="seta seta-dir" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
@@ -578,7 +560,7 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
   <svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>
 </a>
 
-<nav class="seletor" aria-label="Opções de abertura"><span>Abertura</span><a href="?abertura=a">A</a><a href="?abertura=b">B</a><a href="?abertura=c">C</a><a href="?abertura=d">D</a><a href="?abertura=e">E</a></nav>
+<nav class="seletor" aria-label="Opções de abertura"><span>Abertura</span><a href="?abertura=a">A</a><a href="?abertura=b">B</a><a href="?abertura=c">C</a><a href="?abertura=d">D</a></nav>
 
 <script>
   // Equipe: edite esta lista para adicionar, remover ou reordenar terapeutas.
@@ -599,7 +581,7 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
     ["Victoria Sami","[registro a confirmar]","Professora de yoga, pesquisadora de psicodélicos e estudante de Psicologia","7UUoLlWNrMACtvcJHTGLWPcF4"]
   ];
   document.getElementById("grade").innerHTML = equipe.map(([nome, reg, cargo, foto]) =>
-    `<li class="pessoa surge"><picture><source type="image/avif" srcset="/cepa/vitamina/img/${foto}-320.avif 320w, /cepa/vitamina/img/${foto}-640.avif 640w" sizes="(max-width:600px) 44vw, (max-width:1100px) 30vw, 260px"><img src="/cepa/vitamina/img/${foto}.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy" decoding="async"></picture><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
+    `<li class="pessoa surge"><picture><source type="image/avif" srcset="/cepa/vitamina/img/${foto}-a-320.avif 320w, /cepa/vitamina/img/${foto}-a-640.avif 640w" sizes="(max-width:600px) 44vw, (max-width:1100px) 30vw, 260px"><img src="/cepa/vitamina/img/${foto}-a.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy" decoding="async"></picture><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
 
   // Topo: fica sólido depois da abertura
   const topo = document.getElementById("topo"), heroAtual = document.documentElement.dataset.hero || "a", hero = document.querySelector(".hero-" + heroAtual);
@@ -670,8 +652,8 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
   // O WhatsApp fixo também espera a abertura sair da tela
   zo.observe(hero);
 
-  // Abertura E: lanterna de cor que segue o cursor; no toque, deriva sozinha
-  const lan = heroAtual === "e" && document.querySelector(".lanterna");
+  // Abertura A: lente de cor que segue o cursor; no toque, deriva sozinha
+  const lan = heroAtual === "a" && document.querySelector(".hero-a .lanterna");
   if (lan && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const fino = matchMedia("(hover: hover) and (pointer: fine)").matches;
     let alvo = null, x = 50, y = 46, r = 34, rAlvo = 34, rodando = false, visivel = true, t0 = performance.now();
@@ -680,7 +662,7 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
       if (alvo) { [tx, ty] = alvo; rAlvo = 36; }
       else { const k = (t - t0) / 20000 * Math.PI * 2; tx = 50 + Math.cos(k) * 18; ty = 46 + Math.sin(k * 2) * 12; rAlvo = 40; }
       x += (tx - x) * .035; y += (ty - y) * .035; r += (rAlvo - r) * .02;
-      lan.style.setProperty("--x", x.toFixed(2) + "%"); lan.style.setProperty("--y", y.toFixed(2) + "%"); lan.style.setProperty("--r", r.toFixed(2) + "%");
+      lan.style.setProperty("--x", x.toFixed(2) + "%"); lan.style.setProperty("--y", y.toFixed(2) + "%"); lan.style.setProperty("--r", r.toFixed(2) + "%"); lan.style.setProperty("--h", (Math.sin(t / 9000 * Math.PI * 2) * 55).toFixed(1) + "deg");
       
       if (visivel && !document.hidden) requestAnimationFrame(passo); else rodando = false;
     };
@@ -695,6 +677,63 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
     new IntersectionObserver(es => { visivel = es[0].isIntersecting; liga(); }).observe(hero);
     document.addEventListener("visibilitychange", liga);
     liga();
+  }
+
+  // Abertura B: o cursor deforma o gradiente como uma mão na água (WebGL; sem ele, fica o vídeo)
+  const hb = heroAtual === "b" && document.querySelector(".hero-b"), cv = hb && hb.querySelector(".liquido"), vd = hb && hb.querySelector("video");
+  const gl = cv && !matchMedia("(prefers-reduced-motion: reduce)").matches && cv.getContext("webgl", {alpha: false, antialias: false, premultipliedAlpha: false});
+  if (gl) {
+    const N = 32;
+    const vs = "attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0,1);}";
+    const fs = `precision mediump float;varying vec2 uv;uniform sampler2D t;uniform vec2 res,tex;uniform vec4 pt[${N}];uniform float age[${N}];uniform float tm;
+      vec2 cover(vec2 u){float ra=res.x/res.y,ta=tex.x/tex.y;vec2 s=ra>ta?vec2(1.,ta/ra):vec2(ra/ta,1.);return (u-.5)*s+.5;}
+      void main(){vec2 u=uv,d=vec2(0.);float asp=res.x/res.y;
+        for(int i=0;i<${N};i++){vec2 q=(u-pt[i].xy)*vec2(asp,1.);float w=exp(-dot(q,q)/.022)*pow(max(1.-age[i],0.),2.);d+=pt[i].zw*w;}
+        d+=.004*vec2(sin(u.y*5.+tm*.25),cos(u.x*4.-tm*.2));
+        vec2 b=cover(vec2(u.x,1.-u.y)-vec2(d.x,-d.y));float k=length(d)*.6;
+        gl_FragColor=vec4(texture2D(t,b+vec2(k,0.)).r,texture2D(t,b).g,texture2D(t,b-vec2(k,0.)).b,1.);}`;
+    const sh = (tp, src) => { const o = gl.createShader(tp); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+    if (gl.getProgramParameter(pr, gl.LINK_STATUS)) {
+      gl.useProgram(pr);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+      const lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+      [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      const U = n => gl.getUniformLocation(pr, n), uRes = U("res"), uTex = U("tex"), uPt = U("pt"), uAge = U("age"), uTm = U("tm");
+      const pts = new Float32Array(N * 4), ages = new Float32Array(N).fill(1);
+      let cab = 0, alvo = null, mx = .5, my = .5, px = .5, py = .5, vivo = true, rod = false, pronto = false;
+      const fino = matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const mede = () => { const r = cv.getBoundingClientRect(), k = Math.min(devicePixelRatio || 1, 2) * .5; cv.width = Math.max(2, r.width * k | 0); cv.height = Math.max(2, r.height * k | 0); gl.viewport(0, 0, cv.width, cv.height); };
+      mede(); addEventListener("resize", mede);
+      if (fino) {
+        hb.addEventListener("pointermove", e => { const r = hb.getBoundingClientRect(); alvo = [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; }, {passive: true});
+        hb.addEventListener("pointerleave", () => { alvo = null; });
+      }
+      const quadro = t => {
+        const s = t / 1000;
+        let tx, ty;
+        if (alvo) [tx, ty] = alvo; else { tx = .5 + Math.cos(s / 7) * .3; ty = .5 + Math.sin(s / 5) * .22; }
+        mx += (tx - mx) * (alvo ? .09 : .02); my += (ty - my) * (alvo ? .09 : .02);
+        const vx = mx - px, vy = my - py; px = mx; py = my;
+        for (let i = 0; i < N; i++) ages[i] = Math.min(1, ages[i] + .012);
+        if (Math.hypot(vx, vy) > .0004) { pts.set([mx, 1 - my, vx * 1.6, -vy * 1.6], cab * 4); ages[cab] = 0; cab = (cab + 1) % N; }
+        if (vd.readyState >= 2) {
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, vd);
+          if (!pronto) { pronto = true; hb.classList.add("gl"); }
+          gl.uniform2f(uRes, cv.width, cv.height); gl.uniform2f(uTex, vd.videoWidth || 1280, vd.videoHeight || 720);
+          gl.uniform4fv(uPt, pts); gl.uniform1fv(uAge, ages); gl.uniform1f(uTm, s);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        }
+        if (vivo && !document.hidden) requestAnimationFrame(quadro); else rod = false;
+      };
+      const liga = () => { if (!rod && vivo && !document.hidden) { rod = true; requestAnimationFrame(quadro); } };
+      new IntersectionObserver(es => { vivo = es[0].isIntersecting; vivo ? vd.play().catch(() => {}) : vd.pause(); liga(); }).observe(hb);
+      document.addEventListener("visibilitychange", liga);
+      cv.addEventListener("webglcontextlost", e => { e.preventDefault(); hb.classList.remove("gl"); vivo = false; });
+      liga();
+    }
   }
   // Entrada suave
   const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visto"); so.unobserve(e.target); } }), {threshold: .12});
