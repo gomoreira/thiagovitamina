@@ -45,7 +45,7 @@ a{color:inherit}
 .skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--branco);color:var(--preto);padding:10px 16px;font-weight:500;text-decoration:none}
 .skip:focus{top:12px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
-.eyebrow{font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow{font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
 h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08;text-wrap:balance}
 p{text-wrap:pretty}
 
@@ -55,9 +55,9 @@ p{text-wrap:pretty}
 .btn-luz{background:var(--off);color:var(--preto)}
 .btn-luz:hover{background:var(--branco)}
 .btn-escuro{background:var(--preto);color:var(--off)}
-.btn-escuro:hover{background:#000}
+.btn-escuro:hover{background:var(--noite)}
 .btn-linha{border:1px solid currentColor}
-.btn-linha:hover{background:rgba(245,245,242,.1)}
+.btn-linha:hover{background:color-mix(in srgb,var(--off) 10%,transparent)}
 
 /* Topo */
 .topo{position:fixed;inset:0 0 auto;z-index:20;color:var(--off);transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
@@ -70,7 +70,7 @@ p{text-wrap:pretty}
 .menu a{font-size:16px;font-weight:400;text-decoration:none;opacity:.86;transition:opacity .2s}
 .menu a:hover{opacity:1}
 .menu .btn{opacity:1;min-height:44px;padding:10px 20px;font-size:15px}
-.topo.solido{background:rgba(245,245,242,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--preto);box-shadow:0 1px 0 var(--linha)}
+.topo.solido{background:color-mix(in srgb,var(--off) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--preto);box-shadow:0 1px 0 var(--linha)}
 .topo.solido .palavra-branca{display:none}.topo.solido .palavra-preta{display:block}
 .topo.solido .menu .btn{background:var(--preto);color:var(--off)}
 .abrir{display:none;width:44px;height:44px;background:none;border:0;color:inherit;cursor:pointer;position:relative}
@@ -84,15 +84,15 @@ p{text-wrap:pretty}
 .hero .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
 .hero h1{font-size:clamp(38px,4vw,58px);margin-bottom:22px;max-width:15ch}
 .hero h1 em{font-style:italic}
-.hero .lead{font-size:clamp(18px,1.5vw,20px);max-width:38ch;color:#DCDAD4;margin-bottom:32px}
+.hero .lead{font-size:clamp(18px,1.5vw,20px);max-width:38ch;color:var(--cinza-claro);margin-bottom:32px}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
-.contato-rapido{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:16px;color:#DCDAD4;border-top:1px solid rgba(245,245,242,.18);padding-top:24px;list-style:none}
-.contato-rapido a{text-decoration:none;border-bottom:1px solid rgba(245,245,242,.35);padding-bottom:2px}
+.contato-rapido{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:16px;color:var(--cinza-claro);border-top:1px solid color-mix(in srgb,var(--off) 18%,transparent);padding-top:24px;list-style:none}
+.contato-rapido a{text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--off) 35%,transparent);padding-bottom:2px}
 .contato-rapido a:hover{border-color:var(--off);color:var(--off)}
 .contato-rapido span{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-escuro);margin-bottom:4px}
 .visual{position:relative;justify-self:end;width:min(100%,620px);aspect-ratio:1}
-.visual img{width:100%;height:100%;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);animation:flutua 9s ease-in-out infinite}
-.visual::after{content:"";position:absolute;inset:18%;z-index:-1;background:radial-gradient(closest-side,rgba(77,98,173,.45),rgba(216,27,97,.18) 60%,transparent);filter:blur(30px)}
+.visual img{width:100%;height:100%;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent 100%);mask-image:radial-gradient(closest-side,var(--noite) 72%,transparent 100%);animation:flutua 9s ease-in-out infinite}
+.visual::after{content:"";position:absolute;inset:18%;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--azul) 45%,transparent),color-mix(in srgb,var(--rosa) 18%,transparent) 60%,transparent);filter:blur(30px)}
 @keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* Seções */
@@ -106,8 +106,8 @@ section{padding:var(--sec) 0}
 .citacao{font-family:var(--serif);font-size:clamp(24px,2.4vw,34px);line-height:1.12;font-style:italic}
 .texto p{font-size:clamp(18px,1.5vw,21px);margin-bottom:22px;max-width:60ch}
 .texto p:first-child{font-size:clamp(21px,1.9vw,26px);line-height:1.45;font-weight:300}
-.video{margin-top:64px;position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#000 url(/cepa/vitamina/img/gradiente.jpg) center/cover}
-.video button{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45));color:var(--off);cursor:pointer;display:flex;align-items:flex-end;justify-content:space-between;padding:clamp(20px,3vw,40px);text-align:left;font:inherit}
+.video{margin-top:64px;position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:var(--noite) url(/cepa/vitamina/img/gradiente.jpg) center/cover}
+.video button{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,color-mix(in srgb,var(--noite) 0%,transparent) 40%,color-mix(in srgb,var(--noite) 45%,transparent));color:var(--off);cursor:pointer;display:flex;align-items:flex-end;justify-content:space-between;padding:clamp(20px,3vw,40px);text-align:left;font:inherit}
 .video .play{width:clamp(64px,7vw,88px);height:clamp(64px,7vw,88px);border-radius:50%;background:var(--off);display:grid;place-items:center;transition:transform .3s var(--ease)}
 .video button:hover .play{transform:scale(1.06)}
 .video .play svg{width:28%;margin-left:6%;fill:var(--preto)}
@@ -133,9 +133,9 @@ section{padding:var(--sec) 0}
 .aviso .eyebrow{color:var(--rosa-claro);margin-bottom:24px;display:flex;gap:10px;align-items:center}
 .aviso .eyebrow svg{width:22px;height:22px}
 .aviso h2{font-size:clamp(32px,3.8vw,52px);margin-bottom:28px}
-.aviso p:not(.eyebrow){color:#CFCCC5;margin-bottom:18px;max-width:58ch}
+.aviso p:not(.eyebrow){color:var(--areia);margin-bottom:18px;max-width:58ch}
 .aviso p strong{color:var(--off);font-weight:500}
-.aviso img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent);opacity:.9}
+.aviso img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 70%,transparent);mask-image:radial-gradient(closest-side,var(--noite) 70%,transparent);opacity:.9}
 
 /* Equipe */
 .equipe .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px;list-style:none}
@@ -146,12 +146,12 @@ section{padding:var(--sec) 0}
 
 /* Contato */
 .contato{position:relative;color:var(--off);background:var(--preto) url(/cepa/vitamina/img/gradiente.jpg) center/cover;overflow:hidden}
-.contato::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,28,.82),rgba(28,28,28,.35))}
+.contato::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--preto) 82%,transparent),color-mix(in srgb,var(--preto) 35%,transparent))}
 .contato .wrap{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
 .contato h2{font-size:clamp(44px,6vw,84px);margin-bottom:24px}
 .contato p:not(.eyebrow){font-size:clamp(18px,1.6vw,21px);max-width:40ch;margin-bottom:36px}
-.canais{font-variant-numeric:tabular-nums lining-nums;list-style:none;display:grid;gap:0;border-top:1px solid rgba(245,245,242,.35)}
-.canais a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid rgba(245,245,242,.35);text-decoration:none;font-size:clamp(18px,1.6vw,22px);transition:padding .25s var(--ease)}
+.canais{font-variant-numeric:tabular-nums lining-nums;list-style:none;display:grid;gap:0;border-top:1px solid color-mix(in srgb,var(--off) 35%,transparent)}
+.canais a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid color-mix(in srgb,var(--off) 35%,transparent);text-decoration:none;font-size:clamp(18px,1.6vw,22px);transition:padding .25s var(--ease)}
 .canais a:hover{border-bottom-color:var(--off)}
 .canais span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:2px}
 .canais svg{width:22px;height:22px;flex:none}
@@ -167,11 +167,11 @@ footer .wrap{display:grid;gap:48px}
 .rod-links a{display:block;text-decoration:none;padding:4px 0}
 .rod-links a:hover{color:var(--off)}
 .palavra-grande{width:100%;height:auto;opacity:.12}
-.rod-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #2a2a2a;padding-top:24px;font-size:14px}
+.rod-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--grafite);padding-top:24px;font-size:14px}
 .rod-base a{text-decoration:none}.rod-base a:hover{color:var(--off)}
 
 /* WhatsApp fixo */
-.zap{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:15;width:60px;height:60px;border-radius:50%;background:var(--preto);color:var(--off);display:grid;place-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);transition:opacity .3s,transform .3s var(--ease);text-decoration:none}
+.zap{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:15;width:60px;height:60px;border-radius:50%;background:var(--preto);color:var(--off);display:grid;place-items:center;box-shadow:0 6px 24px color-mix(in srgb,var(--noite) 25%,transparent);transition:opacity .3s,transform .3s var(--ease);text-decoration:none}
 .zap svg{width:28px;height:28px}
 .zap.escondido{opacity:0;transform:translateY(12px);pointer-events:none}
 
@@ -187,7 +187,7 @@ footer .wrap{display:grid;gap:48px}
 }
 @media (max-width:860px){
   .abrir{display:block}
-  .menu{position:fixed;inset:80px 0 auto;flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px rgba(0,0,0,.08);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s var(--ease)}
+  .menu{position:fixed;inset:80px 0 auto;flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px color-mix(in srgb,var(--noite) 8%,transparent);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s var(--ease)}
   .menu a{font-family:var(--serif);font-size:32px;opacity:1;display:block;padding:6px 0}
   .menu .btn{font-family:var(--sans);font-size:17px;margin-top:16px;background:var(--preto);color:var(--off)}
   .topo.aberto{background:var(--off);color:var(--preto)}
@@ -216,17 +216,17 @@ footer .wrap{display:grid;gap:48px}
 html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-b,html[data-hero=c] .hero-c,html[data-hero=d] .hero-d{display:flex}
 /* B: gradiente da marca, como o cartão de visita */
 .hero-b .hero-fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-b::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.05) 40%,rgba(0,0,0,.45))}
+.hero-b::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,color-mix(in srgb,var(--noite) 15%,transparent),color-mix(in srgb,var(--noite) 5%,transparent) 40%,color-mix(in srgb,var(--noite) 45%,transparent))}
 .hero-b .wrap{display:block;z-index:2;padding-top:112px;padding-bottom:56px}
 .hero-b .simb-grande{width:clamp(64px,6vw,96px);height:auto;filter:brightness(0) invert(1);margin-bottom:28px}
 .hero-b .eyebrow{color:var(--off);opacity:.9}
 .hero-b h1{max-width:16ch;font-size:clamp(38px,4.4vw,64px)}
 .hero-b .lead{color:var(--off)}
-.hero-b .btn-linha:hover{background:rgba(245,245,242,.16)}
+.hero-b .btn-linha:hover{background:color-mix(in srgb,var(--off) 16%,transparent)}
 /* C: o key visual do Figma, a palavra cepa sobre os cogumelos */
 .hero-c .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:88px;padding-bottom:32px}
 .kv{position:relative;width:min(100%,760px,86svh);display:grid;place-items:center;margin-bottom:8px}
-.kv-foto{grid-area:1/1;width:min(29svh,340px);height:auto;aspect-ratio:1;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent)}
+.kv-foto{grid-area:1/1;width:min(29svh,340px);height:auto;aspect-ratio:1;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side,var(--noite) 70%,transparent);mask-image:radial-gradient(closest-side,var(--noite) 70%,transparent)}
 .kv-palavra{grid-area:1/1;width:100%;height:auto;position:relative;z-index:1}
 .hero-c h1{font-size:clamp(26px,min(2.6vw,4.4svh),38px);max-width:26ch;margin:4px auto 12px}
 .hero-c .lead{margin:0 auto 22px;max-width:52ch;font-size:clamp(16px,min(1.4vw,2.3svh),19px)}
@@ -238,19 +238,19 @@ html:not([data-hero]) .hero-a,html[data-hero=a] .hero-a,html[data-hero=b] .hero-
 .hero-d .eyebrow{color:var(--roxo)}
 .hero-d .lead{color:var(--cinza)}
 .hero-d .visual img{-webkit-mask-image:none;mask-image:none}
-.hero-d .visual::after{background:radial-gradient(closest-side,rgba(120,69,155,.22),rgba(216,27,97,.10) 60%,transparent)}
-.hero-d .btn-linha:hover{background:rgba(28,28,28,.06)}
+.hero-d .visual::after{background:radial-gradient(closest-side,color-mix(in srgb,var(--roxo) 22%,transparent),color-mix(in srgb,var(--rosa) 10%,transparent) 60%,transparent)}
+.hero-d .btn-linha:hover{background:color-mix(in srgb,var(--preto) 6%,transparent)}
 html[data-hero=d] .topo:not(.solido):not(.aberto){color:var(--preto)}
 html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-branca{display:none}
 html[data-hero=d] .topo:not(.solido):not(.aberto) .palavra-preta{display:block}
 html[data-hero=d] .topo:not(.solido) .menu .btn{background:var(--preto);color:var(--off)}
 /* ritmo de cor na D: com a abertura clara, o Sobre vira escuro */
 html[data-hero=d] #sobre{background:var(--preto);color:var(--off)}
-html[data-hero=d] #sobre .eyebrow{color:#C9A6F2}
-html[data-hero=d] #sobre .texto p{color:#DCDAD4}
+html[data-hero=d] #sobre .eyebrow{color:var(--lilas-300)}
+html[data-hero=d] #sobre .texto p{color:var(--cinza-claro)}
 html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 /* seletor de abertura: aparece sempre na prévia. Tirar antes de ir pro domínio do CEPA */
-.seletor{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:30;display:none;gap:4px;padding:6px;border-radius:999px;background:rgba(28,28,28,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 14px/1 var(--sans);color:var(--off)}
+.seletor{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:30;display:none;gap:4px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--preto) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 14px/1 var(--sans);color:var(--off)}
 .seletor{display:flex}
 .seletor span{padding:10px 8px 10px 12px;opacity:.7}
 .seletor a{display:grid;place-items:center;min-width:40px;height:36px;border-radius:999px;text-decoration:none}
@@ -264,10 +264,10 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 @media (prefers-reduced-motion:reduce){.hero-b .hero-fundo{display:none}.hero-b{background:url(/cepa/vitamina/img/gradiente.jpg) center/cover}}
 
 /* Estudos clínicos em destaque (pedido da Raquel) */
-.chip-estudos{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-bottom:28px;padding:9px 16px 9px 12px;border-radius:999px;font-size:15px;font-weight:400;text-decoration:none;background:rgba(245,245,242,.1);border:1px solid rgba(245,245,242,.28);color:var(--off);transition:background .25s var(--ease),border-color .25s var(--ease)}
-.chip-estudos:hover{background:rgba(245,245,242,.18);border-color:rgba(245,245,242,.6)}
+.chip-estudos{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-bottom:28px;padding:9px 16px 9px 12px;border-radius:999px;font-size:15px;font-weight:400;text-decoration:none;background:color-mix(in srgb,var(--off) 10%,transparent);border:1px solid color-mix(in srgb,var(--off) 28%,transparent);color:var(--off);transition:background .25s var(--ease),border-color .25s var(--ease)}
+.chip-estudos:hover{background:color-mix(in srgb,var(--off) 18%,transparent);border-color:color-mix(in srgb,var(--off) 60%,transparent)}
 .chip-estudos svg{width:13px;height:13px;flex:none}
-.chip-estudos .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 4px rgba(37,186,162,.25);flex:none}
+.chip-estudos .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 4px color-mix(in srgb,var(--verde) 25%,transparent);flex:none}
 .hero-c .chip-estudos{align-self:center;margin-bottom:0;padding-block:7px}
 .hero-d .chip-estudos{background:var(--branco);border-color:var(--linha);color:var(--preto)}
 .hero-d .chip-estudos:hover{border-color:var(--preto)}
@@ -275,11 +275,11 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 .estudos-home .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:start}
 .estudos-home .eyebrow{color:var(--lilas-100);margin-bottom:24px}
 .estudos-home h2{font-size:clamp(36px,4.4vw,60px);margin-bottom:24px;max-width:16ch}
-.estudos-home p:not(.eyebrow){font-size:clamp(18px,1.6vw,21px);max-width:50ch;margin-bottom:32px;color:#F1ECF6}
+.estudos-home p:not(.eyebrow){font-size:clamp(18px,1.6vw,21px);max-width:50ch;margin-bottom:32px;color:var(--lilas-50)}
 .estudos-home .btn svg{width:14px;height:14px}
 .estudos-subs{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.estudos-subs li{font-family:var(--serif);font-size:clamp(20px,1.8vw,26px);padding:6px 16px;border:1px solid rgba(245,245,242,.45);border-radius:999px}
-.estudos-ponte{font-size:17px!important;line-height:1.5;border-top:1px solid rgba(245,245,242,.35);padding-top:20px;margin-bottom:0!important}
+.estudos-subs li{font-family:var(--serif);font-size:clamp(20px,1.8vw,26px);padding:6px 16px;border:1px solid color-mix(in srgb,var(--off) 45%,transparent);border-radius:999px}
+.estudos-ponte{font-size:17px!important;line-height:1.5;border-top:1px solid color-mix(in srgb,var(--off) 35%,transparent);padding-top:20px;margin-bottom:0!important}
 .estudos-ponte strong{font-weight:500;color:var(--off)}
 @media (max-width:860px){.so-desk{display:none}.estudos-home .wrap{grid-template-columns:1fr;gap:32px}.chip-estudos{font-size:14px;margin-bottom:20px}}
 </style>
@@ -304,7 +304,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
       <li><a href="#equipe">Equipe</a></li>
       <li><a href="/cepa/vitamina/estudos">Estudos clínicos</a></li>
       <li><a href="#contato">Contato</a></li>
-      <li><a class="btn btn-luz" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener">Agendar conversa</a></li>
+      <li><a class="btn btn-luz" href="https://wa.me/5511920005742?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20CEPA%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20atendimento." target="_blank" rel="noopener"><svg viewBox="0 0 96 96" fill="currentColor" aria-hidden="true"><path d="M76.2 19.64A39.4 39.4 0 0 0 48.16 8C26.32 8 8.52 25.8 8.52 47.64c0 7 1.84 13.8 5.28 19.8L8.2 88l21-5.52a39.6 39.6 0 0 0 18.96 4.84c21.84 0 39.64-17.8 39.64-39.64 0-10.6-4.12-20.56-11.6-28.04ZM48.16 80.6c-5.92 0-11.72-1.6-16.8-4.6l-1.2-.72-12.48 3.28L21 66.4l-.8-1.24a32.8 32.8 0 0 1-5.04-17.52c0-18.16 14.8-32.96 32.96-32.96 8.8 0 17.08 3.44 23.28 9.68a32.7 32.7 0 0 1 9.64 23.32c.08 18.16-14.72 32.92-32.88 32.92Zm18.08-24.64c-1-.48-5.88-2.88-6.76-3.24-.92-.32-1.56-.48-2.24.48-.68 1-2.56 3.24-3.12 3.88-.56.68-1.16.76-2.16.24-1-.48-4.2-1.56-7.96-4.92-2.96-2.64-4.92-5.88-5.52-6.88-.56-1-.08-1.52.44-2.04.44-.44 1-1.16 1.48-1.72.48-.56.68-1 1-1.64.32-.68.16-1.24-.08-1.72-.24-.48-2.24-5.36-3.04-7.36-.8-1.92-1.64-1.68-2.24-1.72h-1.92c-.68 0-1.72.24-2.64 1.24-.88 1-3.44 3.4-3.44 8.28s3.56 9.6 4.04 10.24c.48.68 7 10.68 16.92 14.96 2.36 1.04 4.2 1.64 5.64 2.08 2.36.76 4.52.64 6.24.4 1.92-.28 5.88-2.4 6.68-4.72.84-2.32.84-4.28.56-4.72-.28-.44-.88-.64-1.88-1.12Z"/></svg>Agendar conversa</a></li>
     </ul>
   </div>
 </header>
@@ -313,7 +313,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-a" aria-labelledby="h-hero">
     <div class="wrap">
       <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -335,7 +335,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
     <video class="hero-fundo" autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
     <div class="wrap">
       <img class="simb-grande" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
-      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
       <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
       <h1 id="h-hero-b">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
       <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -348,7 +348,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 
   <section class="hero hero-c" aria-labelledby="h-hero-c">
     <div class="wrap">
-      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
       <div class="kv">
         <img class="kv-foto" src="/cepa/vitamina/img/cogumelos.jpg" alt="" width="1080" height="1080">
         <img class="kv-palavra" src="/cepa/vitamina/img/cepa-branco.svg" alt="CEPA" width="1240" height="273">
@@ -365,7 +365,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-d" aria-labelledby="h-hero-d">
     <div class="wrap">
       <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero-d">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -438,7 +438,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
         <p class="eyebrow">Estudos clínicos</p>
         <h2 id="h-estudos">Quer participar de uma pesquisa com psicodélicos?</h2>
         <p>Reunimos os estudos que estão recrutando agora no Brasil e nos EUA, com psilocibina, MDMA, ayahuasca, cetamina e outras substâncias. Você pode filtrar por cidade, substância ou condição.</p>
-        <a class="btn btn-luz" href="/cepa/vitamina/estudos">Ver os estudos abertos <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+        <a class="btn btn-luz" href="/cepa/vitamina/estudos">Ver os estudos abertos <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
       </div>
       <div class="estudos-lado surge">
         <ul class="estudos-subs" aria-label="Substâncias pesquisadas">
