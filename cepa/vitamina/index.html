@@ -29,6 +29,8 @@
   --preto:#1C1C1C; --noite:#000; --off:#F5F5F2; --branco:#fff;
   --azul:#4D62AD; --rosa:#D81B61; --roxo:#78459B; --verde:#25BAA2;
   --cinza:#5A5A5A; --linha:#E2E0DA; --cinza-escuro:#B9B6AE;
+  --cinza-claro:#DCDAD4; --areia:#CFCCC4; --grafite:#2A2A2A;
+  --lilas-300:#C9A6F2; --lilas-100:#E6DDF0; --lilas-50:#F1ECF6; --rosa-claro:#FF5C99;
   --serif:"Bodoni Moda","Bodoni 72",Didot,"Times New Roman",serif;
   --sans:"Funnel Display","Helvetica Neue",Arial,sans-serif;
   --max:1240px; --gut:clamp(20px,5vw,64px); --sec:clamp(72px,10vw,136px);
@@ -95,16 +97,16 @@ p{text-wrap:pretty}
 
 /* Seções */
 section{padding:var(--sec) 0}
-.titulo{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px;margin-bottom:56px}
+.titulo{margin-bottom:56px;max-width:860px}
 .titulo h2{font-size:clamp(36px,4.4vw,60px)}
-.titulo .eyebrow{color:var(--roxo);padding-top:12px}
+.titulo .eyebrow{color:var(--roxo);margin-bottom:24px}
 
 /* Sobre */
 .sobre-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px}
-.citacao{font-family:var(--serif);font-size:clamp(30px,3.4vw,46px);line-height:1.12;font-style:italic}
+.citacao{font-family:var(--serif);font-size:clamp(24px,2.4vw,34px);line-height:1.12;font-style:italic}
 .texto p{font-size:clamp(18px,1.5vw,21px);margin-bottom:22px;max-width:60ch}
 .texto p:first-child{font-size:clamp(21px,1.9vw,26px);line-height:1.45;font-weight:300}
-.video{margin-top:var(--sec);position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#000 url(/cepa/vitamina/img/gradiente.jpg) center/cover}
+.video{margin-top:64px;position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#000 url(/cepa/vitamina/img/gradiente.jpg) center/cover}
 .video button{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45));color:var(--off);cursor:pointer;display:flex;align-items:flex-end;justify-content:space-between;padding:clamp(20px,3vw,40px);text-align:left;font:inherit}
 .video .play{width:clamp(64px,7vw,88px);height:clamp(64px,7vw,88px);border-radius:50%;background:var(--off);display:grid;place-items:center;transition:transform .3s var(--ease)}
 .video button:hover .play{transform:scale(1.06)}
@@ -114,9 +116,9 @@ section{padding:var(--sec) 0}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* Cuidado */
-.cuidado{background:var(--branco)}
+.cuidado{background:var(--off)}
 .servicos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none}
-.servicos li{border-radius:24px;padding:32px 28px 30px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.servicos li{border-radius:24px;padding:32px 28px 32px;min-height:320px;display:flex;flex-direction:column;gap:64px}
 .servicos .n{font-family:var(--serif);font-size:20px;font-style:italic}
 .servicos h3{font-size:clamp(26px,2.4vw,34px);margin-bottom:12px}
 .servicos p{font-size:17px;line-height:1.5}
@@ -128,18 +130,18 @@ section{padding:var(--sec) 0}
 /* Aviso */
 .aviso{background:var(--noite);color:var(--off);position:relative;overflow:hidden}
 .aviso .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center}
-.aviso .eyebrow{color:var(--rosa);filter:brightness(1.35);margin-bottom:24px;display:flex;gap:10px;align-items:center}
+.aviso .eyebrow{color:var(--rosa-claro);margin-bottom:24px;display:flex;gap:10px;align-items:center}
 .aviso .eyebrow svg{width:22px;height:22px}
 .aviso h2{font-size:clamp(32px,3.8vw,52px);margin-bottom:28px}
-.aviso p{color:#CFCCC5;margin-bottom:18px;max-width:58ch}
+.aviso p:not(.eyebrow){color:#CFCCC5;margin-bottom:18px;max-width:58ch}
 .aviso p strong{color:var(--off);font-weight:500}
 .aviso img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;max-width:460px;justify-self:end;-webkit-mask-image:radial-gradient(closest-side,#000 70%,transparent);mask-image:radial-gradient(closest-side,#000 70%,transparent);opacity:.9}
 
 /* Equipe */
 .equipe .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px;list-style:none}
 .pessoa img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:18px;margin-bottom:18px;background:var(--linha);filter:grayscale(.15)}
-.pessoa h3{font-size:24px;line-height:1.15;margin-bottom:6px}
-.pessoa .reg{font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--roxo);margin-bottom:8px}
+.pessoa h3{font-size:24px;line-height:1.15;margin-bottom:6px;text-wrap:pretty;min-height:2.3em}
+.pessoa .reg{font-variant-numeric:tabular-nums lining-nums;font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--roxo);margin-bottom:8px}
 .pessoa .cargo{font-size:16px;line-height:1.45;color:var(--cinza)}
 
 /* Contato */
@@ -147,8 +149,8 @@ section{padding:var(--sec) 0}
 .contato::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,28,.82),rgba(28,28,28,.35))}
 .contato .wrap{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
 .contato h2{font-size:clamp(44px,6vw,84px);margin-bottom:24px}
-.contato p{font-size:clamp(18px,1.6vw,21px);max-width:40ch;margin-bottom:36px}
-.canais{list-style:none;display:grid;gap:0;border-top:1px solid rgba(245,245,242,.35)}
+.contato p:not(.eyebrow){font-size:clamp(18px,1.6vw,21px);max-width:40ch;margin-bottom:36px}
+.canais{font-variant-numeric:tabular-nums lining-nums;list-style:none;display:grid;gap:0;border-top:1px solid rgba(245,245,242,.35)}
 .canais a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid rgba(245,245,242,.35);text-decoration:none;font-size:clamp(18px,1.6vw,22px);transition:padding .25s var(--ease)}
 .canais a:hover{border-bottom-color:var(--off)}
 .canais span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:2px}
@@ -174,8 +176,8 @@ footer .wrap{display:grid;gap:48px}
 .zap.escondido{opacity:0;transform:translateY(12px);pointer-events:none}
 
 /* Entrada suave */
-.surge{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.surge.visto{opacity:1;transform:none}
+.js .surge{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .surge.visto{opacity:1;transform:none}
 
 /* Tablet e celular */
 @media (max-width:1024px){
@@ -194,10 +196,10 @@ footer .wrap{display:grid;gap:48px}
   .topo.aberto .abrir span:first-child{top:21px;transform:rotate(45deg)}
   .topo.aberto .abrir span:last-child{top:21px;transform:rotate(-45deg)}
   .hero .wrap{grid-template-columns:1fr;padding-top:104px;gap:8px}
-  .visual{order:-1;justify-self:start;width:min(52vw,220px);margin:-8px 0 4px -12px}
+  .visual{order:-1;justify-self:center;width:min(72vw,300px);margin:-16px auto 8px}
   .titulo,.sobre-grid,.aviso .wrap,.contato .wrap{grid-template-columns:1fr;gap:20px}
   .titulo{margin-bottom:36px}
-  .aviso img{justify-self:center;max-width:300px;order:-1}
+  .aviso img{justify-self:center;max-width:240px}
   .equipe .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 16px}
   .pessoa h3{font-size:20px}
   .pessoa .cargo{font-size:15px}
@@ -270,10 +272,10 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 .hero-d .chip-estudos{background:var(--branco);border-color:var(--linha);color:var(--preto)}
 .hero-d .chip-estudos:hover{border-color:var(--preto)}
 .estudos-home{background:var(--roxo);color:var(--off)}
-.estudos-home .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:end}
-.estudos-home .eyebrow{color:#E6DDF0;margin-bottom:20px}
+.estudos-home .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:start}
+.estudos-home .eyebrow{color:var(--lilas-100);margin-bottom:24px}
 .estudos-home h2{font-size:clamp(36px,4.4vw,60px);margin-bottom:24px;max-width:16ch}
-.estudos-home p{font-size:clamp(18px,1.6vw,21px);max-width:50ch;margin-bottom:32px;color:#F1ECF6}
+.estudos-home p:not(.eyebrow){font-size:clamp(18px,1.6vw,21px);max-width:50ch;margin-bottom:32px;color:#F1ECF6}
 .estudos-home .btn svg{width:14px;height:14px}
 .estudos-subs{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .estudos-subs li{font-family:var(--serif);font-size:clamp(20px,1.8vw,26px);padding:6px 16px;border:1px solid rgba(245,245,242,.45);border-radius:999px}
@@ -282,7 +284,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 @media (max-width:860px){.so-desk{display:none}.estudos-home .wrap{grid-template-columns:1fr;gap:32px}.chip-estudos{font-size:14px;margin-bottom:20px}}
 </style>
 <script>
-  (function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
+  document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
 </script>
 </head>
 <body>
@@ -311,7 +313,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-a" aria-labelledby="h-hero">
     <div class="wrap">
       <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -333,7 +335,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
     <video class="hero-fundo" autoplay muted loop playsinline poster="/cepa/vitamina/img/gradiente.jpg" aria-hidden="true"><source src="/cepa/vitamina/img/cepa-bg.mp4" type="video/mp4"></video>
     <div class="wrap">
       <img class="simb-grande" src="/cepa/vitamina/img/cepa-icone.png" alt="" width="160" height="150">
-      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
       <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
       <h1 id="h-hero-b">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
       <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -346,7 +348,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
 
   <section class="hero hero-c" aria-labelledby="h-hero-c">
     <div class="wrap">
-      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+      <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
       <div class="kv">
         <img class="kv-foto" src="/cepa/vitamina/img/cogumelos.jpg" alt="" width="1080" height="1080">
         <img class="kv-palavra" src="/cepa/vitamina/img/cepa-branco.svg" alt="CEPA" width="1240" height="273">
@@ -363,7 +365,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
   <section class="hero hero-d" aria-labelledby="h-hero-d">
     <div class="wrap">
       <div>
-        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
+        <a class="chip-estudos" href="/cepa/vitamina/estudos"><span class="ponto" aria-hidden="true"></span><span>Estudos clínicos abertos<span class="so-desk"> no Brasil e nos EUA</span></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
         <p class="eyebrow">Centro de Estudos de Psicodelia Aplicada</p>
         <h1 id="h-hero-d">Pessoas diferentes requerem um jeito <em>diferente</em> de cuidar de si</h1>
         <p class="lead">Psicoterapia para quem vive experiências psicodélicas. Preparação, integração e redução de danos, com psicólogos e psiquiatras que conhecem o tema de perto.</p>
@@ -406,12 +408,12 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
     <div class="wrap">
       <div class="titulo surge">
         <p class="eyebrow">Como cuidamos</p>
-        <h2 id="h-cuidado">Três frentes de cuidado, antes, durante e depois da experiência</h2>
+        <h2 id="h-cuidado">Três frentes de cuidado, da preparação à integração</h2>
       </div>
       <ul class="servicos">
-        <li class="s1 surge"><span class="n">01</span><div><h3>Preparação</h3><p>Preparação para usos autônomos, com informação e escuta antes da experiência.</p></div></li>
-        <li class="s2 surge"><span class="n">02</span><div><h3>Integração</h3><p>Integração de experiências psicodélicas em psicoterapia contínua ou em sessões breves.</p></div></li>
-        <li class="s3 surge"><span class="n">03</span><div><h3>Redução de danos</h3><p>Redução de danos e psicoeducação sobre psicodélicos, sem julgamento.</p></div></li>
+        <li class="s1 surge"><span class="n">01</span><div><h3>Preparação</h3><p>Para quem vai viver uma experiência por conta própria: informação, intenção e segurança antes de começar.</p></div></li>
+        <li class="s2 surge"><span class="n">02</span><div><h3>Integração</h3><p>Depois da experiência, a terapia ajuda a dar sentido ao que apareceu, em sessões breves ou num acompanhamento contínuo.</p></div></li>
+        <li class="s3 surge"><span class="n">03</span><div><h3>Redução de danos</h3><p>Informação clara sobre substâncias, riscos e interações, sem julgamento, para quem usa ou pensa em usar.</p></div></li>
       </ul>
       <p class="fecho surge">O cuidado com um profissional especializado pode fazer a diferença na sua jornada.</p>
     </div>
@@ -435,7 +437,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
       <div class="surge">
         <p class="eyebrow">Estudos clínicos</p>
         <h2 id="h-estudos">Quer participar de uma pesquisa com psicodélicos?</h2>
-        <p>Reunimos os estudos que estão recrutando agora no Brasil e nos EUA, com psilocibina, MDMA, ayahuasca, cetamina e outras substâncias. Dá pra filtrar por cidade, substância ou condição.</p>
+        <p>Reunimos os estudos que estão recrutando agora no Brasil e nos EUA, com psilocibina, MDMA, ayahuasca, cetamina e outras substâncias. Você pode filtrar por cidade, substância ou condição.</p>
         <a class="btn btn-luz" href="/cepa/vitamina/estudos">Ver os estudos abertos <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 12.5 12 4M5.5 3.75h6.75v6.75"/></svg></a>
       </div>
       <div class="estudos-lado surge">
@@ -451,7 +453,7 @@ html[data-hero=d] #sobre .texto p:first-child{color:var(--off)}
     <div class="wrap">
       <div class="titulo surge">
         <p class="eyebrow">Equipe</p>
-        <h2 id="h-equipe">Conheça nossos terapeutas</h2>
+        <h2 id="h-equipe">Quem faz o CEPA</h2>
       </div>
       <ul class="grid" id="grade"></ul>
     </div>
