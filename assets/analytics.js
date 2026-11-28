@@ -12,8 +12,8 @@ try {
   if (ownerOut) localStorage.setItem('tv-owner', 'out');
   if (OWNER === 'thiago-optin') localStorage.removeItem('tv-owner');
 } catch (e) {}
-var isOwner = false;
-try { isOwner = localStorage.getItem('tv-owner') === 'out'; } catch (e) {}
+var isOwner = ownerOut;
+try { isOwner = isOwner || localStorage.getItem('tv-owner') === 'out'; } catch (e) {}
 
 // Until someone says yes, nothing is stored in the browser and nothing is recorded.
 // Events go through /ingest on this domain (rewrite in vercel.json), so ad blockers don't drop them.
