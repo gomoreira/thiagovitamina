@@ -10,7 +10,7 @@ for f in (HERE / "review").glob("*.webp"): shutil.copy(f, ROOT / "review" / f.na
 sistema.CHANGES.clear(); sistema.build((HERE / "src/assets/css/site.css").read_text())
 n = len(sistema.CHANGES)
 
-WHATS = "https://wa.me/5511956299380?text=" + urllib.parse.quote("thiago, vi as duas versões da andante. prefiro a versão ")
+WHATS = "https://wa.me/5511956299380?text=" + urllib.parse.quote("thiago, vi os ajustes da andante. ")
 
 def phone(v, letra, nome):
     return f'''<figure class="version">
@@ -39,6 +39,10 @@ ICONS = {
   "todos":   "M1.25 4.25h13.5v7.5H1.25zM3.5 6.75h1M6 6.75h1M8.5 6.75h1M11 6.75h1.5M4.5 9.25h7",
   "rapido":  "M9.25 1.5 3.5 9h4.25L6.75 14.5 12.5 7H8.25z",
   "achar":   "M6.75 3.5h-4v9.75H12.5v-4M9.5 2.75h3.75V6.5M13 3 7.5 8.5",
+  "cor":     "M8 1.75a6.25 6.25 0 1 0 0 12.5V1.75zM8 1.75a6.25 6.25 0 0 1 0 12.5",
+  "lista":   "M5.5 3.75h9M5.5 8h9M5.5 12.25h9M1.75 3.75h1.5M1.75 8h1.5M1.75 12.25h1.5",
+  "carrossel": "M4.25 3.25h7.5v9.5h-7.5zM1.5 4.75v6.5M14.5 4.75v6.5",
+  "aviso":   "M8 1.75 14.75 13.75H1.25zM8 6v3.75M8 11.25v1",
 }
 def ico_css():
     import urllib.parse
@@ -69,14 +73,74 @@ AMBAS = [
   ("achar", "Fácil de achar e de compartilhar", ["Quando alguém manda o link no WhatsApp, aparece uma prévia com foto e título, como esta aqui.", "O Google recebe o nome, a descrição e os dados de cada viagem.", "O site tem ícone próprio na aba do navegador e no celular."]),
 ]
 
-PASSOS = [
-  ("Agora", "Você escolhe a original ou a Vitamina, ou me diz o que pegaria de cada uma."),
-  ("Esta semana", "Chega o conteúdo do País Basco, da home e do quem somos."),
-  ("Em seguida", "Peru e Gaga e Piemonte, quando estiverem prontos."),
-  ("Até 2/12", "Ajustes da revisão."),
-  ("3/12", "Domínio e site na Hostinger de vocês."),
-  ("4/12", "Site no ar."),
+PASSOS = [  # (quando, o que acontece, o que falta de vocês)
+  ("Agora", "Você confere os ajustes desta rodada.", ["Acesso à Hostinger, hoje (26/11), pelo compartilhamento de conta para designdasilva@gmail.com"]),
+  ("Esta semana", "Textos e fotos do País Basco: recebidos, obrigado.", ["WhatsApp e telefone da Andante, para os botões de reserva e o rodapé"]),
+  ("Em seguida", "Peru e Gaga e Piemonte.", ["Datas, vagas, preço, hotéis e nomes de quem conduz (o que está entre colchetes)"]),
+  ("Até 2/12", "Ajustes da revisão.", ["Fotos em alta do País Basco e fotos sem marca d\u2019água para a home e as capas", "Valor do suplemento de quarto individual do País Basco"]),
+  ("3/12", "Domínio e site na Hostinger de vocês.", ["Apontar o domínio para a Hostinger, ou me dizer onde ele está registrado"]),
+  ("4/12", "Site no ar.", []),
 ]
+
+AJUSTES = [
+  ("botao", "cta", "Um botão mais calmo", "Pedido do Tiago",
+   "O vermelho cheio gritava na página. Agora o botão usa um vermelho mais fechado, da mesma família da marca. Em fundo escuro, ele ganha o contorno no vermelho do logo, pra não se perder no preto.",
+   "Texto branco sobre o vermelho antigo: 4,8:1, perto do mínimo. Sobre o novo: 7,9:1, o nível mais alto da norma de acessibilidade. Mais calmo e mais fácil de ler."),
+  ("contato", "fale", "WhatsApp sempre à mão", "Pedido do Tiago",
+   "Um botão fixo no canto da tela abre a conversa de qualquer ponto do site. Ele sai de cena quando já tem outro botão de WhatsApp à vista, pra não repetir. O rodapé ganhou WhatsApp e telefone.",
+   "No celular, o botão tem 64px, acima dos 44px recomendados para o toque, e quem usa leitor de tela ouve \u201cFalar com a Andante no WhatsApp\u201d."),
+  ("cor", "roteiro", "Cores mais leves no País Basco", "Pedido do Tiago",
+   "Entrou a paleta que você testou: azul acinzentado, areia, grafite e ferrugem. Dois tons foram afinados para o texto continuar fácil de ler, e a tabela logo abaixo mostra o porquê.",
+   ""),
+  ("lista", "perfis", "\u201cPara quem é\u201d em lista", "Pedido do Tiago",
+   "É o trecho em que a pessoa se reconhece na viagem. Em lista, os quatro perfis aparecem de uma vez. Num carrossel, só o primeiro fica à vista e os outros dependem de a pessoa arrastar.",
+   ""),
+  ("carrossel", "hoteis", "Hotéis e bikes em carrossel", "Pedido do Tiago",
+   "Aqui o carrossel faz sentido: são fotos, na ordem da viagem, e a página fica bem mais curta no celular. O próximo card aparece na borda e o contador mostra quantos faltam. As fotos provisórias deram lugar às fotos que você mandou.",
+   "Funciona também pelo teclado. No computador, os cards voltam a ficar lado a lado."),
+  ("tipo", "hero", "Uma frase só no título", "Conversa com o Lucas",
+   "O título volta à quebra do desenho do Lucas, \u201cO que interessa / é o TEMPO / VIVIDO\u201d, em que a serifada e a caixa alta dividem a mesma linha. E ficou cerca de 20% menor, mais delicado.",
+   "A quebra é escrita à mão para cada tamanho de tela, então o título não se desmonta em blocos soltos."),
+  ("ritmo", "faixa", "Respiro na abertura", "Conversa com o Lucas",
+   "No computador, a faixa preta logo depois da foto ganhou espaço em cima e embaixo, e a frase voltou a um tamanho mais delicado. É a entrada do site, e agora ela respira antes da próxima faixa.",
+   "No celular, a faixa já seguia o desenho do Lucas e ficou como estava."),
+]
+
+CONTRASTE = [
+  ("Nome do hotel no roteiro", "#B97A4F", "#29302F", "3,8:1", "#E6B48C", "#29302F", "7,2:1",
+   "Era texto pequeno abaixo do mínimo de 4,5:1. O cobre ficou um pouco mais claro."),
+  ("Texto branco na faixa ferrugem", "#FFFFFF", "#8A4A2C", "6,8:1", "#FFFFFF", "#82442A", "7,5:1",
+   "Passava do mínimo, mas não do nível alto. Um tom mais escuro, quase igual a olho."),
+  ("Botão de reserva no fundo preto", "#381E23", "#000000", "1,4:1", "#9E1F17", "#000000", "contorno 4,7:1",
+   "O vinho escuro quase some no preto. Um botão precisa se destacar do fundo em pelo menos 3:1. Ficou o vermelho fechado, com o contorno da marca."),
+]
+MANTIDAS = [("Preto sobre azul acinzentado", "#000000", "#8EA8AB", "8,3:1"), ("Preto sobre areia", "#000000", "#D0B776", "10,7:1"), ("Branco sobre grafite", "#FFFFFF", "#29302F", "13,5:1")]
+
+def chip(fg, bg, r):
+    return f'<span class="chip" style="color:{fg};background:{bg}" aria-hidden="true"></span><span class="ratio">{r}</span>'
+
+def contraste():
+    rows = "".join(f'''<tr><th scope="row">{n}<small>{why}</small></th>
+      <td><span class="cell">{chip(f1, b1, r1)}</span><span class="sr">antes, {r1}</span></td>
+      <td><span class="cell">{chip(f2, b2, r2)}</span><span class="sr">depois, {r2}</span></td></tr>''' for n, f1, b1, r1, f2, b2, r2, why in CONTRASTE)
+    keep = "".join(f'<li><span class="cell">{chip(f, b, r)}</span>{n}</li>' for n, f, b, r in MANTIDAS)
+    return f'''<div class="contrast">
+      <h3 class="sub">Por que mexemos no contraste</h3>
+      <p class="contrast__lead">A norma internacional de acessibilidade (WCAG) mede o contraste entre o texto e o fundo. O mínimo para texto comum é 4,5:1, e o nível mais alto, que usamos no site todo, é 7:1. Isso não ajuda só quem enxerga pouco: é o que faz o texto ler bem no celular, na rua, com sol na tela.</p>
+      <table><thead><tr><th scope="col">Onde</th><th scope="col">Antes</th><th scope="col">Depois</th></tr></thead><tbody>{rows}</tbody></table>
+      <p class="contrast__keep">Já estavam ótimas e ficaram como você testou:</p>
+      <ul class="contrast__list">{keep}</ul>
+    </div>'''
+
+def ajuste(i, ico, key, titulo, quem, texto, tec):
+    extra = f'<p class="tec">{tec}</p>' if tec else ""
+    return f'''<article class="change grid">
+          <div class="change__text"><span class="num"><span class="ico ico--{ico}" aria-hidden="true"></span>{i} · {quem}</span><h3>{titulo}</h3><p>{texto}</p>{extra}</div>
+          <div class="change__pair">
+            <figure><figcaption>Antes</figcaption><img src="/andante/review/a-{key}-a.webp" alt="{titulo}, antes" loading="lazy" decoding="async"></figure>
+            <figure><figcaption>Depois</figcaption><img src="/andante/review/a-{key}-b.webp" alt="{titulo}, depois" loading="lazy" decoding="async"></figure>
+          </div>
+        </article>''' + (contraste() if ico == "cor" else "")
 
 def muda(i, key, titulo, texto):
     a = (f'<img src="/andante/review/c-{key}-a.webp" alt="{titulo}, versão original" loading="lazy" decoding="async">'
@@ -215,6 +279,26 @@ a:hover{{text-decoration-thickness:2px}}
 .change__pair img{{width:100%;border:1px solid var(--rule)}}
 .none{{display:grid;place-items:center;aspect-ratio:1000/276;background:var(--well);color:var(--mute);font-size:var(--t-sm);text-align:center;padding:var(--sp-3)}}
 
+/* ajustes desta rodada */
+.tec{{font-size:var(--t-base)!important;color:var(--mute);border-left:2px solid var(--plum);padding-left:var(--sp-3)}}
+.contrast{{padding-block:var(--sp-5);border-top:1px solid var(--rule)}}
+.contrast .sub{{margin-top:0}}
+.contrast__lead{{font-size:var(--t-md);line-height:1.45;max-width:52ch;margin-bottom:var(--sp-5)}}
+.contrast table{{width:100%;border-collapse:collapse}}
+.contrast th,.contrast td{{text-align:left;vertical-align:top;padding:var(--sp-3) var(--sp-3) var(--sp-3) 0;border-top:1px solid var(--rule)}}
+.contrast thead th{{font-size:var(--t-sm);color:var(--mute);font-weight:400;border-top:0}}
+.contrast tbody th{{font-weight:600;width:50%}}
+.contrast tbody th small{{display:block;font-weight:400;font-size:var(--t-sm);color:var(--mute);margin-top:var(--sp-1);max-width:44ch}}
+.cell{{display:inline-flex;align-items:center;gap:var(--sp-2)}}
+.chip::before{{content:"Aa"}}
+.chip{{display:inline-grid;place-items:center;width:48px;height:48px;font-family:var(--display);font-weight:600;font-size:20px;border:1px solid var(--rule)}}
+.ratio{{font-family:var(--display);font-weight:600;font-size:var(--t-md)}}
+.sr{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+.contrast__keep{{margin-top:var(--sp-5);color:var(--mute)}}
+.contrast__list{{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);margin-top:var(--sp-3)}}
+.contrast__list li{{display:flex;align-items:center;gap:var(--sp-3)}}
+@media (max-width:820px){{.contrast tbody th{{width:auto}}.chip{{width:40px;height:40px;font-size:16px}}.ratio{{font-size:var(--t-base)}}.contrast th,.contrast td{{padding-right:var(--sp-2)}}}}
+
 /* nas duas */
 .groups{{row-gap:var(--sp-5);align-items:start}}
 .group{{grid-column:span 4;display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--ink);padding-top:var(--sp-3)}}
@@ -235,6 +319,18 @@ a:hover{{text-decoration-thickness:2px}}
 .timeline li:first-child{{border-top-color:var(--ink)}}
 .timeline b{{font-family:var(--display);font-weight:600;font-size:var(--t-md)}}
 .timeline span{{text-wrap:pretty}}
+/* o que falta: um toque de laranja de aviso, pedido do Thiago (exceção à regra de cor única, só nesta página) */
+.timeline li.is-pending{{border-top-color:#FF7A1A}}
+.timeline li:first-child.is-pending{{border-top-color:#FF7A1A}}
+.need{{margin-top:var(--sp-2);background:#FFEBDB;padding:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-2)}}
+.need__tag{{display:inline-flex;align-self:flex-start;align-items:center;gap:var(--sp-1);background:#FF7A1A;color:var(--ink);font-size:var(--t-sm);font-weight:600;line-height:1;padding:6px 8px}}
+.need__tag .ico{{font-size:14px}}
+.need ul{{list-style:none;padding:0;display:flex;flex-direction:column;gap:var(--sp-2);font-size:var(--t-sm);line-height:1.4}}
+.need li{{border:0!important;padding:0!important;display:block!important}}
+/* todas as caixas com o mesmo tamanho e começando na mesma altura */
+@media (min-width:821px){{.timeline{{grid-template-rows:auto auto 1fr}}.timeline>li{{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}}.timeline>li>.need{{margin-top:var(--sp-2);height:100%}}}}
+@media (min-width:821px) and (max-width:1100px){{.timeline{{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--sp-5)}}}}
+.need ul{{overflow-wrap:anywhere}}
 .ask{{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--rule)}}
 .ask p{{font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:30ch}}
 
@@ -255,7 +351,7 @@ a:hover{{text-decoration-thickness:2px}}
   .screen{{height:600px}}
   .change__pair{{grid-template-columns:1fr;gap:var(--sp-4)}}
   .timeline{{grid-template-columns:1fr}}
-  .timeline li{{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)}}
+  .timeline li{{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)}} .timeline .need{{grid-column:2}}
 }}
 @media (prefers-reduced-motion:reduce){{html{{scroll-behavior:auto}}*{{transition:none !important}}}}
 </style>
@@ -267,9 +363,10 @@ a:hover{{text-decoration-thickness:2px}}
   <div class="wrap top-in">
     <a class="name" href="/">Thiago Vitamina</a>
     <nav aria-label="Partes da apresentação">
-      <a href="#lado"><span>1</span>Lado a lado</a>
-      <a href="#muda"><span>2</span>O que muda</a>
-      <a href="#passos"><span>3</span>Próximos passos</a>
+      <a href="#ajustes"><span>1</span>Ajustes</a>
+      <a href="#lado"><span>2</span>Lado a lado</a>
+      <a href="#muda"><span>3</span>O que muda</a>
+      <a href="#passos"><span>4</span>Próximos passos</a>
     </nav>
   </div>
 </header>
@@ -281,10 +378,20 @@ a:hover{{text-decoration-thickness:2px}}
     <p class="lead">A versão original é o desenho do Lucas, do jeito que ele fez. A Vitamina é a mesma página com um sistema de tipografia, espaçamento e grid, e ajustes de leitura e de toque. O conteúdo e as fotos são os mesmos nas duas.</p>
   </section>
 
+  <section class="part" id="ajustes" aria-labelledby="h-ajustes">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-ajustes">1 · Ajustes desta rodada</h2>
+        <p>O que mudou na versão Vitamina depois da nossa conversa de 25/11. Em cada um, o mesmo pedaço do site antes e depois, e o motivo técnico quando ele existe.</p>
+      </div>
+      {"".join(ajuste(i, *a) for i, a in enumerate(AJUSTES, 1))}
+    </div>
+  </section>
+
   <section class="part" id="lado" aria-labelledby="h-lado">
     <div class="wrap">
       <div class="head grid">
-        <h2 id="h-lado">1 · Lado a lado</h2>
+        <h2 id="h-lado">2 · Lado a lado</h2>
         <p>As duas funcionam de verdade. Dá pra rolar, abrir o menu e entrar nas viagens dentro de cada celular.</p>
       </div>
       <div class="pair">
@@ -302,7 +409,7 @@ a:hover{{text-decoration-thickness:2px}}
   <section class="part" id="muda" aria-labelledby="h-muda">
     <div class="wrap">
       <div class="head grid">
-        <h2 id="h-muda">2 · O que muda na Vitamina</h2>
+        <h2 id="h-muda">3 · O que muda na Vitamina</h2>
         <p>Seis mudanças. Em cada uma, o mesmo pedaço do site nas duas versões.</p>
       </div>
       {"".join(muda(i, *m) for i, m in enumerate(MUDA, 1))}
@@ -316,14 +423,14 @@ a:hover{{text-decoration-thickness:2px}}
   <section class="part" id="passos" aria-labelledby="h-passos">
     <div class="wrap">
       <div class="head grid">
-        <h2 id="h-passos">3 · Próximos passos</h2>
+        <h2 id="h-passos">4 · Próximos passos</h2>
         <p>Até o site no ar. O que estiver entre colchetes é provisório e entra quando o conteúdo chegar.</p>
       </div>
       <ol class="timeline">
-        {"".join(f"<li><b>{d}</b><span>{t}</span></li>" for d, t in PASSOS)}
+        {"".join(f'<li{" class=is-pending" if f else ""}><b>{d}</b><span>{t}</span>' + (f'<div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>' if f else "") + "</li>" for d, t, f in PASSOS)}
       </ol>
       <div class="ask">
-        <p>Olhou as duas? Me conta qual prefere.</p>
+        <p>Conferiu os ajustes? Me conta o que achou.</p>
         <a class="btn-ink" href="{WHATS}" target="_blank" rel="noopener"><span>Responder no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
       </div>
     </div>

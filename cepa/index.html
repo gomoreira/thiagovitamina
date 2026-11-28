@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<title>CEPA · versão atual e versão Vitamina · Thiago Vitamina</title>
+<meta name="description" content="O site do CEPA em duas versões lado a lado, com as auditorias e o plano bilíngue.">
+<meta property="og:title" content="CEPA · versão atual e versão Vitamina">
+<meta property="og:description" content="O site do CEPA em duas versões lado a lado, com as auditorias e o plano bilíngue.">
+<meta property="og:image" content="https://thiagovitamina.com/cepa/vitamina/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/funnel-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Funnel Display';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/funnel-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/funnel-sans-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/funnel-sans-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* tokens do thiagovitamina.com */
+:root{
+  --paper:#FFFFFF; --ink:#000000; --plum:#551A8B; --mute:#615C68; --rule:#E3E0E8; --well:#F4F2F7; --night:#0B0A0D;
+  --on-dark:#F2EFEA; --mute-dark:#A39DAA; --link-dark:#C9A6F2;
+  --display:"Funnel Display","Helvetica Neue",Arial,sans-serif; --text:"Funnel Sans","Helvetica Neue",Arial,sans-serif;
+  --t-sm:14px; --t-base:16px; --t-md:20px; --t-lg:28px; --t-xl:44px; --t-2xl:72px;
+  --sp-1:4px; --sp-2:8px; --sp-3:16px; --sp-4:24px; --sp-5:40px; --sp-6:64px; --sp-7:104px;
+  --gap:var(--sp-4); --max:1440px; --section:var(--sp-7);
+  --gut:max(var(--sp-5),env(safe-area-inset-left,0px)); --gutR:max(var(--sp-5),env(safe-area-inset-right,0px));
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --arw:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 12.5 12 4M5.5 3.75h6.75v6.75' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
+  color-scheme:light;
+}
+@media (max-width:1100px){:root{--t-2xl:56px;--t-xl:36px} .timeline{grid-template-columns:repeat(3,minmax(0,1fr))} .group{grid-column:span 6}}
+@media (max-width:820px){:root{--t-md:18px;--t-lg:22px;--t-xl:30px;--t-2xl:42px;--section:var(--sp-6);--gap:var(--sp-3);--gut:max(16px,env(safe-area-inset-left,0px));--gutR:max(16px,env(safe-area-inset-right,0px))}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:var(--t-base);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ol,ul,figure{margin:0}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--plum);text-underline-offset:.2em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+::selection{background:rgba(85,26,139,.24)}
+.wrap{padding-left:var(--gut);padding-right:var(--gutR);max-width:calc(var(--max) + var(--gut) + var(--gutR));margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+.arw{display:inline-block;width:.72em;height:.72em;background:currentColor;-webkit-mask:var(--arw) center/contain no-repeat;mask:var(--arw) center/contain no-repeat;flex:none;transition:transform .35s var(--ease)}
+.skip{position:absolute;left:var(--gut);top:-100px;z-index:50;background:var(--plum);color:var(--paper);padding:var(--sp-2) var(--sp-3)}
+.skip:focus{top:var(--sp-2)}
+
+/* links e botões do site */
+.open{display:inline-flex;align-items:center;gap:var(--sp-1);align-self:flex-start;color:var(--plum);text-decoration:underline;min-height:24px}
+.btn-ink,.btn-ink:visited{position:relative;isolation:isolate;overflow:hidden;align-self:flex-start;display:inline-flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) var(--sp-4);border:1.5px solid var(--plum);color:var(--plum);background:transparent;text-decoration:none;font-family:var(--display);font-weight:600;font-size:var(--t-md);letter-spacing:-.01em;line-height:1;transition:color .35s}
+.btn-ink::before{content:"";position:absolute;z-index:-1;left:var(--x,50%);top:var(--y,50%);width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--plum);transform:scale(0);transition:transform .55s var(--ease)}
+.btn-ink .arw{width:.8em;height:.8em}
+@media (hover:hover){
+  .btn-ink:hover{color:var(--paper)}
+  .btn-ink:hover::before{transform:scale(var(--k,60))}
+  .btn-ink:hover .arw,.open:hover .arw{transform:translate(3px,-3px)}
+}
+.btn-ink:focus-visible{color:var(--paper)}
+.btn-ink:focus-visible::before{transform:scale(var(--k,60))}
+@media (hover:none){.btn-ink,.btn-ink:visited{background:var(--plum);color:var(--paper)}}
+
+/* topo */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);border-bottom:1px solid rgba(0,0,0,.06)}
+.top-in{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2) var(--sp-4);flex-wrap:wrap;padding-block:var(--sp-3)}
+.top .name,.top .name:visited{font-family:var(--display);font-weight:600;color:var(--ink);text-decoration:none}
+.top nav{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+.top nav a,.top nav a:visited{color:var(--ink);text-decoration:none;display:inline-flex;gap:var(--sp-2);align-items:baseline;min-height:24px}
+.top nav a span{font-size:var(--t-sm);color:var(--mute)}
+@media (hover:hover){.top .name:hover,.top nav a:hover{color:var(--plum);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.3em}}
+
+/* abertura */
+.opening{padding-block:var(--sp-6) var(--sp-5);row-gap:var(--sp-4);align-items:end}
+.opening h1{grid-column:1 / span 8;font-family:var(--display);font-weight:600;font-size:var(--t-2xl);line-height:.95;letter-spacing:-.035em;text-wrap:balance}
+.opening h1 span{display:block;font-weight:400;color:var(--mute)}
+.opening .lead{grid-column:9 / span 4;font-size:var(--t-md);line-height:1.4;max-width:44ch;text-wrap:pretty}
+
+/* partes */
+.part{padding-block:var(--sp-5) var(--section);scroll-margin-top:var(--sp-6)}
+.part + .part{padding-top:var(--section)}
+.head{border-top:1px solid var(--ink);padding-top:var(--sp-3);margin-bottom:var(--sp-6);row-gap:var(--sp-3)}
+.head h2{grid-column:1 / span 3;font-family:var(--display);font-weight:600;font-size:var(--t-base);line-height:1.3}
+.head p{grid-column:4 / span 7;font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:34ch;text-wrap:pretty}
+.sub{font-family:var(--display);font-weight:600;font-size:var(--t-base);margin:var(--sp-6) 0 var(--sp-4)}
+
+/* lado a lado */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.version{display:flex;flex-direction:column;gap:var(--sp-3);min-width:0}
+.version figcaption{font-size:var(--t-base);color:var(--mute)}
+.version figcaption b{font-family:var(--display);font-weight:600;color:var(--ink);margin-right:var(--sp-2)}
+.stage-box{position:relative;isolation:isolate;overflow:hidden;background:var(--night);display:flex;flex-direction:column;align-items:center;padding:var(--sp-6) var(--sp-4)}
+.stage-box::before{content:"";position:absolute;inset:0;z-index:-2;background:url(/cepa/vitamina/img/gradiente.jpg) center/cover no-repeat}
+.stage-box::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--night);opacity:.55;pointer-events:none}
+.stage-box .hint{font-size:var(--t-sm);color:var(--mute-dark);margin-top:var(--sp-3)}
+.stage-box :focus-visible{outline-color:var(--link-dark)}
+.phone{width:336px;max-width:100%;border-radius:44px;padding:12px;background:rgba(242,239,234,.16);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);box-shadow:0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.22),0 0 0 2px rgba(0,0,0,.4),0 28px 56px -14px rgba(0,0,0,.5)}
+.screen{position:relative;height:700px;border-radius:32px;overflow:hidden;overflow:clip;background:var(--night)}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.shot{display:block;border:1px solid var(--rule);overflow:hidden;aspect-ratio:1440/1100;background:var(--night)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* ícones: máscara SVG, um traço só, do tamanho do texto */
+.ico{display:inline-block;width:1em;height:1em;flex:none;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.ico--tipo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.5%2013%203.75%207.75%206%2013M2.4%2011h2.7M8%2013l3-9.25%203%209.25M9.1%209.75h3.8%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--botao{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%204.75h12.5v6.5H1.75zM5%208h6%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--ritmo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M2%202.75h12M2%2013.25h12M8%205.25v5.5M6.25%207%208%205.25%209.75%207M6.25%209%208%2010.75%209.75%209%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--topo{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%202.75h12.5v10.5H1.75zM1.75%205.75h12.5M8.5%204.25h4%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--rodape{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.75%202.75h12.5v10.5H1.75zM1.75%2010.25h12.5M4%2011.75h2.5M8.5%2011.75h2.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--contato{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M2%203h12v7.5H7.25L4%2013.25V10.5H2z%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--todos{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M1.25%204.25h13.5v7.5H1.25zM3.5%206.75h1M6%206.75h1M8.5%206.75h1M11%206.75h1.5M4.5%209.25h7%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--rapido{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M9.25%201.5%203.5%209h4.25L6.75%2014.5%2012.5%207H8.25z%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--achar{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M6.75%203.5h-4v9.75H12.5v-4M9.5%202.75h3.75V6.5M13%203%207.5%208.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--cor{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M8%201.75a6.25%206.25%200%201%200%200%2012.5V1.75zM8%201.75a6.25%206.25%200%200%201%200%2012.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--lista{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M5.5%203.75h9M5.5%208h9M5.5%2012.25h9M1.75%203.75h1.5M1.75%208h1.5M1.75%2012.25h1.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--carrossel{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M4.25%203.25h7.5v9.5h-7.5zM1.5%204.75v6.5M14.5%204.75v6.5%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+.ico--aviso{--i:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Cpath%20d%3D%27M8%201.75%2014.75%2013.75H1.25zM8%206v3.75M8%2011.25v1%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27square%27/%3E%3C/svg%3E")}
+
+/* o que muda */
+.change{row-gap:var(--sp-4);align-items:start;padding-block:var(--sp-5);border-top:1px solid var(--rule)}
+.change:first-of-type{border-top:0;padding-top:0}
+.change__text{grid-column:1 / span 4;display:flex;flex-direction:column;gap:var(--sp-3);max-width:40ch}
+.change__text .num{display:flex;align-items:center;gap:var(--sp-3);font-size:var(--t-sm);color:var(--mute)}
+.change__text .num .ico{font-size:var(--t-lg);color:var(--ink)}
+.change__text h3{font-family:var(--display);font-weight:600;font-size:var(--t-lg);line-height:1.15;letter-spacing:-.012em;text-wrap:balance}
+.change__text p{font-size:var(--t-md);line-height:1.45;text-wrap:pretty}
+.change__pair{grid-column:5 / span 8;display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);align-items:start}
+.change__pair figure{display:flex;flex-direction:column;gap:var(--sp-2);min-width:0}
+.change__pair figcaption{font-size:var(--t-sm);color:var(--mute)}
+.change__pair img{width:100%;border:1px solid var(--rule)}
+.none{display:grid;place-items:center;aspect-ratio:1000/276;background:var(--well);color:var(--mute);font-size:var(--t-sm);text-align:center;padding:var(--sp-3)}
+
+/* ajustes desta rodada */
+.tec{font-size:var(--t-base)!important;color:var(--mute);border-left:2px solid var(--plum);padding-left:var(--sp-3)}
+.contrast{padding-block:var(--sp-5);border-top:1px solid var(--rule)}
+.contrast .sub{margin-top:0}
+.contrast__lead{font-size:var(--t-md);line-height:1.45;max-width:52ch;margin-bottom:var(--sp-5)}
+.contrast table{width:100%;border-collapse:collapse}
+.contrast th,.contrast td{text-align:left;vertical-align:top;padding:var(--sp-3) var(--sp-3) var(--sp-3) 0;border-top:1px solid var(--rule)}
+.contrast thead th{font-size:var(--t-sm);color:var(--mute);font-weight:400;border-top:0}
+.contrast tbody th{font-weight:600;width:50%}
+.contrast tbody th small{display:block;font-weight:400;font-size:var(--t-sm);color:var(--mute);margin-top:var(--sp-1);max-width:44ch}
+.cell{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.chip::before{content:"Aa"}
+.chip{display:inline-grid;place-items:center;width:48px;height:48px;font-family:var(--display);font-weight:600;font-size:20px;border:1px solid var(--rule)}
+.ratio{font-family:var(--display);font-weight:600;font-size:var(--t-md)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.contrast__keep{margin-top:var(--sp-5);color:var(--mute)}
+.contrast__list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);margin-top:var(--sp-3)}
+.contrast__list li{display:flex;align-items:center;gap:var(--sp-3)}
+@media (max-width:820px){.contrast tbody th{width:auto}.chip{width:40px;height:40px;font-size:16px}.ratio{font-size:var(--t-base)}.contrast th,.contrast td{padding-right:var(--sp-2)}}
+
+/* nas duas */
+.groups{row-gap:var(--sp-5);align-items:start}
+.group{grid-column:span 4;display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--ink);padding-top:var(--sp-3)}
+.group h3{display:flex;flex-direction:column;gap:var(--sp-3);font-family:var(--display);font-weight:600;font-size:var(--t-md);line-height:1.2}
+.group h3 .ico{font-size:var(--t-lg)}
+.group ul{padding-left:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-2)}
+.group li{text-wrap:pretty}
+.share{margin-top:var(--sp-2);max-width:340px;background:#E7F6E3;border-radius:12px;padding:6px;font-size:var(--t-sm);line-height:1.35}
+.share img{border-radius:8px 8px 0 0}
+.share div{background:rgba(0,0,0,.05);border-radius:0 0 8px 8px;padding:var(--sp-2) var(--sp-3)}
+.share b{display:block}
+.share small{color:var(--mute)}
+.share p{padding:var(--sp-2) var(--sp-2) 2px;color:var(--plum);text-decoration:underline}
+
+/* próximos passos */
+.timeline{list-style:none;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap)}
+.timeline li{display:flex;flex-direction:column;gap:var(--sp-2);border-top:2px solid var(--rule);padding-top:var(--sp-3)}
+.timeline li:first-child{border-top-color:var(--ink)}
+.timeline b{font-family:var(--display);font-weight:600;font-size:var(--t-md)}
+.timeline span{text-wrap:pretty}
+/* o que falta: um toque de laranja de aviso, pedido do Thiago (exceção à regra de cor única, só nesta página) */
+.timeline li.is-pending{border-top-color:#FF7A1A}
+.timeline li:first-child.is-pending{border-top-color:#FF7A1A}
+.need{margin-top:var(--sp-2);background:#FFEBDB;padding:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-2)}
+.need__tag{display:inline-flex;align-self:flex-start;align-items:center;gap:var(--sp-1);background:#FF7A1A;color:var(--ink);font-size:var(--t-sm);font-weight:600;line-height:1;padding:6px 8px}
+.need__tag .ico{font-size:14px}
+.need ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:var(--sp-2);font-size:var(--t-sm);line-height:1.4}
+.need li{border:0!important;padding:0!important;display:block!important}
+/* todas as caixas com o mesmo tamanho e começando na mesma altura */
+@media (min-width:821px){.timeline{grid-template-rows:auto auto 1fr}.timeline>li{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}.timeline>li>.need{margin-top:var(--sp-2);height:100%}}
+@media (min-width:821px) and (max-width:1100px){.timeline{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--sp-5)}}
+.need ul{overflow-wrap:anywhere}
+.plano{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--sp-5) var(--gap);align-items:start;border-top:2px solid var(--ink);padding-top:var(--sp-5)}
+.plano__preco{display:flex;flex-direction:column;gap:var(--sp-1)}
+.plano__preco b{font-family:var(--display);font-weight:600;font-size:var(--t-2xl);letter-spacing:-.03em;line-height:1}
+.plano__lista{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:var(--sp-2)}
+.plano__acoes{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4)}
+.plano__nota{grid-column:2;margin:0;color:var(--mute);font-size:var(--t-sm)}
+.plano__acoes .open{align-self:center}
+@media (max-width:820px){.plano{grid-template-columns:1fr}.plano__acoes,.plano__nota{grid-column:auto}}
+.ask{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid var(--rule)}
+.ask p{font-family:var(--display);font-size:var(--t-lg);line-height:1.25;letter-spacing:-.012em;max-width:30ch}
+
+/* rodapé */
+.foot-simple{border-top:1px solid var(--rule);padding-block:var(--sp-5)}
+.foot-simple .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-2) var(--sp-4);font-size:var(--t-sm);color:var(--mute)}
+.foot-simple .open{font-size:var(--t-sm)}
+
+@media (max-width:820px){
+  .grid{display:flex;flex-direction:column}
+  .opening{padding-block:var(--sp-5) var(--sp-4)}
+  .top{position:relative}
+  .top nav{gap:var(--sp-3);font-size:var(--t-sm)}
+  .head{margin-bottom:var(--sp-5)}
+  .pair{grid-template-columns:1fr;row-gap:var(--sp-6)}
+  .stage-box{padding:var(--sp-5) var(--sp-3)}
+  .phone{width:300px}
+  .screen{height:600px}
+  .change__pair{grid-template-columns:1fr;gap:var(--sp-4)}
+  .timeline{grid-template-columns:1fr}
+  .timeline li{display:grid;grid-template-columns:96px 1fr;gap:var(--sp-3)} .timeline .need{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important}}
+/* auditorias (CEPA) */
+.audits{row-gap:var(--sp-6);align-items:start}
+.audit{grid-column:span 6;display:flex;flex-direction:column;gap:var(--sp-3);border-top:2px solid var(--ink);padding-top:var(--sp-3)}
+.audit h3{display:flex;align-items:center;gap:var(--sp-3);font-family:var(--display);font-weight:600;font-size:var(--t-lg);line-height:1.15}
+.audit h3 .ico{font-size:var(--t-lg)}
+.audit ul{padding-left:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-3)}
+.audit li{text-wrap:pretty;line-height:1.45}
+.audit li b{font-family:var(--display);font-weight:600}
+.audit li small{display:block;color:var(--plum);margin-top:2px;font-size:var(--t-sm)}
+.scores{width:100%;border-collapse:collapse;margin-bottom:var(--sp-6)}
+.scores th,.scores td{text-align:left;padding:var(--sp-3) var(--sp-3) var(--sp-3) 0;border-top:1px solid var(--rule);vertical-align:top}
+.scores thead th{font-size:var(--t-sm);color:var(--mute);font-weight:400;border-top:0}
+.scores td{font-family:var(--display);font-weight:600;font-size:var(--t-md);font-variant-numeric:tabular-nums}
+.scores td small{display:block;font-family:var(--text);font-weight:400;font-size:var(--t-sm);color:var(--mute)}
+.scores .ruim{color:#B3261E}.scores .bom{color:#1E6B3A}
+.plan{grid-column:1 / span 8;padding-left:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-3);font-size:var(--t-md);line-height:1.45}
+.plan b{font-family:var(--display);font-weight:600}
+.timeline{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px) and (min-width:821px){.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){.timeline{grid-template-columns:1fr}.audit{grid-column:auto}.scores td{font-size:var(--t-base)}.scores th,.scores td{padding-right:var(--sp-2)}}
+</style>
+<body>
+<a class="skip" href="#main">Pular pro conteúdo</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="name" href="/">Thiago Vitamina</a>
+    <nav aria-label="Partes da apresentação">
+      <a href="#lado"><span>1</span>Lado a lado</a>
+      <a href="#auditorias"><span>2</span>Auditorias</a>
+      <a href="#muda"><span>3</span>O que muda</a>
+      <a href="#aberturas"><span>4</span>Aberturas</a>
+      <a href="#bilingue"><span>5</span>Bilíngue</a>
+      <a href="#passos"><span>6</span>Próximos passos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="wrap opening grid" aria-labelledby="h-top">
+    <h1 id="h-top">CEPA, em duas versões. <span>O site de hoje e uma proposta nova.</span></h1>
+    <p class="lead">A versão atual é o site que está no ar, refeito fora do Framer, com as mesmas seções e a paleta oficial da marca. A Vitamina é uma proposta nova, mais fiel à identidade do Figma, com uma abertura mais forte e o WhatsApp sempre à mão. As fotos e as pessoas da equipe são as mesmas nas duas.</p>
+  </section>
+
+  <section class="part" id="lado" aria-labelledby="h-lado">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-lado">1 · Lado a lado</h2>
+        <p>As duas funcionam de verdade. Dá pra rolar, abrir o menu e tocar nos botões dentro de cada celular.</p>
+      </div>
+      <div class="pair">
+        <figure class="version">
+          <figcaption><b>Versão atual</b> o site de hoje, fora do Framer</figcaption>
+          <div class="stage-box">
+            <div class="phone"><div class="screen"><iframe src="/cepa/atual/" title="Site do CEPA, versão atual" loading="lazy"></iframe></div></div>
+            <p class="hint">Role e toque dentro do celular.</p>
+          </div>
+          <a class="btn-ink" href="/cepa/atual/" target="_blank" rel="noopener"><span>Abrir a versão atual</span><span class="arw" aria-hidden="true"></span></a>
+        </figure>
+        <figure class="version">
+          <figcaption><b>Versão Vitamina</b> mais fiel ao Figma</figcaption>
+          <div class="stage-box">
+            <div class="phone"><div class="screen"><iframe src="/cepa/vitamina/" title="Site do CEPA, versão Vitamina" loading="lazy"></iframe></div></div>
+            <p class="hint">Role e toque dentro do celular.</p>
+          </div>
+          <a class="btn-ink" href="/cepa/vitamina/" target="_blank" rel="noopener"><span>Abrir a versão Vitamina</span><span class="arw" aria-hidden="true"></span></a>
+        </figure>
+      </div>
+      <h3 class="sub">No computador</h3>
+      <div class="pair">
+        <figure class="version"><a class="shot" href="/cepa/atual/" target="_blank" rel="noopener"><img src="/cepa/review/a-tela-1440.webp" alt="Abertura da versão atual no computador" width="1200" height="750" loading="lazy"></a><figcaption><b>Versão atual</b></figcaption></figure>
+        <figure class="version"><a class="shot" href="/cepa/vitamina/" target="_blank" rel="noopener"><img src="/cepa/review/b-tela-1440.webp" alt="Abertura da versão Vitamina no computador" width="1200" height="750" loading="lazy"></a><figcaption><b>Versão Vitamina</b></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="auditorias" aria-labelledby="h-aud">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-aud">2 · Auditorias</h2>
+        <p>O site que está no ar hoje, no Framer, olhado em quatro frentes: uso, texto, acessibilidade e velocidade. Ao lado de cada ponto, o que a versão Vitamina já resolve.</p>
+      </div>
+
+      <table class="scores">
+        <caption class="sr">Notas do Google Lighthouse no celular, de 0 a 100</caption>
+        <thead><tr><th scope="col">Nota do Google (celular)</th><th scope="col">Framer, no ar</th><th scope="col">Atual, fora do Framer</th><th scope="col">Vitamina</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Performance</th><td class="ruim">66</td><td class="bom">99</td><td class="bom">100</td></tr>
+          <tr><th scope="row">Acessibilidade</th><td class="ruim">77</td><td>96</td><td class="bom">100</td></tr>
+          <tr><th scope="row">Boas práticas</th><td>96</td><td class="bom">100</td><td class="bom">100</td></tr>
+          <tr><th scope="row">Tempo até a abertura aparecer</th><td class="ruim">6,3 s</td><td class="bom">1,6 s</td><td class="bom">0,9 s</td></tr>
+          <tr><th scope="row">Peso da página</th><td class="ruim">7,4 MB</td><td class="bom">0,9 MB</td><td class="bom">0,2 MB<small>o vídeo carrega quando a pessoa toca</small></td></tr>
+        </tbody>
+      </table>
+
+      <div class="grid audits">
+        <article class="audit">
+          <h3><span class="ico ico--topo" aria-hidden="true"></span>UX</h3>
+          <ul>
+            <li><b>A abertura não diz o que o CEPA faz.</b> A frase é bonita, mas quem chega não sabe que é psicoterapia, para quem é e como agendar.<small>Vitamina: uma linha abaixo do título explica o serviço.</small></li>
+            <li><b>O contato fica escondido.</b> O único caminho é o botão “Fale Conosco”, que abre o WhatsApp sem avisar. Não há telefone nem e-mail à vista, e o rodapé só tem o Instagram.<small>Vitamina: “Agendar pelo WhatsApp” com o ícone na abertura e no fim, um bloco de contato com telefone, e-mail e Instagram, e um botão de WhatsApp fixo.</small></li>
+            <li><b>Um vazio depois da abertura.</b> O vídeo do Vimeo não tem capa e ocupa um espaço em branco até carregar.<small>Vitamina: o vídeo tem capa da marca e só carrega quando a pessoa toca.</small></li>
+            <li><b>Página longa no celular.</b> São cerca de 12 mil pixels de rolagem, com os 14 terapeutas um embaixo do outro.<small>Vitamina: equipe em duas colunas no celular, cerca de 15% mais curta.</small></li>
+            <li><b>Nenhum próximo passo no fim.</b> Depois da equipe, a página termina sem convite pra conversar.<small>Vitamina: “Vamos conversar?” com os três canais.</small></li>
+          </ul>
+        </article>
+
+        <article class="audit">
+          <h3><span class="ico ico--tipo" aria-hidden="true"></span>Content design</h3>
+          <ul>
+            <li><b>O nome aparece de três jeitos.</b> No site é “Centro de Estudos Psicodélicos Aplicados”. No Figma e no cartão, “Centro de Estudos de Psicodelia Aplicada”. Nas pranchas, “Psicodelicos Aplicados”.<small>A Vitamina usa o do Figma, mas isso precisa de uma decisão da Raquel.</small></li>
+            <li><b>Muito texto antes do essencial.</b> São cinco parágrafos, cerca de 230 palavras, antes de aparecer o que o CEPA oferece.<small>Vitamina: texto mais enxuto e os três serviços com título e uma linha cada.</small></li>
+            <li><b>Erros de digitação.</b> “substancias” e “Porem” sem acento, e “Disclaimer” em inglês no menu.<small>Corrigido nas duas versões. Na Vitamina, o menu diz “Aviso importante”.</small></li>
+            <li><b>Registros fora do padrão.</b> “CRP 06131776”, “CRP 4/58942” e “CRP/SP 165562” estão escritos cada um de um jeito. A Victoria aparece com o mesmo CRP da Maíra e, sendo estudante, está listada entre os terapeutas.<small>Vitamina: registros no formato 06/000000 e o da Victoria marcado “a confirmar”.</small></li>
+            <li><b>Cargo da Raquel diferente.</b> No site é “Psicoterapeuta e idealizadora do CEPA”. No cartão, “Integração Psicodélica, Idealizadora do CEPA”.</li>
+          </ul>
+        </article>
+
+        <article class="audit">
+          <h3><span class="ico ico--todos" aria-hidden="true"></span>Acessibilidade</h3>
+          <ul>
+            <li><b>A página não diz em que língua está.</b> Leitores de tela podem ler o português com pronúncia de inglês.<small>Corrigido nas duas.</small></li>
+            <li><b>Texto branco no card verde.</b> O contraste é 2,2:1, e o mínimo para texto é 4,5:1. É o primeiro serviço da lista.<small>Vitamina: texto preto sobre o verde, 7,0:1.</small></li>
+            <li><b>Texto do aviso claro demais.</b> O cinza sobre o fundo claro dá 4,1:1, abaixo do mínimo.<small>Vitamina: aviso em fundo preto, com texto acima de 10:1.</small></li>
+            <li><b>Títulos fora de ordem e um link escondido.</b> O ícone do Instagram recebe foco do teclado, mas o leitor de tela não o anuncia.<small>Corrigido nas duas.</small></li>
+            <li><b>Movimento sem pausa.</b> O vídeo de fundo não para, nem para quem pede menos movimento no celular.<small>Vitamina: respeita o ajuste “reduzir movimento”.</small></li>
+          </ul>
+        </article>
+
+        <article class="audit">
+          <h3><span class="ico ico--rapido" aria-hidden="true"></span>Performance</h3>
+          <ul>
+            <li><b>7,4 MB pra abrir uma página.</b> Cada foto da equipe pesa até 1,6 MB, e o vídeo de fundo, 7 MB. No 4G, a abertura leva mais de 6 segundos pra aparecer.<small>Atual: 0,9 MB. Vitamina: 0,2 MB até a pessoa tocar no vídeo.</small></li>
+            <li><b>Código do Framer que a página não usa.</b> Boa parte do JavaScript carregado não faz nada nesta página.<small>As duas versões são HTML e CSS puros, sem Framer.</small></li>
+            <li><b>Mensalidade menor.</b> Hoje o Framer custa R$ 70 por mês. Fora dele, a hospedagem e a manutenção ficam com a Vitamina, por R$ 50 por mês.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="muda" aria-labelledby="h-muda">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-muda">3 · O que muda na Vitamina</h2>
+        <p>Cinco mudanças. Em cada uma, o mesmo pedaço do site nas duas versões.</p>
+      </div>
+
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num"><span class="ico ico--topo" aria-hidden="true"></span>1</p>
+          <h3>Uma abertura com a cara do Figma</h3>
+          <p>Fundo preto, os cogumelos dos key visuals e o título em Bodoni, como no cartão de visita. Logo abaixo, o que o CEPA faz e o botão de agendar pelo WhatsApp. Na parte 4 tem mais três opções de abertura.</p>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/a-hero.webp" alt="Abertura da versão atual" loading="lazy"><figcaption>Versão atual</figcaption></figure>
+          <figure><img src="/cepa/review/b-hero.webp" alt="Abertura da versão Vitamina" loading="lazy"><figcaption>Versão Vitamina</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num"><span class="ico ico--cor" aria-hidden="true"></span>2</p>
+          <h3>Serviços que dá pra ler de longe</h3>
+          <p>Cada serviço ganhou um nome curto e uma linha de explicação. As cores são as da paleta, e o verde passou a ter texto preto pra ficar legível.</p>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/a-servicos.webp" alt="Serviços na versão atual" loading="lazy"><figcaption>Versão atual</figcaption></figure>
+          <figure><img src="/cepa/review/b-servicos.webp" alt="Serviços na versão Vitamina" loading="lazy"><figcaption>Versão Vitamina</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num"><span class="ico ico--aviso" aria-hidden="true"></span>3</p>
+          <h3>Um aviso que pesa o que precisa pesar</h3>
+          <p>O aviso legal é a informação mais séria do site. Na Vitamina ele vira uma seção inteira em preto, com as substâncias permitidas em destaque.</p>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/a-aviso.webp" alt="Aviso na versão atual" loading="lazy"><figcaption>Versão atual</figcaption></figure>
+          <figure><img src="/cepa/review/b-aviso.webp" alt="Aviso na versão Vitamina" loading="lazy"><figcaption>Versão Vitamina</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num"><span class="ico ico--lista" aria-hidden="true"></span>4</p>
+          <h3>Equipe mais compacta</h3>
+          <p>Quatro terapeutas por linha no computador e dois no celular. Nomes em Bodoni, registro em roxo e a descrição em uma frase.</p>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/a-equipe.webp" alt="Equipe na versão atual" loading="lazy"><figcaption>Versão atual</figcaption></figure>
+          <figure><img src="/cepa/review/b-equipe.webp" alt="Equipe na versão Vitamina" loading="lazy"><figcaption>Versão Vitamina</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num"><span class="ico ico--contato" aria-hidden="true"></span>5</p>
+          <h3>Um convite pra conversar</h3>
+          <p>No fim da página, “Vamos conversar?” sobre o gradiente da marca, com WhatsApp, telefone, e-mail e Instagram. A mensagem do WhatsApp já vem escrita.</p>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/a-rodape.webp" alt="Fim da página na versão atual" loading="lazy"><figcaption>Versão atual</figcaption></figure>
+          <figure><img src="/cepa/review/b-rodape.webp" alt="Bloco de contato na versão Vitamina" loading="lazy"><figcaption>Versão Vitamina</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="aberturas" aria-labelledby="h-ab">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-ab">4 · Três aberturas</h2>
+        <p>Três jeitos de abrir a versão Vitamina, todos com a identidade do Figma. No site, dá pra trocar entre elas pelo seletor no canto da tela.</p>
+      </div>
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num">Abertura A</p>
+          <h3>Cogumelos no escuro</h3>
+          <p>A que está na versão Vitamina. Fundo preto, o título à esquerda e os cogumelos dos key visuals à direita. No computador, onde o mouse passa, a cor dos cogumelos se intensifica e vai mudando devagar; no celular, isso acontece sozinho. É a mais sóbria das três.</p>
+          <a class="open" href="/cepa/vitamina/?abertura=a" target="_blank" rel="noopener">Ver a abertura A no site <span class="arw" aria-hidden="true"></span></a>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/abertura-a.webp" alt="Abertura A no computador" loading="lazy"><figcaption>No computador</figcaption></figure>
+          <figure><img src="/cepa/review/abertura-a-cel.webp" alt="Abertura A no celular" loading="lazy" style="max-width:220px"><figcaption>No celular</figcaption></figure>
+        </div>
+      </div>
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num">Abertura B</p>
+          <h3>O gradiente do cartão</h3>
+          <p>O gradiente da marca em movimento, o mesmo do site de hoje e do cartão de visita, com o símbolo em branco. No computador, o mouse deforma o gradiente como se passasse a mão na água; no celular, ele ondula sozinho. É a mais colorida e a mais próxima do que o público já conhece.</p>
+          <a class="open" href="/cepa/vitamina/?abertura=b" target="_blank" rel="noopener">Ver a abertura B no site <span class="arw" aria-hidden="true"></span></a>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/abertura-b.webp" alt="Abertura B no computador" loading="lazy"><figcaption>No computador</figcaption></figure>
+          <figure><img src="/cepa/review/abertura-b-cel.webp" alt="Abertura B no celular" loading="lazy" style="max-width:220px"><figcaption>No celular</figcaption></figure>
+        </div>
+      </div>
+      <div class="change grid">
+        <div class="change__text">
+          <p class="num">Abertura C</p>
+          <h3>O key visual inteiro</h3>
+          <p>A palavra “cepa” grande sobre os cogumelos, como nos key visuals do Figma. A marca vem primeiro e o título fica embaixo, centralizado, tudo dentro da primeira tela. É a mais forte como marca.</p>
+          <a class="open" href="/cepa/vitamina/?abertura=c" target="_blank" rel="noopener">Ver a abertura C no site <span class="arw" aria-hidden="true"></span></a>
+        </div>
+        <div class="change__pair">
+          <figure><img src="/cepa/review/abertura-c.webp" alt="Abertura C no computador" loading="lazy"><figcaption>No computador</figcaption></figure>
+          <figure><img src="/cepa/review/abertura-c-cel.webp" alt="Abertura C no celular" loading="lazy" style="max-width:220px"><figcaption>No celular</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="bilingue" aria-labelledby="h-bi">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-bi">5 · Português e inglês</h2>
+        <p>O plano pra versão em inglês. Ela entra depois que a versão for escolhida, em cima da mesma página.</p>
+      </div>
+      <div class="grid">
+        <ul class="plan">
+          <li><b>Dois endereços, uma página.</b> cepaintegra.com.br em português e cepaintegra.com.br/en em inglês, com o mesmo desenho.</li>
+          <li><b>Troca de idioma no topo.</b> Um “PT · EN” que leva pra mesma seção na outra língua.</li>
+          <li><b>O Google entende as duas.</b> Cada versão tem título, descrição e prévia de compartilhamento na sua língua, marcadas como versões da mesma página.</li>
+          <li><b>WhatsApp na língua da pessoa.</b> A mensagem pronta muda junto com o idioma.</li>
+          <li><b>Quem atende em inglês.</b> Um selo nos terapeutas que atendem em inglês. Essa informação precisa vir da equipe.</li>
+          <li><b>Tradução revisada.</b> Eu faço a tradução e a Raquel revisa os termos clínicos. Cada profissional aprova a própria descrição.</li>
+          <li><b>Aviso adaptado.</b> Em inglês, o aviso precisa deixar claro que a regra citada é a brasileira.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="passos" aria-labelledby="h-passos">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-passos">6 · Próximos passos</h2>
+        <p>Até o site no ar no domínio do CEPA, com a mensalidade de R$ 50 com a Vitamina no lugar dos R$ 70 do Framer.</p>
+      </div>
+      <ol class="timeline">
+        <li class="is-pending"><b>Agora</b><span>Escolher entre a versão atual e a Vitamina, e uma das quatro aberturas.</span>
+          <div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Qual nome usar: “de Psicodelia Aplicada” ou “Psicodélicos Aplicados”</li></ul></div></li>
+        <li class="is-pending"><b>Em seguida</b><span>Ajustes na versão escolhida.</span>
+          <div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Se o e-mail raquel@cepaintegra.com.br funciona</li><li>O registro da Victoria e se ela entra na equipe</li></ul></div></li>
+        <li class="is-pending"><b>Depois</b><span>Versão em inglês.</span>
+          <div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Quem da equipe atende em inglês</li><li>Revisão da tradução</li></ul></div></li>
+        <li class="is-pending"><b>Por fim</b><span>Site no Cloudflare, domínio apontado, PostHog instalado e Framer cancelado.</span>
+          <div class="need"><p class="need__tag"><span class="ico ico--aviso" aria-hidden="true"></span>Falta de vocês</p><ul><li>Acesso a onde o domínio cepaintegra.com.br está registrado</li></ul></div></li>
+      </ol>
+      <div class="ask">
+        <p>Olhou as duas versões? Me conta qual faz mais sentido pro CEPA.</p>
+        <a class="btn-ink" href="https://wa.me/5511956299380?text=thiago%2C%20vi%20as%20vers%C3%B5es%20do%20cepa.%20" target="_blank" rel="noopener"><span>Responder no WhatsApp</span><span class="arw" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" id="mensalidade" aria-labelledby="h-mens">
+    <div class="wrap">
+      <div class="head grid">
+        <h2 id="h-mens">7 · Mensalidade</h2>
+        <p>Hospedagem, manutenção e pequenos ajustes do site, pagos direto no cartão.</p>
+      </div>
+      <div class="plano">
+        <div class="plano__preco"><b>R$ 50</b><span>por mês</span></div>
+        <ul class="plano__lista">
+          <li>Você paga hoje, e esse pagamento cobre dezembro.</li>
+          <li>Depois, a cobrança cai todo dia 1, a partir de 1º de janeiro.</li>
+          <li>Dá pra trocar o cartão, ver os recibos ou cancelar quando quiser.</li>
+        </ul>
+        <div class="plano__acoes">
+          <a class="btn-ink" href="https://buy.stripe.com/fZu8wIgah0qlarNappds400" rel="noopener"><span>Assinar com cartão</span><span class="arw" aria-hidden="true"></span></a>
+          <a class="open" href="https://billing.stripe.com/p/login/fZu8wIgah0qlarNappds400" target="_blank" rel="noopener">Gerenciar assinatura <span class="arw" aria-hidden="true"></span></a>
+        </div>
+        <p class="plano__nota">O pagamento é feito numa página segura do Stripe. Na fatura do cartão aparece VITAMINA INTERATIVA.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot-simple">
+  <div class="wrap">
+    <span>CEPA · proposta de site · Thiago Vitamina</span>
+    <a class="open" href="/">thiagovitamina.com <span class="arw" aria-hidden="true"></span></a>
+  </div>
+</footer>
+
+<script>
+// a tinta do botão entra de onde o cursor chegou, como no site
+document.querySelectorAll('.btn-ink').forEach(b=>b.addEventListener('pointerenter',e=>{const r=b.getBoundingClientRect();b.style.setProperty('--x',(e.clientX-r.left)+'px');b.style.setProperty('--y',(e.clientY-r.top)+'px');b.style.setProperty('--k',Math.ceil(Math.hypot(r.width,r.height)/6)+2)}));
+</script>
+</body>
+</html>
