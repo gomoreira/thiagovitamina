@@ -329,6 +329,9 @@ h1 em::after{content:"";position:absolute;left:.04em;right:.08em;bottom:.02em;he
   .topo.oculto{transform:none}
   .btn:active{transform:none}
 }
+.equipe .grid{content-visibility:auto;contain-intrinsic-size:auto 900px}
+.pessoa picture{display:block}
+footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
 </style>
 <script>
   document.documentElement.classList.add("js");(function(){var q=new URLSearchParams(location.search).get("abertura");if(q&&/^[abcd]$/.test(q)){document.documentElement.dataset.hero=q;document.documentElement.dataset.seletor="";}})();
@@ -568,7 +571,7 @@ h1 em::after{content:"";position:absolute;left:.04em;right:.08em;bottom:.02em;he
     ["Victoria Sami","[registro a confirmar]","Professora de yoga, pesquisadora de psicodélicos e estudante de Psicologia","7UUoLlWNrMACtvcJHTGLWPcF4"]
   ];
   document.getElementById("grade").innerHTML = equipe.map(([nome, reg, cargo, foto]) =>
-    `<li class="pessoa surge"><img src="/cepa/vitamina/img/${foto}.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy"><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
+    `<li class="pessoa surge"><picture><source type="image/avif" srcset="/cepa/vitamina/img/${foto}-320.avif 320w, /cepa/vitamina/img/${foto}-640.avif 640w" sizes="(max-width:600px) 44vw, (max-width:1100px) 30vw, 260px"><img src="/cepa/vitamina/img/${foto}.jpg" alt="Foto de ${nome}" width="640" height="640" loading="lazy" decoding="async"></picture><h3>${nome}</h3><p class="reg">${reg}</p><p class="cargo">${cargo}</p></li>`).join("");
 
   // Topo: fica sólido depois da abertura
   const topo = document.getElementById("topo"), heroAtual = document.documentElement.dataset.hero || "a", hero = document.querySelector(".hero-" + heroAtual);
