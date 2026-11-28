@@ -94,7 +94,7 @@ posthog.init('phc_q2kGD4TfbdLA6zzstSbBVcRtp5Qr8uwdBPFoNBWywmHv', {
     if (/cv\.pdf$/.test(href)) return track('cv_downloaded');
     if (/instagram\.com/.test(href)) return track('contact_clicked', { channel: 'instagram' });
     if (/^mailto:/.test(href)) return track('contact_clicked', { channel: 'email' });
-    if (el.classList.contains('btn-ink') && /^[\w-]+\.html/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
+    if (el.classList.contains('btn-ink') && /^(?!index\b)[\w-]+\.html/.test(href)) return track('case_opened', { case: caseName(el) || href.replace(/\.html.*$/, '') });
     if (/^https?:/.test(href) && href.indexOf(location.host) < 0) return track('external_site_opened', { url: href, project: caseName(el) });
   }, true);
 
