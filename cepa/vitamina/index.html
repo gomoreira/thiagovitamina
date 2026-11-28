@@ -187,12 +187,14 @@ footer .wrap{display:grid;gap:48px}
 }
 @media (max-width:860px){
   .abrir{display:block}
-  .menu{position:fixed;inset:80px 0 auto;flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px color-mix(in srgb,var(--noite) 8%,transparent);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s var(--ease)}
-  .menu a{font-family:var(--serif);font-size:32px;opacity:1;display:block;padding:6px 0}
+  .menu{position:fixed;inset:80px 0 0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(32px,env(safe-area-inset-bottom));flex-direction:column;align-items:flex-start;gap:4px;padding:16px var(--gut) 32px;background:var(--off);color:var(--preto);box-shadow:0 12px 24px color-mix(in srgb,var(--noite) 8%,transparent);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s var(--ease)}
+  .menu a:not(.btn){font-family:var(--serif);font-size:32px;opacity:1;display:block;padding:6px 0}
   .menu .btn{font-family:var(--sans);font-size:17px;margin-top:16px;background:var(--preto);color:var(--off)}
   .topo.aberto{background:var(--off);color:var(--preto)}
   .topo.aberto .palavra-branca{display:none}.topo.aberto .palavra-preta{display:block}
   .topo.aberto .menu{opacity:1;visibility:visible;transform:none}
+  html.menu-aberto{overflow:hidden}
+  html.menu-aberto .seletor,html.menu-aberto .zap{opacity:0;visibility:hidden}
   .topo.aberto .abrir span:first-child{top:21px;transform:rotate(45deg)}
   .topo.aberto .abrir span:last-child{top:21px;transform:rotate(-45deg)}
   .hero .wrap{grid-template-columns:1fr;padding-top:104px;gap:8px}
@@ -616,8 +618,8 @@ footer{content-visibility:auto;contain-intrinsic-size:auto 420px}
 
   // Menu no celular
   const abrir = document.getElementById("abrir");
-  const fechar = () => { topo.classList.remove("aberto"); abrir.setAttribute("aria-expanded","false"); abrir.setAttribute("aria-label","Abrir menu"); };
-  abrir.addEventListener("click", () => { const a = topo.classList.toggle("aberto"); abrir.setAttribute("aria-expanded", a); abrir.setAttribute("aria-label", a ? "Fechar menu" : "Abrir menu"); });
+  const fechar = () => { topo.classList.remove("aberto"); document.documentElement.classList.remove("menu-aberto"); abrir.setAttribute("aria-expanded","false"); abrir.setAttribute("aria-label","Abrir menu"); };
+  abrir.addEventListener("click", () => { const a = topo.classList.toggle("aberto"); document.documentElement.classList.toggle("menu-aberto", a); abrir.setAttribute("aria-expanded", a); abrir.setAttribute("aria-label", a ? "Fechar menu" : "Abrir menu"); });
   document.querySelectorAll("#menu a").forEach(a => a.addEventListener("click", fechar));
   document.addEventListener("keydown", e => { if (e.key === "Escape") fechar(); });
 
